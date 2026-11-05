@@ -1,266 +1,369 @@
 # IDP English Test - Test Taker Portal MVP
 
-**Project:** MSP-2427 - React Project Skeleton  
+**Projects:** MSP-2427 (Project Setup) + MSP-2011 (Component Library)  
 **Status:** In Progress  
 **Version:** 0.1.0
 
 ## Overview
 
-This is the React-based frontend application for the IDP English Test (Moonshot) Test Taker Portal. The project includes:
+This is the React-based frontend application for the IDP English Test (Moonshot) Test Taker Portal.
 
-- ✅ React 18 with Vite build tool
-- ✅ Professional project structure (scalable architecture)
-- ✅ Mock Server (MSW) for API calls
-- ✅ ESLint & Prettier for code quality
-- ✅ Vitest + React Testing Library for testing
-- ✅ Plain CSS with CSS variables for styling
-- ✅ Login screen with form validation
+**Scope (Current Phase):**
+- **MSP-2427** — React/Vite project initialization, configuration, and tooling setup
+- **MSP-2011** — Shared component library and design token system
 
-## Tech Stack
+**Scope (Deferred):**
+- Test Taker user flows (Account Creation, Onboarding, Buy Test, Results)
+- Backend API integration
+- Authentication flow (AWS Cognito)
+- Routing and page implementation
 
-| Tool       | Version | Purpose                  |
-|-----------|---------|--------------------------|
-| React     | 18.2.0  | UI framework             |
-| Vite      | 5.0.0   | Build tool & dev server  |
-| Vitest    | 1.0.0   | Unit testing             |
-| ESLint    | 8.54.0  | Code linting             |
-| Prettier  | 3.1.0   | Code formatting          |
-| MSW       | 1.3.0   | Mock API server          |
+**Team Note:** This repository is for the **Test Taker** experience only. The Institution/Receiving Office (RO) portal (`/ro/*` routes) is deferred to a future phase.
+
+---
+
+## Technology Stack
+
+| Tool | Version | Purpose |
+|------|---------|---------|
+| **React** | 18.2.0 | UI framework |
+| **TypeScript** | 5.x | Type-safe development |
+| **Vite** | 5.0.0 | Build tool, dev server, HMR |
+| **Vitest** | 1.0.0 | Unit testing |
+| **React Testing Library** | 14.1.0 | Component testing |
+| **ESLint** | 8.54.0 | Code quality and linting |
+| **Prettier** | 3.1.0 | Code formatting |
+| **CSS Modules** | — | Component-scoped styles |
+
+---
 
 ## Project Structure
 
 ```
-src/
-├── assets/              # Images, logos, fonts
-├── components/          # React components
-│   ├── common/         # Reusable components (Button, Input, etc.)
-│   └── features/       # Feature-specific components (Auth, Dashboard, etc.)
-├── pages/              # Page-level components
-├── services/           # API and business logic
-│   ├── api/           # API client & endpoints
-│   └── mock/          # Mock Service Worker setup
-├── hooks/             # Custom React hooks
-├── utils/             # Utility functions
-├── config/            # Configuration & constants
-└── styles/            # Global CSS & variables
+iet-ui-testtaker-1/
+├── src/
+│   ├── components/          # React components
+│   │   └── common/         # Shared, reusable components (MSP-2011)
+│   │       ├── Alert/
+│   │       ├── Button/
+│   │       ├── Card/
+│   │       ├── Dropdown/
+│   │       ├── Input/
+│   │       ├── MediaControls/
+│   │       ├── Modal/
+│   │       ├── Stepper/
+│   │       ├── Timer/
+│   │       ├── Toast/
+│   │       └── Tooltip/
+│   ├── hooks/              # Custom React hooks (placeholder)
+│   ├── styles/             # Global styles and design tokens
+│   │   ├── index.css       # Global styles entry point
+│   │   ├── reset.css       # CSS reset
+│   │   └── variables.css   # Design tokens (Layer 1: brand, Layer 2: semantic)
+│   └── types/              # TypeScript declarations
+├── tests/
+│   └── setup.ts            # Vitest setup file
+├── dist/                   # Production build output
+├── package.json
+├── tsconfig.json           # TypeScript configuration
+├── tsconfig.node.json      # Node/Config TypeScript configuration
+├── vite.config.ts          # Vite configuration
+├── vitest.config.ts        # Vitest configuration
+├── .eslintrc.json          # ESLint configuration
+├── .prettierrc             # Prettier configuration
+├── .env.example            # Environment variables template
+├── .env.development        # Development environment
+├── .env.production         # Production environment
+└── index.html              # HTML entry point
 ```
 
-## Quick Start
+### Folder Responsibilities
 
-### 1. Install Dependencies
+| Folder | Responsibility |
+|--------|----------------|
+| `src/components/common/` | Reusable UI components following IDP styling conventions |
+| `src/hooks/` | Custom React hooks (to be populated as features are built) |
+| `src/styles/` | Global styles, CSS reset, and design tokens (MSP-2011) |
+| `src/types/` | TypeScript type declarations |
+| `tests/` | Test setup configuration |
+
+**Planned Folders (Not Implemented):**
+- `src/pages/` — Page-level components (to be created when implementing user flows)
+- `src/services/` — API client, business logic, and mock handlers
+- `src/utils/` — Utility functions
+- `src/config/` — Application configuration and constants
+- `src/assets/` — Images, fonts, static assets
+
+---
+
+## MSP-2427 — React Project Setup
+
+### Project Initialization
+
+- React 18.2.0 with Vite 5.0.0
+- TypeScript configured with `strict: true`
+- Path aliases configured for clean imports:
+  - `@components` → `src/components`
+  - `@hooks` → `src/hooks`
+  - `@styles` → `src/styles`
+- Dev server runs on port 5173
+
+### Development Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server with HMR |
+| `npm run build` | Build for production (`tsc && vite build`) |
+| `npm run preview` | Preview production build locally |
+| `npm run typecheck` | Run TypeScript compiler without emitting files |
+| `npm run lint` | Check code quality with ESLint |
+| `npm run lint:fix` | Auto-fix linting issues |
+| `npm run format` | Format code with Prettier |
+| `npm run format:check` | Check if files are formatted |
+
+### Test Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run test` | Run tests with Vitest in watch mode |
+| `npm run test:run` | Run tests once (CI-friendly) |
+| `npm run test:ui` | Run tests with Vitest UI dashboard |
+| `npm run test:coverage` | Run tests and generate coverage report |
+
+### Configuration
+
+- **Vite:** `vite.config.ts` — alias configuration, dev server settings, build options
+- **TypeScript:** `tsconfig.json` — strict mode, path aliases, JSX settings
+- **Vitest:** `vitest.config.ts` — globals enabled, JSdom environment, coverage config
+
+---
+
+## MSP-2011 — Component & Token Library
+
+### Shared Component Architecture
+
+**Design Principles:**
+- **Reusability** — Components are generic and composable
+- **Accessibility** — WCAG 2.1 AA compliant (labels, roles, keyboard navigation, focus management)
+- **Testability** — Each component has co-located tests
+- **Maintainability** — Clear APIs, documented props, single responsibility
+
+**Component Location:** All components reside in `src/components/common/`
+
+### Implemented Components
+
+| Component | Files | Purpose |
+|-----------|-------|---------|
+| **Alert** | Alert.tsx, Alert.module.css, Alert.test.tsx | In-page feedback messages with variants (info, success, warning, error) |
+| **Button** | Button.tsx, Button.module.css, Button.test.tsx | Reusable button with variants and loading state |
+| **Card** | Card.tsx, Card.module.css, Card.test.tsx | Structural container for grouped content |
+| **Dropdown** | Dropdown.tsx, Dropdown.module.css, Dropdown.test.tsx | Styled native `<select>` with accessibility |
+| **Input** | Input.tsx, Input.module.css, Input.test.tsx | Form input with label, error, and helper text |
+| **MediaControls** | MediaControls.tsx, MediaControls.module.css, MediaControls.test.tsx | Audio/video playback controls (play, pause, progress, volume) |
+| **Modal** | Modal.tsx, Modal.module.css, Modal.test.tsx | Accessible dialog with focus trap and scroll lock |
+| **Stepper** | Stepper.tsx, Stepper.module.css, Stepper.test.tsx | Multi-step progress indicator |
+| **Timer** | Timer.tsx, Timer.module.css, Timer.test.tsx | Countdown timer with warning states |
+| **Toast** | ToastProvider.tsx, Toast.module.css, Toast.test.tsx, index.ts | Context-based toast notifications with aria-live regions |
+| **Tooltip** | Tooltip.tsx, Tooltip.module.css, Tooltip.test.tsx | Accessible tooltip on hover, focus, and touch |
+
+**Barrel Exports:** All components are exported via `src/components/common/index.ts`
+
+### CSS Modules Convention
+
+- Component styles are defined in `*.module.css` files
+- Styles are imported as a `styles` object and applied using class name composition
+- Example:
+  ```tsx
+  import styles from './Button.module.css';
+  
+  const buttonClass = [
+    styles.btn,
+    styles[variant],
+    styles[size],
+    className
+  ].filter(Boolean).join(' ');
+  ```
+
+### Design Tokens
+
+**Two-Layer Architecture:**
+
+**Layer 1 — Brand Palette** (Raw, swappable)
+- Located in `src/styles/variables.css`
+- Variables prefixed with `--brand-*`
+- Examples: `--brand-primary`, `--brand-secondary`, `--brand-accent`
+- **To re-brand, override ONLY these values**
+
+**Layer 2 — Semantic Tokens** (Components reference these only)
+- Located in `src/styles/variables.css`
+- Variables prefixed with `--color-*`
+- Examples: `--color-action`, `--color-danger-action`, `--color-surface`
+- Components reference ONLY these semantic tokens
+
+**Example:**
+```css
+/* Layer 1 (brand) */
+:root {
+  --brand-primary: #FF6A00;
+  --brand-primary-rgb: 255, 106, 0;
+}
+
+/* Layer 2 (semantic) */
+:root {
+  --color-action: var(--brand-primary);
+  --color-focus-ring-faint: rgba(var(--brand-primary-rgb), 0.1);
+}
+```
+
+### Component Styling Standards
+
+- **No hardcoded hex values** — All colors use CSS variables from design tokens
+- **SVG icons only** — No emoji or icon fonts
+- **CSS custom properties** — Use design tokens for spacing, typography, shadows, transitions
+- **Responsive design** — Media queries reference breakpoint tokens from `variables.css`
+
+### Component Testing Conventions
+
+- **Co-located tests** — `ComponentName.test.tsx` in same folder
+- **Testing Library** — `render`, `screen`, `fireEvent` for DOM interaction
+- **Vitest** — `describe`, `it`, `expect` for test structure
+- **Mocking** — `vi.fn()` for event handlers, timers, etc.
+
+### Accessibility Requirements (WCAG 2.1 AA)
+
+Every component must implement:
+- Proper semantic roles (`role="alert"`, `role="dialog"`, `role="slider"`, etc.)
+- `aria-*` attributes for dynamic state (`aria-label`, `aria-describedby`, `aria-current`, etc.)
+- Keyboard navigation (Tab, Shift+Tab, Enter, Escape)
+- Visible focus indicators (`:focus-visible` styles)
+- Screen reader support (`aria-live` regions for dynamic content)
+
+---
+
+## Development Guidelines
+
+### Naming Conventions
+
+| Item | Convention | Example |
+|------|------------|---------|
+| Component files | PascalCase | `Button.tsx`, `Alert.test.tsx` |
+| Hook files | `use` + PascalCase | `useAuth.ts` (not yet implemented) |
+| Component folders | PascalCase | `src/components/common/Button/` |
+| Style files | PascalCase + `.module.css` | `Button.module.css` |
+| Test files | PascalCase + `.test.tsx` | `Button.test.tsx` |
+| CSS classes | BEM within module | `.btn`, `.btn--primary`, `.btn__spinner` |
+| Variables/Functions | camelCase | `isLoading`, `handleSubmit` |
+| Constants | SCREAMING_SNAKE_CASE | `MAX_RETRIES` (not yet used) |
+| Types/Interfaces | PascalCase | `ButtonProps`, `ApiResponse` |
+
+### Component Creation Standards
+
+1. **Co-locate** component, styles, and tests in same folder
+2. **Export** component and default from `index.ts` in folder
+3. **Document** props with JSDoc and TypeScript interfaces
+4. **Style** using CSS Modules and design tokens only
+5. **Test** with React Testing Library and Vitest
+6. **Accessibility** — implement WCAG 2.1 AA requirements
+
+### Styling Conventions
+
+- Use CSS Modules for component styles
+- Reference design tokens in `src/styles/variables.css`
+- Do not use external CSS libraries (no Tailwind, Bootstrap, MUI)
+- Use SVG for icons
+- Prefer semantic class names over utility classes
+
+### Testing Conventions
+
+- **Unit tests** for all components
+- **Co-located** with source files
+- **Mock** external dependencies with `vi.fn()`
+- **Verify** accessibility attributes where applicable
+
+---
+
+## Development Setup
+
+### Prerequisites
+
+- Node.js (current Active LTS)
+- npm or compatible package manager
+
+### Installation
 
 ```bash
 npm install
 ```
 
-### 2. Start Development Server
+### Running Locally
 
 ```bash
 npm run dev
 ```
 
-The app will open at `http://localhost:5173`
+The app will be available at `http://localhost:5173`
 
-### 3. Build for Production
+### Building for Production
 
 ```bash
 npm run build
 ```
 
-### 4. Preview Production Build
+Output is written to `dist/`
 
-```bash
-npm run preview
-```
-
-## Available Scripts
-
-| Command           | Description                          |
-|------------------|--------------------------------------|
-| `npm run dev`     | Start development server (with HMR) |
-| `npm run build`   | Build for production                 |
-| `npm run preview` | Preview production build             |
-| `npm run lint`    | Check code quality                   |
-| `npm run lint:fix`| Fix linting issues                   |
-| `npm run format`  | Format code with Prettier            |
-| `npm run test`    | Run tests with Vitest               |
-| `npm run test:ui` | Run tests with UI dashboard         |
-| `npm run test:coverage` | Generate coverage report    |
+---
 
 ## Environment Configuration
 
-### Development (`.env.development`)
-```env
-VITE_API_BASE_URL=http://localhost:3000
-VITE_APP_NAME=IDP English Test (Dev)
-VITE_ENABLE_MOCK_SERVER=true
-VITE_ENABLE_ANALYTICS=false
-```
+Environment variables use `VITE_*` prefix (Vite convention).
 
-### Production (`.env.production`)
-```env
-VITE_API_BASE_URL=https://api.idpenglishtest.com
-VITE_APP_NAME=IDP English Test
-VITE_ENABLE_MOCK_SERVER=false
-VITE_ENABLE_ANALYTICS=true
-```
+| Variable | Description |
+|----------|-------------|
+| `VITE_API_BASE_URL` | Backend API base URL |
+| `VITE_APP_NAME` | Application name |
+| `VITE_APP_VERSION` | Application version |
+| `VITE_ENABLE_MOCK_SERVER` | Enable/disable mock server (not yet implemented) |
+| `VITE_ENABLE_ANALYTICS` | Enable/disable analytics |
 
-## Mock API
+---
 
-The application uses **Mock Service Worker (MSW)** to intercept API calls.
+## Git Workflow
 
-### Test Credentials
+- Feature branches: `feature/feature-name`
+- Bug fix branches: `fix/bug-description`
+- Merge to main: Create merge request for review
 
-**Login:**
-- Email: `test@idp.com`
-- Password: `Password123!`
+---
 
-### Mock Endpoints
+## Current Status
 
-- `POST /api/v1/auth/login` - Login
-- `POST /api/v1/auth/signup` - Sign up
-- `POST /api/v1/auth/logout` - Logout
-- `GET /api/v1/users/profile` - Get user profile
-- `PUT /api/v1/users/profile` - Update profile
+**Completed:**
+- ✅ MSP-2427 — React/Vite project setup and configuration
+- ✅ MSP-2011 — 11 shared components with tests
+- ✅ Design token system with two-layer architecture
+- ✅ ESLint and Prettier configuration
+- ✅ Vitest and React Testing Library setup
 
-See `src/services/mock/handlers.js` for full endpoint definitions.
+**In Progress:**
+- 🚧 Test Taker user flow implementation
+- 🚧 Backend API integration
+- 🚧 Authentication flow
 
-## Component Examples
+**Deferred:**
+- ⏭️ Test Taker pages and routes
+- ⏭️ Institution/RO portal
+- ⏭️ Mock server implementation (MSW)
 
-### Button Component
-```jsx
-import { Button } from '@components/common';
-
-<Button 
-  variant="primary" 
-  size="large" 
-  isLoading={loading}
-  fullWidth
->
-  Sign In
-</Button>
-```
-
-### Input Component
-```jsx
-import { Input } from '@components/common';
-
-<Input
-  label="Email"
-  type="email"
-  name="email"
-  value={email}
-  onChange={handleChange}
-  error={errors.email}
-  required
-/>
-```
-
-### useAuth Hook
-```jsx
-import { useAuth } from '@hooks';
-
-const { login, isLoading, error } = useAuth();
-```
-
-## Form Validation
-
-Password policy is enforced:
-- Minimum 12 characters
-- At least 1 uppercase letter
-- At least 1 lowercase letter
-- At least 1 number
-
-See `src/utils/validation.js` for validation utilities.
-
-## Testing
-
-Run tests with:
-
-```bash
-npm run test
-```
-
-Run tests with UI:
-
-```bash
-npm run test:ui
-```
-
-Generate coverage report:
-
-```bash
-npm run test:coverage
-```
-
-## Code Quality
-
-### Linting
-
-```bash
-npm run lint          # Check for issues
-npm run lint:fix      # Automatically fix issues
-```
-
-### Formatting
-
-```bash
-npm run format        # Format all files
-npm run format:check  # Check if files are formatted
-```
-
-## Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-
-## Contributing
-
-1. Create a feature branch: `git checkout -b feature/your-feature`
-2. Commit changes: `git commit -m "Add your feature"`
-3. Push to branch: `git push origin feature/your-feature`
-4. Create a Pull Request
+---
 
 ## Documentation
 
-- [Architecture](./docs/ARCHITECTURE.md) - Project architecture overview
-- [API Integration](./docs/API_INTEGRATION.md) - How to integrate with backend APIs
-- [Component Guide](./docs/COMPONENT_GUIDE.md) - Component development guide
-- [Testing Guide](./docs/TESTING.md) - Testing best practices
-- [Styling Guide](./docs/STYLING.md) - CSS and styling conventions
+- Component usage: See `src/components/common/README.md`
+- Design tokens: See `src/styles/variables.css`
+- IDP React standards: See `react-nextjs-standards.md`
 
-## Troubleshooting
-
-### Port Already in Use
-
-If port 5173 is already in use, Vite will automatically use the next available port.
-
-### Module Import Errors
-
-Make sure all import paths use the configured aliases:
-- `@components` → `src/components`
-- `@pages` → `src/pages`
-- `@services` → `src/services`
-- `@hooks` → `src/hooks`
-- `@utils` → `src/utils`
-
-### Mock Server Not Working
-
-Ensure `VITE_ENABLE_MOCK_SERVER=true` in `.env.development` and check browser console for errors.
-
-## Future Tasks
-
-- **MSP-2428**: Implement Sign Up screen
-- **MSP-2429**: Implement Onboarding flow
-- **MSP-2430**: Implement Dashboard
-- **Future**: Replace mock server with real backend APIs
+---
 
 ## License
 
-Proprietary - IDP Group
-
-## Support
-
-For issues or questions, contact the development team.
+Proprietary — IDP Group
