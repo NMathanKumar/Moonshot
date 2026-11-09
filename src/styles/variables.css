@@ -1,15 +1,68 @@
 /* CSS Custom Properties (Variables) */
 
 :root {
-  /* Colors */
-  --color-primary: #0066cc;
-  --color-primary-dark: #0052a3;
-  --color-secondary: #667eea;
-  --color-success: #28a745;
-  --color-danger: #dc3545;
-  --color-warning: #ffc107;
-  --color-info: #17a2b8;
+  /*
+   * ----------------------------------------------------------------
+   * LAYER 1 — Raw brand palette (BRAND-SWAPPABLE, per MSP-2011 AC2 / F118)
+   * Moonshot/IDP English Test brand colors
+   * To re-brand, override ONLY these --brand-* values (e.g. in a theme
+   * block or a brand stylesheet). Components must NOT reference these
+   * directly; they reference the semantic tokens in Layer 2.
+   * ----------------------------------------------------------------
+   */
+  --brand-primary: #FF6A00;
+  --brand-primary-hover: #E85A00;
+  --brand-primary-active: #D14900;
+  --brand-secondary: #FFC01E;
+  --brand-accent: #E01F26;
+  --brand-accent-hover: #C01520;
+  --brand-success: #2e7d32;
+  --brand-warning: #f9a825;
+  --brand-info: #17a2b8;
+  --brand-surface: #ffffff;
+  --brand-on-primary: #ffffff;
+  --brand-focus-ring: #FF6A00;
+  /* RGB channels of the brand colors, so faint/alpha tokens below can be
+     derived from the swappable layer (override these when re-branding). */
+  --brand-primary-rgb: 255, 106, 0;
+  --brand-secondary-rgb: 255, 192, 30;
+  --brand-accent-rgb: 224, 31, 38;
 
+  /*
+   * ----------------------------------------------------------------
+   * LAYER 2 — Semantic tokens (components reference ONLY these)
+   * These map intent -> brand palette. Stable names so a brand swap
+   * never requires component changes.
+   * ----------------------------------------------------------------
+   */
+  --color-action: var(--brand-primary);
+  --color-action-hover: var(--brand-primary-hover);
+  --color-action-active: var(--brand-primary-active);
+  --color-on-action: var(--brand-on-primary);
+  --color-danger-action: var(--brand-accent);
+  --color-danger-action-hover: var(--brand-accent-hover);
+  --color-surface: var(--brand-surface);
+  --color-focus-ring: var(--brand-focus-ring);
+  /* Faint focus/validation rings — derived from brand RGB so a rebrand flows through */
+  --color-focus-ring-faint: rgba(var(--brand-primary-rgb), 0.1);
+  --color-danger-ring-faint: rgba(var(--brand-accent-rgb), 0.1);
+  --color-text: #232D3F;
+  --color-text-muted: #55657B;
+  --color-text-secondary: #55657B;
+  --color-border: #DDE2E7;
+  --color-border-default: #DDE2E7;
+  --color-border-strong: #999999;
+  --color-overlay: rgba(0, 0, 0, 0.5);
+  --color-ink: #232D3F;
+  --color-slate: #55657B;
+  --color-cream: #FFF3EA;
+  --color-success: #2e7d32;
+  --color-warning: #f9a825;
+  /* Legacy color aliases (kept for compatibility; prefer semantic tokens above) */
+  --color-primary: var(--brand-primary);
+  --color-primary-dark: var(--brand-primary-hover);
+  --color-secondary: var(--brand-secondary);
+  --color-danger: var(--brand-accent);
   /* Grays */
   --color-dark: #333;
   --color-gray-900: #1a1a1a;
@@ -24,6 +77,13 @@
   --color-gray-50: #fafafa;
   --color-light: #f0f0f0;
   --color-white: #ffffff;
+  --color-muted: #f5f5f5;
+  --color-muted-foreground: #8d8f91;
+  --color-surface-subtle: #F7F9FA;
+  --color-surface-brand: #FFF3EA;
+  --color-action-primary: #FF6A00;
+  --color-action-primary-text: #FFFFFF;
+  --color-border-subtle: #E9EDF0;
 
   /* Typography */
   --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
@@ -68,6 +128,9 @@
   --border-radius-lg: 8px;
   --border-radius-xl: 12px;
   --border-radius-full: 9999px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
 
   /* Shadows */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -75,6 +138,8 @@
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
   --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.2);
+  --shadow-card: 0 1px 2px rgba(35, 45, 63, 0.04), 0 8px 24px rgba(35, 45, 63, 0.06);
+  --shadow-card-hover: 0 2px 4px rgba(35, 45, 63, 0.05), 0 12px 28px rgba(35, 45, 63, 0.09);
 
   /* Z-index */
   --z-index-dropdown: 1000;
@@ -89,6 +154,10 @@
   --transition-fast: 0.15s ease-in-out;
   --transition-base: 0.3s ease-in-out;
   --transition-slow: 0.5s ease-in-out;
+  --transition-default: 160ms ease;
+
+  /* Gradient */
+  --gradient-brand: linear-gradient(135deg, #FFC01E 0%, #FF6A00 50%, #E01F26 100%);
 
   /* Breakpoints */
   --breakpoint-xs: 480px;

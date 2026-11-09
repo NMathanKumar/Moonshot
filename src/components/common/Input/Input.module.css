@@ -1,0 +1,62 @@
+/* Input Component Styles (CSS Modules) */
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-md);
+}
+
+.label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+.required {
+  color: var(--color-danger-action);
+  margin-left: var(--spacing-xs);
+}
+
+.input {
+  /* 12px horizontal has no exact spacing token; kept literal to preserve
+     the original input appearance (tokens jump 8px -> 16px). */
+  padding: var(--spacing-sm) 12px;
+  font-size: var(--font-size-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-base);
+  font-family: inherit;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-action);
+  box-shadow: 0 0 0 3px var(--color-focus-ring-faint);
+}
+
+.input:disabled {
+  background-color: var(--color-gray-100);
+  cursor: not-allowed;
+  color: var(--color-border-strong);
+}
+
+.error {
+  border-color: var(--color-danger-action);
+}
+
+.error:focus {
+  box-shadow: 0 0 0 3px var(--color-danger-ring-faint);
+}
+
+.errorText {
+  font-size: var(--font-size-xs);
+  color: var(--color-danger-action);
+  margin-top: -4px;
+}
+
+.helperText {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-top: -4px;
+}

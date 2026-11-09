@@ -1,0 +1,45 @@
+/* Tooltip Component Styles (CSS Modules) */
+
+.wrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+.bubble {
+  position: absolute;
+  z-index: var(--z-index-tooltip);
+  background-color: var(--color-gray-900);
+  color: var(--color-white);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-normal);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-base);
+  box-shadow: var(--shadow-base);
+  max-width: 240px;
+  width: max-content;
+  pointer-events: none;
+}
+
+.top {
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bottom {
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.left {
+  right: calc(100% + 6px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.right {
+  left: calc(100% + 6px);
+  top: 50%;
+  transform: translateY(-50%);
+}
