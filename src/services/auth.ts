@@ -21,6 +21,7 @@ export interface SignUpCredentials {
   password: string;
   firstName: string;
   lastName: string;
+  dateOfBirth: string;
 }
 
 export interface SignInResponse {
@@ -83,7 +84,7 @@ export async function signIn(credentials: SignInCredentials): Promise<void> {
  * Sign up a user with email and password
  * Sends a confirmation code to the email address
  * 
- * @param credentials - Email, password, and name information
+ * @param credentials - Email, password, name, and date of birth information
  * @throws Error if sign-up fails
  */
 export async function signUp(credentials: SignUpCredentials): Promise<void> {
@@ -98,6 +99,7 @@ export async function signUp(credentials: SignUpCredentials): Promise<void> {
           email: credentials.email,
           given_name: credentials.firstName,
           family_name: credentials.lastName,
+          'custom:date_of_birth': credentials.dateOfBirth,
         },
       },
     });

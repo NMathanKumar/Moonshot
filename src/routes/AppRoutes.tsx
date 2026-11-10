@@ -4,6 +4,7 @@
 
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { SignIn } from '@components/auth/SignIn';
+import { SignUp } from '@components/auth/SignUp';
 import { Dashboard } from '@components/dashboard';
 import { signIn as authSignIn, signUp as authSignUp, confirmSignUp } from '@services/auth';
 
@@ -27,7 +28,7 @@ async function handleSignInSubmit(
  * Handles Sign Up submission by creating a new account
  */
 async function handleSignUpSubmit(
-  credentials: { email: string; password: string; firstName: string; lastName: string },
+  credentials: { email: string; password: string; firstName: string; lastName: string; dateOfBirth: string },
 ): Promise<void> {
   try {
     console.log('AppRoutes: handleSignUpSubmit called');
@@ -58,7 +59,10 @@ export function AppRoutes(): React.JSX.Element {
   return (
     <Routes>
       {/* Sign in page */}
-      <Route path="/signin" element={<SignIn onSubmit={handleSignInSubmit} onSignUp={handleSignUpSubmit} onVerifyEmail={handleVerifyEmail} />} />
+      <Route path="/signin" element={<SignIn onSubmit={handleSignInSubmit} />} />
+      
+      {/* Sign up page */}
+      <Route path="/signup" element={<SignUp onSubmit={handleSignUpSubmit} />} />
       
       {/* Protected dashboard route */}
       <Route path="/dashboard" element={<Dashboard />} />
@@ -68,4 +72,3 @@ export function AppRoutes(): React.JSX.Element {
     </Routes>
   );
 }
-

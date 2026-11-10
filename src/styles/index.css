@@ -1,10 +1,10 @@
 /* Global Styles Entry Point */
 
+@import './variables.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import './variables.css';
 
 /* Base element resets and styles (moved from reset.css) */
 @layer base {
