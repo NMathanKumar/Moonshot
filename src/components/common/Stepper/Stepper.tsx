@@ -5,8 +5,6 @@
  * WCAG 2.1 AA.
  */
 
-import styles from './Stepper.module.css';
-
 export interface Step {
   label: string;
   id?: string;
@@ -29,9 +27,10 @@ export const Stepper: React.FC<StepperProps> = ({
   orientation = 'horizontal',
   className = '',
 }) => {
+  const isHorizontal = orientation === 'horizontal';
   const stepperClass = [
-    styles.stepper,
-    styles[orientation],
+    'flex gap-4',
+    isHorizontal ? 'flex-row items-center' : 'flex-col items-start',
     className,
   ]
     .filter(Boolean)
@@ -53,19 +52,17 @@ export const Stepper: React.FC<StepperProps> = ({
         const isActive = index === activeStep;
         const isFuture = index > activeStep;
 
-        const stepClass = [
-          styles.step,
-          orientation === 'vertical' ? styles.vertical : '',
-          isCompleted ? styles.completed : '',
-          isActive ? styles.active : '',
-          disabled || isFuture ? styles.disabled : '',
-        ]
-          .filter(Boolean)
-          .join(' ');
-
         const stepButtonContent = (
           <>
-            <div className={styles.stepIndicator}>
+            <div className={`flex items-center justify-center w-9 h-9 rounded-full font-semibold text-sm border-2 flex-shrink-0 transition-all ${
+              isCompleted
+                ? 'bg-[#FF6A00] border-[#FF6A00] text-white'
+                : isActive
+                ? 'bg-[#FF6A00] border-[#FF6A00] text-white shadow-[0_0_0_3px_rgba(255,106,0,0.1)]'
+                : disabled || isFuture
+                ? 'border-[#DDE2E7] bg-white text-[#232D3F] opacity-50'
+                : 'border-[#DDE2E7] bg-white text-[#232D3F]'
+            }`}>
               {isCompleted ? (
                 <svg
                   width="16"
@@ -81,15 +78,8 @@ export const Stepper: React.FC<StepperProps> = ({
                 index + 1
               )}
             </div>
-            <div
-              className={[
-                styles.stepLabel,
-                orientation === 'horizontal' ? styles.horizontal : styles.vertical,
-              ]
-                .filter(Boolean)
-                .join(' ')}
-            >
-              <p className={[styles.stepText, isFuture ? styles.disabled : ''].filter(Boolean).join(' ')}>
+            <div className={`flex flex-col gap-1 ${isHorizontal ? 'items-center' : 'items-start'}`}>
+              <p className={`text-sm font-medium ${isFuture ? 'text-[#55657B]' : 'text-[#232D3F]'}`}>
                 {step.label}
               </p>
             </div>
@@ -97,16 +87,18 @@ export const Stepper: React.FC<StepperProps> = ({
         );
 
         return (
-          <div key={step.id || index} className={stepClass}>
+          <div
+            key={step.id || index}
+            className={`flex ${isHorizontal ? 'flex-row items-center' : 'flex-col items-start'} relative flex-1`}
+          >
             {/* Connector line (not on last step) */}
             {index < steps.length - 1 && (
               <div
-                className={[
-                  styles.connector,
-                  index < activeStep ? styles.completed : '',
-                ]
-                  .filter(Boolean)
-                  .join(' ')}
+                className={`absolute ${
+                  isHorizontal
+                    ? 'top-4.5 left-1/2 w-[calc(100%-36px)] h-0.5 ml-4.5'
+                    : 'left-4.5 top-9 w-0.5 h-[calc(100%-36px)]'
+                } ${index < activeStep ? 'bg-[#FF6A00]' : 'bg-[#DDE2E7]'} transition-colors`}
               />
             )}
 
@@ -114,7 +106,9 @@ export const Stepper: React.FC<StepperProps> = ({
             {onStepClick && !disabled ? (
               <button
                 type="button"
-                className={styles.stepButton}
+                className={`bg-none border-none p-0 cursor-pointer flex gap-2 w-full text-left rounded-md transition-colors ${
+                  isHorizontal ? 'flex-col items-center text-center' : 'flex-row'
+                } hover:bg-[#fafafa] focus-visible:outline-2 focus-visible:outline-[#FF6A00] focus-visible:outline-offset-2 disabled:cursor-not-allowed`}
                 onClick={() => handleStepClick(index)}
                 disabled={isFuture || disabled}
                 aria-label={`Step ${index + 1}: ${step.label}${isActive ? ' (current)' : ''}${isCompleted ? ' (completed)' : ''}`}

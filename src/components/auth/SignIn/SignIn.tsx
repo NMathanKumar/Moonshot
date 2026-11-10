@@ -1,221 +1,234 @@
-import { useId, useState, type FormEvent, type ChangeEvent } from 'react';
-import { Button } from '@components/common/Button';
-import styles from './SignIn.module.css';
+import { useState } from 'react';
+import signupStudent from '@assets/idp-signup-student.png';
 import signinStudent from '@assets/idp-signin-student.png';
-import '@styles/index.css';
+import styles from './SignIn.module.css';
 
-/**
- * Credentials captured by the Sign In form.
- */
 export interface SignInCredentials {
   email: string;
   password: string;
 }
 
-/**
- * Props for the {@link SignIn} screen.
- *
- * The screen is presentational: it owns its own form state and UI concerns
- * (show/hide password, validation, loading, error display) but delegates the
- * actual authentication call to the parent via `onSubmit`, and the secondary
- * navigation (sign up, forgot password) via optional callbacks. This keeps the
- * component decoupled from the typed API client and router that arrive with a
- * later journey.
- */
 export interface SignInProps {
-  /**
-   * Called when the user submits valid credentials. Should return a promise
-   * that resolves on success and rejects on failure. A rejected promise with
-   * a message is surfaced to the user as an error; the submit button returns
-   * to its idle state so the user can retry.
-   */
   onSubmit?: (credentials: SignInCredentials) => Promise<void>;
-  /** Invoked when the user activates the "Forgot password?" link. */
-  onForgotPassword?: () => void;
-  /** Invoked when the user activates the "Sign up" link. */
-  onSignUp?: () => void;
+  onSignUp?: (credentials: { email: string; password: string; firstName: string; lastName: string }) => Promise<void>;
+  onVerifyEmail?: (email: string, code: string) => Promise<void>;
 }
 
-/** Minimal email shape check — the server remains the source of truth. */
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+function isUnder18(dateOfBirth: string) {
+  const birthDate = new Date(`${dateOfBirth}T00:00:00`);
+  const today = new Date();
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const birthdayHasPassed =
+    today.getMonth() > birthDate.getMonth() ||
+    (today.getMonth() === birthDate.getMonth() && today.getDate() >= birthDate.getDate());
+  if (!birthdayHasPassed) age -= 1;
+  return age < 18;
+}
 
-/**
- * Sign In screen for the Test Taker Portal.
- *
- * Two-panel IDP-branded layout matching the approved design: a brand
- * illustration panel on the left and a sign-in card on the right with email,
- * password (show/hide toggle), a forgot-password link, a gradient submit
- * button with loading state, inline validation, and submission error handling.
- *
- * Styling uses CSS Modules and Moonshot design tokens.
- */
-export function SignIn({ onSubmit, onForgotPassword, onSignUp }: SignInProps) {
+export function SignIn() {
+  const [tab, setTab] = useState<'login' | 'signup'>('login');
+  const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formError, setFormError] = useState<string | null>(null);
-  const [fieldErrors, setFieldErrors] = useState<Partial<SignInCredentials>>({});
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
+  const [gender, setGender] = useState('');
 
-  const emailId = useId();
-  const passwordId = useId();
-  const formErrorId = useId();
-
-  /** Validates the current field values, returning per-field error messages. */
-  function validate(): Partial<SignInCredentials> {
-    const errors: Partial<SignInCredentials> = {};
-
-    if (!email.trim()) {
-      errors.email = 'Enter your email address.';
-    } else if (!EMAIL_PATTERN.test(email.trim())) {
-      errors.email = 'Enter a valid email address.';
-    }
-
-    if (!password) {
-      errors.password = 'Enter your password.';
-    }
-
-    return errors;
-  }
-
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setFormError(null);
-
-    const errors = validate();
-    setFieldErrors(errors);
-    if (Object.keys(errors).length > 0) {
-      return;
-    }
-
-    setIsSubmitting(true);
-    try {
-      await onSubmit?.({ email: email.trim(), password });
-    } catch (error) {
-      setFormError(
-        error instanceof Error && error.message
-          ? error.message
-          : 'We could not sign you in. Please check your details and try again.',
-      );
-    } finally {
-      setIsSubmitting(false);
-    }
-  }
+  const needsGuardian = tab === 'signup' && Boolean(dateOfBirth) && isUnder18(dateOfBirth);
 
   return (
-    <div className={styles.signInLayout}>
-      <div className={styles.signInBrandPanel}>
-        <div className={styles.signInBrandMedia}>
-          <img src={signinStudent} alt="" />
+    <div className={styles.container}>
+      {/* LEFT PANEL */}
+      <div className={styles.leftPanel}>
+        {/* Orange circle background */}
+        <div className={styles.orangeCircle}></div>
+        {/* Green leaf */}
+        <div className={styles.greenLeaf}></div>
+        {/* Blue circle background */}
+        <div className={styles.blueCircle}></div>
+
+        {/* Content */}
+        <div className={styles.leftContent}>
+          {tab === 'login' ? (
+            <img src={signinStudent} alt="Professional woman" className={styles.image} />
+          ) : (
+            <>
+              <img src={signupStudent} alt="Student" className={styles.image} />
+              <h2 className={styles.leftHeading}>Create your IDP account</h2>
+              <p className={styles.leftDescription}>One account for your English test journey. Sign up today.</p>
+              <ul className={styles.benefits}>
+                <li>
+                  <span>✓</span>
+                  <p>Access your personalised dashboard and results.</p>
+                </li>
+                <li>
+                  <span>✓</span>
+                  <p>Practise all four skills at your own pace.</p>
+                </li>
+                <li>
+                  <span>✓</span>
+                  <p>Manage your tests and certificates in one place.</p>
+                </li>
+                <li>
+                  <span>✓</span>
+                  <div>
+                    <strong>Clear and simple.</strong>
+                    <p>Your account keeps your preparation, purchases, and results together.</p>
+                  </div>
+                </li>
+              </ul>
+            </>
+          )}
         </div>
       </div>
 
-      <div className={styles.signInFormPanel}>
-        <section className={styles.signInFormCard} aria-labelledby="signin-heading">
-          <header className={styles.signInCardHeader}>
-            <h1 id="signin-heading" className={styles.signInCardTitle}>
-              Sign in
-            </h1>
-            <p className={styles.signInCardSubtitle}>
-              Welcome back! Please enter your details.
-            </p>
-          </header>
+      {/* RIGHT PANEL */}
+      <div className={styles.rightPanel}>
+        <div className={styles.card}>
+          {/* HEADER */}
+          {tab === 'login' && (
+            <div className={styles.header}>
+              <h1>Welcome back</h1>
+              <p>Sign in to your IDP account</p>
+            </div>
+          )}
 
-          <form className={styles.signInForm} onSubmit={handleSubmit} noValidate>
-            {formError && (
-              <div id={formErrorId} className={styles.signInFormError} role="alert">
-                {formError}
+          {tab === 'signup' && (
+            <div className={styles.header}>
+              <h1>Create your account</h1>
+              <p>Start your IDP English Test journey</p>
+            </div>
+          )}
+
+          {/* TAB TOGGLE */}
+          <div className={styles.tabs}>
+            <button
+              className={`${styles.tab} ${tab === 'login' ? styles.active : ''}`}
+              onClick={() => setTab('login')}
+            >
+              Sign In
+            </button>
+            <button
+              className={`${styles.tab} ${tab === 'signup' ? styles.active : ''}`}
+              onClick={() => setTab('signup')}
+            >
+              Sign Up
+            </button>
+          </div>
+
+          {/* FORM */}
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+          >
+            {/* NAME FIELDS - Only for signup */}
+            {tab === 'signup' && (
+              <div className={styles.row}>
+                <div className={styles.field}>
+                  <label>FIRST NAME</label>
+                  <input
+                    type="text"
+                    placeholder="Sarah"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                  />
+                </div>
+                <div className={styles.field}>
+                  <label>LAST NAME</label>
+                  <input
+                    type="text"
+                    placeholder="Chen"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                  />
+                </div>
               </div>
             )}
 
-            <div className={styles.signInField}>
-              <label className={styles.signInLabel} htmlFor={emailId}>
-                Email
-              </label>
+            {/* EMAIL FIELD */}
+            <div className={styles.field}>
+              <label>EMAIL</label>
               <input
-                id={emailId}
                 type="email"
-                name="email"
-                className={styles.signInInput}
-                value={email}
                 placeholder="you@example.com"
-                disabled={isSubmitting}
-                aria-invalid={fieldErrors.email ? 'true' : undefined}
-                aria-describedby={fieldErrors.email ? `${emailId}-error` : undefined}
-                onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
-              {fieldErrors.email && (
-                <span id={`${emailId}-error`} className={styles.signInFieldError}>
-                  {fieldErrors.email}
-                </span>
-              )}
             </div>
 
-            <div className={styles.signInField}>
-              <div className={styles.signInLabelRow}>
-                <label className={styles.signInLabel} htmlFor={passwordId}>
-                  Password
-                </label>
-                <button
-                  type="button"
-                  className={styles.signInForgot}
-                  onClick={onForgotPassword}
-                  disabled={isSubmitting}
-                >
-                  Forgot password?
-                </button>
-              </div>
+            {/* PASSWORD FIELD */}
+            <div className={styles.field}>
+              <label>PASSWORD</label>
               <div className={styles.passwordContainer}>
                 <input
-                  id={passwordId}
                   type={showPassword ? 'text' : 'password'}
-                  name="password"
-                  className={styles.passwordInput}
+                  placeholder="••••••••"
                   value={password}
-                  placeholder="Enter your password"
-                  disabled={isSubmitting}
-                  aria-invalid={fieldErrors.password ? 'true' : undefined}
-                  aria-describedby={fieldErrors.password ? `${passwordId}-error` : undefined}
-                  onChange={(event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 <button
                   type="button"
-                  className={styles.passwordToggle}
-                  onClick={() => setShowPassword((visible) => !visible)}
-                  disabled={isSubmitting}
-                  aria-pressed={showPassword}
-                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  className={styles.showButton}
+                  onClick={() => setShowPassword(!showPassword)}
                 >
-                  {showPassword ? 'Hide password' : 'Show password'}
+                  {showPassword ? 'Hide' : 'Show'} password
                 </button>
               </div>
-              {fieldErrors.password && (
-                <span id={`${passwordId}-error`} className={styles.signInFieldError}>
-                  {fieldErrors.password}
-                </span>
-              )}
             </div>
 
-            <Button
-              type="submit"
-              className={styles.signInSubmit}
-              disabled={isSubmitting}
-              isLoading={isSubmitting}
-            >
-              Sign in
-            </Button>
+            {/* DOB & GENDER - Only for signup */}
+            {tab === 'signup' && (
+              <div className={styles.row}>
+                <div className={styles.field}>
+                  <label>DATE OF BIRTH</label>
+                  <input
+                    type="date"
+                    value={dateOfBirth}
+                    onChange={(e) => setDateOfBirth(e.target.value)}
+                  />
+                </div>
+                <div className={styles.field}>
+                  <label>GENDER</label>
+                  <select value={gender} onChange={(e) => setGender(e.target.value)}>
+                    <option value="">Select gender</option>
+                    <option>Female</option>
+                    <option>Male</option>
+                    <option>Non-binary</option>
+                    <option>Prefer not to say</option>
+                  </select>
+                </div>
+              </div>
+            )}
+
+            {/* TERMS CHECKBOX - Only for signup */}
+            {tab === 'signup' && !needsGuardian && (
+              <div className={styles.checkbox}>
+                <input type="checkbox" id="terms" />
+                <label htmlFor="terms">
+                  I agree to the <span className={styles.highlight}>Terms of Service and Privacy Policy</span>
+                </label>
+              </div>
+            )}
+
+            {/* SUBMIT BUTTON */}
+            <button type="submit" className={styles.submitButton}>
+              {tab === 'login' ? 'Sign in →' : 'Create my account →'}
+            </button>
           </form>
 
-          <p className={styles.signInFooter}>
-            Don&apos;t have an account?{' '}
-            <button type="button" onClick={onSignUp} disabled={isSubmitting}>
-              Sign up
-            </button>
-          </p>
-        </section>
+          {/* SIGN UP LINK - Only for login */}
+          {tab === 'login' && (
+            <div className={styles.signupLink}>
+              Don't have an account?{' '}
+              <button type="button" onClick={() => setTab('signup')}>
+                Sign up
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
 }
-
-export default SignIn;

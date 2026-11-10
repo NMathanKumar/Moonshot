@@ -11,7 +11,6 @@
 
 import { useEffect, useRef, useCallback, useId } from 'react';
 import { createPortal } from 'react-dom';
-import styles from './Modal.module.css';
 import { lockBodyScroll, unlockBodyScroll } from './scrollLock';
 
 const FOCUSABLE =
@@ -136,7 +135,7 @@ export const Modal: React.FC<ModalProps> = ({
 
   return createPortal(
     <div
-      className={styles.backdrop}
+      className="fixed inset-0 bg-[rgba(0,0,0,0.5)] flex items-center justify-center p-4 z-[1050]"
       onMouseDown={onBackdropMouseDown}
       data-testid="modal-backdrop"
     >
@@ -146,17 +145,17 @@ export const Modal: React.FC<ModalProps> = ({
         aria-modal="true"
         aria-labelledby={title ? titleId : undefined}
         tabIndex={-1}
-        className={[styles.dialog, className].filter(Boolean).join(' ')}
+        className={`bg-white rounded-lg shadow-lg w-full max-w-md max-h-[calc(100vh-64px)] flex flex-col overflow-hidden ${className}`}
         onKeyDown={handleKeyDown}
       >
         {title && (
-          <div className={styles.header}>
-            <h2 id={titleId} className={styles.title}>
+          <div className="flex items-center justify-between gap-4 p-6 border-b border-[#DDE2E7]">
+            <h2 id={titleId} className="m-0 text-xl font-semibold text-[#232D3F]">
               {title}
             </h2>
             <button
               type="button"
-              className={styles.closeButton}
+              className="flex-shrink-0 inline-flex items-center justify-center w-8 h-8 border-none bg-transparent rounded text-[#55657B] cursor-pointer hover:bg-[#f5f5f5] focus-visible:outline-2 focus-visible:outline-[#FF6A00] focus-visible:outline-offset-2"
               aria-label={closeLabel}
               onClick={onClose}
             >
@@ -171,7 +170,7 @@ export const Modal: React.FC<ModalProps> = ({
             </button>
           </div>
         )}
-        <div className={styles.body}>{children}</div>
+        <div className="p-6 overflow-y-auto">{children}</div>
       </div>
     </div>,
     document.body

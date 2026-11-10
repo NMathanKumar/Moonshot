@@ -17,7 +17,6 @@ import {
   useState,
 } from 'react';
 import { Toast } from './Toast';
-import styles from './Toast.module.css';
 
 const ToastContext = createContext<ReturnType<typeof useToast> | null>(null);
 
@@ -124,7 +123,7 @@ export const ToastProvider: React.FC<{
     <ToastContext.Provider value={value}>
       {children}
       <div
-        className={styles.region}
+        className="fixed bottom-6 right-6 flex flex-col gap-2 z-[1070] max-w-sm w-[calc(100vw-48px)] pointer-events-none"
         role="region"
         aria-label="Notifications"
         data-testid="toast-region"

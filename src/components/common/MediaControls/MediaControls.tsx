@@ -5,8 +5,6 @@
  * WCAG 2.1 AA.
  */
 
-import styles from './MediaControls.module.css';
-
 const formatTime = (seconds: number): string => {
   if (!Number.isFinite(seconds)) return '00:00';
   const mins = Math.floor(seconds / 60);
@@ -41,7 +39,12 @@ export const MediaControls: React.FC<MediaControlsProps> = ({
   onVolumeChange,
   className = '',
 }) => {
-  const controlsClass = [styles.controls, className].filter(Boolean).join(' ');
+  const controlsClass = [
+    'flex flex-col gap-4 p-4 bg-white border border-[#DDE2E7] rounded-md',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
   
   const progressPercent = duration > 0 ? (currentTime / duration) * 100 : 0;
 
@@ -62,10 +65,10 @@ export const MediaControls: React.FC<MediaControlsProps> = ({
   return (
     <div className={controlsClass} aria-label={label}>
       {/* Time display */}
-      <div className={styles.display}>
-        <span className={styles.displayLabel}>Time:</span>
+      <div className="flex items-center justify-between gap-4">
+        <span className="text-xs text-[#55657B] flex-shrink-0">Time:</span>
         <span
-          className={styles.timeDisplay}
+          className="font-mono text-sm font-semibold text-[#232D3F]"
           aria-label={`Current time: ${formatTime(currentTime)} of ${formatTime(duration)}`}
           aria-live="off"
         >
@@ -74,11 +77,11 @@ export const MediaControls: React.FC<MediaControlsProps> = ({
       </div>
 
       {/* Progress bar */}
-      <div className={styles.progressContainer}>
-        <div className={styles.progress}>
+      <div className="flex items-center gap-2 flex-wrap">
+        <div className="flex-1 min-w-[100px]">
           <button
             type="button"
-            className={styles.progressBar}
+            className="w-full h-1 bg-[#DDE2E7] rounded-full cursor-pointer relative overflow-hidden"
             onClick={handleProgressClick}
             aria-label={`Seek to position: ${formatTime(currentTime)} of ${formatTime(duration)}`}
             aria-valuemin={0}
@@ -88,19 +91,23 @@ export const MediaControls: React.FC<MediaControlsProps> = ({
             role="slider"
           >
             <div
-              className={styles.progressFill}
+              className="h-full bg-[#FF6A00] rounded-full transition-all"
               style={{ width: `${progressPercent}%` }}
             />
           </button>
         </div>
-        <span className={styles.progressTime}>{formatTime(duration)}</span>
+        <span className="text-xs text-[#55657B] whitespace-nowrap flex-shrink-0">{formatTime(duration)}</span>
       </div>
 
       {/* Control buttons */}
-      <div className={styles.controlsRow}>
+      <div className="flex items-center justify-center gap-2">
         <button
           type="button"
-          className={[styles.button, !isPlaying ? styles.primary : ''].filter(Boolean).join(' ')}
+          className={`inline-flex items-center justify-center w-10 h-10 border-none rounded text-[#232D3F] cursor-pointer transition-all p-0 ${
+            !isPlaying
+              ? 'bg-[#FF6A00] text-white hover:bg-[#E85A00]'
+              : 'bg-[#efefef] hover:bg-[#ddd]'
+          } focus-visible:outline-2 focus-visible:outline-[#FF6A00] focus-visible:outline-offset-2 disabled:opacity-50 disabled:cursor-not-allowed`}
           onClick={onPlay}
           disabled={isPlaying}
           aria-label="Play"
@@ -112,7 +119,11 @@ export const MediaControls: React.FC<MediaControlsProps> = ({
         </button>
         <button
           type="button"
-          className={[styles.button, isPlaying ? styles.primary : ''].filter(Boolean).join(' ')}
+          className={`inline-flex items-center justify-center w-10 h-10 border-none rounded text-[#232D3F] cursor-pointer transition-all p-0 ${
+            isPlaying
+              ? 'bg-[#FF6A00] text-white hover:bg-[#E85A00]'
+              : 'bg-[#efefef] hover:bg-[#ddd]'
+          } focus-visible:outline-2 focus-visible:outline-[#FF6A00] focus-visible:outline-offset-2 disabled:opacity-50 disabled:cursor-not-allowed`}
           onClick={onPause}
           disabled={!isPlaying}
           aria-label="Pause"
@@ -125,7 +136,7 @@ export const MediaControls: React.FC<MediaControlsProps> = ({
 
         {/* Volume control */}
         {showVolume && (
-          <div className={styles.volumeControl}>
+          <div className="flex items-center gap-2">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
               <path d="M3.5 5a.5.5 0 0 1 .5-.5h2.793L10 2.207a.5.5 0 0 1 1 .293v11a.5.5 0 0 1-1 .293L6.793 11.5H4a.5.5 0 0 1-.5-.5v-5z" />
             </svg>
@@ -136,7 +147,7 @@ export const MediaControls: React.FC<MediaControlsProps> = ({
               step={0.1}
               value={volume}
               onChange={handleVolumeChange}
-              className={styles.volumeSlider}
+              className="w-20 h-1 cursor-pointer"
               aria-label="Volume"
             />
           </div>

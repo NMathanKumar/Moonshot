@@ -1,15 +1,18 @@
 /**
  * App Component
- * Main application component with routing
+ * Main application component with routing and auth provider
  */
 
 import { BrowserRouter } from 'react-router-dom';
 import { AppRoutes } from '@routes';
+import { AuthProvider } from '@hooks/useAuth';
 
 function App(): React.JSX.Element {
   return (
     <BrowserRouter>
-      <AppRoutes />
+      <AuthProvider>
+        <AppRoutes />
+      </AuthProvider>
     </BrowserRouter>
   );
 }

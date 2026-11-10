@@ -1,0 +1,468 @@
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90mC:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1[39m
+
+ [32m✓[39m src/services/apiClient.test.ts [2m ([22m[2m24 tests[22m[2m)[22m[90m 103[2mms[22m[39m
+ [33m❯[39m src/components/common/Modal/Modal.test.tsx [2m ([22m[2m0 test[22m[2m)[22m
+ [33m❯[39m src/components/common/Dropdown/Dropdown.test.tsx [2m ([22m[2m0 test[22m[2m)[22m
+ [32m✓[39m src/services/auth.test.ts [2m ([22m[2m16 tests[22m[2m)[22m[90m 50[2mms[22m[39m
+ [33m❯[39m src/components/common/MediaControls/MediaControls.test.tsx [2m ([22m[2m0 test[22m[2m)[22m
+ [33m❯[39m src/components/common/Stepper/Stepper.test.tsx [2m ([22m[2m0 test[22m[2m)[22m
+ [33m❯[39m src/components/common/Toast/Toast.test.tsx [2m ([22m[2m0 test[22m[2m)[22m
+ [33m❯[39m src/components/common/Alert/Alert.test.tsx [2m ([22m[2m0 test[22m[2m)[22m
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2minitialization[2m > [22m[2mshows loading state during initial auth check[22m[39m
+AuthProvider: Initializing authentication state...
+AuthProvider: Setting up auth Hub listener
+AuthProvider: No valid session found
+
+[90mstderr[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2minitialization[2m > [22m[2mshows loading state during initial auth check[22m[39m
+Error: Uncaught [TypeError: Cannot read properties of undefined (reading 'listen')]
+    at reportException (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\helpers\runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:353:9)
+    at invokeEventListeners (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\generated\EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:4213:16)
+    at invokeGuardedCallback (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:4277:31)
+    at reportUncaughtErrorInDEV (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:22877:5)
+    at captureCommitPhaseError (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:27165:5) TypeError: Cannot read properties of undefined (reading 'listen')
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39msrc\hooks\useAuth.tsx:81:32
+    at commitHookEffectListMount [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:23189:26[90m)[39m
+    at commitPassiveMountOnFiber [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24970:11[90m)[39m
+    at commitPassiveMountEffects_complete [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24930:9[90m)[39m
+    at commitPassiveMountEffects_begin [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24917:7[90m)[39m
+    at commitPassiveMountEffects [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24905:3[90m)[39m
+    at flushPassiveEffectsImpl [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:27078:3[90m)[39m
+    at flushPassiveEffects [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:27023:14[90m)[39m
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:26808:9
+    at flushActQueue [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact[24m\cjs\react.development.js:2667:24[90m)[39m
+The above error occurred in the <AuthProvider> component:
+
+    at AuthProvider (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\src\hooks\useAuth.tsx:10:25)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2minitialization[2m > [22m[2msets authenticated state when user is authenticated[22m[39m
+AuthProvider: Initializing authentication state...
+AuthProvider: Setting up auth Hub listener
+AuthProvider: No valid session found
+
+[90mstderr[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2minitialization[2m > [22m[2msets authenticated state when user is authenticated[22m[39m
+Error: Uncaught [TypeError: Cannot read properties of undefined (reading 'listen')]
+    at reportException (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\helpers\runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:353:9)
+    at invokeEventListeners (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\generated\EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:4213:16)
+    at invokeGuardedCallback (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:4277:31)
+    at reportUncaughtErrorInDEV (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:22877:5)
+    at captureCommitPhaseError (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:27165:5) TypeError: Cannot read properties of undefined (reading 'listen')
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39msrc\hooks\useAuth.tsx:81:32
+    at commitHookEffectListMount [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:23189:26[90m)[39m
+    at commitPassiveMountOnFiber [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24970:11[90m)[39m
+    at commitPassiveMountEffects_complete [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24930:9[90m)[39m
+    at commitPassiveMountEffects_begin [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24917:7[90m)[39m
+    at commitPassiveMountEffects [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24905:3[90m)[39m
+    at flushPassiveEffectsImpl [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:27078:3[90m)[39m
+    at flushPassiveEffects [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:27023:14[90m)[39m
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:26808:9
+    at flushActQueue [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact[24m\cjs\react.development.js:2667:24[90m)[39m
+The above error occurred in the <AuthProvider> component:
+
+    at AuthProvider (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\src\hooks\useAuth.tsx:10:25)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2minitialization[2m > [22m[2msets unauthenticated state when no user is present[22m[39m
+AuthProvider: Initializing authentication state...
+AuthProvider: Setting up auth Hub listener
+AuthProvider: No valid session found
+
+[90mstderr[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2minitialization[2m > [22m[2msets unauthenticated state when no user is present[22m[39m
+Error: Uncaught [TypeError: Cannot read properties of undefined (reading 'listen')]
+    at reportException (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\helpers\runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:353:9)
+    at invokeEventListeners (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\generated\EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:4213:16)
+    at invokeGuardedCallback (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:4277:31)
+    at reportUncaughtErrorInDEV (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:22877:5)
+    at captureCommitPhaseError (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:27165:5) TypeError: Cannot read properties of undefined (reading 'listen')
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39msrc\hooks\useAuth.tsx:81:32
+    at commitHookEffectListMount [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:23189:26[90m)[39m
+    at commitPassiveMountOnFiber [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24970:11[90m)[39m
+    at commitPassiveMountEffects_complete [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24930:9[90m)[39m
+    at commitPassiveMountEffects_begin [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24917:7[90m)[39m
+    at commitPassiveMountEffects [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24905:3[90m)[39m
+    at flushPassiveEffectsImpl [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:27078:3[90m)[39m
+    at flushPassiveEffects [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:27023:14[90m)[39m
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:26808:9
+    at flushActQueue [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact[24m\cjs\react.development.js:2667:24[90m)[39m
+The above error occurred in the <AuthProvider> component:
+
+    at AuthProvider (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\src\hooks\useAuth.tsx:10:25)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mHub event listeners[2m > [22m[2mhandles signedIn event[22m[39m
+AuthProvider: Initializing authentication state...
+AuthProvider: Setting up auth Hub listener
+AuthProvider: No valid session found
+
+[90mstderr[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mHub event listeners[2m > [22m[2mhandles signedIn event[22m[39m
+Error: Uncaught [TypeError: Cannot read properties of undefined (reading 'listen')]
+    at reportException (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\helpers\runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:353:9)
+    at invokeEventListeners (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\generated\EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:4213:16)
+    at invokeGuardedCallback (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:4277:31)
+    at reportUncaughtErrorInDEV (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:22877:5)
+    at captureCommitPhaseError (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:27165:5) TypeError: Cannot read properties of undefined (reading 'listen')
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39msrc\hooks\useAuth.tsx:81:32
+    at commitHookEffectListMount [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:23189:26[90m)[39m
+    at commitPassiveMountOnFiber [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24970:11[90m)[39m
+    at commitPassiveMountEffects_complete [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24930:9[90m)[39m
+    at commitPassiveMountEffects_begin [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24917:7[90m)[39m
+    at commitPassiveMountEffects [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24905:3[90m)[39m
+    at flushPassiveEffectsImpl [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:27078:3[90m)[39m
+    at flushPassiveEffects [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:27023:14[90m)[39m
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:26808:9
+    at flushActQueue [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact[24m\cjs\react.development.js:2667:24[90m)[39m
+The above error occurred in the <AuthProvider> component:
+
+    at AuthProvider (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\src\hooks\useAuth.tsx:10:25)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mHub event listeners[2m > [22m[2mhandles signedOut event[22m[39m
+AuthProvider: Initializing authentication state...
+AuthProvider: Setting up auth Hub listener
+AuthProvider: No valid session found
+
+[90mstderr[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mHub event listeners[2m > [22m[2mhandles signedOut event[22m[39m
+Error: Uncaught [TypeError: Cannot read properties of undefined (reading 'listen')]
+    at reportException (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\helpers\runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:353:9)
+    at invokeEventListeners (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\generated\EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:4213:16)
+    at invokeGuardedCallback (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:4277:31)
+    at reportUncaughtErrorInDEV (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:22877:5)
+    at captureCommitPhaseError (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:27165:5) TypeError: Cannot read properties of undefined (reading 'listen')
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39msrc\hooks\useAuth.tsx:81:32
+    at commitHookEffectListMount [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:23189:26[90m)[39m
+    at commitPassiveMountOnFiber [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24970:11[90m)[39m
+    at commitPassiveMountEffects_complete [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24930:9[90m)[39m
+    at commitPassiveMountEffects_begin [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24917:7[90m)[39m
+    at commitPassiveMountEffects [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24905:3[90m)[39m
+    at flushPassiveEffectsImpl [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:27078:3[90m)[39m
+    at flushPassiveEffects [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:27023:14[90m)[39m
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:26808:9
+    at flushActQueue [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact[24m\cjs\react.development.js:2667:24[90m)[39m
+The above error occurred in the <AuthProvider> component:
+
+    at AuthProvider (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\src\hooks\useAuth.tsx:10:25)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mHub event listeners[2m > [22m[2mhandles tokenRefresh event[22m[39m
+AuthProvider: Initializing authentication state...
+AuthProvider: Setting up auth Hub listener
+AuthProvider: No valid session found
+
+[90mstderr[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mHub event listeners[2m > [22m[2mhandles tokenRefresh event[22m[39m
+Error: Uncaught [TypeError: Cannot read properties of undefined (reading 'listen')]
+    at reportException (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\helpers\runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:353:9)
+    at invokeEventListeners (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\generated\EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:4213:16)
+    at invokeGuardedCallback (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:4277:31)
+    at reportUncaughtErrorInDEV (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:22877:5)
+    at captureCommitPhaseError (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:27165:5) TypeError: Cannot read properties of undefined (reading 'listen')
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39msrc\hooks\useAuth.tsx:81:32
+    at commitHookEffectListMount [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:23189:26[90m)[39m
+    at commitPassiveMountOnFiber [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24970:11[90m)[39m
+    at commitPassiveMountEffects_complete [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24930:9[90m)[39m
+    at commitPassiveMountEffects_begin [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24917:7[90m)[39m
+    at commitPassiveMountEffects [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24905:3[90m)[39m
+    at flushPassiveEffectsImpl [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:27078:3[90m)[39m
+    at flushPassiveEffects [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:27023:14[90m)[39m
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:26808:9
+    at flushActQueue [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact[24m\cjs\react.development.js:2667:24[90m)[39m
+The above error occurred in the <AuthProvider> component:
+
+    at AuthProvider (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\src\hooks\useAuth.tsx:10:25)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2msignOut function[2m > [22m[2mcalls authSignOut on sign out[22m[39m
+AuthProvider: Initializing authentication state...
+AuthProvider: Setting up auth Hub listener
+AuthProvider: No valid session found
+
+[90mstderr[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2msignOut function[2m > [22m[2mcalls authSignOut on sign out[22m[39m
+Error: Uncaught [TypeError: Cannot read properties of undefined (reading 'listen')]
+    at reportException (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\helpers\runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:353:9)
+    at invokeEventListeners (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\generated\EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:4213:16)
+    at invokeGuardedCallback (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:4277:31)
+    at reportUncaughtErrorInDEV (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:22877:5)
+    at captureCommitPhaseError (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:27165:5) TypeError: Cannot read properties of undefined (reading 'listen')
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39msrc\hooks\useAuth.tsx:81:32
+    at commitHookEffectListMount [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:23189:26[90m)[39m
+    at commitPassiveMountOnFiber [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24970:11[90m)[39m
+    at commitPassiveMountEffects_complete [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24930:9[90m)[39m
+    at commitPassiveMountEffects_begin [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24917:7[90m)[39m
+    at commitPassiveMountEffects [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24905:3[90m)[39m
+    at flushPassiveEffectsImpl [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:27078:3[90m)[39m
+    at flushPassiveEffects [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:27023:14[90m)[39m
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:26808:9
+    at flushActQueue [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact[24m\cjs\react.development.js:2667:24[90m)[39m
+The above error occurred in the <AuthProvider> component:
+
+    at AuthProvider (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\src\hooks\useAuth.tsx:10:25)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2msignOut function[2m > [22m[2mhandles signOut error gracefully[22m[39m
+AuthProvider: Initializing authentication state...
+AuthProvider: Setting up auth Hub listener
+AuthProvider: No valid session found
+
+[90mstderr[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2msignOut function[2m > [22m[2mhandles signOut error gracefully[22m[39m
+Error: Uncaught [TypeError: Cannot read properties of undefined (reading 'listen')]
+    at reportException (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\helpers\runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:353:9)
+    at invokeEventListeners (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\generated\EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:4213:16)
+    at invokeGuardedCallback (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:4277:31)
+    at reportUncaughtErrorInDEV (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:22877:5)
+    at captureCommitPhaseError (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:27165:5) TypeError: Cannot read properties of undefined (reading 'listen')
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39msrc\hooks\useAuth.tsx:81:32
+    at commitHookEffectListMount [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:23189:26[90m)[39m
+    at commitPassiveMountOnFiber [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24970:11[90m)[39m
+    at commitPassiveMountEffects_complete [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24930:9[90m)[39m
+    at commitPassiveMountEffects_begin [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24917:7[90m)[39m
+    at commitPassiveMountEffects [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24905:3[90m)[39m
+    at flushPassiveEffectsImpl [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:27078:3[90m)[39m
+    at flushPassiveEffects [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:27023:14[90m)[39m
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:26808:9
+    at flushActQueue [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact[24m\cjs\react.development.js:2667:24[90m)[39m
+The above error occurred in the <AuthProvider> component:
+
+    at AuthProvider (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\src\hooks\useAuth.tsx:10:25)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mrefreshAuth function[2m > [22m[2mcalls getCurrentUser to refresh state[22m[39m
+AuthProvider: Initializing authentication state...
+AuthProvider: Setting up auth Hub listener
+AuthProvider: No valid session found
+
+[90mstderr[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mrefreshAuth function[2m > [22m[2mcalls getCurrentUser to refresh state[22m[39m
+Error: Uncaught [TypeError: Cannot read properties of undefined (reading 'listen')]
+    at reportException (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\helpers\runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:353:9)
+    at invokeEventListeners (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\generated\EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:4213:16)
+    at invokeGuardedCallback (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:4277:31)
+    at reportUncaughtErrorInDEV (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:22877:5)
+    at captureCommitPhaseError (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:27165:5) TypeError: Cannot read properties of undefined (reading 'listen')
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39msrc\hooks\useAuth.tsx:81:32
+    at commitHookEffectListMount [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:23189:26[90m)[39m
+    at commitPassiveMountOnFiber [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24970:11[90m)[39m
+    at commitPassiveMountEffects_complete [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24930:9[90m)[39m
+    at commitPassiveMountEffects_begin [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24917:7[90m)[39m
+    at commitPassiveMountEffects [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:24905:3[90m)[39m
+    at flushPassiveEffectsImpl [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:27078:3[90m)[39m
+    at flushPassiveEffects [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:27023:14[90m)[39m
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:26808:9
+    at flushActQueue [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact[24m\cjs\react.development.js:2667:24[90m)[39m
+The above error occurred in the <AuthProvider> component:
+
+    at AuthProvider (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\src\hooks\useAuth.tsx:10:25)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+[90mstderr[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2museAuth hook without provider[2m > [22m[2mthrows error when used outside AuthProvider[22m[39m
+Error: Uncaught [Error: useAuth must be used within an AuthProvider]
+    at reportException (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\helpers\runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:353:9)
+    at invokeEventListeners (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\generated\EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:4213:16)
+    at invokeGuardedCallback (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:4277:31)
+    at beginWork$1 (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:27490:7)
+    at performUnitOfWork (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:26599:12) Error: useAuth must be used within an AuthProvider
+    at Module.useAuth [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39msrc\hooks\useAuth.tsx:187:11[90m)[39m
+    at TestComponent [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39msrc\hooks\useAuth.test.tsx:34:72[90m)[39m
+    at renderWithHooks [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:15486:18[90m)[39m
+    at mountIndeterminateComponent [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:20103:13[90m)[39m
+    at beginWork [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:21626:16[90m)[39m
+    at HTMLUnknownElement.callCallback [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:4164:14[90m)[39m
+    at HTMLUnknownElement.callTheUserObjectsOperation [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mjsdom[24m\lib\jsdom\living\generated\EventListener.js:26:30[90m)[39m
+    at innerInvokeEventListeners [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mjsdom[24m\lib\jsdom\living\events\EventTarget-impl.js:350:25[90m)[39m
+    at invokeEventListeners [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mjsdom[24m\lib\jsdom\living\events\EventTarget-impl.js:286:3[90m)[39m
+    at HTMLUnknownElementImpl._dispatch [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mjsdom[24m\lib\jsdom\living\events\EventTarget-impl.js:233:9[90m)[39m
+Error: Uncaught [Error: useAuth must be used within an AuthProvider]
+    at reportException (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\helpers\runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:353:9)
+    at invokeEventListeners (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\jsdom\lib\jsdom\living\generated\EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:4213:16)
+    at invokeGuardedCallback (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:4277:31)
+    at beginWork$1 (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:27490:7)
+    at performUnitOfWork (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\node_modules\react-dom\cjs\react-dom.development.js:26599:12) Error: useAuth must be used within an AuthProvider
+    at Module.useAuth [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39msrc\hooks\useAuth.tsx:187:11[90m)[39m
+    at TestComponent [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39msrc\hooks\useAuth.test.tsx:34:72[90m)[39m
+    at renderWithHooks [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:15486:18[90m)[39m
+    at mountIndeterminateComponent [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:20103:13[90m)[39m
+    at beginWork [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:21626:16[90m)[39m
+    at HTMLUnknownElement.callCallback [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mreact-dom[24m\cjs\react-dom.development.js:4164:14[90m)[39m
+    at HTMLUnknownElement.callTheUserObjectsOperation [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mjsdom[24m\lib\jsdom\living\generated\EventListener.js:26:30[90m)[39m
+    at innerInvokeEventListeners [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mjsdom[24m\lib\jsdom\living\events\EventTarget-impl.js:350:25[90m)[39m
+    at invokeEventListeners [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mjsdom[24m\lib\jsdom\living\events\EventTarget-impl.js:286:3[90m)[39m
+    at HTMLUnknownElementImpl._dispatch [90m(C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39mnode_modules\[4mjsdom[24m\lib\jsdom\living\events\EventTarget-impl.js:233:9[90m)[39m
+The above error occurred in the <TestComponent> component:
+
+    at TestComponent (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\src\hooks\useAuth.test.tsx:31:88)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+ [33m❯[39m src/hooks/useAuth.test.tsx [2m ([22m[2m10 tests[22m [2m|[22m [31m9 failed[39m[2m)[22m[90m 265[2mms[22m[39m
+[31m   [33m❯[31m src/hooks/useAuth.test.tsx[2m > [22mAuthProvider[2m > [22minitialization[2m > [22mshows loading state during initial auth check[39m
+[31m     → Cannot read properties of undefined (reading 'listen')[39m
+[31m   [33m❯[31m src/hooks/useAuth.test.tsx[2m > [22mAuthProvider[2m > [22minitialization[2m > [22msets authenticated state when user is authenticated[39m
+[31m     → Cannot read properties of undefined (reading 'listen')[39m
+[31m   [33m❯[31m src/hooks/useAuth.test.tsx[2m > [22mAuthProvider[2m > [22minitialization[2m > [22msets unauthenticated state when no user is present[39m
+[31m     → Cannot read properties of undefined (reading 'listen')[39m
+[31m   [33m❯[31m src/hooks/useAuth.test.tsx[2m > [22mAuthProvider[2m > [22mHub event listeners[2m > [22mhandles signedIn event[39m
+[31m     → Cannot read properties of undefined (reading 'listen')[39m
+[31m   [33m❯[31m src/hooks/useAuth.test.tsx[2m > [22mAuthProvider[2m > [22mHub event listeners[2m > [22mhandles signedOut event[39m
+[31m     → Cannot read properties of undefined (reading 'listen')[39m
+[31m   [33m❯[31m src/hooks/useAuth.test.tsx[2m > [22mAuthProvider[2m > [22mHub event listeners[2m > [22mhandles tokenRefresh event[39m
+[31m     → Cannot read properties of undefined (reading 'listen')[39m
+[31m   [33m❯[31m src/hooks/useAuth.test.tsx[2m > [22mAuthProvider[2m > [22msignOut function[2m > [22mcalls authSignOut on sign out[39m
+[31m     → Cannot read properties of undefined (reading 'listen')[39m
+[31m   [33m❯[31m src/hooks/useAuth.test.tsx[2m > [22mAuthProvider[2m > [22msignOut function[2m > [22mhandles signOut error gracefully[39m
+[31m     → Cannot read properties of undefined (reading 'listen')[39m
+[31m   [33m❯[31m src/hooks/useAuth.test.tsx[2m > [22mAuthProvider[2m > [22mrefreshAuth function[2m > [22mcalls getCurrentUser to refresh state[39m
+[31m     → Cannot read properties of undefined (reading 'listen')[39m
+ [33m❯[39m src/components/common/Card/Card.test.tsx [2m ([22m[2m0 test[22m[2m)[22m
+ [33m❯[39m src/components/common/Tooltip/Tooltip.test.tsx [2m ([22m[2m0 test[22m[2m)[22m
+[90mstdout[2m | src/components/callback/Callback.test.tsx[2m > [22m[2mCallback (Deprecated)[2m > [22m[2mredirects to /signin on mount[22m[39m
+Callback: Redirecting to signin...
+
+[90mstderr[2m | src/components/callback/Callback.test.tsx[2m > [22m[2mCallback (Deprecated)[2m > [22m[2mredirects to /signin on mount[22m[39m
+Callback: This route should not be accessed with direct SDK auth
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+[90mstdout[2m | src/components/callback/Callback.test.tsx[2m > [22m[2mCallback (Deprecated)[2m > [22m[2mrenders empty div (temporary placeholder)[22m[39m
+Callback: Redirecting to signin...
+
+[90mstderr[2m | src/components/callback/Callback.test.tsx[2m > [22m[2mCallback (Deprecated)[2m > [22m[2mrenders empty div (temporary placeholder)[22m[39m
+Callback: This route should not be accessed with direct SDK auth
+
+ [32m✓[39m src/components/callback/Callback.test.tsx [2m ([22m[2m3 tests[22m[2m)[22m[90m 96[2mms[22m[39m
+ [33m❯[39m src/components/common/Timer/Timer.test.tsx [2m ([22m[2m0 test[22m[2m)[22m
+ [33m❯[39m src/components/common/Input/Input.test.tsx [2m ([22m[2m0 test[22m[2m)[22m
+ [33m❯[39m src/components/common/Button/Button.test.tsx [2m ([22m[2m0 test[22m[2m)[22m
+ [33m❯[39m src/app/App.test.tsx [2m ([22m[2m0 test[22m[2m)[22m
+ [32m✓[39m src/services/envoy/products.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[90m 20[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯[1m[7m Failed Suites 12 [27m[22m⎯⎯⎯⎯⎯⎯[39m
+
+[31m[1m[7m FAIL [27m[22m[39m src/app/App.test.tsx [2m[ src/app/App.test.tsx ][22m
+[31m[1m[7m FAIL [27m[22m[39m src/components/common/Alert/Alert.test.tsx [2m[ src/components/common/Alert/Alert.test.tsx ][22m
+[31m[1m[7m FAIL [27m[22m[39m src/components/common/Button/Button.test.tsx [2m[ src/components/common/Button/Button.test.tsx ][22m
+[31m[1m[7m FAIL [27m[22m[39m src/components/common/Card/Card.test.tsx [2m[ src/components/common/Card/Card.test.tsx ][22m
+[31m[1m[7m FAIL [27m[22m[39m src/components/common/Dropdown/Dropdown.test.tsx [2m[ src/components/common/Dropdown/Dropdown.test.tsx ][22m
+[31m[1m[7m FAIL [27m[22m[39m src/components/common/Input/Input.test.tsx [2m[ src/components/common/Input/Input.test.tsx ][22m
+[31m[1m[7m FAIL [27m[22m[39m src/components/common/MediaControls/MediaControls.test.tsx [2m[ src/components/common/MediaControls/MediaControls.test.tsx ][22m
+[31m[1m[7m FAIL [27m[22m[39m src/components/common/Modal/Modal.test.tsx [2m[ src/components/common/Modal/Modal.test.tsx ][22m
+[31m[1m[7m FAIL [27m[22m[39m src/components/common/Stepper/Stepper.test.tsx [2m[ src/components/common/Stepper/Stepper.test.tsx ][22m
+[31m[1m[7m FAIL [27m[22m[39m src/components/common/Timer/Timer.test.tsx [2m[ src/components/common/Timer/Timer.test.tsx ][22m
+[31m[1m[7m FAIL [27m[22m[39m src/components/common/Toast/Toast.test.tsx [2m[ src/components/common/Toast/Toast.test.tsx ][22m
+[31m[1m[7m FAIL [27m[22m[39m src/components/common/Tooltip/Tooltip.test.tsx [2m[ src/components/common/Tooltip/Tooltip.test.tsx ][22m
+[31m[1mError[22m: [postcss] It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.[39m
+[90m [2m❯[22m ht node_modules/tailwindcss/dist/lib.js:[2m38:1628[22m[39m
+[90m [2m❯[22m LazyResult.runOnRoot node_modules/postcss/lib/lazy-result.js:[2m367:16[22m[39m
+[90m [2m❯[22m LazyResult.runAsync node_modules/postcss/lib/lazy-result.js:[2m296:26[22m[39m
+[90m [2m❯[22m LazyResult.async node_modules/postcss/lib/lazy-result.js:[2m198:30[22m[39m
+[90m [2m❯[22m LazyResult.then node_modules/postcss/lib/lazy-result.js:[2m455:17[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/21]⎯[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[1m[7m Failed Tests 9 [27m[22m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[31m[1m[7m FAIL [27m[22m[39m src/hooks/useAuth.test.tsx[2m > [22mAuthProvider[2m > [22minitialization[2m > [22mshows loading state during initial auth check
+[31m[1m[7m FAIL [27m[22m[39m src/hooks/useAuth.test.tsx[2m > [22mAuthProvider[2m > [22minitialization[2m > [22msets authenticated state when user is authenticated
+[31m[1m[7m FAIL [27m[22m[39m src/hooks/useAuth.test.tsx[2m > [22mAuthProvider[2m > [22minitialization[2m > [22msets unauthenticated state when no user is present
+[31m[1m[7m FAIL [27m[22m[39m src/hooks/useAuth.test.tsx[2m > [22mAuthProvider[2m > [22mHub event listeners[2m > [22mhandles signedIn event
+[31m[1m[7m FAIL [27m[22m[39m src/hooks/useAuth.test.tsx[2m > [22mAuthProvider[2m > [22mHub event listeners[2m > [22mhandles signedOut event
+[31m[1m[7m FAIL [27m[22m[39m src/hooks/useAuth.test.tsx[2m > [22mAuthProvider[2m > [22mHub event listeners[2m > [22mhandles tokenRefresh event
+[31m[1m[7m FAIL [27m[22m[39m src/hooks/useAuth.test.tsx[2m > [22mAuthProvider[2m > [22msignOut function[2m > [22mcalls authSignOut on sign out
+[31m[1m[7m FAIL [27m[22m[39m src/hooks/useAuth.test.tsx[2m > [22mAuthProvider[2m > [22msignOut function[2m > [22mhandles signOut error gracefully
+[31m[1m[7m FAIL [27m[22m[39m src/hooks/useAuth.test.tsx[2m > [22mAuthProvider[2m > [22mrefreshAuth function[2m > [22mcalls getCurrentUser to refresh state
+[31m[1mTypeError[22m: Cannot read properties of undefined (reading 'listen')[39m
+[36m [2m❯[22m src/hooks/useAuth.tsx:[2m81:32[22m[39m
+    [90m 79| [39m    console[33m.[39m[34mlog[39m([32m'AuthProvider: Setting up auth Hub listener'[39m)[33m;[39m
+    [90m 80| [39m    
+    [90m 81| [39m    [35mconst[39m removeListener [33m=[39m [33mHub[39m[33m.[39m[34mlisten[39m([32m'auth'[39m[33m,[39m ({ payload[33m:[39m { event } })…
+    [90m   | [39m                               [31m^[39m
+    [90m 82| [39m      console[33m.[39m[34mlog[39m([32m'AuthProvider: Auth Hub event:'[39m[33m,[39m event)[33m;[39m
+    [90m 83| [39m      
+[90m [2m❯[22m commitHookEffectListMount node_modules/react-dom/cjs/react-dom.development.js:[2m23189:26[22m[39m
+[90m [2m❯[22m commitPassiveMountOnFiber node_modules/react-dom/cjs/react-dom.development.js:[2m24970:11[22m[39m
+[90m [2m❯[22m commitPassiveMountEffects_complete node_modules/react-dom/cjs/react-dom.development.js:[2m24930:9[22m[39m
+[90m [2m❯[22m commitPassiveMountEffects_begin node_modules/react-dom/cjs/react-dom.development.js:[2m24917:7[22m[39m
+[90m [2m❯[22m commitPassiveMountEffects node_modules/react-dom/cjs/react-dom.development.js:[2m24905:3[22m[39m
+[90m [2m❯[22m flushPassiveEffectsImpl node_modules/react-dom/cjs/react-dom.development.js:[2m27078:3[22m[39m
+[90m [2m❯[22m flushPassiveEffects node_modules/react-dom/cjs/react-dom.development.js:[2m27023:14[22m[39m
+[90m [2m❯[22m node_modules/react-dom/cjs/react-dom.development.js:[2m26808:9[22m[39m
+[90m [2m❯[22m flushActQueue node_modules/react/cjs/react.development.js:[2m2667:24[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/21]⎯[22m[39m
+
+[2m Test Files [22m [1m[31m13 failed[39m[22m[2m | [22m[1m[32m4 passed[39m[22m[90m (17)[39m
+[2m      Tests [22m [1m[31m9 failed[39m[22m[2m | [22m[1m[32m47 passed[39m[22m[90m (56)[39m
+[2m   Start at [22m 19:28:10
+[2m   Duration [22m 27.52s[2m (transform 1.40s, setup 13.34s, collect 13.23s, tests 534ms, environment 71.89s, prepare 15.57s)[22m
+

@@ -5,10 +5,20 @@ import App from './App';
 // Mock the auth service to avoid actual Cognito calls
 vi.mock('@services/auth', () => ({
   signIn: vi.fn(),
+  signOut: vi.fn(),
+  isAuthenticated: vi.fn(),
+  getCurrentUser: vi.fn(),
+}));
+
+// Mock Hub to prevent event listener errors in tests
+vi.mock('aws-amplify/utils', () => ({
+  Hub: {
+    listen: vi.fn(() => () => {}), // Returns a no-op remove function
+  },
 }));
 
 describe('App', () => {
-  it('renders the Sign In page', () => {
+  it('renders the Sign In page within AuthProvider', () => {
     render(<App />);
     expect(screen.getByRole('heading', { level: 1, name: /sign in/i })).toBeInTheDocument();
   });

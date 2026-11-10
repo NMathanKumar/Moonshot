@@ -1,0 +1,7 @@
+﻿
+> iet-ui-testtaker@0.1.0 build
+> tsc && vite build
+
+src/hooks/useAuth.tsx(8,21): error TS2307: Cannot find module 'aws-amplify/hub' or its corresponding type declarations.
+src/hooks/useAuth.tsx(11,34): error TS2307: Cannot find module 'aws-amplify/hub' or its corresponding type declarations.
+src/hooks/useAuth.tsx(83,43): error TS7006: Parameter 'payload' implicitly has an 'any' type.

@@ -1,9 +1,7 @@
 /**
  * Input Component
- * Reusable input field component
+ * Reusable input field component using Tailwind CSS
  */
-
-import styles from './Input.module.css';
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: React.ReactNode;
@@ -37,9 +35,11 @@ export const Input: React.FC<InputProps> = ({
   autoComplete,
   ...props
 }) => {
-  const inputClass = [styles.input, error ? styles.error : '', className]
-    .filter(Boolean)
-    .join(' ');
+  const inputClasses = `px-3 py-2 text-sm border rounded transition-colors font-inherit ${
+    error
+      ? 'border-red-600 focus:outline-none focus:border-red-600 focus:ring-3 focus:ring-red-100'
+      : 'border-[#DDE2E7] focus:outline-none focus:border-[#FF6A00] focus:ring-3 focus:ring-orange-100'
+  } ${disabled ? 'bg-gray-100 cursor-not-allowed text-gray-600' : ''} ${className}`;
 
   const errorId = error && name ? `${name}-error` : undefined;
   const helperId = helperText && name ? `${name}-helper` : undefined;
@@ -48,11 +48,11 @@ export const Input: React.FC<InputProps> = ({
     .join(' ') || undefined;
 
   return (
-    <div className={styles.wrapper}>
+    <div className="flex flex-col gap-1 mb-4">
       {label && (
-        <label htmlFor={props.id || name} className={styles.label}>
+        <label htmlFor={props.id || name} className="text-sm font-semibold text-slate-900">
           {label}
-          {required && <span className={styles.required}>*</span>}
+          {required && <span className="text-red-600 ml-1">*</span>}
         </label>
       )}
       <input
@@ -67,17 +67,17 @@ export const Input: React.FC<InputProps> = ({
         required={required}
         aria-invalid={error ? 'true' : undefined}
         aria-describedby={describedBy}
-        className={inputClass}
+        className={inputClasses}
         autoComplete={autoComplete}
         {...props}
       />
       {error && (
-        <span id={errorId} className={styles.errorText} role="alert">
+        <span id={errorId} className="text-xs text-red-600 -mt-1" role="alert">
           {error}
         </span>
       )}
       {helperText && !error && (
-        <span id={helperId} className={styles.helperText}>
+        <span id={helperId} className="text-xs text-slate-500 -mt-1">
           {helperText}
         </span>
       )}

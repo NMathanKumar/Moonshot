@@ -2,9 +2,8 @@
  * Alert Component
  * In-page contextual feedback message with optional title and close button.
  * WCAG 2.1 AA with role="alert" for errors/warnings and role="status" for success/info.
+ * Uses Tailwind CSS.
  */
-
-import styles from './Alert.module.css';
 
 export interface AlertProps {
   variant?: 'info' | 'success' | 'warning' | 'error';
@@ -42,6 +41,16 @@ const iconMap: Record<string, React.ReactNode> = {
   ),
 };
 
+const getAlertClasses = (variant: string): string => {
+  const variants: Record<string, string> = {
+    info: 'border-l-blue-500 bg-blue-50 text-slate-900',
+    success: 'border-l-green-600 bg-green-50 text-slate-900',
+    warning: 'border-l-amber-500 bg-amber-50 text-slate-900',
+    error: 'border-l-red-600 bg-red-50 text-slate-900',
+  };
+  return variants[variant] || variants.info;
+};
+
 export const Alert: React.FC<AlertProps> = ({
   variant = 'info',
   title,
@@ -50,37 +59,31 @@ export const Alert: React.FC<AlertProps> = ({
   closeable = true,
   className = '',
 }) => {
-  const alertClass = [
-    styles.alert,
-    styles[variant],
-    className,
-  ]
-    .filter(Boolean)
-    .join(' ');
-
+  const alertClasses = getAlertClasses(variant);
+  const baseClasses = `flex gap-4 p-4 rounded-md border-l-4 bg-white text-sm leading-normal ${alertClasses}`;
   const role = variant === 'error' || variant === 'warning' ? 'alert' : 'status';
 
   return (
     <div
       role={role}
-      className={alertClass}
+      className={`${baseClasses} ${className}`}
       data-testid={`alert-${variant}`}
     >
-      <div className={styles.icon} aria-hidden="true">
+      <div className="flex-shrink-0 flex items-start pt-0.5 w-5 h-5" aria-hidden="true">
         {iconMap[variant]}
       </div>
-      <div className={styles.content}>
-        {title && <h3 className={styles.title}>{title}</h3>}
+      <div className="flex-1 flex flex-col gap-1">
+        {title && <h3 className="m-0 text-base font-semibold text-current">{title}</h3>}
         {typeof children === 'string' ? (
-          <p className={styles.message}>{children}</p>
+          <p className="m-0 text-current">{children}</p>
         ) : (
-          <div className={styles.message}>{children}</div>
+          <div className="text-current">{children}</div>
         )}
       </div>
       {closeable && (
         <button
           type="button"
-          className={styles.closeButton}
+          className="flex-shrink-0 bg-transparent border-none p-0 cursor-pointer text-inherit opacity-70 transition-opacity hover:opacity-100 flex items-center justify-center w-6 h-6 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF6A00] rounded"
           onClick={onClose}
           aria-label="Close alert"
         >

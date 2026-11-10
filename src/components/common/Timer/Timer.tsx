@@ -6,7 +6,6 @@
  */
 
 import { useEffect, useState, useRef } from 'react';
-import styles from './Timer.module.css';
 
 export type TimerFormatFunction = (seconds: number) => string;
 
@@ -80,14 +79,20 @@ export const Timer: React.FC<TimerProps> = ({
   }, [isActive, onComplete, onTick]);
 
   // Determine warning/critical state
-  let displayClass = '';
+  let displayClasses = '';
   if (warningThreshold && secondsRemaining <= warningThreshold) {
-    displayClass = secondsRemaining <= warningThreshold / 2 ? styles.critical : styles.warning;
+    if (secondsRemaining <= warningThreshold / 2) {
+      // Critical state
+      displayClasses = 'text-[#E01F26] animate-pulse';
+    } else {
+      // Warning state
+      displayClasses = 'text-[#f9a825] animate-pulse';
+    }
   }
 
   const timerClass = [
-    styles.timer,
-    orientation === 'vertical' ? styles.timerVertical : '',
+    'inline-flex items-center justify-center p-4 rounded-md bg-white border border-[#DDE2E7] min-w-[200px]',
+    orientation === 'vertical' ? 'flex-col gap-4' : '',
     className,
   ]
     .filter(Boolean)
@@ -102,7 +107,7 @@ export const Timer: React.FC<TimerProps> = ({
       aria-live="polite"
       aria-atomic="true"
     >
-      <div className={[styles.display, displayClass].filter(Boolean).join(' ')}>
+      <div className={`font-mono text-2xl font-bold text-[#232D3F] transition-colors letter-spacing-2 text-center ${displayClasses} ${orientation === 'vertical' ? 'text-4xl' : ''}`}>
         {formattedTime}
       </div>
     </div>

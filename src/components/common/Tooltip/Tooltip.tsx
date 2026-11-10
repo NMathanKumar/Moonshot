@@ -18,7 +18,6 @@
  */
 
 import { useId, useRef, useState, cloneElement } from 'react';
-import styles from './Tooltip.module.css';
 
 export interface TooltipProps {
   content: React.ReactNode;
@@ -56,10 +55,17 @@ export const Tooltip: React.FC<TooltipProps> = ({ content, placement = 'top', ch
       : ariaDesc,
   });
 
+  const placementClasses = {
+    top: 'bottom-[calc(100%+6px)] left-1/2 -translate-x-1/2',
+    bottom: 'top-[calc(100%+6px)] left-1/2 -translate-x-1/2',
+    left: 'right-[calc(100%+6px)] top-1/2 -translate-y-1/2',
+    right: 'left-[calc(100%+6px)] top-1/2 -translate-y-1/2',
+  };
+
   return (
     <span
       ref={wrapperRef}
-      className={styles.wrapper}
+      className="relative inline-flex"
       onMouseEnter={show}
       onMouseLeave={hide}
       onFocusCapture={show}
@@ -72,7 +78,7 @@ export const Tooltip: React.FC<TooltipProps> = ({ content, placement = 'top', ch
         <span
           role="tooltip"
           id={tooltipId}
-          className={[styles.bubble, styles[placement]].join(' ')}
+          className={`absolute z-[1070] bg-[#1a1a1a] text-white text-xs leading-normal py-1 px-2 rounded max-w-60 w-max pointer-events-none shadow-sm ${placementClasses[placement]}`}
         >
           {content}
         </span>

@@ -24,6 +24,12 @@ export default defineConfig({
     port: 5173,
     open: true,
     strictPort: false,
+    middlewareMode: false,
+  },
+  optimizeDeps: {
+    // Suppress Vite plugin analysis warnings for aws-amplify subexports
+    // This is a known compatibility issue with aws-amplify v6 and doesn't affect functionality
+    exclude: [],
   },
   build: {
     outDir: 'dist',
