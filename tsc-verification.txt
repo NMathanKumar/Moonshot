@@ -1,0 +1,25 @@
+﻿src/components/common/Stepper/Stepper.test.tsx(20,11): error TS6133: 'container' is declared but its value is never read.
+src/hooks/useAuth.test.tsx(62,48): error TS2322: Type 'null' is not assignable to type 'AuthTokens | undefined'.
+src/hooks/useAuth.test.tsx(87,19): error TS2741: Property 'payload' is missing in type '{ toString: () => string; }' but required in type 'JWT'.
+src/hooks/useAuth.tsx(133,47): error TS2769: No overload matches this call.
+  Overload 1 of 3, '(channel: "auth", callback: HubCallback<"auth", AuthHubEventData>, listenerName?: string | undefined): StopListenerCallback', gave the following error.
+    Argument of type '(payload: { data?: { event?: string; }; }) => Promise<void>' is not assignable to parameter of type 'HubCallback<"auth", AuthHubEventData>'.
+      Types of parameters 'payload' and 'capsule' are incompatible.
+        Type 'HubCapsule<"auth", AuthHubEventData>' has no properties in common with type '{ data?: { event?: string | undefined; } | undefined; }'.
+  Overload 2 of 3, '(channel: "auth", callback: HubCallback<"auth", AuthHubEventData>, options?: { listenerName?: string | undefined; enableCrossTabEvents?: boolean | undefined; } | undefined): StopListenerCallback', gave the following error.
+    Argument of type '(payload: { data?: { event?: string; }; }) => Promise<void>' is not assignable to parameter of type 'HubCallback<"auth", AuthHubEventData>'.
+      Types of parameters 'payload' and 'capsule' are incompatible.
+        Type 'HubCapsule<"auth", AuthHubEventData>' has no properties in common with type '{ data?: { event?: string | undefined; } | undefined; }'.
+  Overload 3 of 3, '(channel: string, callback: HubCallback<string, EventDataMap>, listenerName?: string | undefined): StopListenerCallback', gave the following error.
+    Argument of type '(payload: { data?: { event?: string; }; }) => Promise<void>' is not assignable to parameter of type 'HubCallback<string, EventDataMap>'.
+      Types of parameters 'payload' and 'capsule' are incompatible.
+        Type 'HubCapsule<string, EventDataMap>' has no properties in common with type '{ data?: { event?: string | undefined; } | undefined; }'.
+src/services/apiClient.ts(6,1): error TS6133: 'getEnv' is declared but its value is never read.
+tests/integration/api.integration.test.ts(33,3): error TS6133: 'generateTestEmail' is declared but its value is never read.
+tests/integration/api.integration.test.ts(67,7): error TS2322: Type 'string | undefined' is not assignable to type 'string | null'.
+  Type 'undefined' is not assignable to type 'string | null'.
+tests/integration/api.integration.test.ts(128,7): error TS2322: Type 'string | undefined' is not assignable to type 'string | null'.
+  Type 'undefined' is not assignable to type 'string | null'.
+tests/integration/auth.integration.test.ts(19,18): error TS6133: 'signOut' is declared but its value is never read.
+tests/integration/auth.integration.test.ts(101,7): error TS2322: Type 'string | undefined' is not assignable to type 'string | null'.
+  Type 'undefined' is not assignable to type 'string | null'.

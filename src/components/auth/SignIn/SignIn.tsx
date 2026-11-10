@@ -188,13 +188,13 @@ export function SignIn({ onSubmit }: SignInProps) {
             </button>
 
             {/* SIGN UP LINK */}
-            <div className="flex items-center justify-center gap-1 mt-6 pt-4 border-t border-gray-100">
-              <p className="text-[12px] text-[#55657b]">Don't have an account?</p>
+            <div className="flex items-baseline justify-center gap-1.5 mt-6 pt-4 border-t border-gray-100">
+              <span className="text-sm text-gray-500 font-normal">Don't have an account?</span>
               <button
                 type="button"
                 onClick={handleNavigateToSignUp}
                 disabled={isSubmitting}
-                className="text-[12px] font-bold text-[#ff6a00] hover:underline focus:outline-none disabled:opacity-60"
+                className="text-sm font-semibold text-[#f97316] hover:text-[#ea580c] hover:underline focus:outline-none disabled:opacity-60 transition-colors"
               >
                 Sign up
               </button>

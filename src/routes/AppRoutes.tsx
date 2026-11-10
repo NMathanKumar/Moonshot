@@ -6,7 +6,7 @@ import { useNavigate, Routes, Route, Navigate } from 'react-router-dom';
 import { SignIn } from '@components/auth/SignIn';
 import { SignUp } from '@components/auth/SignUp';
 import { ConfirmSignUp } from '@components/auth/ConfirmSignUp';
-import { Dashboard } from '@components/dashboard';
+import Dashboard from '../pages/Dashboard';
 import { signIn as authSignIn, getCurrentUser, signUp as authSignUp, confirmSignUp as authConfirmSignUp, getAuthSession } from '@services/auth';
 import { useAuth } from '@hooks/useAuth';
 import { EnrolmentService } from '@services';

@@ -1,95 +1,62 @@
-import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@hooks/useAuth';
+import { useEffect, useState } from 'react';
+import { EnrolmentService } from '@services';
+import type { TestTakerResponse } from '@services/enrolment';
+import idpLogo from '@assets/idp-logo-transparent.png';
 
-interface TestEnrolment {
-  id: string;
-  status: 'not-taken' | 'expired' | 'in-progress' | 'completed';
-  purchaseDate: string;
-  daysRemaining: number;
-  expiryDate: string;
-  action: {
-    label: string;
-    link: string;
-    disabled?: boolean;
-  };
-}
-
-interface SkillScore {
-  skill: string;
-  score: number;
-  cefr: string;
-}
-
-interface OverallScore {
-  score: number;
-  maxScore: number;
-  cefr: string;
-  testDate: string;
-  skills: SkillScore[];
-}
-
-export default function DashboardPage() {
+export default function Dashboard() {
   const { user, isLoading } = useAuth();
   const navigate = useNavigate();
-  const [overallScore, setOverallScore] = useState<OverallScore | null>(null);
-  const [testEnrolments, setTestEnrolments] = useState<TestEnrolment[]>([]);
+  const [profile, setProfile] = useState<TestTakerResponse | null>(null);
+  const [_profileLoading, _setProfileLoading] = useState(false);
+  const [_profileError, _setProfileError] = useState<string | null>(null);
 
   useEffect(() => {
     // Redirect if authentication loading is complete and no user found
+    // This handles session expiry or invalid tokens
     if (!isLoading && !user) {
-      console.log('[Dashboard] Auth complete, no user found - redirecting to signin');
+      console.log('Dashboard: Auth complete, no user found - redirecting to signin');
       navigate('/signin', { replace: true });
     }
   }, [user, isLoading, navigate]);
 
-  // Mock data - replace with API call
+  // Load test taker profile from Enrolment Service after user is authenticated
   useEffect(() => {
-    if (user) {
-      // Mock test enrolments
-      setTestEnrolments([
-        {
-          id: '1',
-          status: 'not-taken',
-          purchaseDate: 'Sep 24, 2026',
-          daysRemaining: 17,
-          expiryDate: 'Oct 15, 2026',
-          action: { label: 'Start test →', link: '/test-prepare' },
-        },
-        {
-          id: '2',
-          status: 'expired',
-          purchaseDate: 'Aug 5, 2026',
-          daysRemaining: 0,
-          expiryDate: 'Aug 26, 2026',
-          action: { label: 'Start test →', link: '/test-prepare', disabled: true },
-        },
-        {
-          id: '3',
-          status: 'in-progress',
-          purchaseDate: 'Aug 4, 2026',
-          daysRemaining: 21,
-          expiryDate: '',
-          action: { label: 'Make payment →', link: '/book' },
-        },
-      ]);
+    const loadProfile = async () => {
+      if (!user || isLoading) {
+        return;
+      }
 
-      // Mock overall score
-      setOverallScore({
-        score: 78,
-        maxScore: 120,
-        cefr: 'B2',
-        testDate: '2 Jul 2026',
-        skills: [
-          { skill: 'Reading', score: 86, cefr: 'C1' },
-          { skill: 'Listening', score: 64, cefr: 'B2' },
-          { skill: 'Writing', score: 74, cefr: 'B2' },
-          { skill: 'Speaking', score: 72, cefr: 'B2' },
-        ],
-      });
-    }
-  }, [user]);
+      _setProfileLoading(true);
+      _setProfileError(null);
 
+      try {
+        console.log('Dashboard: Fetching test taker profile from Enrolment Service');
+        const testTakerProfile = await EnrolmentService.getTestTaker();
+        
+        if (testTakerProfile) {
+          console.log('Dashboard: Test taker profile loaded:', testTakerProfile);
+          setProfile(testTakerProfile);
+        } else {
+          // Profile may not exist yet (e.g., sign-up confirmation failed)
+          console.log('Dashboard: No test taker profile found');
+          setProfile(null);
+        }
+      } catch (error) {
+        // Log error but don't block dashboard rendering
+        // User can continue using the app even if profile fetch fails
+        console.error('Dashboard: Failed to load test taker profile:', error);
+        _setProfileError(error instanceof Error ? error.message : 'Failed to load profile');
+      } finally {
+        _setProfileLoading(false);
+      }
+    };
+
+    loadProfile();
+  }, [user, isLoading]);
+
+  // Show loading state while AuthProvider initializes
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-50">
@@ -103,199 +70,252 @@ export default function DashboardPage() {
     );
   }
 
+  // Don't render if no user (will redirect via effect)
   if (!user) {
     return null;
   }
 
-  const firstName = (user as any)?.given_name || 'Test Taker';
+  // Extract first name from user object (Cognito stores it as 'given_name') or profile
+  const firstName = profile?.givenName || (user as any)?.given_name || 'Agnes';
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="max-w-6xl mx-auto px-6 py-6 flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-[#232d3f]">My Dashboard</h1>
-          <div className="flex items-center gap-3">
-            <span className="text-sm text-[#55657b] bg-orange-50 px-3 py-1.5 rounded-lg border border-orange-200">
-              Test taken 2 Jul 2026
+    <div className="min-h-screen bg-gray-50">
+      <div className="flex h-screen overflow-hidden">
+        {/* Sidebar */}
+        <div className="w-44 bg-white border-r border-gray-200 flex flex-col">
+          {/* Logo */}
+          <div className="p-6 border-b border-gray-100">
+            <img src={idpLogo} alt="IDP" className="h-8 w-auto" />
+            <p className="text-xs text-gray-600 font-medium mt-3">English Test</p>
+          </div>
+
+          {/* Overall Score */}
+          <div className="px-6 py-5 border-b border-gray-100">
+            <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3">Overall Score</p>
+            <div className="flex items-baseline gap-1 mb-3">
+              <span className="text-3xl font-black text-gray-900">78</span>
+              <span className="text-sm text-gray-600">/120</span>
+            </div>
+            <span className="inline-flex items-center justify-center px-3 py-1 bg-orange-50 text-orange-700 text-xs font-bold rounded-full border border-orange-200">
+              B2 Upper Intermediate
             </span>
-            <Link
-              to="/book"
-              className="px-4 py-2 bg-gradient-to-r from-[#FFC01E] via-[#FF6A00] to-[#E01F26] text-white font-bold text-sm rounded-lg hover:shadow-lg transition-shadow"
-            >
-              Purchase a Test →
-            </Link>
+          </div>
+
+          {/* Menu */}
+          <nav className="flex-1 px-4 py-6">
+            <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-4">Menu</p>
+            <div className="space-y-2">
+              <div className="flex items-center gap-3 px-3 py-2.5 bg-orange-50 text-orange-700 rounded-lg font-semibold text-sm">
+                <span className="text-lg">📊</span>
+                Dashboard
+              </div>
+              <Link to="/results" className="flex items-center gap-3 px-3 py-2.5 text-gray-700 hover:bg-gray-50 rounded-lg font-medium text-sm transition-colors">
+                <span className="text-lg">📈</span>
+                My Results
+              </Link>
+              <Link to="/practice" className="flex items-center gap-3 px-3 py-2.5 text-gray-700 hover:bg-gray-50 rounded-lg font-medium text-sm transition-colors">
+                <span className="text-lg">✍️</span>
+                Practice
+              </Link>
+              <Link to="/book" className="flex items-center gap-3 px-3 py-2.5 text-gray-700 hover:bg-gray-50 rounded-lg font-medium text-sm transition-colors">
+                <span className="text-lg">🎫</span>
+                Purchase Test
+              </Link>
+              <Link to="/settings" className="flex items-center gap-3 px-3 py-2.5 text-gray-700 hover:bg-gray-50 rounded-lg font-medium text-sm transition-colors">
+                <span className="text-lg">⚙️</span>
+                Settings
+              </Link>
+            </div>
+          </nav>
+
+          {/* User Profile */}
+          <div className="px-4 py-6 border-t border-gray-100">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-white font-bold text-sm">
+                {firstName.charAt(0)}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-semibold text-gray-900 truncate">{firstName}</p>
+                <p className="text-xs text-gray-500 truncate">{(user as any)?.email || 'student@example.com'}</p>
+              </div>
+            </div>
+            <button className="w-full text-left text-xs font-semibold text-orange-600 hover:text-orange-700 py-2">
+              Sign out
+            </button>
           </div>
         </div>
-      </div>
 
-      {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-6 py-8">
-        {/* Welcome Section */}
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold text-[#232d3f] mb-2">Welcome back, {firstName}</h2>
-          <p className="text-[14px] text-[#55657b]">Here's an overview of your IDP English Test journey.</p>
-        </div>
-
-        {/* Test Enrolments */}
-        <div className="space-y-4 mb-8">
-          {testEnrolments.map((test, idx) => (
-            <div
-              key={test.id}
-              className={`bg-white rounded-xl border-2 p-6 flex items-center justify-between ${
-                test.status === 'not-taken' && idx === 0
-                  ? 'border-[#FF6A0030]'
-                  : test.status === 'expired'
-                  ? 'border-gray-200 opacity-60'
-                  : 'border-gray-200'
-              }`}
-            >
-              {/* Left Content */}
-              <div className="flex items-center gap-4 flex-1">
-                <div
-                  className={`w-11 h-11 rounded-xl flex items-center justify-center text-2xl flex-shrink-0 ${
-                    test.status === 'not-taken' && idx === 0
-                      ? 'bg-[#FFF3EA] border border-[#FF6A0030]'
-                      : 'bg-gray-100 border border-gray-200'
-                  }`}
-                >
-                  🎫
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-[15px] font-bold text-[#232d3f]">IDP English Test</span>
-                    <span
-                      className={`text-[10px] font-bold px-2 py-1 rounded-full ${
-                        test.status === 'not-taken'
-                          ? 'bg-yellow-100 text-yellow-700 border border-yellow-200'
-                          : test.status === 'expired'
-                          ? 'bg-red-100 text-red-700 border border-red-200'
-                          : 'bg-blue-100 text-blue-700 border border-blue-200'
-                      }`}
-                    >
-                      {test.status === 'not-taken' && 'TEST NOT TAKEN'}
-                      {test.status === 'expired' && 'TEST NOT TAKEN'}
-                      {test.status === 'in-progress' && 'ENROLMENT IN PROGRESS'}
-                    </span>
-                  </div>
-                  <p className="text-xs text-[#55657b] mb-2">
-                    Purchased {test.purchaseDate} · ONE TIME TEST · UP TO 80 MINS
-                  </p>
-                  {test.status === 'not-taken' && test.daysRemaining > 0 && (
-                    <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#e65100] bg-[#FFF3EA] border border-[#FF6A0040] px-2.5 py-1 rounded-full">
-                      🏆 Take within 21 days of enrolment · {test.daysRemaining} days left (by {test.expiryDate})
-                    </span>
-                  )}
-                  {test.status === 'expired' && (
-                    <span className="inline-flex items-center gap-1 text-xs font-semibold text-red-600 bg-red-50 border border-red-200 px-2.5 py-1 rounded-full">
-                      ⏰ Test window closed — was due by {test.expiryDate}
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              {/* Action Button */}
-              {test.action.disabled ? (
-                <button
-                  disabled
-                  className="px-6 py-2.5 bg-gradient-to-r from-[#FFC01E] via-[#FF6A00] to-[#E01F26] text-white font-bold text-sm rounded-lg opacity-40 cursor-not-allowed flex-shrink-0"
-                >
-                  {test.action.label}
-                </button>
-              ) : (
-                <Link
-                  to={test.action.link}
-                  className={`px-6 py-2.5 text-white font-bold text-sm rounded-lg flex-shrink-0 transition-all ${
-                    test.status === 'expired'
-                      ? 'bg-gray-300 cursor-not-allowed'
-                      : 'bg-gradient-to-r from-[#FFC01E] via-[#FF6A00] to-[#E01F26] hover:shadow-lg'
-                  }`}
-                >
-                  {test.action.label}
-                </Link>
-              )}
+        {/* Main Content */}
+        <div className="flex-1 flex flex-col overflow-hidden">
+          {/* Header */}
+          <div className="bg-white border-b border-gray-200 px-8 py-6 flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">My Dashboard</h1>
             </div>
-          ))}
-        </div>
+            <div className="flex items-center gap-4">
+              <span className="inline-flex items-center px-3 py-2 bg-orange-50 text-orange-700 text-sm font-bold rounded-lg border border-orange-200">
+                Test taken 2 Jul 2026
+              </span>
+              <button className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-white font-bold text-sm rounded-lg hover:shadow-lg transition-shadow">
+                Purchase a Test →
+              </button>
+            </div>
+          </div>
 
-        {/* Overall Score Card */}
-        {overallScore && (
-          <div className="mb-8 bg-gradient-to-br from-[#FFC01E] via-[#FF6A00] to-[#E01F26] rounded-2xl p-8 text-white relative overflow-hidden">
-            <div className="absolute -top-20 -right-20 w-40 h-40 bg-white/10 rounded-full blur-3xl" />
-            <div className="absolute -bottom-10 right-20 w-32 h-32 bg-white/5 rounded-full blur-3xl" />
-
-            <div className="relative z-10">
-              <p className="text-xs font-bold uppercase opacity-85 mb-3 tracking-wider">
-                Overall Score · Latest test
-              </p>
-
-              <div className="flex items-end gap-3 mb-4">
-                <span className="text-7xl font-black leading-none">{overallScore.score}</span>
-                <span className="text-xl font-semibold opacity-75 mb-2">/{overallScore.maxScore}</span>
-                <span className="text-2xl font-bold bg-white/20 px-4 py-2 rounded-full mb-1">
-                  {overallScore.cefr}
-                </span>
+          {/* Scrollable Content */}
+          <div className="flex-1 overflow-auto">
+            <div className="px-8 py-8">
+              {/* Welcome Section */}
+              <div className="mb-8">
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">Welcome back, {firstName}</h2>
+                <p className="text-gray-600">Here's an overview of your IDP English Test journey.</p>
               </div>
 
-              <p className="text-xs opacity-70 mb-6">Test taken {overallScore.testDate} · Upper Intermediate</p>
-
-              {/* Skill Bars */}
-              <div className="space-y-3 mb-6">
-                {overallScore.skills.map((skill) => (
-                  <div key={skill.skill}>
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-semibold opacity-85">{skill.skill}</span>
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs opacity-75">{skill.score}/120</span>
-                        <span className="text-[10px] font-bold bg-white/20 px-2 py-0.5 rounded-full">
-                          {skill.cefr}
+              {/* Test Cards */}
+              <div className="space-y-4 mb-8">
+                {/* Card 1: Not taken, window open */}
+                <div className="bg-white rounded-xl border-2 border-orange-100 p-6 flex items-center justify-between hover:shadow-md transition-shadow">
+                  <div className="flex items-center gap-4">
+                    <div className="w-11 h-11 rounded-lg bg-orange-50 border border-orange-200 flex items-center justify-center text-xl">
+                      🎫
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="font-bold text-gray-900">IDP English Test</span>
+                        <span className="inline-flex items-center px-2 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded-full border border-yellow-300">
+                          TEST NOT TAKEN
                         </span>
                       </div>
-                    </div>
-                    <div className="h-1 bg-white/20 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-white/70 rounded-full transition-all"
-                        style={{ width: `${(skill.score / 120) * 100}%` }}
-                      />
+                      <p className="text-sm text-gray-600 mb-2">Purchased Sep 24, 2026 · ONE TIME TEST · UP TO 80 MINS</p>
+                      <div className="inline-flex items-center gap-2 px-3 py-2 bg-orange-50 text-orange-700 text-xs font-bold rounded-full border border-orange-200">
+                        🏆 Take within 21 days of enrolment · 17 days left (by Oct 15, 2026)
+                      </div>
                     </div>
                   </div>
-                ))}
+                  <Link to="/test-prepare" className="inline-flex items-center px-6 py-2 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-white font-bold text-sm rounded-lg hover:shadow-lg transition-shadow flex-shrink-0">
+                    Start test →
+                  </Link>
+                </div>
+
+                {/* Card 2: Not taken, window closed */}
+                <div className="bg-white rounded-xl border-2 border-gray-200 p-6 flex items-center justify-between opacity-60">
+                  <div className="flex items-center gap-4">
+                    <div className="w-11 h-11 rounded-lg bg-gray-100 border border-gray-300 flex items-center justify-center text-xl">
+                      🎫
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="font-bold text-gray-900">IDP English Test</span>
+                        <span className="inline-flex items-center px-2 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded-full border border-yellow-300">
+                          TEST NOT TAKEN
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-600 mb-2">Purchased 5 Aug 2026 · ONE TIME TEST · UP TO 80 MINS</p>
+                      <div className="inline-flex items-center gap-2 px-3 py-2 bg-red-50 text-red-700 text-xs font-bold rounded-full border border-red-300">
+                        ⏰ Test window closed — was due by Aug 26, 2026
+                      </div>
+                    </div>
+                  </div>
+                  <button disabled className="inline-flex items-center px-6 py-2 bg-gray-300 text-white font-bold text-sm rounded-lg flex-shrink-0 cursor-not-allowed">
+                    Start test →
+                  </button>
+                </div>
+
+                {/* Card 3: Enrolment in progress */}
+                <div className="bg-white rounded-xl border-2 border-gray-200 p-6 flex items-center justify-between hover:shadow-md transition-shadow">
+                  <div className="flex items-center gap-4">
+                    <div className="w-11 h-11 rounded-lg bg-gray-100 border border-gray-300 flex items-center justify-center text-xl">
+                      🎫
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="font-bold text-gray-900">IDP English Test</span>
+                        <span className="inline-flex items-center px-2 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full border border-blue-300">
+                          ENROLMENT IN PROGRESS
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-600">Purchased 4 Aug 2026 · ONE TIME TEST · UP TO 80 MINS</p>
+                    </div>
+                  </div>
+                  <Link to="/book" className="inline-flex items-center px-6 py-2 bg-orange-400 text-white font-bold text-sm rounded-lg hover:shadow-lg transition-shadow flex-shrink-0">
+                    Make payment →
+                  </Link>
+                </div>
               </div>
 
-              <Link
-                to="/results"
-                className="inline-block text-xs font-bold text-white bg-white/20 px-4 py-2 rounded-lg border border-white/35 hover:bg-white/30 transition-colors"
-              >
-                View full results →
-              </Link>
-            </div>
-          </div>
-        )}
+              {/* Overall Score Card */}
+              <div className="bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 rounded-xl p-8 text-white mb-8 relative overflow-hidden">
+                <div className="absolute -top-20 -right-20 w-48 h-48 bg-white/10 rounded-full blur-3xl"></div>
+                <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/5 rounded-full blur-3xl"></div>
+                <div className="relative z-10">
+                  <p className="text-xs font-bold uppercase tracking-widest opacity-90 mb-4">Overall Score - Latest Test</p>
+                  
+                  <div className="flex items-baseline gap-3 mb-6">
+                    <span className="text-6xl font-black">78</span>
+                    <span className="text-2xl font-bold opacity-90">/120</span>
+                    <span className="text-2xl font-bold bg-white/20 px-4 py-1 rounded-full">B2</span>
+                  </div>
 
-        {/* What's Next Section */}
-        <div className="bg-white rounded-2xl border border-gray-200 p-8">
-          <h3 className="text-lg font-bold text-[#232d3f] mb-6">What's next?</h3>
+                  <p className="text-sm opacity-90 mb-6">Test taken 2 Jul 2026 · Upper Intermediate</p>
 
-          <div className="space-y-3">
-            {[
-              { icon: '📥', label: 'Download official certificate', sub: 'PDF · ready now', to: '/results' },
-              { icon: '✏️', label: 'Request Score Review', sub: 'Submit a score review', to: '/results' },
-              { icon: '🎯', label: 'Practice to improve', sub: 'Free sessions available', to: '/practice' },
-              { icon: '🏫', label: 'Search accepting institutions', sub: '2,000+ worldwide', to: '/book' },
-            ].map((item, idx) => (
-              <Link
-                key={idx}
-                to={item.to}
-                className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 hover:bg-[#FFF3EA] hover:border-[#FF6A0040] border border-transparent transition-all group"
-              >
-                <span className="text-2xl flex items-center justify-center">{item.icon}</span>
-                <div className="flex-1">
-                  <div className="text-sm font-bold text-[#232d3f]">{item.label}</div>
-                  <div className="text-xs text-[#55657b]">{item.sub}</div>
+                  {/* Skill Bars */}
+                  <div className="space-y-4 mb-8">
+                    {[
+                      { skill: 'Reading', score: 86, cefr: 'C1' },
+                      { skill: 'Listening', score: 64, cefr: 'B2' },
+                      { skill: 'Writing', score: 74, cefr: 'B2' },
+                      { skill: 'Speaking', score: 72, cefr: 'B2' },
+                    ].map((s) => (
+                      <div key={s.skill}>
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-sm font-semibold opacity-90">{s.skill}</span>
+                          <div className="flex items-center gap-3">
+                            <span className="text-sm opacity-90">{s.score}/120</span>
+                            <span className="text-xs font-bold bg-white/20 px-2 py-0.5 rounded-full">{s.cefr}</span>
+                          </div>
+                        </div>
+                        <div className="h-1 bg-white/20 rounded-full overflow-hidden">
+                          <div
+                            className="h-full bg-white/70 rounded-full"
+                            style={{ width: `${(s.score / 120) * 100}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <Link to="/results" className="inline-flex items-center px-4 py-2 bg-white/20 text-white font-bold text-sm rounded-lg border border-white/30 hover:bg-white/30 transition-colors">
+                    View full results →
+                  </Link>
                 </div>
-                <span className="text-gray-400 group-hover:text-[#FF6A00] transition-colors">›</span>
-              </Link>
-            ))}
+              </div>
+
+              {/* What's Next Section */}
+              <div className="bg-white rounded-xl border border-gray-200 p-8">
+                <h3 className="text-lg font-bold text-gray-900 mb-6">What's next?</h3>
+                <div className="space-y-3">
+                  {[
+                    { icon: '📥', label: 'Download official certificate', sub: 'PDF · ready now', to: '/results' },
+                    { icon: '✏️', label: 'Request Score Review', sub: 'Submit a score review', to: '/results' },
+                    { icon: '🎯', label: 'Practice to improve', sub: 'Free sessions available', to: '/practice' },
+                    { icon: '🏫', label: 'Search accepting institutions', sub: '2,000+ worldwide', to: '/book' },
+                  ].map((item, i) => (
+                    <Link
+                      key={i}
+                      to={item.to}
+                      className="flex items-center gap-4 px-4 py-3 bg-gray-50 rounded-lg hover:bg-orange-50 border border-transparent hover:border-orange-200 transition-all group"
+                    >
+                      <span className="text-xl">{item.icon}</span>
+                      <div className="flex-1">
+                        <div className="font-semibold text-gray-900">{item.label}</div>
+                        <div className="text-xs text-gray-600">{item.sub}</div>
+                      </div>
+                      <span className="text-gray-400 group-hover:text-gray-600">›</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

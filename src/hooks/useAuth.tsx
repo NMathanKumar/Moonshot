@@ -8,7 +8,6 @@ import { fetchAuthSession } from 'aws-amplify/auth';
 import { Hub } from 'aws-amplify/utils';
 import { getCurrentUser, signOut as authSignOut } from '@services/auth';
 import type { AuthUser } from 'aws-amplify/auth';
-import type { HubCallback } from 'aws-amplify/utils';
 
 export type { AuthUser };
 
@@ -87,7 +86,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }): React
     console.log(`[${timestamp}] AuthProvider: Setting up auth Hub listener`);
     
 
-    const handleAuthEvent: HubCallback = async (payload: any) => {
+    const handleAuthEvent = async (capsule: unknown): Promise<void> => {
+      const payload = capsule as { data?: { event?: string } };
       const { event } = payload?.data || {};
       const eventTimestamp = new Date().toISOString();
       console.log(`[${eventTimestamp}] AuthProvider: Auth Hub event received: ${event}`);

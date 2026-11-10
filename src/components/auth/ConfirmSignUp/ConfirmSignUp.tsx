@@ -65,19 +65,19 @@ export function ConfirmSignUp({ onSubmit }: ConfirmSignUpProps) {
     <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen bg-[#f7f7f5]">
       {/* LEFT PANEL - Student image with decorative circles (matches SignUp) */}
       <div className="hidden md:flex flex-col items-end justify-center p-10 relative overflow-hidden">
-        <div className="absolute w-[280px] h-[280px] bg-white/6 rounded-full -top-16 -left-16 z-0" />
-        <div className="absolute w-[200px] h-[200px] bg-white/8 rounded-full -bottom-8 left-96 z-0" />
+        <div className="absolute w-72 h-72 bg-white/6 rounded-full -top-16 -left-16 z-0" />
+        <div className="absolute w-52 h-52 bg-white/8 rounded-full -bottom-8 left-96 z-0" />
         
-        <div className="relative z-10 w-full max-w-[520px]">
+        <div className="relative z-10 w-full max-w-xl">
           <img
             src={signupStudent}
             alt="Student preparing to study"
             className="w-full h-auto object-cover"
           />
-          <h2 className="text-[30px] font-bold text-[#232d3f] leading-[36px] tracking-[-0.45px] mt-8 mb-3">
+          <h2 className="text-3xl font-bold text-[#232d3f] leading-9 tracking-tight mt-8 mb-3">
             Verify your email
           </h2>
-          <p className="text-[14px] font-normal text-[#55657b] leading-[23px] mb-0">
+          <p className="text-sm font-normal text-[#55657b] leading-6 mb-0">
             We've sent a verification code to your email address. Enter it below to complete your account setup.
           </p>
         </div>
@@ -85,7 +85,7 @@ export function ConfirmSignUp({ onSubmit }: ConfirmSignUpProps) {
 
       {/* RIGHT PANEL - Verification Form */}
       <div className="flex items-center justify-center p-6 md:p-9 bg-[#f7f7f5]">
-        <div className="w-full max-w-[620px] bg-white rounded-[20px] border border-[#e0e0e0] shadow-[0px_16px_22.5px_rgba(35,45,63,0.12)] px-9 py-8">
+        <div className="w-full max-w-2xl bg-white rounded-3xl border border-[#e0e0e0] shadow-lg px-9 py-8">
           {/* LOGO */}
           <div className="flex justify-center mb-8">
             <img src={idpLogo} alt="IDP Logo" className="h-10 w-auto" />
@@ -93,19 +93,19 @@ export function ConfirmSignUp({ onSubmit }: ConfirmSignUpProps) {
 
           {/* HEADER */}
           <div className="mb-7 text-center">
-            <h1 className="text-[26px] font-bold text-[#232d3f] leading-[39px] tracking-[-0.39px]">
+            <h1 className="text-2xl font-bold text-[#232d3f] leading-10 tracking-tight">
               Confirm your email
             </h1>
-            <p className="text-[14px] font-normal text-[#55657b] leading-[21px] text-center mt-2 mb-0">
+            <p className="text-sm font-normal text-[#55657b] leading-6 text-center mt-2 mb-0">
               We sent a verification code to
             </p>
-            <p className="text-[14px] font-bold text-[#232d3f] leading-[21px]">{email}</p>
+            <p className="text-sm font-bold text-[#232d3f] leading-6">{email}</p>
           </div>
 
           {/* Error Alert */}
           {error && (
             <div className="mb-4 p-3 rounded-lg border border-[#ffb399] bg-[#fff5f0]">
-              <p className="font-['Inter'] text-sm m-0 font-medium text-[#d97f60]">
+              <p className="text-sm m-0 font-medium text-[#d97f60]">
                 {error}
               </p>
             </div>
@@ -114,7 +114,7 @@ export function ConfirmSignUp({ onSubmit }: ConfirmSignUpProps) {
           {/* Success Alert */}
           {successMessage && (
             <div className="mb-4 p-3 rounded-lg border border-[#86efac] bg-[#f0fdf4]">
-              <p className="font-['Inter'] text-sm m-0 font-medium text-[#22c55e]">
+              <p className="text-sm m-0 font-medium text-[#22c55e]">
                 ✓ {successMessage}
               </p>
             </div>
@@ -123,13 +123,13 @@ export function ConfirmSignUp({ onSubmit }: ConfirmSignUpProps) {
           {/* FORM */}
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* INFO TEXT */}
-            <p className="text-[12px] font-normal text-[#55657b] leading-[18px]">
+            <p className="text-xs font-normal text-[#55657b] leading-5">
               Check your email (including spam folder) for a 6-character code
             </p>
 
             {/* CONFIRMATION CODE FIELD */}
             <div className="flex flex-col gap-2">
-              <label className="block text-[11px] font-bold text-[#55657b] uppercase tracking-[0.66px] pb-1.5">
+              <label className="block text-xs font-bold text-[#55657b] uppercase tracking-wider pb-1.5">
                 Verification code
               </label>
               <input
@@ -140,7 +140,7 @@ export function ConfirmSignUp({ onSubmit }: ConfirmSignUpProps) {
                 disabled={isLoading}
                 required
                 maxLength={10}
-                className="w-full h-11 px-3.5 py-2.75 bg-white border border-[#e0e0e0] rounded-lg text-[13px] text-[#111827] font-medium placeholder-[#9CA3AF] focus:outline-none focus:border-[#FF6A00] focus:ring-1 focus:ring-[rgba(255,106,0,0.1)] disabled:opacity-60 autofill:text-[#111827] autofill:font-medium"
+                className="w-full h-11 px-3.5 py-2 bg-white border border-[#e0e0e0] rounded-lg text-sm text-[#111827] font-medium placeholder-[#9CA3AF] focus:outline-none focus:border-[#FF6A00] focus:ring-1 focus:ring-[rgba(255,106,0,0.1)] disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
                 style={{
                   WebkitTextFillColor: confirmationCode ? '#111827' : undefined,
                 }}
@@ -151,7 +151,7 @@ export function ConfirmSignUp({ onSubmit }: ConfirmSignUpProps) {
             <button
               type="submit"
               disabled={isLoading || !confirmationCode.trim()}
-              className="w-full py-3 px-4 bg-gradient-to-r from-[#FFC01E] via-[#FF6A00] to-[#E01F26] rounded-[10px] text-white font-extrabold text-[14px] leading-[21px] hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:shadow-md transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+              className="w-full py-3 px-4 bg-gradient-to-r from-[#FFC01E] via-[#FF6A00] to-[#E01F26] rounded-xl text-white font-extrabold text-sm leading-6 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:shadow-md transition-all disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <>
@@ -166,7 +166,7 @@ export function ConfirmSignUp({ onSubmit }: ConfirmSignUpProps) {
             {/* DIVIDER */}
             <div className="flex items-center gap-3 my-1">
               <div className="flex-1 h-px bg-[#e5e7eb]"></div>
-              <span className="text-[12px] text-[#9ca3af] font-medium">or</span>
+              <span className="text-xs text-[#9ca3af] font-medium">or</span>
               <div className="flex-1 h-px bg-[#e5e7eb]"></div>
             </div>
 
@@ -178,8 +178,7 @@ export function ConfirmSignUp({ onSubmit }: ConfirmSignUpProps) {
                 handleBackToSignUp();
               }}
               disabled={isLoading}
-              className="w-full px-4 py-3 bg-transparent text-[#ff6a00] border-1.5 border-[#ff6a00] rounded-[10px] font-['Inter'] text-[14px] font-bold cursor-pointer transition-all hover:bg-[#fff5f0] disabled:opacity-60"
-              style={{ opacity: isLoading ? 0.65 : 1, cursor: isLoading ? 'not-allowed' : 'pointer' }}
+              className="w-full px-4 py-3 bg-transparent text-[#ff6a00] border-2 border-[#ff6a00] rounded-xl text-sm font-bold cursor-pointer transition-all hover:bg-[#fff5f0] disabled:opacity-60 disabled:cursor-not-allowed"
             >
               Didn't receive the code? Start over
             </button>
@@ -187,8 +186,8 @@ export function ConfirmSignUp({ onSubmit }: ConfirmSignUpProps) {
 
           {/* FOOTER */}
           <div className="mt-6 text-center pt-5 border-t border-[#e5e7eb]">
-            <p className="text-[12px] text-[#55657b] m-0 leading-[1.6]">Trouble verifying?</p>
-            <p className="text-[12px] text-[#55657b] m-0 leading-[1.6]">
+            <p className="text-xs text-[#55657b] m-0 leading-relaxed">Trouble verifying?</p>
+            <p className="text-xs text-[#55657b] m-0 leading-relaxed">
               Contact us at <span className="text-[#ff6a00] font-semibold">support@idp.com</span>
             </p>
           </div>

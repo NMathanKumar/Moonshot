@@ -148,7 +148,7 @@ describe('auth service', () => {
         dateOfBirth: '1990-01-01',
       };
 
-      await expect(signUp(credentials)).rejects.toThrow('does not meet the required criteria');
+      await expect(signUp(credentials)).rejects.toThrow('Password must be at least 12 characters');
     });
   });
 
