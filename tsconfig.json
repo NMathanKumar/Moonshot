@@ -35,7 +35,9 @@
       "@services": ["./src/services"],
       "@services/*": ["./src/services/*"],
       "@routes": ["./src/routes"],
-      "@routes/*": ["./src/routes/*"]
+      "@routes/*": ["./src/routes/*"],
+      "@utils": ["./src/utils"],
+      "@utils/*": ["./src/utils/*"]
     }
   },
   "include": ["src", "tests"],

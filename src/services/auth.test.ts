@@ -101,6 +101,7 @@ describe('auth service', () => {
         password: 'Password123!',
         firstName: 'John',
         lastName: 'Doe',
+        dateOfBirth: '1990-01-01',
       };
 
       await signUp(credentials);
@@ -114,6 +115,7 @@ describe('auth service', () => {
             email: credentials.email,
             given_name: credentials.firstName,
             family_name: credentials.lastName,
+            // custom:date_of_birth is not included — validated client-side only
           },
         },
       });
@@ -128,6 +130,7 @@ describe('auth service', () => {
         password: 'Password123!',
         firstName: 'John',
         lastName: 'Doe',
+        dateOfBirth: '1990-01-01',
       };
 
       await expect(signUp(credentials)).rejects.toThrow('already exists');
@@ -142,6 +145,7 @@ describe('auth service', () => {
         password: 'weak',
         firstName: 'John',
         lastName: 'Doe',
+        dateOfBirth: '1990-01-01',
       };
 
       await expect(signUp(credentials)).rejects.toThrow('does not meet the required criteria');

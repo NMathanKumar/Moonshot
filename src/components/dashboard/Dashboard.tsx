@@ -3,18 +3,35 @@ import { useAuth } from '@hooks/useAuth';
 import { useEffect } from 'react';
 
 export default function Dashboard() {
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    // If user is not authenticated, redirect to sign in
-    if (!user) {
-      navigate('/signin');
+    // Redirect if authentication loading is complete and no user found
+    // This handles session expiry or invalid tokens
+    if (!isLoading && !user) {
+      console.log('Dashboard: Auth complete, no user found - redirecting to signin');
+      navigate('/signin', { replace: true });
     }
-  }, [user, navigate]);
+  }, [user, isLoading, navigate]);
 
+  // Show loading state while AuthProvider initializes
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-50">
+        <div className="text-center">
+          <div className="inline-flex items-center justify-center">
+            <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+          </div>
+          <p className="mt-4 text-gray-600 font-medium">Loading your dashboard...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Don't render if no user (will redirect via effect)
   if (!user) {
-    return null; // Don't render while redirecting
+    return null;
   }
 
   // Extract first name from user object (Cognito stores it as 'given_name')

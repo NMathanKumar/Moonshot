@@ -18,12 +18,14 @@ export default defineConfig({
       '@services/*': path.resolve(__dirname, './src/services/*'),
       '@routes': path.resolve(__dirname, './src/routes'),
       '@routes/*': path.resolve(__dirname, './src/routes/*'),
+      '@utils': path.resolve(__dirname, './src/utils'),
+      '@utils/*': path.resolve(__dirname, './src/utils/*'),
     },
   },
   server: {
     port: 5173,
     open: true,
-    strictPort: false,
+    strictPort: true,
     middlewareMode: false,
   },
   optimizeDeps: {

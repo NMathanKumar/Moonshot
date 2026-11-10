@@ -9,6 +9,7 @@ import {
   confirmSignUp as amplifyConfirmSignUp,
   signOut as amplifySignOut,
   getCurrentUser as amplifyGetCurrentUser,
+  fetchAuthSession,
 } from 'aws-amplify/auth';
 
 export interface SignInCredentials {
@@ -38,27 +39,77 @@ export interface SignInResponse {
  * @param credentials - Email and password provided by the user
  * @throws Error if authentication fails
  */
+/**
+ * Sign in a user with email and password using USER_SRP_AUTH or USER_PASSWORD_AUTH
+ * 
+ * This function performs direct SDK authentication without any Cognito Hosted UI redirect.
+ * First tries USER_SRP_AUTH (secure remote password), falls back to USER_PASSWORD_AUTH if needed.
+ * 
+ * @param credentials - Email and password provided by the user
+ * @throws Error if authentication fails
+ */
 export async function signIn(credentials: SignInCredentials): Promise<void> {
+  const timestamp = new Date().toISOString();
+  console.log(`[${timestamp}] signIn: Attempting direct SDK authentication...`);
+  console.log(`[${timestamp}] signIn: Email: ${credentials.email}`);
+  
   try {
-    console.log('signIn: Attempting direct SDK authentication with USER_SRP_AUTH...');
+    // Try USER_SRP_AUTH first (secure)
+    try {
+      console.log(`[${timestamp}] signIn: Trying USER_SRP_AUTH...`);
+      const result = await amplifySignIn({
+        username: credentials.email,
+        password: credentials.password,
+        options: {
+          authFlow: 'USER_SRP_AUTH',
+        },
+      });
+      
+      console.log(`[${timestamp}] ✅ signIn: User authenticated successfully with USER_SRP_AUTH`);
+      console.log(`[${timestamp}] signIn: SignIn result:`, result);
+      return;
+    } catch (srpError) {
+      console.warn(`[${timestamp}] signIn: USER_SRP_AUTH failed, trying USER_PASSWORD_AUTH...`);
+      console.warn(`[${timestamp}] signIn: SRP Error:`, srpError);
+    }
     
-    await amplifySignIn({
-      username: credentials.email,
-      password: credentials.password,
-      options: {
-        authFlow: 'USER_SRP_AUTH',
-      },
-    });
-    
-    console.log('✅ signIn: User authenticated successfully');
-    // AuthProvider will detect the 'signedIn' Hub event and fetch the current user
+    // Fallback to USER_PASSWORD_AUTH
+    try {
+      console.log(`[${timestamp}] signIn: Trying USER_PASSWORD_AUTH...`);
+      const result = await amplifySignIn({
+        username: credentials.email,
+        password: credentials.password,
+        options: {
+          authFlow: 'USER_PASSWORD_AUTH',
+        },
+      });
+      
+      console.log(`[${timestamp}] ✅ signIn: User authenticated successfully with USER_PASSWORD_AUTH`);
+      console.log(`[${timestamp}] signIn: SignIn result:`, result);
+      return;
+    } catch (passwordError) {
+      console.error(`[${timestamp}] signIn: USER_PASSWORD_AUTH also failed`);
+      console.error(`[${timestamp}] signIn: Password Auth Error:`, passwordError);
+      throw passwordError;
+    }
   } catch (error) {
-    console.error('❌ signIn: Direct auth failed:', error);
+    console.error('❌ signIn: Direct auth failed with error:');
+    console.error('Error object:', error);
+    
+    // Log detailed error information
+    if (error instanceof Error) {
+      console.error('Error name:', error.name);
+      console.error('Error message:', error.message);
+      console.error('Full error:', JSON.stringify(error, Object.getOwnPropertyNames(error)));
+    }
     
     // Translate Cognito errors to user-friendly messages
     if (error instanceof Error) {
       const message = error.message;
       
+      if (message.includes('UserAlreadyAuthenticated')) {
+        throw new Error('You are already signed in. Please sign out first if you want to sign in with a different account.');
+      }
       if (message.includes('UserNotConfirmedException')) {
         throw new Error('Please confirm your email address before signing in.');
       }
@@ -84,6 +135,9 @@ export async function signIn(credentials: SignInCredentials): Promise<void> {
  * Sign up a user with email and password
  * Sends a confirmation code to the email address
  * 
+ * Note: Date of birth is validated client-side for age verification but not stored
+ * in Cognito as it's not a required User Pool attribute in the current MVP scope.
+ * 
  * @param credentials - Email, password, name, and date of birth information
  * @throws Error if sign-up fails
  */
@@ -91,6 +145,8 @@ export async function signUp(credentials: SignUpCredentials): Promise<void> {
   try {
     console.log('signUp: Creating user account...');
     
+    // Standard attributes only — custom:date_of_birth is not included because
+    // it may not be configured in the Cognito User Pool or may require additional setup
     await amplifySignUp({
       username: credentials.email,
       password: credentials.password,
@@ -99,7 +155,7 @@ export async function signUp(credentials: SignUpCredentials): Promise<void> {
           email: credentials.email,
           given_name: credentials.firstName,
           family_name: credentials.lastName,
-          'custom:date_of_birth': credentials.dateOfBirth,
+          // Date of birth is validated client-side but not stored in Cognito
         },
       },
     });
