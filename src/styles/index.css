@@ -1,10 +1,7 @@
 /* Global Styles Entry Point */
 
 @import './variables.css';
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import './tailwind.css';
 
 /* Base element resets and styles (moved from reset.css) */
 @layer base {
@@ -66,7 +63,7 @@
   input,
   select,
   textarea {
-    @apply font-inherit text-inherit leading-inherit m-0;
+    @apply text-inherit m-0;
   }
 
   button {
@@ -80,7 +77,7 @@
   }
 
   textarea {
-    @apply resize-vertical font-sans;
+    @apply resize-y font-sans;
   }
 
   img {

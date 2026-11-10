@@ -1,6 +1,7 @@
 /**
  * Input Component
  * Reusable input field component using Tailwind CSS
+ * Follows project design tokens from src/styles/variables.css
  */
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -35,10 +36,15 @@ export const Input: React.FC<InputProps> = ({
   autoComplete,
   ...props
 }) => {
-  const inputClasses = `px-3 py-2 text-sm border rounded transition-colors font-inherit ${
+  // Design tokens from variables.css
+  const borderColor = error ? '#DDE2E7' : '#DDE2E7';
+  const focusColor = '#FF6A00'; // brand-primary
+  const focusRing = 'rgba(255, 106, 0, 0.1)';
+  
+  const inputClasses = `px-3.5 py-2.75 text-sm border rounded-lg font-sans transition-all ${
     error
       ? 'border-red-600 focus:outline-none focus:border-red-600 focus:ring-3 focus:ring-red-100'
-      : 'border-[#DDE2E7] focus:outline-none focus:border-[#FF6A00] focus:ring-3 focus:ring-orange-100'
+      : `border-[#DDE2E7] focus:outline-none focus:border-[${focusColor}] focus:ring-3 focus:ring-[${focusRing}]`
   } ${disabled ? 'bg-gray-100 cursor-not-allowed text-gray-600' : ''} ${className}`;
 
   const errorId = error && name ? `${name}-error` : undefined;
@@ -48,11 +54,11 @@ export const Input: React.FC<InputProps> = ({
     .join(' ') || undefined;
 
   return (
-    <div className="flex flex-col gap-1 mb-4">
+    <div className="flex flex-col gap-1.5 mb-4">
       {label && (
-        <label htmlFor={props.id || name} className="text-sm font-semibold text-slate-900">
+        <label htmlFor={props.id || name} className="font-['Inter'] text-xs font-bold uppercase tracking-[0.66px] text-[#55657b]">
           {label}
-          {required && <span className="text-red-600 ml-1">*</span>}
+          {required && <span className="text-[#eb7900] ml-1">*</span>}
         </label>
       )}
       <input
@@ -77,7 +83,7 @@ export const Input: React.FC<InputProps> = ({
         </span>
       )}
       {helperText && !error && (
-        <span id={helperId} className="text-xs text-slate-500 -mt-1">
+        <span id={helperId} className="text-xs text-[#55657b] -mt-1">
           {helperText}
         </span>
       )}
