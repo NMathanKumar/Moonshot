@@ -3,6 +3,7 @@ import { useAuth } from '@hooks/useAuth';
 import { useEffect, useState } from 'react';
 import { EnrolmentService } from '@services';
 import type { TestTakerResponse } from '@services/enrolment';
+import idpLogo from '@assets/idp-logo-transparent.png';
 
 export default function Dashboard() {
   const { user, isLoading } = useAuth();
@@ -75,466 +76,247 @@ export default function Dashboard() {
   }
 
   // Extract first name from user object (Cognito stores it as 'given_name') or profile
-  const firstName = profile?.givenName || (user as any)?.given_name || 'Test Taker';
+  const firstName = profile?.givenName || (user as any)?.given_name || 'Agnes';
 
   return (
-    <div style={{ maxWidth: 900, margin: '0 auto', paddingBottom: 48 }}>
-      {/* Welcome */}
-      <div style={{ marginBottom: 32 }}>
-        <h1 style={{ fontSize: 26, fontWeight: 800, color: 'var(--color-ink)', marginBottom: 4 }}>
-          Welcome back, {firstName}
-        </h1>
-        <p style={{ fontSize: 14, color: 'var(--color-slate)' }}>
-          Here's an overview of your IDP English Test journey.
-        </p>
-      </div>
-
-      {/* Purchased tests */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 20 }}>
-        {/* State 1: Not taken, window open */}
-        <div
-          style={{
-            background: 'white',
-            borderRadius: 16,
-            border: '2px solid #FF6A0030',
-            padding: '22px 28px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: 24,
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-            <div
-              style={{
-                width: 44,
-                height: 44,
-                borderRadius: 12,
-                background: 'var(--color-cream)',
-                border: '1.5px solid #FF6A0030',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: 22,
-                flexShrink: 0,
-              }}
-            >
-              🎫
-            </div>
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-                <span style={{ fontSize: 15, fontWeight: 800, color: 'var(--color-ink)' }}>
-                  IDP English Test
-                </span>
-                <span
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 700,
-                    padding: '2px 8px',
-                    borderRadius: 20,
-                    background: '#fff8e1',
-                    color: '#f9a825',
-                    border: '1px solid #ffd54f',
-                  }}
-                >
-                  TEST NOT TAKEN
-                </span>
-              </div>
-              <p style={{ fontSize: 12, color: 'var(--color-slate)', marginBottom: 6 }}>
-                Purchased Sep 24, 2026 · ONE TIME TEST · UP TO 80 MINS
-              </p>
-              <span
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 5,
-                  fontSize: 11,
-                  fontWeight: 600,
-                  color: '#e65100',
-                  background: 'var(--color-cream)',
-                  border: '1px solid #FF6A0040',
-                  padding: '3px 10px',
-                  borderRadius: 20,
-                }}
-              >
-                🏆 Take within 21 days of enrolment · 17 days left (by Oct 15, 2026)
-              </span>
-            </div>
+    <div className="min-h-screen bg-gray-50">
+      <div className="flex h-screen overflow-hidden">
+        {/* Sidebar */}
+        <div className="w-44 bg-white border-r border-gray-200 flex flex-col">
+          {/* Logo */}
+          <div className="p-6 border-b border-gray-100">
+            <img src={idpLogo} alt="IDP" className="h-8 w-auto" />
+            <p className="text-xs text-gray-600 font-medium mt-3">English Test</p>
           </div>
-          <Link
-            to="/test-prepare"
-            style={{
-              padding: '11px 24px',
-              borderRadius: 10,
-              border: 'none',
-              background: 'var(--gradient-brand)',
-              color: 'white',
-              fontSize: 13,
-              fontWeight: 800,
-              textDecoration: 'none',
-              whiteSpace: 'nowrap',
-              flexShrink: 0,
-              minWidth: 148,
-              textAlign: 'center',
-              cursor: 'pointer',
-            }}
-          >
-            Start test →
-          </Link>
+
+          {/* Overall Score */}
+          <div className="px-6 py-5 border-b border-gray-100">
+            <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3">Overall Score</p>
+            <div className="flex items-baseline gap-1 mb-3">
+              <span className="text-3xl font-black text-gray-900">78</span>
+              <span className="text-sm text-gray-600">/120</span>
+            </div>
+            <span className="inline-flex items-center justify-center px-3 py-1 bg-orange-50 text-orange-700 text-xs font-bold rounded-full border border-orange-200">
+              B2 Upper Intermediate
+            </span>
+          </div>
+
+          {/* Menu */}
+          <nav className="flex-1 px-4 py-6">
+            <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-4">Menu</p>
+            <div className="space-y-2">
+              <div className="flex items-center gap-3 px-3 py-2.5 bg-orange-50 text-orange-700 rounded-lg font-semibold text-sm">
+                <span className="text-lg">📊</span>
+                Dashboard
+              </div>
+              <Link to="/results" className="flex items-center gap-3 px-3 py-2.5 text-gray-700 hover:bg-gray-50 rounded-lg font-medium text-sm transition-colors">
+                <span className="text-lg">📈</span>
+                My Results
+              </Link>
+              <Link to="/practice" className="flex items-center gap-3 px-3 py-2.5 text-gray-700 hover:bg-gray-50 rounded-lg font-medium text-sm transition-colors">
+                <span className="text-lg">✍️</span>
+                Practice
+              </Link>
+              <Link to="/book" className="flex items-center gap-3 px-3 py-2.5 text-gray-700 hover:bg-gray-50 rounded-lg font-medium text-sm transition-colors">
+                <span className="text-lg">🎫</span>
+                Purchase Test
+              </Link>
+              <Link to="/settings" className="flex items-center gap-3 px-3 py-2.5 text-gray-700 hover:bg-gray-50 rounded-lg font-medium text-sm transition-colors">
+                <span className="text-lg">⚙️</span>
+                Settings
+              </Link>
+            </div>
+          </nav>
+
+          {/* User Profile */}
+          <div className="px-4 py-6 border-t border-gray-100">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-white font-bold text-sm">
+                {firstName.charAt(0)}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-semibold text-gray-900 truncate">{firstName}</p>
+                <p className="text-xs text-gray-500 truncate">{(user as any)?.email || 'student@example.com'}</p>
+              </div>
+            </div>
+            <button className="w-full text-left text-xs font-semibold text-orange-600 hover:text-orange-700 py-2">
+              Sign out
+            </button>
+          </div>
         </div>
 
-        {/* State 2: Not taken, window closed */}
-        <div
-          style={{
-            background: 'white',
-            borderRadius: 16,
-            border: '2px solid #e0e0e0',
-            padding: '22px 28px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: 24,
-            opacity: 0.6,
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-            <div
-              style={{
-                width: 44,
-                height: 44,
-                borderRadius: 12,
-                background: '#f5f5f5',
-                border: '1.5px solid #e0e0e0',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: 22,
-                flexShrink: 0,
-              }}
-            >
-              🎫
-            </div>
+        {/* Main Content */}
+        <div className="flex-1 flex flex-col overflow-hidden">
+          {/* Header */}
+          <div className="bg-white border-b border-gray-200 px-8 py-6 flex items-center justify-between">
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-                <span style={{ fontSize: 15, fontWeight: 800, color: 'var(--color-ink)' }}>
-                  IDP English Test
-                </span>
-                <span
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 700,
-                    padding: '2px 8px',
-                    borderRadius: 20,
-                    background: '#fff8e1',
-                    color: '#f9a825',
-                    border: '1px solid #ffd54f',
-                  }}
-                >
-                  TEST NOT TAKEN
-                </span>
-              </div>
-              <p style={{ fontSize: 12, color: 'var(--color-slate)', marginBottom: 6 }}>
-                Purchased 5 Aug 2026 · ONE TIME TEST · UP TO 80 MINS
-              </p>
-              <span
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 5,
-                  fontSize: 11,
-                  fontWeight: 600,
-                  color: '#c62828',
-                  background: '#fce4ec',
-                  border: '1px solid #ef9a9a',
-                  padding: '3px 10px',
-                  borderRadius: 20,
-                }}
-              >
-                ⏰ Test window closed — was due by Aug 26, 2026
+              <h1 className="text-2xl font-bold text-gray-900">My Dashboard</h1>
+            </div>
+            <div className="flex items-center gap-4">
+              <span className="inline-flex items-center px-3 py-2 bg-orange-50 text-orange-700 text-sm font-bold rounded-lg border border-orange-200">
+                Test taken 2 Jul 2026
               </span>
+              <button className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-white font-bold text-sm rounded-lg hover:shadow-lg transition-shadow">
+                Purchase a Test →
+              </button>
             </div>
           </div>
-          <button
-            disabled
-            style={{
-              padding: '11px 24px',
-              borderRadius: 10,
-              border: 'none',
-              background: 'var(--gradient-brand)',
-              color: 'white',
-              fontSize: 13,
-              fontWeight: 800,
-              whiteSpace: 'nowrap',
-              flexShrink: 0,
-              minWidth: 148,
-              textAlign: 'center',
-              opacity: 0.4,
-              cursor: 'not-allowed',
-            }}
-          >
-            Start test →
-          </button>
-        </div>
 
-        {/* State 3: Enrolment in progress */}
-        <div
-          style={{
-            background: 'white',
-            borderRadius: 16,
-            border: '2px solid #e0e0e0',
-            padding: '22px 28px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: 24,
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-            <div
-              style={{
-                width: 44,
-                height: 44,
-                borderRadius: 12,
-                background: '#f5f5f5',
-                border: '1.5px solid #e0e0e0',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: 22,
-                flexShrink: 0,
-              }}
-            >
-              🎫
-            </div>
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-                <span style={{ fontSize: 15, fontWeight: 800, color: 'var(--color-ink)' }}>
-                  IDP English Test
-                </span>
-                <span
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 700,
-                    padding: '2px 8px',
-                    borderRadius: 20,
-                    background: '#e3f2fd',
-                    color: '#1565c0',
-                    border: '1px solid #90caf9',
-                  }}
-                >
-                  ENROLMENT IN PROGRESS
-                </span>
+          {/* Scrollable Content */}
+          <div className="flex-1 overflow-auto">
+            <div className="px-8 py-8">
+              {/* Welcome Section */}
+              <div className="mb-8">
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">Welcome back, {firstName}</h2>
+                <p className="text-gray-600">Here's an overview of your IDP English Test journey.</p>
               </div>
-              <p style={{ fontSize: 12, color: 'var(--color-slate)' }}>
-                Purchased 4 Aug 2026 · ONE TIME TEST · UP TO 80 MINS
-              </p>
-            </div>
-          </div>
-          <Link
-            to="/book"
-            style={{
-              padding: '11px 24px',
-              borderRadius: 10,
-              border: 'none',
-              background: 'var(--gradient-brand)',
-              color: 'white',
-              fontSize: 13,
-              fontWeight: 800,
-              textDecoration: 'none',
-              whiteSpace: 'nowrap',
-              flexShrink: 0,
-              minWidth: 148,
-              textAlign: 'center',
-              cursor: 'pointer',
-            }}
-          >
-            Make payment →
-          </Link>
-        </div>
-      </div>
 
-      {/* Overall score card */}
-      <div style={{ marginBottom: 20 }}>
-        <div
-          style={{
-            background: 'var(--gradient-brand)',
-            borderRadius: 16,
-            padding: '28px 32px',
-            color: 'white',
-            position: 'relative',
-            overflow: 'hidden',
-          }}
-        >
-          <div
-            style={{
-              position: 'absolute',
-              top: -40,
-              right: -40,
-              width: 180,
-              height: 180,
-              borderRadius: '50%',
-              background: 'rgba(255,255,255,0.07)',
-            }}
-          />
-          <div
-            style={{
-              position: 'absolute',
-              bottom: -20,
-              right: 60,
-              width: 110,
-              height: 110,
-              borderRadius: '50%',
-              background: 'rgba(255,255,255,0.05)',
-            }}
-          />
-          <div style={{ position: 'relative' }}>
-            <p
-              style={{
-                fontSize: 12,
-                fontWeight: 700,
-                opacity: 0.85,
-                textTransform: 'uppercase',
-                letterSpacing: '0.08em',
-                marginBottom: 12,
-                marginTop: 0,
-              }}
-            >
-              Overall Score · Latest test
-            </p>
-
-            <div style={{ display: 'flex', alignItems: 'flex-end', gap: 12, marginBottom: 12 }}>
-              <span style={{ fontSize: 64, fontWeight: 900, lineHeight: 1 }}>78</span>
-              <span style={{ fontSize: 20, fontWeight: 600, opacity: 0.75, paddingBottom: 8 }}>
-                /120
-              </span>
-              <span
-                style={{
-                  fontSize: 24,
-                  fontWeight: 800,
-                  background: 'rgba(255,255,255,0.2)',
-                  padding: '4px 16px',
-                  borderRadius: 30,
-                  marginBottom: 6,
-                }}
-              >
-                B2
-              </span>
-            </div>
-
-            <p style={{ fontSize: 12, opacity: 0.7, marginBottom: 20 }}>
-              Test taken 2 Jul 2026 · Upper Intermediate
-            </p>
-
-            {/* Skill bars */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 20 }}>
-              {[
-                { skill: 'Reading', score: 86, cefr: 'C1' },
-                { skill: 'Listening', score: 64, cefr: 'B2' },
-                { skill: 'Writing', score: 74, cefr: 'B2' },
-                { skill: 'Speaking', score: 72, cefr: 'B2' },
-              ].map((s) => (
-                <div key={s.skill}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
-                    <span style={{ fontSize: 12, fontWeight: 600, opacity: 0.85 }}>{s.skill}</span>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <span style={{ fontSize: 12, opacity: 0.75 }}>{s.score}/120</span>
-                      <span
-                        style={{
-                          fontSize: 10,
-                          fontWeight: 700,
-                          background: 'rgba(255,255,255,0.2)',
-                          padding: '1px 7px',
-                          borderRadius: 20,
-                        }}
-                      >
-                        {s.cefr}
-                      </span>
+              {/* Test Cards */}
+              <div className="space-y-4 mb-8">
+                {/* Card 1: Not taken, window open */}
+                <div className="bg-white rounded-xl border-2 border-orange-100 p-6 flex items-center justify-between hover:shadow-md transition-shadow">
+                  <div className="flex items-center gap-4">
+                    <div className="w-11 h-11 rounded-lg bg-orange-50 border border-orange-200 flex items-center justify-center text-xl">
+                      🎫
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="font-bold text-gray-900">IDP English Test</span>
+                        <span className="inline-flex items-center px-2 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded-full border border-yellow-300">
+                          TEST NOT TAKEN
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-600 mb-2">Purchased Sep 24, 2026 · ONE TIME TEST · UP TO 80 MINS</p>
+                      <div className="inline-flex items-center gap-2 px-3 py-2 bg-orange-50 text-orange-700 text-xs font-bold rounded-full border border-orange-200">
+                        🏆 Take within 21 days of enrolment · 17 days left (by Oct 15, 2026)
+                      </div>
                     </div>
                   </div>
-                  <div style={{ height: 5, borderRadius: 5, background: 'rgba(255,255,255,0.2)' }}>
-                    <div
-                      style={{
-                        height: '100%',
-                        borderRadius: 5,
-                        width: `${(s.score / 120) * 100}%`,
-                        background: 'rgba(255,255,255,0.7)',
-                      }}
-                    />
+                  <Link to="/test-prepare" className="inline-flex items-center px-6 py-2 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-white font-bold text-sm rounded-lg hover:shadow-lg transition-shadow flex-shrink-0">
+                    Start test →
+                  </Link>
+                </div>
+
+                {/* Card 2: Not taken, window closed */}
+                <div className="bg-white rounded-xl border-2 border-gray-200 p-6 flex items-center justify-between opacity-60">
+                  <div className="flex items-center gap-4">
+                    <div className="w-11 h-11 rounded-lg bg-gray-100 border border-gray-300 flex items-center justify-center text-xl">
+                      🎫
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="font-bold text-gray-900">IDP English Test</span>
+                        <span className="inline-flex items-center px-2 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded-full border border-yellow-300">
+                          TEST NOT TAKEN
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-600 mb-2">Purchased 5 Aug 2026 · ONE TIME TEST · UP TO 80 MINS</p>
+                      <div className="inline-flex items-center gap-2 px-3 py-2 bg-red-50 text-red-700 text-xs font-bold rounded-full border border-red-300">
+                        ⏰ Test window closed — was due by Aug 26, 2026
+                      </div>
+                    </div>
                   </div>
+                  <button disabled className="inline-flex items-center px-6 py-2 bg-gray-300 text-white font-bold text-sm rounded-lg flex-shrink-0 cursor-not-allowed">
+                    Start test →
+                  </button>
                 </div>
-              ))}
-            </div>
 
-            <Link
-              to="/results"
-              style={{
-                display: 'inline-block',
-                fontSize: 13,
-                fontWeight: 700,
-                color: 'white',
-                textDecoration: 'none',
-                background: 'rgba(255,255,255,0.2)',
-                padding: '8px 18px',
-                borderRadius: 8,
-                border: '1.5px solid rgba(255,255,255,0.35)',
-                backdropFilter: 'blur(4px)',
-              }}
-            >
-              View full results →
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* What's next section */}
-      <div style={{ background: 'white', borderRadius: 16, padding: '24px 28px', border: '1.5px solid var(--border)' }}>
-        <h2 style={{ fontSize: 16, fontWeight: 800, color: 'var(--color-ink)', marginBottom: 16 }}>
-          What's next?
-        </h2>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          {[
-            { icon: '📥', label: 'Download official certificate', sub: 'PDF · ready now', to: '/results' },
-            { icon: '✏️', label: 'Request Score Review', sub: 'Submit a score review', to: '/results' },
-            { icon: '🎯', label: 'Practice to improve', sub: 'Free sessions available', to: '/practice' },
-            { icon: '🏫', label: 'Search accepting institutions', sub: '2,000+ worldwide', to: '/book' },
-          ].map((item, i) => (
-            <Link
-              key={i}
-              to={item.to}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 12,
-                padding: '12px 14px',
-                borderRadius: 10,
-                background: 'var(--muted)',
-                textDecoration: 'none',
-                border: '1.5px solid transparent',
-                transition: 'all 0.15s',
-              }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.borderColor = '#FF6A0040';
-                el.style.background = 'var(--color-cream)';
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.borderColor = 'transparent';
-                el.style.background = 'var(--muted)';
-              }}
-            >
-              <span style={{ fontSize: 19, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                {item.icon}
-              </span>
-              <div>
-                <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--color-ink)' }}>
-                  {item.label}
+                {/* Card 3: Enrolment in progress */}
+                <div className="bg-white rounded-xl border-2 border-gray-200 p-6 flex items-center justify-between hover:shadow-md transition-shadow">
+                  <div className="flex items-center gap-4">
+                    <div className="w-11 h-11 rounded-lg bg-gray-100 border border-gray-300 flex items-center justify-center text-xl">
+                      🎫
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="font-bold text-gray-900">IDP English Test</span>
+                        <span className="inline-flex items-center px-2 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full border border-blue-300">
+                          ENROLMENT IN PROGRESS
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-600">Purchased 4 Aug 2026 · ONE TIME TEST · UP TO 80 MINS</p>
+                    </div>
+                  </div>
+                  <Link to="/book" className="inline-flex items-center px-6 py-2 bg-orange-400 text-white font-bold text-sm rounded-lg hover:shadow-lg transition-shadow flex-shrink-0">
+                    Make payment →
+                  </Link>
                 </div>
-                <div style={{ fontSize: 11, color: 'var(--color-slate)' }}>{item.sub}</div>
               </div>
-              <span style={{ marginLeft: 'auto', color: 'var(--color-slate)', fontSize: 14 }}>›</span>
-            </Link>
-          ))}
+
+              {/* Overall Score Card */}
+              <div className="bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 rounded-xl p-8 text-white mb-8 relative overflow-hidden">
+                <div className="absolute -top-20 -right-20 w-48 h-48 bg-white/10 rounded-full blur-3xl"></div>
+                <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/5 rounded-full blur-3xl"></div>
+                <div className="relative z-10">
+                  <p className="text-xs font-bold uppercase tracking-widest opacity-90 mb-4">Overall Score - Latest Test</p>
+                  
+                  <div className="flex items-baseline gap-3 mb-6">
+                    <span className="text-6xl font-black">78</span>
+                    <span className="text-2xl font-bold opacity-90">/120</span>
+                    <span className="text-2xl font-bold bg-white/20 px-4 py-1 rounded-full">B2</span>
+                  </div>
+
+                  <p className="text-sm opacity-90 mb-6">Test taken 2 Jul 2026 · Upper Intermediate</p>
+
+                  {/* Skill Bars */}
+                  <div className="space-y-4 mb-8">
+                    {[
+                      { skill: 'Reading', score: 86, cefr: 'C1' },
+                      { skill: 'Listening', score: 64, cefr: 'B2' },
+                      { skill: 'Writing', score: 74, cefr: 'B2' },
+                      { skill: 'Speaking', score: 72, cefr: 'B2' },
+                    ].map((s) => (
+                      <div key={s.skill}>
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-sm font-semibold opacity-90">{s.skill}</span>
+                          <div className="flex items-center gap-3">
+                            <span className="text-sm opacity-90">{s.score}/120</span>
+                            <span className="text-xs font-bold bg-white/20 px-2 py-0.5 rounded-full">{s.cefr}</span>
+                          </div>
+                        </div>
+                        <div className="h-1 bg-white/20 rounded-full overflow-hidden">
+                          <div
+                            className="h-full bg-white/70 rounded-full"
+                            style={{ width: `${(s.score / 120) * 100}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <Link to="/results" className="inline-flex items-center px-4 py-2 bg-white/20 text-white font-bold text-sm rounded-lg border border-white/30 hover:bg-white/30 transition-colors">
+                    View full results →
+                  </Link>
+                </div>
+              </div>
+
+              {/* What's Next Section */}
+              <div className="bg-white rounded-xl border border-gray-200 p-8">
+                <h3 className="text-lg font-bold text-gray-900 mb-6">What's next?</h3>
+                <div className="space-y-3">
+                  {[
+                    { icon: '📥', label: 'Download official certificate', sub: 'PDF · ready now', to: '/results' },
+                    { icon: '✏️', label: 'Request Score Review', sub: 'Submit a score review', to: '/results' },
+                    { icon: '🎯', label: 'Practice to improve', sub: 'Free sessions available', to: '/practice' },
+                    { icon: '🏫', label: 'Search accepting institutions', sub: '2,000+ worldwide', to: '/book' },
+                  ].map((item, i) => (
+                    <Link
+                      key={i}
+                      to={item.to}
+                      className="flex items-center gap-4 px-4 py-3 bg-gray-50 rounded-lg hover:bg-orange-50 border border-transparent hover:border-orange-200 transition-all group"
+                    >
+                      <span className="text-xl">{item.icon}</span>
+                      <div className="flex-1">
+                        <div className="font-semibold text-gray-900">{item.label}</div>
+                        <div className="text-xs text-gray-600">{item.sub}</div>
+                      </div>
+                      <span className="text-gray-400 group-hover:text-gray-600">›</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

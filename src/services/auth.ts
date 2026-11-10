@@ -173,7 +173,7 @@ export async function signUp(credentials: SignUpCredentials): Promise<void> {
         throw new Error('An account with this email address already exists.');
       }
       if (message.includes('InvalidPasswordException')) {
-        throw new Error('Password does not meet the required criteria: at least 1 uppercase, 1 lowercase, 1 number, and 12 characters.');
+        throw new Error('Password must be at least 12 characters with 1 uppercase, 1 lowercase, and 1 number (e.g., Password123!!).');
       }
       if (message.includes('InvalidParameterException') || message.includes('Invalid')) {
         throw new Error('Invalid input. Please check your details and try again.');

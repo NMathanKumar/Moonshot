@@ -26,6 +26,15 @@ function isUnder18(dateOfBirth: string) {
   return age < 18;
 }
 
+function validatePassword(password: string): string | null {
+  if (!password) return null;
+  if (password.length < 12) return 'Password must be at least 12 characters';
+  if (!/[A-Z]/.test(password)) return 'Password must contain at least 1 uppercase letter';
+  if (!/[a-z]/.test(password)) return 'Password must contain at least 1 lowercase letter';
+  if (!/\d/.test(password)) return 'Password must contain at least 1 number';
+  return null;
+}
+
 export function SignUp({ onSubmit }: SignUpProps) {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
@@ -38,9 +47,19 @@ export function SignUp({ onSubmit }: SignUpProps) {
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
 
   const handleNavigateToSignIn = () => {
     navigate('/signin');
+  };
+
+  const handlePasswordChange = (value: string) => {
+    setPassword(value);
+    if (value) {
+      setPasswordError(validatePassword(value));
+    } else {
+      setPasswordError(null);
+    }
   };
 
   const needsGuardian = Boolean(dateOfBirth) && isUnder18(dateOfBirth);
@@ -204,12 +223,13 @@ export function SignUp({ onSubmit }: SignUpProps) {
                   type={showPassword ? 'text' : 'password'}
                   placeholder="••••••••"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => handlePasswordChange(e.target.value)}
                   disabled={isLoading}
                   required
                   className="w-full h-11 px-3.5 py-2.75 bg-white border border-[#e0e0e0] rounded-lg text-[13px] text-[#111827] font-medium placeholder-[#9CA3AF] focus:outline-none focus:border-[#FF6A00] focus:ring-1 focus:ring-[rgba(255,106,0,0.1)] disabled:opacity-60 autofill:text-[#111827] autofill:font-medium"
                   style={{
                     WebkitTextFillColor: password ? '#111827' : undefined,
+                    borderColor: passwordError ? '#dc2626' : undefined,
                   }}
                 />
                 <button
@@ -221,6 +241,9 @@ export function SignUp({ onSubmit }: SignUpProps) {
                   {showPassword ? 'Hide' : 'Show'}
                 </button>
               </div>
+              {passwordError && (
+                <p className="text-[11px] text-red-600 mt-1.5 font-medium">{passwordError}</p>
+              )}
             </div>
 
             {/* Date of Birth and Gender */}
@@ -283,7 +306,7 @@ export function SignUp({ onSubmit }: SignUpProps) {
             {/* Submit Button */}
             <button
               type="submit"
-              disabled={isLoading || (!needsGuardian && !termsAccepted) || !firstName || !lastName}
+              disabled={isLoading || (!needsGuardian && !termsAccepted) || !firstName || !lastName || !!passwordError}
               className="w-full py-3 px-4 bg-gradient-to-r from-[#FFC01E] via-[#FF6A00] to-[#E01F26] rounded-[10px] text-white font-extrabold text-[14px] leading-[21px] hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:shadow-md transition-all disabled:opacity-60 disabled:cursor-not-allowed mt-2"
             >
               {isLoading ? 'Creating account...' : 'Create my account →'}

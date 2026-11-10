@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import idpLogo from '@assets/idp-logo-transparent.png';
+import signupStudent from '@assets/idp-signup-student.png';
 
 export interface ConfirmSignUpProps {
   onSubmit?: (email: string, confirmationCode: string) => Promise<void>;
@@ -62,38 +63,43 @@ export function ConfirmSignUp({ onSubmit }: ConfirmSignUpProps) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen bg-[#f7f7f5]">
-      {/* LEFT PANEL - WITH BACKGROUND */}
-      <div className="hidden md:flex items-center justify-center p-[60px] relative overflow-hidden bg-[#f7f7f5]">
-        {/* Background decorative elements */}
-        <div className="absolute w-[280px] h-[280px] bg-white/6 rounded-full -top-[60px] -left-[60px] z-[1]"></div>
-        <div className="absolute w-[200px] h-[200px] bg-white/8 rounded-full -bottom-[80px] -right-[80px] z-[1]"></div>
-
-        {/* Left content */}
-        <div className="relative z-10 text-center max-w-[424px]">
-          <h2 className="font-['Farro'] text-[20.48px] font-bold text-ink mb-8 leading-[1.2] w-[424px]">
+      {/* LEFT PANEL - Student image with decorative circles (matches SignUp) */}
+      <div className="hidden md:flex flex-col items-end justify-center p-10 relative overflow-hidden">
+        <div className="absolute w-[280px] h-[280px] bg-white/6 rounded-full -top-16 -left-16 z-0" />
+        <div className="absolute w-[200px] h-[200px] bg-white/8 rounded-full -bottom-8 left-96 z-0" />
+        
+        <div className="relative z-10 w-full max-w-[520px]">
+          <img
+            src={signupStudent}
+            alt="Student preparing to study"
+            className="w-full h-auto object-cover"
+          />
+          <h2 className="text-[30px] font-bold text-[#232d3f] leading-[36px] tracking-[-0.45px] mt-8 mb-3">
             Verify your email
           </h2>
-          <p className="font-['Inter'] text-xs text-slate leading-[1.65] font-normal">
+          <p className="text-[14px] font-normal text-[#55657b] leading-[23px] mb-0">
             We've sent a verification code to your email address. Enter it below to complete your account setup.
           </p>
         </div>
       </div>
 
-      {/* RIGHT PANEL */}
-      <div className="flex items-center justify-center p-6 md:p-[60px] relative overflow-hidden bg-white md:bg-white md:min-h-screen">
-        <div className="w-full max-w-[380px]">
+      {/* RIGHT PANEL - Verification Form */}
+      <div className="flex items-center justify-center p-6 md:p-9 bg-[#f7f7f5]">
+        <div className="w-full max-w-[620px] bg-white rounded-[20px] border border-[#e0e0e0] shadow-[0px_16px_22.5px_rgba(35,45,63,0.12)] px-9 py-8">
           {/* LOGO */}
           <div className="flex justify-center mb-8">
             <img src={idpLogo} alt="IDP Logo" className="h-10 w-auto" />
           </div>
 
           {/* HEADER */}
-          <div className="mb-7">
-            <h1 className="font-['Farro'] text-[20.48px] font-bold text-ink mb-3 leading-[1.2]">
+          <div className="mb-7 text-center">
+            <h1 className="text-[26px] font-bold text-[#232d3f] leading-[39px] tracking-[-0.39px]">
               Confirm your email
             </h1>
-            <p className="font-['Inter'] text-xs text-slate mb-0 font-normal">We sent a verification code to</p>
-            <p className="font-['Inter'] text-xs font-bold text-ink">{email}</p>
+            <p className="text-[14px] font-normal text-[#55657b] leading-[21px] text-center mt-2 mb-0">
+              We sent a verification code to
+            </p>
+            <p className="text-[14px] font-bold text-[#232d3f] leading-[21px]">{email}</p>
           </div>
 
           {/* Error Alert */}
@@ -115,15 +121,17 @@ export function ConfirmSignUp({ onSubmit }: ConfirmSignUpProps) {
           )}
 
           {/* FORM */}
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             {/* INFO TEXT */}
-            <p className="font-['Inter'] text-xs text-slate mb-2 font-normal">
+            <p className="text-[12px] font-normal text-[#55657b] leading-[18px]">
               Check your email (including spam folder) for a 6-character code
             </p>
 
             {/* CONFIRMATION CODE FIELD */}
             <div className="flex flex-col gap-2">
-              <label className="font-['Inter'] text-xs font-semibold text-ink">Verification code</label>
+              <label className="block text-[11px] font-bold text-[#55657b] uppercase tracking-[0.66px] pb-1.5">
+                Verification code
+              </label>
               <input
                 type="text"
                 placeholder="Enter 6-character code"
@@ -132,21 +140,22 @@ export function ConfirmSignUp({ onSubmit }: ConfirmSignUpProps) {
                 disabled={isLoading}
                 required
                 maxLength={10}
-                className="px-3.5 py-2.5 border border-[#ddd] rounded-md font-['Inter'] text-sm text-ink bg-white transition-all focus:outline-none focus:border-brand placeholder-[rgba(35,45,63,0.4)]"
-                style={{ opacity: isLoading ? 0.6 : 1, cursor: isLoading ? 'not-allowed' : 'text' }}
+                className="w-full h-11 px-3.5 py-2.75 bg-white border border-[#e0e0e0] rounded-lg text-[13px] text-[#111827] font-medium placeholder-[#9CA3AF] focus:outline-none focus:border-[#FF6A00] focus:ring-1 focus:ring-[rgba(255,106,0,0.1)] disabled:opacity-60 autofill:text-[#111827] autofill:font-medium"
+                style={{
+                  WebkitTextFillColor: confirmationCode ? '#111827' : undefined,
+                }}
               />
             </div>
 
             {/* VERIFY CODE BUTTON */}
-            <button 
-              type="submit" 
-              className="px-4 py-3 bg-gradient-brand text-white border-0 rounded-md font-['Inter'] text-sm font-bold cursor-pointer transition-all flex items-center justify-center gap-2 min-h-10"
+            <button
+              type="submit"
               disabled={isLoading || !confirmationCode.trim()}
-              style={{ opacity: isLoading || !confirmationCode.trim() ? 0.65 : 1, cursor: isLoading ? 'not-allowed' : 'pointer' }}
+              className="w-full py-3 px-4 bg-gradient-to-r from-[#FFC01E] via-[#FF6A00] to-[#E01F26] rounded-[10px] text-white font-extrabold text-[14px] leading-[21px] hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:shadow-md transition-all disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <>
-                  <span className="inline-block w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                  <span className="inline-block w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></span>
                   Verifying...
                 </>
               ) : (
@@ -157,7 +166,7 @@ export function ConfirmSignUp({ onSubmit }: ConfirmSignUpProps) {
             {/* DIVIDER */}
             <div className="flex items-center gap-3 my-1">
               <div className="flex-1 h-px bg-[#e5e7eb]"></div>
-              <span className="font-['Inter'] text-xs text-[#9ca3af] font-medium">or</span>
+              <span className="text-[12px] text-[#9ca3af] font-medium">or</span>
               <div className="flex-1 h-px bg-[#e5e7eb]"></div>
             </div>
 
@@ -169,7 +178,7 @@ export function ConfirmSignUp({ onSubmit }: ConfirmSignUpProps) {
                 handleBackToSignUp();
               }}
               disabled={isLoading}
-              className="px-4 py-3 bg-transparent text-brand border-1.5 border-brand rounded-md font-['Inter'] text-sm font-bold cursor-pointer transition-all"
+              className="w-full px-4 py-3 bg-transparent text-[#ff6a00] border-1.5 border-[#ff6a00] rounded-[10px] font-['Inter'] text-[14px] font-bold cursor-pointer transition-all hover:bg-[#fff5f0] disabled:opacity-60"
               style={{ opacity: isLoading ? 0.65 : 1, cursor: isLoading ? 'not-allowed' : 'pointer' }}
             >
               Didn't receive the code? Start over
@@ -178,9 +187,9 @@ export function ConfirmSignUp({ onSubmit }: ConfirmSignUpProps) {
 
           {/* FOOTER */}
           <div className="mt-6 text-center pt-5 border-t border-[#e5e7eb]">
-            <p className="font-['Inter'] text-xs text-[#9ca3af] m-0 leading-[1.6]">Trouble verifying?</p>
-            <p className="font-['Inter'] text-xs text-[#9ca3af] m-0 leading-[1.6]">
-              Contact us at <span className="text-brand font-semibold">support@idp.com</span>
+            <p className="text-[12px] text-[#55657b] m-0 leading-[1.6]">Trouble verifying?</p>
+            <p className="text-[12px] text-[#55657b] m-0 leading-[1.6]">
+              Contact us at <span className="text-[#ff6a00] font-semibold">support@idp.com</span>
             </p>
           </div>
         </div>
