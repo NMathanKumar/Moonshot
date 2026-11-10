@@ -1,0 +1,40 @@
+﻿
+> iet-ui-testtaker@0.1.0 test:integration
+> vitest run --config vitest.config.integration.ts --grep=Session Persistence
+
+node.exe : file:///C:/Users/mathankumar.n/Downloads/HST_IDP
+/iet-ui-testtaker-1/node_modules/vitest/dist/vendor/cac.cdA
+tVkJZ.js:403
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (file:///C:/Us 
+   er...cdAtVkJZ.js:403:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+          throw new CACError(`Unknown option 
+\`${name.length > 1 ? `--${name}` : `-${name}`}\``);
+                ^
+
+CACError: Unknown option `--grep`
+    at Command.checkUnknownOptions (file:///C:/Users/mathan
+kumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/node_modules/v
+itest/dist/vendor/cac.cdAtVkJZ.js:403:17)
+    at CAC.runMatchedCommand (file:///C:/Users/mathankumar.
+n/Downloads/HST_IDP/iet-ui-testtaker-1/node_modules/vitest/
+dist/vendor/cac.cdAtVkJZ.js:603:13)
+    at CAC.parse (file:///C:/Users/mathankumar.n/Downloads/
+HST_IDP/iet-ui-testtaker-1/node_modules/vitest/dist/vendor/
+cac.cdAtVkJZ.js:544:12)
+    at file:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet
+-ui-testtaker-1/node_modules/vitest/dist/cli.js:9:13
+    at ModuleJob.run 
+(node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async main (file:///C:/Users/mathankumar.n/Downloads
+/HST_IDP/iet-ui-testtaker-1/node_modules/vitest/dist/cli-wr
+apper.js:45:5)
+
+Node.js v24.18.0

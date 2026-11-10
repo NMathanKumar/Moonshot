@@ -132,12 +132,12 @@ export function ConfirmSignUp({ onSubmit }: ConfirmSignUpProps) {
                 disabled={isLoading}
                 required
                 maxLength={10}
-                className="px-3.5 py-2.5 border border-[#ddd] rounded-md font-['Inter'] text-sm text-ink bg-white transition-all focus:outline-none focus:border-brand"
+                className="px-3.5 py-2.5 border border-[#ddd] rounded-md font-['Inter'] text-sm text-ink bg-white transition-all focus:outline-none focus:border-brand placeholder-[rgba(35,45,63,0.4)]"
                 style={{ opacity: isLoading ? 0.6 : 1, cursor: isLoading ? 'not-allowed' : 'text' }}
               />
             </div>
 
-            {/* SUBMIT BUTTON */}
+            {/* VERIFY CODE BUTTON */}
             <button 
               type="submit" 
               className="px-4 py-3 bg-gradient-brand text-white border-0 rounded-md font-['Inter'] text-sm font-bold cursor-pointer transition-all flex items-center justify-center gap-2 min-h-10"
@@ -150,7 +150,7 @@ export function ConfirmSignUp({ onSubmit }: ConfirmSignUpProps) {
                   Verifying...
                 </>
               ) : (
-                'Verify email →'
+                'Verify Code'
               )}
             </button>
 

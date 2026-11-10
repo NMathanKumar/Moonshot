@@ -150,7 +150,10 @@ export function SignUp({ onSubmit }: SignUpProps) {
                   onChange={(e) => setFirstName(e.target.value)}
                   disabled={isLoading}
                   required
-                  className="w-full h-11 px-3.5 py-2.75 bg-white border border-[#e0e0e0] rounded-lg text-[13px] text-[rgba(35,45,63,0.5)] placeholder-[rgba(35,45,63,0.5)] focus:outline-none focus:border-[#FF6A00] focus:ring-1 focus:ring-[rgba(255,106,0,0.1)] disabled:opacity-60"
+                  className="w-full h-11 px-3.5 py-2.75 bg-white border border-[#e0e0e0] rounded-lg text-[13px] text-[#111827] font-medium placeholder-[#9CA3AF] focus:outline-none focus:border-[#FF6A00] focus:ring-1 focus:ring-[rgba(255,106,0,0.1)] disabled:opacity-60 autofill:text-[#111827] autofill:font-medium"
+                  style={{
+                    WebkitTextFillColor: firstName ? '#111827' : undefined,
+                  }}
                 />
               </div>
               <div>
@@ -164,7 +167,10 @@ export function SignUp({ onSubmit }: SignUpProps) {
                   onChange={(e) => setLastName(e.target.value)}
                   disabled={isLoading}
                   required
-                  className="w-full h-11 px-3.5 py-2.75 bg-white border border-[#e0e0e0] rounded-lg text-[13px] text-[rgba(35,45,63,0.5)] placeholder-[rgba(35,45,63,0.5)] focus:outline-none focus:border-[#FF6A00] focus:ring-1 focus:ring-[rgba(255,106,0,0.1)] disabled:opacity-60"
+                  className="w-full h-11 px-3.5 py-2.75 bg-white border border-[#e0e0e0] rounded-lg text-[13px] text-[#111827] font-medium placeholder-[#9CA3AF] focus:outline-none focus:border-[#FF6A00] focus:ring-1 focus:ring-[rgba(255,106,0,0.1)] disabled:opacity-60 autofill:text-[#111827] autofill:font-medium"
+                  style={{
+                    WebkitTextFillColor: lastName ? '#111827' : undefined,
+                  }}
                 />
               </div>
             </div>
@@ -181,7 +187,10 @@ export function SignUp({ onSubmit }: SignUpProps) {
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={isLoading}
                 required
-                className="w-full h-11 px-3.5 py-2.75 bg-white border border-[#e0e0e0] rounded-lg text-[13px] text-[rgba(35,45,63,0.5)] placeholder-[rgba(35,45,63,0.5)] focus:outline-none focus:border-[#FF6A00] focus:ring-1 focus:ring-[rgba(255,106,0,0.1)] disabled:opacity-60"
+                className="w-full h-11 px-3.5 py-2.75 bg-white border border-[#e0e0e0] rounded-lg text-[13px] text-[#111827] font-medium placeholder-[#9CA3AF] focus:outline-none focus:border-[#FF6A00] focus:ring-1 focus:ring-[rgba(255,106,0,0.1)] disabled:opacity-60 autofill:text-[#111827] autofill:font-medium"
+                style={{
+                  WebkitTextFillColor: email ? '#111827' : undefined,
+                }}
               />
             </div>
 
@@ -198,7 +207,10 @@ export function SignUp({ onSubmit }: SignUpProps) {
                   onChange={(e) => setPassword(e.target.value)}
                   disabled={isLoading}
                   required
-                  className="w-full h-11 px-3.5 py-2.75 bg-white border border-[#e0e0e0] rounded-lg text-[13px] text-[rgba(35,45,63,0.5)] placeholder-[rgba(35,45,63,0.5)] focus:outline-none focus:border-[#FF6A00] focus:ring-1 focus:ring-[rgba(255,106,0,0.1)] disabled:opacity-60"
+                  className="w-full h-11 px-3.5 py-2.75 bg-white border border-[#e0e0e0] rounded-lg text-[13px] text-[#111827] font-medium placeholder-[#9CA3AF] focus:outline-none focus:border-[#FF6A00] focus:ring-1 focus:ring-[rgba(255,106,0,0.1)] disabled:opacity-60 autofill:text-[#111827] autofill:font-medium"
+                  style={{
+                    WebkitTextFillColor: password ? '#111827' : undefined,
+                  }}
                 />
                 <button
                   type="button"
@@ -223,7 +235,10 @@ export function SignUp({ onSubmit }: SignUpProps) {
                   onChange={(e) => setDateOfBirth(e.target.value)}
                   disabled={isLoading}
                   required
-                  className="w-full h-11 px-3.5 py-2.75 bg-white border border-[#e0e0e0] rounded-lg text-[13px] text-[rgba(35,45,63,0.5)] focus:outline-none focus:border-[#FF6A00] focus:ring-1 focus:ring-[rgba(255,106,0,0.1)] disabled:opacity-60"
+                  className="w-full h-11 px-3.5 py-2.75 bg-white border border-[#e0e0e0] rounded-lg text-[13px] text-[#111827] font-medium focus:outline-none focus:border-[#FF6A00] focus:ring-1 focus:ring-[rgba(255,106,0,0.1)] disabled:opacity-60 autofill:text-[#111827] autofill:font-medium"
+                  style={{
+                    WebkitTextFillColor: dateOfBirth ? '#111827' : undefined,
+                  }}
                 />
               </div>
               <div>
@@ -235,9 +250,9 @@ export function SignUp({ onSubmit }: SignUpProps) {
                   onChange={(e) => setGender(e.target.value)}
                   disabled={isLoading}
                   required
-                  className="w-full h-11 px-3.5 py-2.75 bg-white border border-[#e0e0e0] rounded-lg text-[13px] text-[rgba(35,45,63,0.5)] focus:outline-none focus:border-[#FF6A00] focus:ring-1 focus:ring-[rgba(255,106,0,0.1)] disabled:opacity-60"
+                  className="w-full h-11 px-3.5 py-2.75 bg-white border border-[#e0e0e0] rounded-lg text-[13px] text-[#111827] font-medium focus:outline-none focus:border-[#FF6A00] focus:ring-1 focus:ring-[rgba(255,106,0,0.1)] disabled:opacity-60"
                 >
-                  <option value="">Select gender</option>
+                  <option value="" className="text-[#9CA3AF]">Select gender</option>
                   <option value="FEMALE">Female</option>
                   <option value="MALE">Male</option>
                   <option value="OTHER">Other</option>

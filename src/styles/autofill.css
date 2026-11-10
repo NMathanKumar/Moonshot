@@ -1,0 +1,24 @@
+/**
+ * Browser Autofill Input Styling
+ * Ensures high-contrast text and proper appearance for autofilled inputs
+ */
+
+/* Webkit autofill state (Chrome, Safari, Edge) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:focus-visible {
+  -webkit-text-fill-color: #111827 !important;
+  font-weight: 500;
+}
+
+/* Autofill background - preserve input background */
+input:-webkit-autofill {
+  -webkit-box-shadow: inset 0 0 0 1000px white !important;
+}
+
+/* Firefox autofill (if supported) */
+input:-moz-autofill {
+  color: #111827 !important;
+  font-weight: 500;
+}

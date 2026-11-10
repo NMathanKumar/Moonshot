@@ -1,0 +1,269 @@
+﻿
+> iet-ui-testtaker@0.1.0 test:integration
+> vitest run --config vitest.config.integration.ts
+
+[vitest.config.integration] Loaded VITE_ vars from .env.development
+[vitest.config.integration] Loaded test credentials from .env.test-integration
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90mC:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1[39m
+
+[90mstdout[2m | loadEnvForIntegration (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\tests\integration\setup.ts:38:11)[22m[39m
+[Integration Tests] Loaded environment variables: {
+  VITE_COGNITO_REGION: [32m'ap-southeast-1'[39m,
+  VITE_COGNITO_USER_POOL_ID: [32m'ap-southeast-1_OyLXCWR59'[39m,
+  VITE_COGNITO_USER_POOL_CLIENT_ID: [32m'5vb0inbm5cson031am1buja73i'[39m,
+  VITE_API_BASE_URL: [32m'https://hih3u10m2i.execute-api.ap-southeast-1.amazonaws.com/dev'[39m
+}
+
+[90mstdout[2m | loadEnvForIntegration (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\tests\integration\setup.ts:48:13)[22m[39m
+[Integration Tests] Test credentials found in process.env
+
+[90mstdout[2m | tests\integration\setup.ts:100:9[22m[39m
+[Integration Tests] Amplify initialized with DEV Cognito pool
+
+[90mstdout[2m | loadEnvForIntegration (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\tests\integration\setup.ts:38:11)[22m[39m
+[Integration Tests] Loaded environment variables: {
+  VITE_COGNITO_REGION: [32m'ap-southeast-1'[39m,
+  VITE_COGNITO_USER_POOL_ID: [32m'ap-southeast-1_OyLXCWR59'[39m,
+  VITE_COGNITO_USER_POOL_CLIENT_ID: [32m'5vb0inbm5cson031am1buja73i'[39m,
+  VITE_API_BASE_URL: [32m'https://hih3u10m2i.execute-api.ap-southeast-1.amazonaws.com/dev'[39m
+}
+
+[90mstdout[2m | loadEnvForIntegration (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\tests\integration\setup.ts:48:13)[22m[39m
+[Integration Tests] Test credentials found in process.env
+
+[90mstdout[2m | tests\integration\setup.ts:100:9[22m[39m
+[Integration Tests] Amplify initialized with DEV Cognito pool
+
+[90mstdout[2m | tests/integration/auth.integration.test.ts[2m > [22m[2mCognito Auth Integration[2m > [22m[2mSign In Flow[2m > [22m[2mSigns in with valid credentials and obtains access token[22m[39m
+[2026-11-10T13:22:18.975Z] signIn: Attempting direct SDK authentication...
+[2026-11-10T13:22:18.975Z] signIn: Email: eugene.mahota@idp.com
+[2026-11-10T13:22:18.975Z] signIn: Trying USER_SRP_AUTH...
+
+[90mstdout[2m | tests/integration/api.integration.test.ts[2m > [22m[2mEnrolment Service Integration Tests[2m > [22m[2mPublic Endpoints[2m > [22m[2mGET /public/v1/health returns 200[22m[39m
+[Integration] Health check OK - Enrolment Service is available
+
+[90mstdout[2m | tests/integration/api.integration.test.ts[2m > [22m[2mEnrolment Service Integration Tests[2m > [22m[2mAuthenticated Endpoints (read-only)[22m[39m
+[2026-11-10T13:22:19.988Z] signIn: Attempting direct SDK authentication...
+[2026-11-10T13:22:19.988Z] signIn: Email: eugene.mahota@idp.com
+[2026-11-10T13:22:19.988Z] signIn: Trying USER_SRP_AUTH...
+
+[90mstdout[2m | tests/integration/auth.integration.test.ts[2m > [22m[2mCognito Auth Integration[2m > [22m[2mSign In Flow[2m > [22m[2mSigns in with valid credentials and obtains access token[22m[39m
+[2026-11-10T13:22:18.975Z] Γ£à signIn: User authenticated successfully with USER_SRP_AUTH
+[2026-11-10T13:22:18.975Z] signIn: SignIn result: { isSignedIn: [33mtrue[39m, nextStep: { signInStep: [32m'DONE'[39m } }
+[Integration] Signed in successfully
+[Integration] Access token obtained - format verified (length: OK)
+[Integration] Authenticated user: b99a859c-80b1-7038-9925-3b15d59fcd75
+
+[90mstdout[2m | tests/integration/auth.integration.test.ts[2m > [22m[2mCognito Auth Integration[2m > [22m[2mSession Persistence[22m[39m
+[2026-11-10T13:22:20.736Z] signIn: Attempting direct SDK authentication...
+[2026-11-10T13:22:20.736Z] signIn: Email: eugene.mahota@idp.com
+[2026-11-10T13:22:20.736Z] signIn: Trying USER_SRP_AUTH...
+[2026-11-10T13:22:20.736Z] signIn: Trying USER_PASSWORD_AUTH...
+
+node.exe : [90mstderr[2m | 
+tests/integration/auth.integration.test.ts[2m > 
+[22m[2mCognito Auth Integration[2m > [22m[2mSession 
+Persistence[22m[39m
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([90mstderr[ 
+   2m...tence[22m[39m:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[2026-11-10T13:22:20.736Z] signIn: USER_SRP_AUTH failed, 
+trying USER_PASSWORD_AUTH...
+[2026-11-10T13:22:20.736Z] signIn: SRP Error: 
+UserAlreadyAuthenticatedException: There is already a 
+signed in user.
+    at assertUserNotAuthenticated [90m(file:///C:/Users/ma
+thankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_
+modules/[4maws-amplify[24m/node_modules/[4m@aws-amplify/
+auth[24m/src/providers/cognito/utils/signInHelpers.ts:673:
+15[90m)[39m
+[90m    at processTicksAndRejections 
+(node:internal/process/task_queues:104:5)[39m
+    at Module.signIn [90m(file:///C:/Users/mathankumar.n/D
+ownloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4ma
+ws-amplify[24m/node_modules/[4m@aws-amplify/auth[24m/src
+/providers/cognito/apis/signIn.ts:19:5[90m)[39m
+    at Module.signIn [90m(C:\Users\mathankumar.n\Downloads
+\HST_IDP\iet-ui-testtaker-1\[39msrc\services\auth.ts:60:22
+[90m)[39m
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui
+-testtaker-1\[39mtests\integration\auth.integration.test.t
+s:69:7
+    at async Promise.all (index 0)
+    at callSuiteHook [90m(file:///C:/Users/mathankumar.n/D
+ownloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@
+vitest/runner[24m/dist/index.js:700:23[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downlo
+ads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vites
+t/runner[24m/dist/index.js:892:27[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downlo
+ads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vites
+t/runner[24m/dist/index.js:909:15[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downlo
+ads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vites
+t/runner[24m/dist/index.js:909:15[90m)[39m {
+  underlyingError: [90mundefined[39m,
+  recoverySuggestion: [32m'Call signOut before calling 
+signIn again.'[39m,
+  constructor: [36m[class AuthError extends 
+AmplifyError][39m
+}
+[2026-11-10T13:22:20.736Z] signIn: USER_PASSWORD_AUTH also 
+failed
+[2026-11-10T13:22:20.736Z] signIn: Password Auth Error: 
+UserAlreadyAuthenticatedException: There is already a 
+signed in user.
+    at assertUserNotAuthenticated [90m(file:///C:/Users/ma
+thankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_
+modules/[4maws-amplify[24m/node_modules/[4m@aws-amplify/
+auth[24m/src/providers/cognito/utils/signInHelpers.ts:673:
+15[90m)[39m
+[90m    at processTicksAndRejections 
+(node:internal/process/task_queues:104:5)[39m
+    at Module.signIn [90m(file:///C:/Users/mathankumar.n/D
+ownloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4ma
+ws-amplify[24m/node_modules/[4m@aws-amplify/auth[24m/src
+/providers/cognito/apis/signIn.ts:19:5[90m)[39m
+    at Module.signIn [90m(C:\Users\mathankumar.n\Downloads
+\HST_IDP\iet-ui-testtaker-1\[39msrc\services\auth.ts:79:22
+[90m)[39m
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui
+-testtaker-1\[39mtests\integration\auth.integration.test.t
+s:69:7
+    at async Promise.all (index 0)
+    at callSuiteHook [90m(file:///C:/Users/mathankumar.n/D
+ownloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@
+vitest/runner[24m/dist/index.js:700:23[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downlo
+ads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vites
+t/runner[24m/dist/index.js:892:27[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downlo
+ads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vites
+t/runner[24m/dist/index.js:909:15[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downlo
+ads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vites
+t/runner[24m/dist/index.js:909:15[90m)[39m {
+  underlyingError: [90mundefined[39m,
+  recoverySuggestion: [32m'Call signOut before calling 
+signIn again.'[39m,
+  constructor: [36m[class AuthError extends 
+AmplifyError][39m
+}
+Γ¥î signIn: Direct auth failed with error:
+Error object: UserAlreadyAuthenticatedException: There is 
+already a signed in user.
+    at assertUserNotAuthenticated [90m(file:///C:/Users/ma
+thankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_
+modules/[4maws-amplify[24m/node_modules/[4m@aws-amplify/
+auth[24m/src/providers/cognito/utils/signInHelpers.ts:673:
+15[90m)[39m
+[90m    at processTicksAndRejections 
+(node:internal/process/task_queues:104:5)[39m
+    at Module.signIn [90m(file:///C:/Users/mathankumar.n/D
+ownloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4ma
+ws-amplify[24m/node_modules/[4m@aws-amplify/auth[24m/src
+/providers/cognito/apis/signIn.ts:19:5[90m)[39m
+    at Module.signIn [90m(C:\Users\mathankumar.n\Downloads
+\HST_IDP\iet-ui-testtaker-1\[39msrc\services\auth.ts:79:22
+[90m)[39m
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui
+-testtaker-1\[39mtests\integration\auth.integration.test.t
+s:69:7
+    at async Promise.all (index 0)
+    at callSuiteHook [90m(file:///C:/Users/mathankumar.n/D
+ownloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@
+vitest/runner[24m/dist/index.js:700:23[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downlo
+ads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vites
+t/runner[24m/dist/index.js:892:27[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downlo
+ads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vites
+t/runner[24m/dist/index.js:909:15[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downlo
+ads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vites
+t/runner[24m/dist/index.js:909:15[90m)[39m {
+  underlyingError: [90mundefined[39m,
+  recoverySuggestion: [32m'Call signOut before calling 
+signIn again.'[39m,
+  constructor: [36m[class AuthError extends 
+AmplifyError][39m
+}
+Error name: UserAlreadyAuthenticatedException
+Error message: There is already a signed in user.
+Full error: {"stack":"UserAlreadyAuthenticatedException: 
+There is already a signed in user.\n    at 
+assertUserNotAuthenticated (file:///C:/Users/mathankumar.n/
+Downloads/HST_IDP/iet-ui-testtaker-1/node_modules/aws-ampli
+fy/node_modules/@aws-amplify/auth/src/providers/cognito/uti
+ls/signInHelpers.ts:673:15)\n    at 
+processTicksAndRejections 
+(node:internal/process/task_queues:104:5)\n    at 
+Module.signIn (file:///C:/Users/mathankumar.n/Downloads/HST
+_IDP/iet-ui-testtaker-1/node_modules/aws-amplify/node_modul
+es/@aws-amplify/auth/src/providers/cognito/apis/signIn.ts:1
+9:5)\n    at Module.signIn (C:\\Users\\mathankumar.n\\Downl
+oads\\HST_IDP\\iet-ui-testtaker-1\\src\\services\\auth.ts:7
+9:22)\n    at C:\\Users\\mathankumar.n\\Downloads\\HST_IDP\
+\iet-ui-testtaker-1\\tests\\integration\\auth.integration.t
+est.ts:69:7\n    at async Promise.all (index 0)\n    at 
+callSuiteHook (file:///C:/Users/mathankumar.n/Downloads/HST
+_IDP/iet-ui-testtaker-1/node_modules/@vitest/runner/dist/in
+dex.js:700:23)\n    at runSuite (file:///C:/Users/mathankum
+ar.n/Downloads/HST_IDP/iet-ui-testtaker-1/node_modules/@vit
+est/runner/dist/index.js:892:27)\n    at runSuite (file:///
+C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1
+/node_modules/@vitest/runner/dist/index.js:909:15)\n    at 
+runSuite (file:///C:/Users/mathankumar.n/Downloads/HST_IDP/
+iet-ui-testtaker-1/node_modules/@vitest/runner/dist/index.j
+s:909:15)","message":"There is already a signed in user.","
+name":"UserAlreadyAuthenticatedException","recoverySuggesti
+on":"Call signOut before calling signIn again."}
+
+ [33mΓ¥»[39m tests/integration/auth.integration.test.ts [2m ([22m[2m2 tests[22m[2m)[22m[33m 1777[2mms[22m[39m
+[90mstdout[2m | tests/integration/api.integration.test.ts[2m > [22m[2mEnrolment Service Integration Tests[2m > [22m[2mAuthenticated Endpoints (read-only)[22m[39m
+[2026-11-10T13:22:19.988Z] Γ£à signIn: User authenticated successfully with USER_SRP_AUTH
+[2026-11-10T13:22:19.988Z] signIn: SignIn result: { isSignedIn: [33mtrue[39m, nextStep: { signInStep: [32m'DONE'[39m } }
+[Integration] Signed in successfully - access token obtained
+
+[90mstdout[2m | tests/integration/api.integration.test.ts[2m > [22m[2mEnrolment Service Integration Tests[2m > [22m[2mAuthenticated Endpoints (read-only)[2m > [22m[2mGET /test-takers/v1/me returns authenticated user profile[22m[39m
+[Integration] GET /test-takers/v1/me returned valid profile
+
+ [32mΓ£ô[39m tests/integration/api.integration.test.ts [2m ([22m[2m3 tests[22m [2m|[22m [33m1 skipped[39m[2m)[22m[33m 5134[2mms[22m[39m
+
+[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[1m[7m Failed Suites 1 
+[27m[22mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+tests/integration/auth.integration.test.ts[2m > 
+[22mCognito Auth Integration[2m > [22mSession 
+Persistence
+[31m[1mError[22m: Authentication failed. Please check 
+your email and password and try again.[39m
+[36m [2mΓ¥»[22m Module.signIn 
+src/services/auth.ts:[2m130:11[22m[39m
+    [90m128| [39m    }
+    [90m129| [39m    
+    [90m130| [39m    [35mthrow[39m [35mnew[39m 
+[33mError[39m([32m'Authentication failed. Please check 
+your email an[39mΓÇª
+    [90m   | [39m          [31m^[39m
+    [90m131| [39m  }
+    [90m132| [39m}
+[90m [2mΓ¥»[22m tests/integration/auth.integration.test.
+ts:[2m69:7[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ
+»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[1/1]ΓÄ»[22m[39m
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m1 passed[39m[22m[90m (2)[39m
+[2m      Tests [22m [1m[32m3 passed[39m[22m[2m | [22m[33m1 skipped[39m[90m (5)[39m
+[2m   Start at [22m 18:52:12
+[2m   Duration [22m 12.10s[2m (transform 206ms, setup 5.47s, collect 437ms, tests 6.91s, environment 0ms, prepare 2.02s)[22m
+

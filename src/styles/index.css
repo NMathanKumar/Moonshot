@@ -2,6 +2,7 @@
 
 @import './variables.css';
 @import './tailwind.css';
+@import './autofill.css';
 
 /* Base element resets and styles (moved from reset.css) */
 @layer base {

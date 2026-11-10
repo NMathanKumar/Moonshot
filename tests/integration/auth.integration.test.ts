@@ -15,9 +15,9 @@
  * - COGNITO_TEST_PASSWORD: Valid password (12+ chars, 1 upper, 1 lower, 1 number)
  */
 
-import { describe, it, expect, beforeAll } from 'vitest';
-import { signIn } from '@services/auth';
-import { fetchAuthSession, getCurrentUser } from 'aws-amplify/auth';
+import { describe, it, expect, beforeAll, afterAll } from 'vitest';
+import { signIn, signOut } from '@services/auth';
+import { fetchAuthSession, getCurrentUser, signOut as amplifySignOut } from 'aws-amplify/auth';
 import {
   getTestCredentials,
   canRunIntegrationTests,
@@ -55,16 +55,42 @@ describe('Cognito Auth Integration', () => {
 
       console.log(`[Integration] Authenticated user: ${user?.username}`);
     }, 20000);
+
+    // Clean up session after Sign In Flow tests to ensure isolation
+    afterAll(async () => {
+      if (!canRunIntegrationTests()) {
+        return;
+      }
+
+      try {
+        await amplifySignOut();
+        console.log('[Integration] Sign In Flow cleanup: Session cleared');
+      } catch (error) {
+        // Session may already be cleared; this is fine
+        console.log('[Integration] Sign In Flow cleanup: No active session to clear');
+      }
+    }, 10000);
   });
 
   describe('Session Persistence', () => {
     let firstSessionToken: string | null = null;
 
+    // Ensure no active session before starting this test suite
     beforeAll(async () => {
       if (!canRunIntegrationTests()) {
         return;
       }
 
+      try {
+        // Clear any existing session from previous tests
+        await amplifySignOut();
+        console.log('[Integration] Session Persistence setup: Cleared previous session');
+      } catch (error) {
+        // No session to clear; this is expected
+        console.log('[Integration] Session Persistence setup: No previous session found');
+      }
+
+      // Now sign in fresh for this test suite
       const credentials = getTestCredentials();
       await signIn({
         email: credentials.email,
@@ -73,6 +99,7 @@ describe('Cognito Auth Integration', () => {
 
       const session = await fetchAuthSession();
       firstSessionToken = session.tokens?.accessToken?.toString();
+      console.log('[Integration] Session Persistence setup: Fresh sign-in completed');
     }, 20000);
 
     it.skipIf(!canRunIntegrationTests())('Maintains session across multiple fetchAuthSession calls', async () => {
@@ -89,6 +116,21 @@ describe('Cognito Auth Integration', () => {
       expect(secondToken).toBe(firstSessionToken);
 
       console.log('[Integration] Session persisted across calls');
+    }, 10000);
+
+    // Clean up session after Session Persistence tests
+    afterAll(async () => {
+      if (!canRunIntegrationTests()) {
+        return;
+      }
+
+      try {
+        await amplifySignOut();
+        console.log('[Integration] Session Persistence cleanup: Session cleared');
+      } catch (error) {
+        // Session may already be cleared; this is fine
+        console.log('[Integration] Session Persistence cleanup: No active session to clear');
+      }
     }, 10000);
   });
 });
