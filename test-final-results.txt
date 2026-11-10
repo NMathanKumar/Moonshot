@@ -1,0 +1,381 @@
+﻿
+> iet-ui-testtaker@0.1.0 test:run
+> vitest run --config vitest.config.ts
+
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90mC:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1[39m
+
+ [32mΓ£ô[39m src/services/auth.test.ts [2m ([22m[2m16 tests[22m[2m)[22m[90m 44[2mms[22m[39m
+ [32mΓ£ô[39m src/services/apiClient.test.ts [2m ([22m[2m24 tests[22m[2m)[22m[90m 54[2mms[22m[39m
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2minitialization[2m > [22m[2mshows loading state during initial auth check[22m[39m
+[2026-11-10T12:34:12.302Z] AuthProvider: Initializing authentication state...
+[2026-11-10T12:34:12.304Z] AuthProvider: Setting up auth Hub listener
+[2026-11-10T12:34:12.302Z] AuthProvider: fetchAuthSession returned: { hasAccessToken: [33mfalse[39m }
+[2026-11-10T12:34:12.302Z] AuthProvider: No valid session found (no access token)
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2minitialization[2m > [22m[2mshows loading state during initial auth check[22m[39m
+[2026-11-10T12:34:12.304Z] AuthProvider: Removing auth Hub listener
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2minitialization[2m > [22m[2msets authenticated state when user is authenticated[22m[39m
+[2026-11-10T12:34:12.346Z] AuthProvider: Initializing authentication state...
+[2026-11-10T12:34:12.347Z] AuthProvider: Setting up auth Hub listener
+[2026-11-10T12:34:12.346Z] AuthProvider: fetchAuthSession returned: { hasAccessToken: [33mtrue[39m }
+[2026-11-10T12:34:12.346Z] AuthProvider: Valid session found. Fetching current user...
+[2026-11-10T12:34:12.346Z] Γ£à AuthProvider: User session restored: test@example.com
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2minitialization[2m > [22m[2msets authenticated state when user is authenticated[22m[39m
+[2026-11-10T12:34:12.347Z] AuthProvider: Removing auth Hub listener
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2minitialization[2m > [22m[2msets unauthenticated state when no user is present[22m[39m
+[2026-11-10T12:34:12.366Z] AuthProvider: Initializing authentication state...
+[2026-11-10T12:34:12.366Z] AuthProvider: Setting up auth Hub listener
+[2026-11-10T12:34:12.366Z] AuthProvider: fetchAuthSession returned: { hasAccessToken: [33mfalse[39m }
+[2026-11-10T12:34:12.366Z] AuthProvider: No valid session found (no access token)
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2minitialization[2m > [22m[2msets unauthenticated state when no user is present[22m[39m
+[2026-11-10T12:34:12.366Z] AuthProvider: Removing auth Hub listener
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mRegression: Post-login authentication state synchronization[2m > [22m[2mRG-1: Successful sign-in followed by immediate Dashboard navigation[22m[39m
+[2026-11-10T12:34:12.382Z] AuthProvider: Initializing authentication state...
+[2026-11-10T12:34:12.382Z] AuthProvider: Setting up auth Hub listener
+[2026-11-10T12:34:12.382Z] AuthProvider: fetchAuthSession returned: { hasAccessToken: [33mfalse[39m }
+[2026-11-10T12:34:12.382Z] AuthProvider: No valid session found (no access token)
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mRegression: Post-login authentication state synchronization[2m > [22m[2mRG-1: Successful sign-in followed by immediate Dashboard navigation[22m[39m
+[2026-11-10T12:34:12.401Z] AuthProvider: Auth Hub event received: undefined
+
+ [32mΓ£ô[39m src/components/common/MediaControls/MediaControls.test.tsx [2m ([22m[2m14 tests[22m[2m)[22m[90m 192[2mms[22m[39m
+ [32mΓ£ô[39m src/components/common/Dropdown/Dropdown.test.tsx [2m ([22m[2m11 tests[22m[2m)[22m[33m 525[2mms[22m[39m
+ [32mΓ£ô[39m src/components/common/Modal/Modal.test.tsx [2m ([22m[2m9 tests[22m[2m)[22m[33m 713[2mms[22m[39m
+ [32mΓ£ô[39m src/components/common/Stepper/Stepper.test.tsx [2m ([22m[2m14 tests[22m[2m)[22m[33m 411[2mms[22m[39m
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mRegression: Post-login authentication state synchronization[2m > [22m[2mRG-1: Successful sign-in followed by immediate Dashboard navigation[22m[39m
+[2026-11-10T12:34:12.382Z] AuthProvider: Removing auth Hub listener
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mRegression: Post-login authentication state synchronization[2m > [22m[2mRG-2: Existing session restoration after refresh[22m[39m
+[2026-11-10T12:34:14.444Z] AuthProvider: Initializing authentication state...
+[2026-11-10T12:34:14.444Z] AuthProvider: Setting up auth Hub listener
+[2026-11-10T12:34:14.444Z] AuthProvider: fetchAuthSession returned: { hasAccessToken: [33mfalse[39m }
+[2026-11-10T12:34:14.444Z] AuthProvider: No valid session found (no access token)
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mRegression: Post-login authentication state synchronization[2m > [22m[2mRG-2: Existing session restoration after refresh[22m[39m
+[2026-11-10T12:34:14.444Z] AuthProvider: Removing auth Hub listener
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mRegression: Post-login authentication state synchronization[2m > [22m[2mRG-3: Unauthenticated users being redirected to Sign In[22m[39m
+[2026-11-10T12:34:15.459Z] AuthProvider: Initializing authentication state...
+[2026-11-10T12:34:15.459Z] AuthProvider: Setting up auth Hub listener
+[2026-11-10T12:34:15.459Z] AuthProvider: fetchAuthSession returned: { hasAccessToken: [33mfalse[39m }
+[2026-11-10T12:34:15.459Z] AuthProvider: No valid session found (no access token)
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mRegression: Post-login authentication state synchronization[2m > [22m[2mRG-3: Unauthenticated users being redirected to Sign In[22m[39m
+[2026-11-10T12:34:15.459Z] AuthProvider: Removing auth Hub listener
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mRegression: Post-login authentication state synchronization[2m > [22m[2mRG-4: No redirect to Sign In while authentication is loading[22m[39m
+[2026-11-10T12:34:15.470Z] AuthProvider: Initializing authentication state...
+[2026-11-10T12:34:15.470Z] AuthProvider: Setting up auth Hub listener
+[2026-11-10T12:34:15.470Z] AuthProvider: fetchAuthSession returned: { hasAccessToken: [33mfalse[39m }
+[2026-11-10T12:34:15.470Z] AuthProvider: No valid session found (no access token)
+[2026-11-10T12:34:15.470Z] AuthProvider: Removing auth Hub listener
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mRegression: Post-login authentication state synchronization[2m > [22m[2mRG-5: No duplicate session checks or conflicting state updates[22m[39m
+[2026-11-10T12:34:15.481Z] AuthProvider: Initializing authentication state...
+[2026-11-10T12:34:15.482Z] AuthProvider: Setting up auth Hub listener
+[2026-11-10T12:34:15.481Z] AuthProvider: fetchAuthSession returned: { hasAccessToken: [33mfalse[39m }
+[2026-11-10T12:34:15.481Z] AuthProvider: No valid session found (no access token)
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mRegression: Post-login authentication state synchronization[2m > [22m[2mRG-5: No duplicate session checks or conflicting state updates[22m[39m
+[2026-11-10T12:34:15.486Z] AuthProvider: Auth Hub event received: undefined
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mRegression: Post-login authentication state synchronization[2m > [22m[2mRG-5: No duplicate session checks or conflicting state updates[22m[39m
+[2026-11-10T12:34:15.482Z] AuthProvider: Removing auth Hub listener
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mRegression: Post-login authentication state synchronization[2m > [22m[2mRG-6: Navigate to Dashboard only after authentication state is confirmed[22m[39m
+[2026-11-10T12:34:15.491Z] AuthProvider: Initializing authentication state...
+[2026-11-10T12:34:15.491Z] AuthProvider: Setting up auth Hub listener
+[2026-11-10T12:34:15.491Z] AuthProvider: fetchAuthSession returned: { hasAccessToken: [33mfalse[39m }
+[2026-11-10T12:34:15.491Z] AuthProvider: No valid session found (no access token)
+[2026-11-10T12:34:15.493Z] AuthProvider: Auth Hub event received: undefined
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mRegression: Post-login authentication state synchronization[2m > [22m[2mRG-6: Navigate to Dashboard only after authentication state is confirmed[22m[39m
+[2026-11-10T12:34:15.491Z] AuthProvider: Removing auth Hub listener
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mHub event listeners[2m > [22m[2mhandles signedIn event[22m[39m
+[2026-11-10T12:34:15.512Z] AuthProvider: Initializing authentication state...
+[2026-11-10T12:34:15.512Z] AuthProvider: Setting up auth Hub listener
+[2026-11-10T12:34:15.512Z] AuthProvider: fetchAuthSession returned: { hasAccessToken: [33mfalse[39m }
+[2026-11-10T12:34:15.512Z] AuthProvider: No valid session found (no access token)
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mHub event listeners[2m > [22m[2mhandles signedIn event[22m[39m
+[2026-11-10T12:34:15.526Z] AuthProvider: Auth Hub event received: undefined
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mHub event listeners[2m > [22m[2mhandles signedIn event[22m[39m
+[2026-11-10T12:34:15.512Z] AuthProvider: Removing auth Hub listener
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mHub event listeners[2m > [22m[2mhandles signedOut event[22m[39m
+[2026-11-10T12:34:15.541Z] AuthProvider: Initializing authentication state...
+[2026-11-10T12:34:15.541Z] AuthProvider: Setting up auth Hub listener
+[2026-11-10T12:34:15.541Z] AuthProvider: fetchAuthSession returned: { hasAccessToken: [33mfalse[39m }
+[2026-11-10T12:34:15.541Z] AuthProvider: No valid session found (no access token)
+
+ [32mΓ£ô[39m src/components/common/Alert/Alert.test.tsx [2m ([22m[2m12 tests[22m[2m)[22m[33m 465[2mms[22m[39m
+ [32mΓ£ô[39m src/components/common/Toast/Toast.test.tsx [2m ([22m[2m8 tests[22m[2m)[22m[33m 400[2mms[22m[39m
+[90mstdout[2m | src/components/callback/Callback.test.tsx[2m > [22m[2mCallback (Deprecated)[2m > [22m[2mredirects to /signin on mount[22m[39m
+Callback: Redirecting to signin...
+
+[90mstdout[2m | src/components/callback/Callback.test.tsx[2m > [22m[2mCallback (Deprecated)[2m > [22m[2mrenders empty div (temporary placeholder)[22m[39m
+Callback: Redirecting to signin...
+
+ [32mΓ£ô[39m src/components/callback/Callback.test.tsx [2m ([22m[2m3 tests[22m[2m)[22m[90m 78[2mms[22m[39m
+ [32mΓ£ô[39m src/components/common/Timer/Timer.test.tsx [2m ([22m[2m10 tests[22m[2m)[22m[90m 115[2mms[22m[39m
+ [32mΓ£ô[39m src/components/common/Card/Card.test.tsx [2m ([22m[2m11 tests[22m[2m)[22m[33m 394[2mms[22m[39m
+ [32mΓ£ô[39m src/components/common/Tooltip/Tooltip.test.tsx [2m ([22m[2m5 tests[22m[2m)[22m[33m 539[2mms[22m[39m
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mHub event listeners[2m > [22m[2mhandles signedOut event[22m[39m
+[2026-11-10T12:34:15.541Z] AuthProvider: Removing auth Hub listener
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2msignOut function[2m > [22m[2mcalls authSignOut on sign out[22m[39m
+[2026-11-10T12:34:17.554Z] AuthProvider: Initializing authentication state...
+[2026-11-10T12:34:17.554Z] AuthProvider: Setting up auth Hub listener
+[2026-11-10T12:34:17.554Z] AuthProvider: fetchAuthSession returned: { hasAccessToken: [33mfalse[39m }
+[2026-11-10T12:34:17.554Z] AuthProvider: No valid session found (no access token)
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2msignOut function[2m > [22m[2mcalls authSignOut on sign out[22m[39m
+AuthProvider: Signing out...
+[2026-11-10T12:34:17.554Z] AuthProvider: Removing auth Hub listener
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2msignOut function[2m > [22m[2mhandles signOut error gracefully[22m[39m
+[2026-11-10T12:34:17.573Z] AuthProvider: Initializing authentication state...
+[2026-11-10T12:34:17.573Z] AuthProvider: Setting up auth Hub listener
+[2026-11-10T12:34:17.573Z] AuthProvider: fetchAuthSession returned: { hasAccessToken: [33mfalse[39m }
+[2026-11-10T12:34:17.573Z] AuthProvider: No valid session found (no access token)
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2msignOut function[2m > [22m[2mhandles signOut error gracefully[22m[39m
+AuthProvider: Signing out...
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2msignOut function[2m > [22m[2mhandles signOut error gracefully[22m[39m
+[2026-11-10T12:34:17.573Z] AuthProvider: Removing auth Hub listener
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mrefreshAuth function[2m > [22m[2mcalls getCurrentUser to refresh state[22m[39m
+[2026-11-10T12:34:17.685Z] AuthProvider: Initializing authentication state...
+[2026-11-10T12:34:17.685Z] AuthProvider: Setting up auth Hub listener
+[2026-11-10T12:34:17.685Z] AuthProvider: fetchAuthSession returned: { hasAccessToken: [33mfalse[39m }
+[2026-11-10T12:34:17.685Z] AuthProvider: No valid session found (no access token)
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mrefreshAuth function[2m > [22m[2mcalls getCurrentUser to refresh state[22m[39m
+[2026-11-10T12:34:17.700Z] AuthProvider: Refreshing auth state...
+
+[90mstdout[2m | src/hooks/useAuth.test.tsx[2m > [22m[2mAuthProvider[2m > [22m[2mrefreshAuth function[2m > [22m[2mcalls getCurrentUser to refresh state[22m[39m
+[2026-11-10T12:34:17.685Z] AuthProvider: Removing auth Hub listener
+
+ [33mΓ¥»[39m src/hooks/useAuth.test.tsx [2m ([22m[2m15 tests[22m [2m|[22m [31m4 failed[39m[2m)[22m[33m 7476[2mms[22m[39m
+[31m   [33mΓ¥»[31m src/hooks/useAuth.test.tsx[2m > [22mAuthProvider[2m > [22mRegression: Post-login authentication state synchronization[2m > [22mRG-1: Successful sign-in followed by immediate Dashboard navigation[39m
+[31m     ΓåÆ [2mexpect([22m[31melement[31m[2m).toHaveTextContent()[22m
+
+Expected element to have text content:
+[32m  test@example.com[31m
+Received:
+[31m  no-user[31m
+
+Ignored nodes: comments, script, style
+[36m<html>[31m
+  [36m<head />[31m
+  [36m<body>[31m
+    [36m<div>[31m
+      [36m<div>[31m
+        [36m<span[31m
+          [33mdata-testid[31m=[32m"mock-user"[31m
+        [36m>[31m
+          [0mno-user[0m
+        [36m</span>[31m
+        [36m<span[31m
+          [33mdata-testid[31m=[32m"mock-is-authenticated"[31m
+        [36m>[31m
+          [0munauthenticated[0m
+        [36m</span>[31m
+        [36m<button[31m
+          [33mdata-testid[31m=[32m"mock-signout"[31m
+        [36m>[31m
+          [0mSign Out[0m
+        [36m</button>[31m
+        [36m<button[31m
+          [33mdata-testid[31m=[32m"mock-refresh"[31m
+        [36m>[31m
+          [0mRefresh[0m
+        [36m</button>[31m
+      [36m</div>[31m
+    [36m</div>[31m
+  [36m</body>[31m
+[36m</html>[31m[39m
+[31m   [33mΓ¥»[31m src/hooks/useAuth.test.tsx[2m > [22mAuthProvider[2m > [22mRegression: Post-login authentication state synchronization[2m > [22mRG-2: Existing session restoration after refresh[39m
+[31m     ΓåÆ [2mexpect([22m[31melement[31m[2m).toHaveTextContent()[22m
+
+Expected element to have text content:
+[32m  test@example.com[31m
+Received:
+[31m  no-user[31m
+
+Ignored nodes: comments, script, style
+[36m<html>[31m
+  [36m<head />[31m
+  [36m<body>[31m
+    [36m<div>[31m
+      [36m<div>[31m
+        [36m<span[31m
+          [33mdata-testid[31m=[32m"mock-user"[31m
+        [36m>[31m
+          [0mno-user[0m
+        [36m</span>[31m
+        [36m<span[31m
+          [33mdata-testid[31m=[32m"mock-is-authenticated"[31m
+        [36m>[31m
+          [0munauthenticated[0m
+        [36m</span>[31m
+        [36m<button[31m
+          [33mdata-testid[31m=[32m"mock-signout"[31m
+        [36m>[31m
+          [0mSign Out[0m
+        [36m</button>[31m
+        [36m<button[31m
+          [33mdata-testid[31m=[32m"mock-refresh"[31m
+        [36m>[31m
+          [0mRefresh[0m
+        [36m</button>[31m
+      [36m</div>[31m
+    [36m</div>[31m
+  [36m</body>[31m
+[36m</html>[31m[39m
+[31m   [33mΓ¥»[31m src/hooks/useAuth.test.tsx[2m > [22mAuthProvider[2m > [22mHub event listeners[2m > [22mhandles signedOut event[39m
+[31m     ΓåÆ [2mexpect([22m[31melement[31m[2m).toHaveTextContent()[22m
+
+Expected element to have text content:
+[32m  test@example.com[31m
+Received:
+[31m  no-user[31m
+
+Ignored nodes: comments, script, style
+[36m<html>[31m
+  [36m<head />[31m
+  [36m<body>[31m
+    [36m<div>[31m
+      [36m<div>[31m
+        [36m<span[31m
+          [33mdata-testid[31m=[32m"mock-user"[31m
+        [36m>[31m
+          [0mno-user[0m
+        [36m</span>[31m
+        [36m<span[31m
+          [33mdata-testid[31m=[32m"mock-is-authenticated"[31m
+        [36m>[31m
+          [0munauthenticated[0m
+        [36m</span>[31m
+        [36m<button[31m
+          [33mdata-testid[31m=[32m"mock-signout"[31m
+        [36m>[31m
+          [0mSign Out[0m
+        [36m</button>[31m
+        [36m<button[31m
+          [33mdata-testid[31m=[32m"mock-refresh"[31m
+        [36m>[31m
+          [0mRefresh[0m
+        [36m</button>[31m
+      [36m</div>[31m
+    [36m</div>[31m
+  [36m</body>[31m
+[36m</html>[31m[39m
+[31m   [33mΓ¥»[31m src/hooks/useAuth.test.tsx[2m > [22mAuthProvider[2m > [22mrefreshAuth function[2m > [22mcalls getCurrentUser to refresh state[39m
+[31m     ΓåÆ [2mexpect([22m[31melement[31m[2m).toHaveTextContent()[22m
+
+Expected element to have text content:
+[32m  refreshed@example.com[31m
+Received:
+[31m  no-user[31m
+
+Ignored nodes: comments, script, style
+[36m<html>[31m
+  [36m<head />[31m
+  [36m<body>[31m
+    [36m<div>[31m
+      [36m<div>[31m
+        [36m<span[31m
+          [33mdata-testid[31m=[32m"mock-user"[31m
+        [36m>[31m
+          [0mno-user[0m
+        [36m</span>[31m
+        [36m<span[31m
+          [33mdata-testid[31m=[32m"mock-is-authenticated"[31m
+        [36m>[31m
+          [0munauthenticated[0m
+        [36m</span>[31m
+        [36m<button[31m
+          [33mdata-testid[31m=[32m"mock-signout"[31m
+        [36m>[31m
+          [0mSign Out[0m
+        [36m</button>[31m
+        [36m<button[31m
+          [33mdata-testid[31m=[32m"mock-refresh"[31m
+        [36m>[31m
+          [0mRefresh[0m
+        [36m</button>[31m
+      [36m</div>[31m
+    [36m</div>[31m
+  [36m</body>[31m
+[36m</html>[31m[39m
+ [32mΓ£ô[39m src/services/envoy/products.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[90m 13[2mms[22m[39m
+ [32mΓ£ô[39m src/components/common/Input/Input.test.tsx [2m ([22m[2m6 tests[22m[2m)[22m[90m 221[2mms[22m[39m
+ [32mΓ£ô[39m src/components/common/Button/Button.test.tsx [2m ([22m[2m6 tests[22m[2m)[22m[90m 275[2mms[22m[39m
+[90mstdout[2m | src/app/App.test.tsx[2m > [22m[2mApp[2m > [22m[2mrenders the Sign In page within AuthProvider[22m[39m
+[2026-11-10T12:34:21.095Z] AuthProvider: Initializing authentication state...
+[2026-11-10T12:34:21.096Z] AuthProvider: Setting up auth Hub listener
+[2026-11-10T12:34:21.095Z] AuthProvider: fetchAuthSession returned: { hasAccessToken: [33mfalse[39m }
+[2026-11-10T12:34:21.095Z] AuthProvider: No valid session found (no access token)
+
+[90mstdout[2m | src/app/App.test.tsx[2m > [22m[2mApp[2m > [22m[2mrenders the Sign In page within AuthProvider[22m[39m
+[2026-11-10T12:34:21.096Z] AuthProvider: Removing auth Hub listener
+
+[90mstdout[2m | src/app/App.test.tsx[2m > [22m[2mApp[2m > [22m[2mdisplays the email input[22m[39m
+[2026-11-10T12:34:21.250Z] AuthProvider: Initializing authentication state...
+[2026-11-10T12:34:21.250Z] AuthProvider: Setting up auth Hub listener
+[2026-11-10T12:34:21.250Z] AuthProvider: fetchAuthSession returned: { hasAccessToken: [33mfalse[39m }
+[2026-11-10T12:34:21.250Z] AuthProvider: No valid session found (no access token)
+
+[90mstdout[2m | src/app/App.test.tsx[2m > [22m[2mApp[2m > [22m[2mdisplays the email input[22m[39m
+[2026-11-10T12:34:21.250Z] AuthProvider: Removing auth Hub listener
+
+[90mstdout[2m | src/app/App.test.tsx[2m > [22m[2mApp[2m > [22m[2mdisplays the password field and toggle[22m[39m
+[2026-11-10T12:34:21.264Z] AuthProvider: Initializing authentication state...
+[2026-11-10T12:34:21.264Z] AuthProvider: Setting up auth Hub listener
+[2026-11-10T12:34:21.264Z] AuthProvider: fetchAuthSession returned: { hasAccessToken: [33mfalse[39m }
+[2026-11-10T12:34:21.264Z] AuthProvider: No valid session found (no access token)
+
+[90mstdout[2m | src/app/App.test.tsx[2m > [22m[2mApp[2m > [22m[2mdisplays the password field and toggle[22m[39m
+[2026-11-10T12:34:21.264Z] AuthProvider: Removing auth Hub listener
+
+[90mstdout[2m | src/app/App.test.tsx[2m > [22m[2mApp[2m > [22m[2mdisplays the Sign in button[22m[39m
+[2026-11-10T12:34:21.338Z] AuthProvider: Initializing authentication state...
+[2026-11-10T12:34:21.338Z] AuthProvider: Setting up auth Hub listener
+[2026-11-10T12:34:21.338Z] AuthProvider: fetchAuthSession returned: { hasAccessToken: [33mfalse[39m }
+[2026-11-10T12:34:21.338Z] AuthProvider: No valid session found (no access token)
+
+[90mstdout[2m | src/app/App.test.tsx[2m > [22m[2mApp[2m > [22m[2mdisplays the Sign in button[22m[39m
+[2026-11-10T12:34:21.338Z] AuthProvider: Removing auth Hub listener
+
+[90mstdout[2m | src/app/App.test.tsx[2m > [22m[2mApp[2m > [22m[2mdisplays the sign up link[22m[39m
+[2026-11-10T12:34:21.390Z] AuthProvider: Initializing authentication state...
+[2026-11-10T12:34:21.390Z] AuthProvider: Setting up auth Hub listener
+[2026-11-10T12:34:21.390Z] AuthProvider: fetchAuthSession returned: { hasAccessToken: [33mfalse[39m }
+[2026-11-10T12:34:21.390Z] AuthProvider: No valid session found (no access token)
+
+ [32mΓ£ô[39m src/app/App.test.tsx [2m ([22m[2m5 tests[22m[2m)[22m[33m 384[2mms[22m[39m
+[90mstdout[2m | src/app/App.test.tsx[2m > [22m[2mApp[2m > [22m[2mdisplays the sign up link[22m[39m
+[2026-11-10T12:34:21.390Z] AuthProvider: Removing auth Hub listener
+
+
+[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[1m[7m Unhandled Errors [27m[22mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m
+[31m[1m
+Vitest caught 1 unhandled error during the test run.
+This might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.[22m[39m
+[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m
+[2m Test Files [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m16 passed[39m[22m[90m (17)[39m
+[2m      Tests [22m [1m[31m4 failed[39m[22m[2m | [22m[1m[32m168 passed[39m[22m[90m (172)[39m
+[2m     Errors [22m [1m[31m1 error[39m[22m
+[2m   Start at [22m 18:04:08
+[2m   Duration [22m 13.39s[2m (transform 876ms, setup 7.97s, collect 11.68s, tests 12.30s, environment 32.47s, prepare 7.09s)[22m
+

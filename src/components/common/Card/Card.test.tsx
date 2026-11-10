@@ -52,24 +52,24 @@ describe('Card', () => {
     const { container: container1 } = render(
       <Card shadow="sm">Content</Card>
     );
-    expect((container1.firstChild as HTMLElement).className).toMatch(/shadowSm/);
+    expect((container1.firstChild as HTMLElement).className).toMatch(/shadow-sm/);
 
     const { container: container2 } = render(
       <Card shadow="md">Content</Card>
     );
-    expect((container2.firstChild as HTMLElement).className).toMatch(/shadowMd/);
+    expect((container2.firstChild as HTMLElement).className).toMatch(/shadow-md/);
   });
 
   it('applies padding variants', () => {
     const { container: container1 } = render(
       <Card padding="sm">Content</Card>
     );
-    expect((container1.firstChild as HTMLElement).className).toMatch(/paddingSm/);
+    expect((container1.firstChild as HTMLElement).className).toMatch(/p-2/);
 
     const { container: container2 } = render(
       <Card padding="lg">Content</Card>
     );
-    expect((container2.firstChild as HTMLElement).className).toMatch(/paddingLg/);
+    expect((container2.firstChild as HTMLElement).className).toMatch(/p-6/);
   });
 
   it('forwards extra className', () => {
@@ -82,8 +82,8 @@ describe('Card', () => {
   it('defaults to base shadow and md padding', () => {
     const { container } = render(<Card>Content</Card>);
     const card = container.firstChild as HTMLElement;
-    expect(card.className).toMatch(/shadowBase/);
-    expect(card.className).toMatch(/paddingMd/);
+    expect(card.className).toMatch(/shadow(?!-)/);  // Match "shadow" but not "shadow-"
+    expect(card.className).toMatch(/p-4/);  // md padding is p-4
   });
 
   it('renders nothing when no title and no footer', () => {

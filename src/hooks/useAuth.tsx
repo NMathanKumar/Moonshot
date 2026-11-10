@@ -5,10 +5,10 @@
 
 import { useState, useEffect, useCallback, createContext, useContext } from 'react';
 import { fetchAuthSession } from 'aws-amplify/auth';
-import { Hub } from '@aws-amplify/core';
+import { Hub } from 'aws-amplify/utils';
 import { getCurrentUser, signOut as authSignOut } from '@services/auth';
 import type { AuthUser } from 'aws-amplify/auth';
-import type { HubCallback } from '@aws-amplify/core';
+import type { HubCallback } from 'aws-amplify/utils';
 
 export type { AuthUser };
 
@@ -86,6 +86,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }): React
     const timestamp = new Date().toISOString();
     console.log(`[${timestamp}] AuthProvider: Setting up auth Hub listener`);
     
+
     const handleAuthEvent: HubCallback = async (payload: any) => {
       const { event } = payload?.data || {};
       const eventTimestamp = new Date().toISOString();

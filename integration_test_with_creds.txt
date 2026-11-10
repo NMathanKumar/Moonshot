@@ -1,0 +1,735 @@
+﻿
+> iet-ui-testtaker@0.1.0 test:integration
+> vitest run --config vitest.config.integration.ts
+
+[vitest.config.integration] Loaded VITE_ vars from .env.development
+[vitest.config.integration] Loaded test credentials from .env.test-integration
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90mC:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1[39m
+
+[90mstdout[2m | loadEnvForIntegration (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\tests\integration\setup.ts:38:11)[22m[39m
+[Integration Tests] Loaded environment variables: {
+  VITE_COGNITO_REGION: [32m'ap-southeast-1'[39m,
+  VITE_COGNITO_USER_POOL_ID: [32m'ap-southeast-1_OyLXCWR59'[39m,
+  VITE_COGNITO_USER_POOL_CLIENT_ID: [32m'5vb0inbm5cson031am1buja73i'[39m,
+  VITE_API_BASE_URL: [32m'https://hih3u10m2i.execute-api.ap-southeast-1.amazonaws.com/dev'[39m
+}
+
+[90mstdout[2m | loadEnvForIntegration (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\tests\integration\setup.ts:48:13)[22m[39m
+[Integration Tests] Test credentials found in process.env
+
+[90mstdout[2m | tests\integration\setup.ts:100:9[22m[39m
+[Integration Tests] Amplify initialized with DEV Cognito pool
+
+[90mstdout[2m | loadEnvForIntegration (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\tests\integration\setup.ts:38:11)[22m[39m
+[Integration Tests] Loaded environment variables: {
+  VITE_COGNITO_REGION: [32m'ap-southeast-1'[39m,
+  VITE_COGNITO_USER_POOL_ID: [32m'ap-southeast-1_OyLXCWR59'[39m,
+  VITE_COGNITO_USER_POOL_CLIENT_ID: [32m'5vb0inbm5cson031am1buja73i'[39m,
+  VITE_API_BASE_URL: [32m'https://hih3u10m2i.execute-api.ap-southeast-1.amazonaws.com/dev'[39m
+}
+
+[90mstdout[2m | loadEnvForIntegration (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\tests\integration\setup.ts:48:13)[22m[39m
+[Integration Tests] Test credentials found in process.env
+
+[90mstdout[2m | tests\integration\setup.ts:100:9[22m[39m
+[Integration Tests] Amplify initialized with DEV Cognito pool
+
+[90mstdout[2m | tests/integration/auth.integration.test.ts[2m > [22m[2mCognito Auth Integration[2m > [22m[2mSign In Flow[2m > [22m[2mSigns in with valid credentials and obtains access token[22m[39m
+[2026-11-10T12:59:20.552Z] signIn: Attempting direct SDK authentication...
+[2026-11-10T12:59:20.552Z] signIn: Email: nmadhankumar597@gmail.com
+[2026-11-10T12:59:20.552Z] signIn: Trying USER_SRP_AUTH...
+
+[90mstdout[2m | tests/integration/api.integration.test.ts[2m > [22m[2mEnrolment Service Integration Tests[2m > [22m[2mPublic Endpoints[2m > [22m[2mGET /public/v1/health returns 200[22m[39m
+[Integration] Health check OK - Enrolment Service is available
+
+[90mstdout[2m | tests/integration/api.integration.test.ts[2m > [22m[2mEnrolment Service Integration Tests[2m > [22m[2mAuthenticated Endpoints (read-only)[22m[39m
+[2026-11-10T12:59:20.644Z] signIn: Attempting direct SDK authentication...
+[2026-11-10T12:59:20.644Z] signIn: Email: nmadhankumar597@gmail.com
+[2026-11-10T12:59:20.644Z] signIn: Trying USER_SRP_AUTH...
+
+node.exe : [90mstderr[2m | 
+tests/integration/api.integration.test.ts[2m > 
+[22m[2mEnrolment Service Integration Tests[2m > 
+[22m[2mAuthenticated Endpoints (read-only)[22m[39m
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([90mstderr[ 
+   2m...only)[22m[39m:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[2026-11-10T12:59:20.644Z] signIn: USER_SRP_AUTH failed, 
+trying USER_PASSWORD_AUTH...
+[2026-11-10T12:59:20.644Z] signIn: SRP Error: 
+NotAuthorizedException: Incorrect username or password.
+    at [90mfile:///C:/Users/mathankumar.n/Downloads/HST_ID
+P/iet-ui-testtaker-1/[39mnode_modules/[4maws-amplify[24m
+/node_modules/[4m@aws-amplify/auth[24m/src/foundation/fac
+tories/serviceClients/cognitoIdentityProvider/shared/serde/
+createUserPoolDeserializer.ts:10:15
+[90m    at processTicksAndRejections 
+(node:internal/process/task_queues:104:5)[39m
+    at handlePasswordVerifierChallenge [90m(file:///C:/Use
+rs/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39m
+node_modules/[4maws-amplify[24m/node_modules/[4m@aws-amp
+lify/auth[24m/src/providers/cognito/utils/handlePasswordVe
+rifierChallenge.ts:63:22[90m)[39m
+    at retryOnResourceNotFoundException [90m(file:///C:/Us
+ers/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39
+mnode_modules/[4maws-amplify[24m/node_modules/[4m@aws-am
+plify/auth[24m/src/providers/cognito/utils/retryOnResource
+NotFoundException.ts:11:16[90m)[39m
+    at signInWithSRP [90m(file:///C:/Users/mathankumar.n/D
+ownloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4ma
+ws-amplify[24m/node_modules/[4m@aws-amplify/auth[24m/src
+/providers/cognito/apis/signInWithSRP.ts:42:138[90m)[39m
+    at Module.signIn [90m(C:\Users\mathankumar.n\Downloads
+\HST_IDP\iet-ui-testtaker-1\[39msrc\services\auth.ts:60:22
+[90m)[39m
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui
+-testtaker-1\[39mtests\integration\api.integration.test.ts
+:61:7
+    at async Promise.all (index 0)
+    at callSuiteHook [90m(file:///C:/Users/mathankumar.n/D
+ownloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@
+vitest/runner[24m/dist/index.js:700:23[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downlo
+ads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vites
+t/runner[24m/dist/index.js:892:27[90m)[39m {
+  underlyingError: [90mundefined[39m,
+  recoverySuggestion: [90mundefined[39m,
+[90mstdout[2m | tests/integration/api.integration.test.ts[2m > [22m[2mEnrolment Service Integration Tests[2m > [22m[2mAuthenticated Endpoints (read-only)[22m[39m
+[2026-11-10T12:59:20.644Z] signIn: Trying USER_PASSWORD_AUTH...
+
+  metadata: {
+    extendedRequestId: [90mundefined[39m,
+    httpStatusCode: [33m400[39m,
+    requestId: 
+[32m'd0e6e242-3fdd-46cd-8ef1-5a634be1a44d'[39m
+  },
+  constructor: [36m[class AuthError extends 
+AmplifyError][39m
+}
+
+[90mstderr[2m | 
+tests/integration/auth.integration.test.ts[2m > 
+[22m[2mCognito Auth Integration[2m > [22m[2mSign In 
+Flow[2m > [22m[2mSigns in with valid credentials and 
+obtains access token[22m[39m
+[2026-11-10T12:59:20.552Z] signIn: USER_SRP_AUTH failed, 
+trying USER_PASSWORD_AUTH...
+[2026-11-10T12:59:20.552Z] signIn: SRP Error: 
+NotAuthorizedException: Incorrect username or password.
+    at [90mfile:///C:/Users/mathankumar.n/Downloads/HST_ID
+P/iet-ui-testtaker-1/[39mnode_modules/[4maws-amplify[24m
+/node_modules/[4m@aws-amplify/auth[24m/src/foundation/fac
+tories/serviceClients/cognitoIdentityProvider/shared/serde/
+createUserPoolDeserializer.ts:10:15
+[90m    at processTicksAndRejections 
+(node:internal/process/task_queues:104:5)[39m
+    at handlePasswordVerifierChallenge [90m(file:///C:/Use
+rs/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39m
+node_modules/[4maws-amplify[24m/node_modules/[4m@aws-amp
+lify/auth[24m/src/providers/cognito/utils/handlePasswordVe
+rifierChallenge.ts:63:22[90m)[39m
+    at retryOnResourceNotFoundException [90m(file:///C:/Us
+ers/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39
+mnode_modules/[4maws-amplify[24m/node_modules/[4m@aws-am
+plify/auth[24m/src/providers/cognito/utils/retryOnResource
+NotFoundException.ts:11:16[90m)[39m
+    at signInWithSRP [90m(file:///C:/Users/mathankumar.n/D
+ownloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4ma
+ws-amplify[24m/node_modules/[4m@aws-amplify/auth[24m/src
+/providers/cognito/apis/signInWithSRP.ts:42:138[90m)[39m
+    at Module.signIn [90m(C:\Users\mathankumar.n\Downloads
+\HST_IDP\iet-ui-testtaker-1\[39msrc\services\auth.ts:60:22
+[90m)[39m
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui
+-testtaker-1\[39mtests\integration\auth.integration.test.t
+s:32:7
+    at runTest [90m(file:///C:/Users/mathankumar.n/Downloa
+ds/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vitest
+/runner[24m/dist/index.js:781:11[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downlo
+ads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vites
+t/runner[24m/dist/index.js:909:15[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downlo
+ads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vites
+t/runner[24m/dist/index.js:909:15[90m)[39m {
+  underlyingError: [90mundefined[39m,
+  recoverySuggestion: [90mundefined[39m,
+  metadata: {
+    extendedRequestId: [90mundefined[39m,
+    httpStatusCode: [33m400[39m,
+    requestId: 
+[32m'ab7e4cfd-3db4-4190-a3fb-f4ccec056397'[39m
+  },
+  constructor: [36m[class AuthError extends 
+AmplifyError][39m
+}
+
+[90mstdout[2m | tests/integration/auth.integration.test.ts[2m > [22m[2mCognito Auth Integration[2m > [22m[2mSign In Flow[2m > [22m[2mSigns in with valid credentials and obtains access token[22m[39m
+[2026-11-10T12:59:20.552Z] signIn: Trying USER_PASSWORD_AUTH...
+
+[90mstdout[2m | tests/integration/api.integration.test.ts[2m > [22m[2mEnrolment Service Integration Tests[2m > [22m[2mAuthenticated Endpoints (read-only)[22m[39m
+<empty line>
+[90mstderr[2m | 
+tests/integration/api.integration.test.ts[2m > 
+[22m[2mEnrolment Service Integration Tests[2m > 
+[22m[2mAuthenticated Endpoints (read-only)[22m[39m
+[2026-11-10T12:59:20.644Z] signIn: USER_PASSWORD_AUTH also 
+failed
+[2026-11-10T12:59:20.644Z] signIn: Password Auth Error: 
+NotAuthorizedException: Incorrect username or password.
+    at [90mfile:///C:/Users/mathankumar.n/Downloads/HST_ID
+P/iet-ui-testtaker-1/[39mnode_modules/[4maws-amplify[24m
+/node_modules/[4m@aws-amplify/auth[24m/src/foundation/fac
+tories/serviceClients/cognitoIdentityProvider/shared/serde/
+createUserPoolDeserializer.ts:10:15
+[90m    at processTicksAndRejections 
+(node:internal/process/task_queues:104:5)[39m
+    at handlePasswordVerifierChallenge [90m(file:///C:/Use
+rs/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39m
+node_modules/[4maws-amplify[24m/node_modules/[4m@aws-amp
+lify/auth[24m/src/providers/cognito/utils/handlePasswordVe
+rifierChallenge.ts:63:22[90m)[39m
+    at retryOnResourceNotFoundException [90m(file:///C:/Us
+ers/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39
+mnode_modules/[4maws-amplify[24m/node_modules/[4m@aws-am
+plify/auth[24m/src/providers/cognito/utils/retryOnResource
+NotFoundException.ts:11:16[90m)[39m
+    at signInWithSRP [90m(file:///C:/Users/mathankumar.n/D
+ownloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4ma
+ws-amplify[24m/node_modules/[4m@aws-amplify/auth[24m/src
+/providers/cognito/apis/signInWithSRP.ts:42:138[90m)[39m
+    at Module.signIn [90m(C:\Users\mathankumar.n\Downloads
+\HST_IDP\iet-ui-testtaker-1\[39msrc\services\auth.ts:79:22
+[90m)[39m
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui
+-testtaker-1\[39mtests\integration\api.integration.test.ts
+:61:7
+    at async Promise.all (index 0)
+    at callSuiteHook [90m(file:///C:/Users/mathankumar.n/D
+ownloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@
+vitest/runner[24m/dist/index.js:700:23[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downlo
+ads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vites
+t/runner[24m/dist/index.js:892:27[90m)[39m {
+  underlyingError: [90mundefined[39m,
+  recoverySuggestion: [90mundefined[39m,
+  metadata: {
+    extendedRequestId: [90mundefined[39m,
+    httpStatusCode: [33m400[39m,
+    requestId: 
+[32m'8d3fcf9a-44d0-409c-9789-49dafbf19bd4'[39m
+  },
+  constructor: [36m[class AuthError extends 
+AmplifyError][39m
+}
+Γ¥î signIn: Direct auth failed with error:
+Error object: NotAuthorizedException: Incorrect username 
+or password.
+    at [90mfile:///C:/Users/mathankumar.n/Downloads/HST_ID
+P/iet-ui-testtaker-1/[39mnode_modules/[4maws-amplify[24m
+/node_modules/[4m@aws-amplify/auth[24m/src/foundation/fac
+tories/serviceClients/cognitoIdentityProvider/shared/serde/
+createUserPoolDeserializer.ts:10:15
+[90m    at processTicksAndRejections 
+(node:internal/process/task_queues:104:5)[39m
+    at handlePasswordVerifierChallenge [90m(file:///C:/Use
+rs/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39m
+node_modules/[4maws-amplify[24m/node_modules/[4m@aws-amp
+lify/auth[24m/src/providers/cognito/utils/handlePasswordVe
+rifierChallenge.ts:63:22[90m)[39m
+    at retryOnResourceNotFoundException [90m(file:///C:/Us
+ers/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39
+mnode_modules/[4maws-amplify[24m/node_modules/[4m@aws-am
+plify/auth[24m/src/providers/cognito/utils/retryOnResource
+NotFoundException.ts:11:16[90m)[39m
+    at signInWithSRP [90m(file:///C:/Users/mathankumar.n/D
+ownloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4ma
+ws-amplify[24m/node_modules/[4m@aws-amplify/auth[24m/src
+/providers/cognito/apis/signInWithSRP.ts:42:138[90m)[39m
+    at Module.signIn [90m(C:\Users\mathankumar.n\Downloads
+\HST_IDP\iet-ui-testtaker-1\[39msrc\services\auth.ts:79:22
+[90m)[39m
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui
+-testtaker-1\[39mtests\integration\api.integration.test.ts
+:61:7
+    at async Promise.all (index 0)
+    at callSuiteHook [90m(file:///C:/Users/mathankumar.n/D
+ownloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@
+vitest/runner[24m/dist/index.js:700:23[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downlo
+ads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vites
+t/runner[24m/dist/index.js:892:27[90m)[39m {
+  underlyingError: [90mundefined[39m,
+  recoverySuggestion: [90mundefined[39m,
+  metadata: {
+    extendedRequestId: [90mundefined[39m,
+    httpStatusCode: [33m400[39m,
+    requestId: 
+[32m'8d3fcf9a-44d0-409c-9789-49dafbf19bd4'[39m
+  },
+  constructor: [36m[class AuthError extends 
+AmplifyError][39m
+}
+Error name: NotAuthorizedException
+Error message: Incorrect username or password.
+Full error: {"stack":"NotAuthorizedException: Incorrect 
+username or password.\n    at file:///C:/Users/mathankumar.
+n/Downloads/HST_IDP/iet-ui-testtaker-1/node_modules/aws-amp
+lify/node_modules/@aws-amplify/auth/src/foundation/factorie
+s/serviceClients/cognitoIdentityProvider/shared/serde/creat
+eUserPoolDeserializer.ts:10:15\n    at 
+processTicksAndRejections 
+(node:internal/process/task_queues:104:5)\n    at 
+handlePasswordVerifierChallenge (file:///C:/Users/mathankum
+ar.n/Downloads/HST_IDP/iet-ui-testtaker-1/node_modules/aws-
+amplify/node_modules/@aws-amplify/auth/src/providers/cognit
+o/utils/handlePasswordVerifierChallenge.ts:63:22)\n    at 
+retryOnResourceNotFoundException (file:///C:/Users/mathanku
+mar.n/Downloads/HST_IDP/iet-ui-testtaker-1/node_modules/aws
+-amplify/node_modules/@aws-amplify/auth/src/providers/cogni
+to/utils/retryOnResourceNotFoundException.ts:11:16)\n    
+at signInWithSRP (file:///C:/Users/mathankumar.n/Downloads/
+HST_IDP/iet-ui-testtaker-1/node_modules/aws-amplify/node_mo
+dules/@aws-amplify/auth/src/providers/cognito/apis/signInWi
+thSRP.ts:42:138)\n    at Module.signIn (C:\\Users\\mathanku
+mar.n\\Downloads\\HST_IDP\\iet-ui-testtaker-1\\src\\service
+s\\auth.ts:79:22)\n    at C:\\Users\\mathankumar.n\\Downloa
+ds\\HST_IDP\\iet-ui-testtaker-1\\tests\\integration\\api.in
+tegration.test.ts:61:7\n    at async Promise.all (index 
+0)\n    at callSuiteHook (file:///C:/Users/mathankumar.n/Do
+wnloads/HST_IDP/iet-ui-testtaker-1/node_modules/@vitest/run
+ner/dist/index.js:700:23)\n    at runSuite (file:///C:/User
+s/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/node_m
+odules/@vitest/runner/dist/index.js:892:27)","message":"Inc
+orrect username or 
+password.","name":"NotAuthorizedException","metadata":{}}
+
+ [33mΓ¥»[39m tests/integration/api.integration.test.ts [2m ([22m[2m3 tests[22m [2m|[22m [33m1 skipped[39m[2m)[22m[33m 3357[2mms[22m[39m
+[90mstdout[2m | tests/integration/auth.integration.test.ts[2m > [22m[2mCognito Auth Integration[2m > [22m[2mSign In Flow[2m > [22m[2mSigns in with valid credentials and obtains access token[22m[39m
+<empty line>
+[90mstderr[2m | 
+tests/integration/auth.integration.test.ts[2m > 
+[22m[2mCognito Auth Integration[2m > [22m[2mSign In 
+Flow[2m > [22m[2mSigns in with valid credentials and 
+obtains access token[22m[39m
+[2026-11-10T12:59:20.552Z] signIn: USER_PASSWORD_AUTH also 
+failed
+[2026-11-10T12:59:20.552Z] signIn: Password Auth Error: 
+NotAuthorizedException: Incorrect username or password.
+    at [90mfile:///C:/Users/mathankumar.n/Downloads/HST_ID
+P/iet-ui-testtaker-1/[39mnode_modules/[4maws-amplify[24m
+/node_modules/[4m@aws-amplify/auth[24m/src/foundation/fac
+tories/serviceClients/cognitoIdentityProvider/shared/serde/
+createUserPoolDeserializer.ts:10:15
+[90m    at processTicksAndRejections 
+(node:internal/process/task_queues:104:5)[39m
+    at handlePasswordVerifierChallenge [90m(file:///C:/Use
+rs/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39m
+node_modules/[4maws-amplify[24m/node_modules/[4m@aws-amp
+lify/auth[24m/src/providers/cognito/utils/handlePasswordVe
+rifierChallenge.ts:63:22[90m)[39m
+    at retryOnResourceNotFoundException [90m(file:///C:/Us
+ers/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39
+mnode_modules/[4maws-amplify[24m/node_modules/[4m@aws-am
+plify/auth[24m/src/providers/cognito/utils/retryOnResource
+NotFoundException.ts:11:16[90m)[39m
+    at signInWithSRP [90m(file:///C:/Users/mathankumar.n/D
+ownloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4ma
+ws-amplify[24m/node_modules/[4m@aws-amplify/auth[24m/src
+/providers/cognito/apis/signInWithSRP.ts:42:138[90m)[39m
+    at Module.signIn [90m(C:\Users\mathankumar.n\Downloads
+\HST_IDP\iet-ui-testtaker-1\[39msrc\services\auth.ts:79:22
+[90m)[39m
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui
+-testtaker-1\[39mtests\integration\auth.integration.test.t
+s:32:7
+    at runTest [90m(file:///C:/Users/mathankumar.n/Downloa
+ds/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vitest
+/runner[24m/dist/index.js:781:11[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downlo
+ads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vites
+t/runner[24m/dist/index.js:909:15[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downlo
+ads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vites
+t/runner[24m/dist/index.js:909:15[90m)[39m {
+  underlyingError: [90mundefined[39m,
+  recoverySuggestion: [90mundefined[39m,
+  metadata: {
+    extendedRequestId: [90mundefined[39m,
+    httpStatusCode: [33m400[39m,
+    requestId: 
+[32m'6f43b672-b92b-4991-8888-ee2a8fcff08a'[39m
+  },
+  constructor: [36m[class AuthError extends 
+AmplifyError][39m
+}
+Γ¥î signIn: Direct auth failed with error:
+Error object: NotAuthorizedException: Incorrect username 
+or password.
+    at [90mfile:///C:/Users/mathankumar.n/Downloads/HST_ID
+P/iet-ui-testtaker-1/[39mnode_modules/[4maws-amplify[24m
+/node_modules/[4m@aws-amplify/auth[24m/src/foundation/fac
+tories/serviceClients/cognitoIdentityProvider/shared/serde/
+createUserPoolDeserializer.ts:10:15
+[90m    at processTicksAndRejections 
+(node:internal/process/task_queues:104:5)[39m
+    at handlePasswordVerifierChallenge [90m(file:///C:/Use
+rs/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39m
+node_modules/[4maws-amplify[24m/node_modules/[4m@aws-amp
+lify/auth[24m/src/providers/cognito/utils/handlePasswordVe
+rifierChallenge.ts:63:22[90m)[39m
+    at retryOnResourceNotFoundException [90m(file:///C:/Us
+ers/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39
+mnode_modules/[4maws-amplify[24m/node_modules/[4m@aws-am
+plify/auth[24m/src/providers/cognito/utils/retryOnResource
+NotFoundException.ts:11:16[90m)[39m
+    at signInWithSRP [90m(file:///C:/Users/mathankumar.n/D
+ownloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4ma
+ws-amplify[24m/node_modules/[4m@aws-amplify/auth[24m/src
+/providers/cognito/apis/signInWithSRP.ts:42:138[90m)[39m
+    at Module.signIn [90m(C:\Users\mathankumar.n\Downloads
+\HST_IDP\iet-ui-testtaker-1\[39msrc\services\auth.ts:79:22
+[90m)[39m
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui
+-testtaker-1\[39mtests\integration\auth.integration.test.t
+s:32:7
+[90mstdout[2m | tests/integration/auth.integration.test.ts[2m > [22m[2mCognito Auth Integration[2m > [22m[2mSession Persistence[22m[39m
+[2026-11-10T12:59:23.246Z] signIn: Attempting direct SDK authentication...
+[2026-11-10T12:59:23.246Z] signIn: Email: nmadhankumar597@gmail.com
+[2026-11-10T12:59:23.246Z] signIn: Trying USER_SRP_AUTH...
+
+    at runTest [90m(file:///C:/Users/mathankumar.n/Downloa
+ds/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vitest
+/runner[24m/dist/index.js:781:11[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downlo
+ads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vites
+t/runner[24m/dist/index.js:909:15[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downlo
+ads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vites
+t/runner[24m/dist/index.js:909:15[90m)[39m {
+  underlyingError: [90mundefined[39m,
+  recoverySuggestion: [90mundefined[39m,
+  metadata: {
+    extendedRequestId: [90mundefined[39m,
+    httpStatusCode: [33m400[39m,
+    requestId: 
+[32m'6f43b672-b92b-4991-8888-ee2a8fcff08a'[39m
+  },
+  constructor: [36m[class AuthError extends 
+AmplifyError][39m
+}
+Error name: NotAuthorizedException
+Error message: Incorrect username or password.
+Full error: {"stack":"NotAuthorizedException: Incorrect 
+username or password.\n    at file:///C:/Users/mathankumar.
+n/Downloads/HST_IDP/iet-ui-testtaker-1/node_modules/aws-amp
+lify/node_modules/@aws-amplify/auth/src/foundation/factorie
+s/serviceClients/cognitoIdentityProvider/shared/serde/creat
+eUserPoolDeserializer.ts:10:15\n    at 
+processTicksAndRejections 
+(node:internal/process/task_queues:104:5)\n    at 
+handlePasswordVerifierChallenge (file:///C:/Users/mathankum
+ar.n/Downloads/HST_IDP/iet-ui-testtaker-1/node_modules/aws-
+amplify/node_modules/@aws-amplify/auth/src/providers/cognit
+o/utils/handlePasswordVerifierChallenge.ts:63:22)\n    at 
+retryOnResourceNotFoundException (file:///C:/Users/mathanku
+mar.n/Downloads/HST_IDP/iet-ui-testtaker-1/node_modules/aws
+-amplify/node_modules/@aws-amplify/auth/src/providers/cogni
+to/utils/retryOnResourceNotFoundException.ts:11:16)\n    
+at signInWithSRP (file:///C:/Users/mathankumar.n/Downloads/
+HST_IDP/iet-ui-testtaker-1/node_modules/aws-amplify/node_mo
+dules/@aws-amplify/auth/src/providers/cognito/apis/signInWi
+thSRP.ts:42:138)\n    at Module.signIn (C:\\Users\\mathanku
+mar.n\\Downloads\\HST_IDP\\iet-ui-testtaker-1\\src\\service
+s\\auth.ts:79:22)\n    at C:\\Users\\mathankumar.n\\Downloa
+ds\\HST_IDP\\iet-ui-testtaker-1\\tests\\integration\\auth.i
+ntegration.test.ts:32:7\n    at runTest (file:///C:/Users/m
+athankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/node_modu
+les/@vitest/runner/dist/index.js:781:11)\n    at runSuite (
+file:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-tes
+ttaker-1/node_modules/@vitest/runner/dist/index.js:909:15)\
+n    at runSuite (file:///C:/Users/mathankumar.n/Downloads/
+HST_IDP/iet-ui-testtaker-1/node_modules/@vitest/runner/dist
+/index.js:909:15)","message":"Incorrect username or 
+password.","name":"NotAuthorizedException","metadata":{}}
+
+[90mstderr[2m | 
+tests/integration/auth.integration.test.ts[2m > 
+[22m[2mCognito Auth Integration[2m > [22m[2mSession 
+Persistence[22m[39m
+[2026-11-10T12:59:23.246Z] signIn: USER_SRP_AUTH failed, 
+trying USER_PASSWORD_AUTH...
+[2026-11-10T12:59:23.246Z] signIn: SRP Error: 
+NotAuthorizedException: Incorrect username or password.
+[90mstdout[2m | tests/integration/auth.integration.test.ts[2m > [22m[2mCognito Auth Integration[2m > [22m[2mSession Persistence[22m[39m
+[2026-11-10T12:59:23.246Z] signIn: Trying USER_PASSWORD_AUTH...
+
+    at [90mfile:///C:/Users/mathankumar.n/Downloads/HST_ID
+P/iet-ui-testtaker-1/[39mnode_modules/[4maws-amplify[24m
+/node_modules/[4m@aws-amplify/auth[24m/src/foundation/fac
+tories/serviceClients/cognitoIdentityProvider/shared/serde/
+createUserPoolDeserializer.ts:10:15
+[90m    at processTicksAndRejections 
+(node:internal/process/task_queues:104:5)[39m
+    at handlePasswordVerifierChallenge [90m(file:///C:/Use
+rs/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39m
+node_modules/[4maws-amplify[24m/node_modules/[4m@aws-amp
+lify/auth[24m/src/providers/cognito/utils/handlePasswordVe
+rifierChallenge.ts:63:22[90m)[39m
+    at retryOnResourceNotFoundException [90m(file:///C:/Us
+ers/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39
+mnode_modules/[4maws-amplify[24m/node_modules/[4m@aws-am
+plify/auth[24m/src/providers/cognito/utils/retryOnResource
+NotFoundException.ts:11:16[90m)[39m
+    at signInWithSRP [90m(file:///C:/Users/mathankumar.n/D
+ownloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4ma
+ws-amplify[24m/node_modules/[4m@aws-amplify/auth[24m/src
+/providers/cognito/apis/signInWithSRP.ts:42:138[90m)[39m
+    at Module.signIn [90m(C:\Users\mathankumar.n\Downloads
+\HST_IDP\iet-ui-testtaker-1\[39msrc\services\auth.ts:60:22
+[90m)[39m
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui
+-testtaker-1\[39mtests\integration\auth.integration.test.t
+s:69:7
+    at async Promise.all (index 0)
+    at callSuiteHook [90m(file:///C:/Users/mathankumar.n/D
+ownloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@
+vitest/runner[24m/dist/index.js:700:23[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downlo
+ads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vites
+t/runner[24m/dist/index.js:892:27[90m)[39m {
+  underlyingError: [90mundefined[39m,
+  recoverySuggestion: [90mundefined[39m,
+  metadata: {
+    extendedRequestId: [90mundefined[39m,
+    httpStatusCode: [33m400[39m,
+    requestId: 
+[32m'77c6da10-7ae0-4bfb-9ed8-3ed6610daf90'[39m
+  },
+  constructor: [36m[class AuthError extends 
+AmplifyError][39m
+}
+
+[90mstdout[2m | tests/integration/auth.integration.test.ts[2m > [22m[2mCognito Auth Integration[2m > [22m[2mSession Persistence[22m[39m
+<empty line>
+[90mstderr[2m | 
+tests/integration/auth.integration.test.ts[2m > 
+[22m[2mCognito Auth Integration[2m > [22m[2mSession 
+Persistence[22m[39m
+[2026-11-10T12:59:23.246Z] signIn: USER_PASSWORD_AUTH also 
+failed
+[2026-11-10T12:59:23.246Z] signIn: Password Auth Error: 
+NotAuthorizedException: Password attempts exceeded
+    at [90mfile:///C:/Users/mathankumar.n/Downloads/HST_ID
+P/iet-ui-testtaker-1/[39mnode_modules/[4maws-amplify[24m
+/node_modules/[4m@aws-amplify/auth[24m/src/foundation/fac
+tories/serviceClients/cognitoIdentityProvider/shared/serde/
+createUserPoolDeserializer.ts:10:15
+[90m    at processTicksAndRejections 
+(node:internal/process/task_queues:104:5)[39m
+    at handlePasswordSRP [90m(file:///C:/Users/mathankumar
+.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/
+[4maws-amplify[24m/node_modules/[4m@aws-amplify/auth[24m
+/src/client/flows/shared/handlePasswordSRP.ts:56:18[90m)[
+39m
+    at signInWithSRP [90m(file:///C:/Users/mathankumar.n/D
+ownloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4ma
+ws-amplify[24m/node_modules/[4m@aws-amplify/auth[24m/src
+/providers/cognito/apis/signInWithSRP.ts:42:138[90m)[39m
+    at Module.signIn [90m(C:\Users\mathankumar.n\Downloads
+\HST_IDP\iet-ui-testtaker-1\[39msrc\services\auth.ts:79:22
+[90m)[39m
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui
+-testtaker-1\[39mtests\integration\auth.integration.test.t
+s:69:7
+    at async Promise.all (index 0)
+    at callSuiteHook [90m(file:///C:/Users/mathankumar.n/D
+ownloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@
+vitest/runner[24m/dist/index.js:700:23[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downlo
+ads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vites
+t/runner[24m/dist/index.js:892:27[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downlo
+ads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vites
+t/runner[24m/dist/index.js:909:15[90m)[39m {
+  underlyingError: [90mundefined[39m,
+  recoverySuggestion: [90mundefined[39m,
+  metadata: {
+    extendedRequestId: [90mundefined[39m,
+    httpStatusCode: [33m400[39m,
+    requestId: 
+[32m'd3722f75-d308-4027-aaa0-9af2d8faa56d'[39m
+  },
+  constructor: [36m[class AuthError extends 
+AmplifyError][39m
+}
+Γ¥î signIn: Direct auth failed with error:
+Error object: NotAuthorizedException: Password attempts 
+exceeded
+    at [90mfile:///C:/Users/mathankumar.n/Downloads/HST_ID
+P/iet-ui-testtaker-1/[39mnode_modules/[4maws-amplify[24m
+/node_modules/[4m@aws-amplify/auth[24m/src/foundation/fac
+tories/serviceClients/cognitoIdentityProvider/shared/serde/
+createUserPoolDeserializer.ts:10:15
+[90m    at processTicksAndRejections 
+(node:internal/process/task_queues:104:5)[39m
+    at handlePasswordSRP [90m(file:///C:/Users/mathankumar
+.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/
+[4maws-amplify[24m/node_modules/[4m@aws-amplify/auth[24m
+/src/client/flows/shared/handlePasswordSRP.ts:56:18[90m)[
+39m
+    at signInWithSRP [90m(file:///C:/Users/mathankumar.n/D
+ownloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4ma
+ws-amplify[24m/node_modules/[4m@aws-amplify/auth[24m/src
+/providers/cognito/apis/signInWithSRP.ts:42:138[90m)[39m
+    at Module.signIn [90m(C:\Users\mathankumar.n\Downloads
+\HST_IDP\iet-ui-testtaker-1\[39msrc\services\auth.ts:79:22
+[90m)[39m
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui
+-testtaker-1\[39mtests\integration\auth.integration.test.t
+s:69:7
+    at async Promise.all (index 0)
+    at callSuiteHook [90m(file:///C:/Users/mathankumar.n/D
+ownloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@
+vitest/runner[24m/dist/index.js:700:23[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downlo
+ads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vites
+t/runner[24m/dist/index.js:892:27[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downlo
+ads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vites
+t/runner[24m/dist/index.js:909:15[90m)[39m {
+  underlyingError: [90mundefined[39m,
+  recoverySuggestion: [90mundefined[39m,
+  metadata: {
+    extendedRequestId: [90mundefined[39m,
+    httpStatusCode: [33m400[39m,
+    requestId: 
+[32m'd3722f75-d308-4027-aaa0-9af2d8faa56d'[39m
+  },
+  constructor: [36m[class AuthError extends 
+AmplifyError][39m
+}
+Error name: NotAuthorizedException
+Error message: Password attempts exceeded
+Full error: {"stack":"NotAuthorizedException: Password 
+attempts exceeded\n    at file:///C:/Users/mathankumar.n/Do
+wnloads/HST_IDP/iet-ui-testtaker-1/node_modules/aws-amplify
+/node_modules/@aws-amplify/auth/src/foundation/factories/se
+rviceClients/cognitoIdentityProvider/shared/serde/createUse
+rPoolDeserializer.ts:10:15\n    at 
+processTicksAndRejections 
+(node:internal/process/task_queues:104:5)\n    at 
+handlePasswordSRP (file:///C:/Users/mathankumar.n/Downloads
+/HST_IDP/iet-ui-testtaker-1/node_modules/aws-amplify/node_m
+odules/@aws-amplify/auth/src/client/flows/shared/handlePass
+wordSRP.ts:56:18)\n    at signInWithSRP (file:///C:/Users/m
+athankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/node_modu
+les/aws-amplify/node_modules/@aws-amplify/auth/src/provider
+s/cognito/apis/signInWithSRP.ts:42:138)\n    at 
+Module.signIn (C:\\Users\\mathankumar.n\\Downloads\\HST_IDP
+\\iet-ui-testtaker-1\\src\\services\\auth.ts:79:22)\n    
+at C:\\Users\\mathankumar.n\\Downloads\\HST_IDP\\iet-ui-tes
+ttaker-1\\tests\\integration\\auth.integration.test.ts:69:7
+\n    at async Promise.all (index 0)\n    at callSuiteHook 
+(file:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-te
+sttaker-1/node_modules/@vitest/runner/dist/index.js:700:23)
+\n    at runSuite (file:///C:/Users/mathankumar.n/Downloads
+/HST_IDP/iet-ui-testtaker-1/node_modules/@vitest/runner/dis
+t/index.js:892:27)\n    at runSuite (file:///C:/Users/matha
+nkumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/node_modules/
+@vitest/runner/dist/index.js:909:15)","message":"Password 
+attempts 
+exceeded","name":"NotAuthorizedException","metadata":{}}
+
+ [33mΓ¥»[39m tests/integration/auth.integration.test.ts [2m ([22m[2m2 tests[22m [2m|[22m [31m1 failed[39m[2m)[22m[33m 3966[2mms[22m[39m
+[31m   [33mΓ¥»[31m tests/integration/auth.integration.test.ts[2m > [22mCognito Auth Integration[2m > [22mSign In Flow[2m > [22mSigns in with valid credentials and obtains access token[39m
+[31m     ΓåÆ Authentication failed. Please check your email and password and try again.[39m
+
+[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[1m[7m Failed Suites 2 
+[27m[22mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+tests/integration/api.integration.test.ts[2m > 
+[22mEnrolment Service Integration Tests[2m > 
+[22mAuthenticated Endpoints (read-only)
+[31m[1mError[22m: Authentication failed. Please check 
+your email and password and try again.[39m
+[36m [2mΓ¥»[22m Module.signIn 
+src/services/auth.ts:[2m130:11[22m[39m
+    [90m128| [39m    }
+    [90m129| [39m    
+    [90m130| [39m    [35mthrow[39m [35mnew[39m 
+[33mError[39m([32m'Authentication failed. Please check 
+your email an[39mΓÇª
+    [90m   | [39m          [31m^[39m
+    [90m131| [39m  }
+    [90m132| [39m}
+[90m [2mΓ¥»[22m tests/integration/api.integration.test.t
+s:[2m61:7[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ
+»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[1/3]ΓÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+tests/integration/auth.integration.test.ts[2m > 
+[22mCognito Auth Integration[2m > [22mSession 
+Persistence
+[31m[1mError[22m: Password does not meet the required 
+criteria.[39m
+[36m [2mΓ¥»[22m Module.signIn 
+src/services/auth.ts:[2m123:15[22m[39m
+    [90m121| [39m      }
+    [90m122| [39m      [35mif[39m (message[33m.[39m[
+34mincludes[39m([32m'Password'[39m)) {
+    [90m123| [39m        [35mthrow[39m [35mnew[39m 
+[33mError[39m([32m'Password does not meet the required 
+criteria.[39mΓÇª
+    [90m   | [39m              [31m^[39m
+    [90m124| [39m      }
+    [90m125| [39m      [35mif[39m (message[33m.[39m[
+34mincludes[39m([32m'NetworkError'[39m) [33m||[39m 
+message[33m.[39m[34mincludes[39m([32m'Networ[39mΓÇª
+[90m [2mΓ¥»[22m tests/integration/auth.integration.test.
+ts:[2m69:7[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ
+»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[2/3]ΓÄ»[22m[39m
+
+[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[1m[7m Failed Tests 1 
+[27m[22mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+tests/integration/auth.integration.test.ts[2m > 
+[22mCognito Auth Integration[2m > [22mSign In Flow[2m 
+> [22mSigns in with valid credentials and obtains access 
+token
+[31m[1mError[22m: Authentication failed. Please check 
+your email and password and try again.[39m
+[36m [2mΓ¥»[22m Module.signIn 
+src/services/auth.ts:[2m130:11[22m[39m
+    [90m128| [39m    }
+    [90m129| [39m    
+    [90m130| [39m    [35mthrow[39m [35mnew[39m 
+[33mError[39m([32m'Authentication failed. Please check 
+your email an[39mΓÇª
+    [90m   | [39m          [31m^[39m
+    [90m131| [39m  }
+    [90m132| [39m}
+[90m [2mΓ¥»[22m tests/integration/auth.integration.test.
+ts:[2m32:7[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ
+»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[3/3]ΓÄ»[22m[39m
+
+[2m Test Files [22m [1m[31m2 failed[39m[22m[90m (2)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m1 passed[39m[22m[2m | [22m[33m1 skipped[39m[90m (5)[39m
+[2m   Start at [22m 18:29:14
+[2m   Duration [22m 10.28s[2m (transform 320ms, setup 7.21s, collect 357ms, tests 7.32s, environment 1ms, prepare 1.47s)[22m
+

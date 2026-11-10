@@ -62,14 +62,14 @@ describe('Alert', () => {
 
   it('applies variant-specific class names', () => {
     const { container: container1 } = render(<Alert variant="error">Error</Alert>);
-    const errorEl = container1.querySelector('[class*="error"]');
-    expect(errorEl).toBeInTheDocument();
-    expect(errorEl?.classList.contains('icon')).toBe(false);
+    const errorEl = container1.firstChild as HTMLElement;
+    // Tailwind classes include border-l-red-600 and bg-red-50 for error variant
+    expect(errorEl.className).toMatch(/border-l-red-600|bg-red-50/);
 
     const { container: container2 } = render(<Alert variant="success">Success</Alert>);
-    const successEl = container2.querySelector('[class*="success"]');
-    expect(successEl).toBeInTheDocument();
-    expect(successEl?.classList.contains('icon')).toBe(false);
+    const successEl = container2.firstChild as HTMLElement;
+    // Tailwind classes include border-l-green-600 and bg-green-50 for success variant
+    expect(successEl.className).toMatch(/border-l-green-600|bg-green-50/);
   });
 
   it('forwards extra className', () => {
@@ -90,9 +90,9 @@ describe('Alert', () => {
         Operation completed
       </Alert>
     );
-    const icon = container.querySelector('[class*="icon"]');
-    expect(icon).toBeInTheDocument();
-    const svg = (icon as HTMLElement | null)?.querySelector('svg');
+    const iconWrapper = container.querySelector('[aria-hidden="true"]')?.closest('div');
+    expect(iconWrapper).toBeInTheDocument();
+    const svg = iconWrapper?.querySelector('svg');
     expect(svg).toHaveAttribute('aria-hidden', 'true');
   });
 });

@@ -1,10 +1,15 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@hooks/useAuth';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { EnrolmentService } from '@services';
+import type { TestTakerResponse } from '@services/enrolment';
 
 export default function Dashboard() {
   const { user, isLoading } = useAuth();
   const navigate = useNavigate();
+  const [profile, setProfile] = useState<TestTakerResponse | null>(null);
+  const [_profileLoading, _setProfileLoading] = useState(false);
+  const [_profileError, _setProfileError] = useState<string | null>(null);
 
   useEffect(() => {
     // Redirect if authentication loading is complete and no user found
@@ -14,6 +19,41 @@ export default function Dashboard() {
       navigate('/signin', { replace: true });
     }
   }, [user, isLoading, navigate]);
+
+  // Load test taker profile from Enrolment Service after user is authenticated
+  useEffect(() => {
+    const loadProfile = async () => {
+      if (!user || isLoading) {
+        return;
+      }
+
+      _setProfileLoading(true);
+      _setProfileError(null);
+
+      try {
+        console.log('Dashboard: Fetching test taker profile from Enrolment Service');
+        const testTakerProfile = await EnrolmentService.getTestTaker();
+        
+        if (testTakerProfile) {
+          console.log('Dashboard: Test taker profile loaded:', testTakerProfile);
+          setProfile(testTakerProfile);
+        } else {
+          // Profile may not exist yet (e.g., sign-up confirmation failed)
+          console.log('Dashboard: No test taker profile found');
+          setProfile(null);
+        }
+      } catch (error) {
+        // Log error but don't block dashboard rendering
+        // User can continue using the app even if profile fetch fails
+        console.error('Dashboard: Failed to load test taker profile:', error);
+        _setProfileError(error instanceof Error ? error.message : 'Failed to load profile');
+      } finally {
+        _setProfileLoading(false);
+      }
+    };
+
+    loadProfile();
+  }, [user, isLoading]);
 
   // Show loading state while AuthProvider initializes
   if (isLoading) {
@@ -34,8 +74,8 @@ export default function Dashboard() {
     return null;
   }
 
-  // Extract first name from user object (Cognito stores it as 'given_name')
-  const firstName = (user as any)?.given_name || 'Test Taker';
+  // Extract first name from user object (Cognito stores it as 'given_name') or profile
+  const firstName = profile?.givenName || (user as any)?.given_name || 'Test Taker';
 
   return (
     <div style={{ maxWidth: 900, margin: '0 auto', paddingBottom: 48 }}>

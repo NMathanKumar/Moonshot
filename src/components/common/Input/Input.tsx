@@ -37,7 +37,6 @@ export const Input: React.FC<InputProps> = ({
   ...props
 }) => {
   // Design tokens from variables.css
-  const borderColor = error ? '#DDE2E7' : '#DDE2E7';
   const focusColor = '#FF6A00'; // brand-primary
   const focusRing = 'rgba(255, 106, 0, 0.1)';
   

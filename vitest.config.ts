@@ -8,11 +8,13 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './tests/setup.ts',
+    // Unit tests only: exclude integration tests
     include: ['src/**/*.test.tsx', 'src/**/*.test.ts'],
+    exclude: ['tests/integration/**'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
-      exclude: ['node_modules/'],
+      exclude: ['node_modules/', 'tests/integration/**'],
     },
   },
   resolve: {
@@ -29,6 +31,8 @@ export default defineConfig({
       '@services/*': path.resolve(__dirname, './src/services/*'),
       '@routes': path.resolve(__dirname, './src/routes'),
       '@routes/*': path.resolve(__dirname, './src/routes/*'),
+      '@utils': path.resolve(__dirname, './src/utils'),
+      '@utils/*': path.resolve(__dirname, './src/utils/*'),
     },
   },
 });

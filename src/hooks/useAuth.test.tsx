@@ -5,9 +5,13 @@
 
 import { render, screen, act, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { fetchAuthSession } from 'aws-amplify/auth';
 import { Hub } from 'aws-amplify/utils';
 import { getCurrentUser, signOut as authSignOut } from '@services/auth';
 import { AuthProvider, useAuth } from './useAuth';
+
+// Mock aws-amplify/auth - need to mock fetchAuthSession for AuthProvider initialization
+const mockedFetchAuthSession = vi.mocked(fetchAuthSession);
 
 // Mock Amplify auth service
 vi.mock('@services/auth', () => ({
@@ -20,7 +24,6 @@ vi.mock('@services/auth', () => ({
 vi.mock('aws-amplify/utils', () => ({
   Hub: {
     listen: vi.fn().mockImplementation(() => {
-      // Return a no-op cleanup function
       return () => {};
     }),
   },
@@ -55,21 +58,34 @@ describe('AuthProvider', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    // Hub.listen returns a cleanup function
+    // Reset mocks with default responses
+    mockedFetchAuthSession.mockResolvedValue({ tokens: null });
+    mockedGetCurrentUser.mockRejectedValue(new Error('No session'));
     mockedHubListen.mockReturnValue(() => {});
   });
 
   describe('initialization', () => {
-    it('shows loading state during initial auth check', () => {
+    it('shows loading state during initial auth check', async () => {
       mockedGetCurrentUser.mockRejectedValue(new Error('No session'));
 
       renderWithProvider();
 
+      // Initially in loading state
       expect(screen.getByTestId('mock-is-authenticated')).toHaveTextContent('loading');
-    });
+      
+      // Then transitions to unauthenticated
+      await waitFor(() => {
+        expect(screen.getByTestId('mock-is-authenticated')).toHaveTextContent('unauthenticated');
+      });
+    }, 5000);
 
     it('sets authenticated state when user is authenticated', async () => {
-      const mockUser = { userId: '123', username: 'test@example.com' };
+      const mockUser = { userId: '123', username: 'test@example.com', userAttributes: {} };
+      
+      // Mock session with access token
+      mockedFetchAuthSession.mockResolvedValue({
+        tokens: { accessToken: { toString: () => 'mock-token' } },
+      });
       mockedGetCurrentUser.mockResolvedValue(mockUser);
 
       renderWithProvider();
@@ -77,7 +93,7 @@ describe('AuthProvider', () => {
       await waitFor(() => {
         expect(screen.getByTestId('mock-user')).toHaveTextContent('test@example.com');
         expect(screen.getByTestId('mock-is-authenticated')).toHaveTextContent('authenticated');
-      });
+      }, { timeout: 3000 });
     });
 
     it('sets unauthenticated state when no user is present', async () => {

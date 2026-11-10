@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { fetchAuthSession } from 'aws-amplify/auth';
 import signinStudent from '@assets/idp-signin-student.png';
-import { Button } from '@components/common/Button';
-import { Input } from '@components/common/Input';
-import { Alert } from '@components/common/Alert';
 
 export interface SignInCredentials {
   email: string;
@@ -29,11 +27,11 @@ export function SignIn({ onSubmit }: SignInProps) {
       try {
         const session = await fetchAuthSession();
         if (session.tokens?.accessToken) {
-          console.log('SignIn: User already authenticated, redirecting to dashboard');
+          console.log('[SignIn] User already authenticated, redirecting to dashboard');
           navigate('/dashboard', { replace: true });
         }
       } catch (err) {
-        console.log('SignIn: No existing session');
+        console.log('[SignIn] No existing session');
       } finally {
         setIsCheckingSession(false);
       }
@@ -46,25 +44,30 @@ export function SignIn({ onSubmit }: SignInProps) {
     navigate('/signup');
   };
 
+  const handleForgotPassword = () => {
+    // TODO: Implement forgot password flow
+    console.log('[SignIn] Forgot password clicked');
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setIsSubmitting(true);
 
     try {
-      console.log('SignIn: Form submitted with:', { email });
+      console.log('[SignIn] Form submitted with:', { email });
       if (onSubmit) {
         await onSubmit({ email, password });
-        console.log('SignIn: Auth handler completed successfully');
+        console.log('[SignIn] Auth handler completed successfully');
         // Handler will navigate to dashboard via AppRoutes
       } else {
-        console.warn('SignIn: No onSubmit handler provided');
+        console.warn('[SignIn] No onSubmit handler provided');
         setError('Sign in handler not configured');
         setIsSubmitting(false);
       }
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred';
-      console.error('SignIn: Submission error:', errorMessage);
+      console.error('[SignIn] Submission error:', errorMessage);
       setError(errorMessage);
       setIsSubmitting(false);
     }
@@ -73,158 +76,122 @@ export function SignIn({ onSubmit }: SignInProps) {
   // Show loading while checking session
   if (isCheckingSession) {
     return (
-      <div className="min-h-screen bg-[#f7f7f5] flex items-center justify-center p-6">
-        <div className="text-center" style={{ fontFamily: "'Inter', sans-serif" }}>
-          <h1 className="text-2xl font-bold text-[#232d3f] mb-2">Loading...</h1>
-        </div>
+      <div className="min-h-screen bg-[#f7f7f5] flex items-center justify-center">
+        <p className="text-center text-[#232d3f] text-base">Loading...</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-[#f7f7f5] grid grid-cols-1 md:grid-cols-2 min-h-screen">
-      {/* LEFT PANEL - with background */}
-      <div className="hidden md:flex flex-col items-end justify-center p-[60px] relative overflow-hidden">
-        {/* Decorative background elements */}
-        <div className="absolute left-[-60px] top-[-60px] w-[280px] h-[280px] bg-[rgba(255,255,255,0.06)] rounded-full z-0" />
-        <div className="absolute left-[384px] top-[920px] w-[200px] h-[200px] bg-[rgba(255,255,255,0.08)] rounded-full z-0" />
-
-        {/* Content */}
-        <div className="flex flex-col items-start max-w-[430px] relative w-[424px]">
-          <div className="h-[314.458px] max-w-[480px] relative w-full">
-            <img
-              src={signinStudent}
-              alt="Professional woman"
-              className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
-            />
-          </div>
-          <h2 className="font-bold text-[26px] text-[#232d3f] mt-[34px] leading-[39px] tracking-[-0.39px]" style={{ fontFamily: "'Farro Bold', sans-serif" }}>
-            Master English with confidence
-          </h2>
-          <p className="font-normal text-[#55657b] text-[14px] mt-[32px] mb-6 leading-[21px]" style={{ fontFamily: "'Inter', sans-serif" }}>
-            Prepare for the IDP English Test with our comprehensive platform
-          </p>
-          <ul className="list-none p-0 m-0 flex flex-col gap-[16px]">
-            <li className="flex gap-[10px] items-start w-full">
-              <span className="font-bold text-[#FF6A00] text-[14px] flex-shrink-0" style={{ fontFamily: "'Inter', sans-serif" }}>✓</span>
-              <p className="m-0 font-normal text-[#55657b] text-[14px] leading-[21px]" style={{ fontFamily: "'Inter', sans-serif" }}>Practice authentic exam questions</p>
-            </li>
-            <li className="flex gap-[10px] items-start w-full">
-              <span className="font-bold text-[#FF6A00] text-[14px] flex-shrink-0" style={{ fontFamily: "'Inter', sans-serif" }}>✓</span>
-              <p className="m-0 font-normal text-[#55657b] text-[14px] leading-[21px]" style={{ fontFamily: "'Inter', sans-serif" }}>Get personalized feedback</p>
-            </li>
-            <li className="flex gap-[10px] items-start w-full">
-              <span className="font-bold text-[#FF6A00] text-[14px] flex-shrink-0" style={{ fontFamily: "'Inter', sans-serif" }}>✓</span>
-              <p className="m-0 font-normal text-[#55657b] text-[14px] leading-[21px]" style={{ fontFamily: "'Inter', sans-serif" }}>Track your progress</p>
-            </li>
-          </ul>
-          <p className="font-bold text-[#232d3f] text-[14px] mt-[24px] w-[424px]" style={{ fontFamily: "'Farro Bold', sans-serif" }}>
-            <span style={{ fontFamily: "'Inter', sans-serif" }}>Clear and simple.</span>
-            <span className="font-normal text-[#55657b]" style={{ fontFamily: "'Inter', sans-serif" }}> Your account keeps your preparation, purchases, and results together.</span>
-          </p>
+    <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen bg-[#f7f7f5]">
+      {/* LEFT PANEL - Student image with decorative circles */}
+      <div className="hidden md:flex flex-col items-end justify-center p-10 relative overflow-hidden">
+        <div className="absolute w-[280px] h-[280px] bg-white/6 rounded-full -top-16 -left-16 z-0" />
+        <div className="absolute w-[200px] h-[200px] bg-white/8 rounded-full -bottom-8 left-96 z-0" />
+        
+        <div className="relative z-10 w-full max-w-[520px]">
+          <img
+            src={signinStudent}
+            alt="Student holding a tablet"
+            className="w-full h-auto object-cover"
+          />
         </div>
       </div>
 
-      {/* RIGHT PANEL - form */}
-      <div className="flex flex-col items-center justify-center min-h-screen md:min-h-auto px-[36px] py-[24px] bg-[#f7f7f5]">
-        <div className="bg-white border-[#E0E0E0] border-[1px] border-solid rounded-[20px] shadow-[0px_16px_45px_rgba(35,45,63,0.12)] px-[40px] py-[44px] w-full max-w-[590px] h-[463px]">
+      {/* RIGHT PANEL - Sign In Form */}
+      <div className="flex items-center justify-center p-6 md:p-9 bg-[#f7f7f5]">
+        <div className="w-full max-w-[590px] bg-white rounded-[20px] border border-[#e0e0e0] shadow-[0px_16px_22.5px_rgba(35,45,63,0.12)] px-11 py-10">
           {/* HEADER */}
-          <div className="flex flex-col items-center w-full mb-[28px]">
-            <h1 className="font-bold text-[26px] text-[#232D3F] w-full text-center tracking-[-0.39px] leading-[39px]" style={{ fontFamily: "'Farro Bold', sans-serif" }}>
+          <div className="flex flex-col items-center mb-7">
+            <h1 className="text-[26px] font-bold text-[#232d3f] leading-[39px] tracking-[-0.39px] text-center">
               Sign in
             </h1>
+            <p className="text-[14px] font-normal text-[#55657b] leading-[21px] text-center mt-2">
+              Welcome back! Please enter your details.
+            </p>
           </div>
 
-          {/* Error Alert */}
+          {/* ERROR ALERT */}
           {error && (
-            <Alert
-              variant="error"
-              title="Authentication failed"
-              className="mb-[28px]"
-            >
+            <div className="w-full mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
               {error}
-            </Alert>
+            </div>
           )}
 
           {/* FORM */}
-          <form onSubmit={handleSubmit} className="flex flex-col gap-[16px]" style={{ fontFamily: "'Inter', sans-serif" }}>
+          <form onSubmit={handleSubmit} className="w-full">
             {/* EMAIL FIELD */}
-            <div>
-              <label className="font-bold text-[#55657b] text-[14px]" style={{ fontFamily: "'Inter', sans-serif" }}>
-                Email <span className="text-[#eb7900]">*</span>
+            <div className="mb-4">
+              <label className="block text-[11px] font-bold text-[#55657b] uppercase tracking-[0.66px] pb-1.5">
+                Email
               </label>
-              <Input
+              <input
                 type="email"
-                name="email"
-                label="Email"
                 placeholder="you@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={isSubmitting}
                 required
-                className="h-[44.167px] !rounded-[8px] !border-[#e0e0e0]"
+                className="w-full h-11 px-3.5 py-2.75 bg-white border border-[#e0e0e0] rounded-lg text-[13px] text-[rgba(35,45,63,0.5)] placeholder-[rgba(35,45,63,0.5)] focus:outline-none focus:border-[#FF6A00] focus:ring-1 focus:ring-[rgba(255,106,0,0.1)] disabled:opacity-60"
               />
             </div>
 
             {/* PASSWORD FIELD */}
-            <div>
-              <div className="flex items-center justify-between mb-[6px]">
-                <label className="font-bold text-[#55657b] text-[14px]" style={{ fontFamily: "'Inter', sans-serif" }}>
-                  Password <span className="text-[#eb7900]">*</span>
+            <div className="mb-6">
+              <div className="flex items-center justify-between pb-1.5">
+                <label className="text-[11px] font-bold text-[#55657b] uppercase tracking-[0.66px]">
+                  Password
                 </label>
+                <button
+                  type="button"
+                  onClick={handleForgotPassword}
+                  disabled={isSubmitting}
+                  className="text-[12px] font-bold text-[#ff6a00] hover:underline focus:outline-none disabled:opacity-60"
+                >
+                  Forgot password?
+                </button>
               </div>
-              <div className="relative h-[44.167px] w-full">
-                <Input
+              <div className="relative">
+                <input
                   type={showPassword ? 'text' : 'password'}
-                  name="password"
-                  label="Password"
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   disabled={isSubmitting}
                   required
-                  className="h-full !rounded-[8px] !border-[#e0e0e0] pr-[44px] pl-[14px]"
+                  className="w-full h-11 px-3.5 py-2.75 bg-white border border-[#e0e0e0] rounded-lg text-[13px] text-[rgba(35,45,63,0.5)] placeholder-[rgba(35,45,63,0.5)] focus:outline-none focus:border-[#FF6A00] focus:ring-1 focus:ring-[rgba(255,106,0,0.1)] disabled:opacity-60"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   disabled={isSubmitting}
-                  className="absolute left-[444.11px] top-[13.58px] font-bold text-[#55657b] text-[14px] focus:outline-none"
-                  style={{ width: '88.729px', fontFamily: "'Inter', sans-serif" }}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[11px] font-bold text-[#55657b] hover:text-[#232d3f] focus:outline-none disabled:opacity-60"
                 >
-                  {showPassword ? 'Hide password' : 'Show password'}
+                  {showPassword ? 'Hide' : 'Show'}
                 </button>
               </div>
             </div>
 
             {/* SUBMIT BUTTON */}
-            <div className="mt-[20px]">
-              <Button
-                type="submit"
-                variant="primary"
-                size="medium"
-                disabled={isSubmitting || !email || !password}
-                fullWidth
-                className="!bg-[#EB7900] !rounded-[10px] !py-[13px] !w-full"
-              >
-                {isSubmitting ? 'Signing in...' : 'Sign in'}
-              </Button>
-            </div>
+            <button
+              type="submit"
+              disabled={isSubmitting || !email || !password}
+              className="w-full py-3 px-4 bg-gradient-to-r from-[#FFC01E] via-[#FF6A00] to-[#E01F26] rounded-[10px] text-white font-extrabold text-[14px] leading-[21px] hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:shadow-md transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {isSubmitting ? 'Signing in...' : 'Sign in'}
+            </button>
 
             {/* SIGN UP LINK */}
-            <div className="flex flex-col items-center pb-[18px] pt-[16px] mt-4" style={{ fontFamily: "'Inter', sans-serif" }}>
-              <p className="text-[#55657b] text-[14px] text-center mb-0">
-                Don't have an account?{' '}
-                <button
-                  type="button"
-                  onClick={handleNavigateToSignUp}
-                  disabled={isSubmitting}
-                  className="font-bold text-[#EB7900] text-[14px] ml-1 hover:underline disabled:opacity-60 disabled:cursor-not-allowed focus:outline-none"
-                  style={{ fontFamily: "'Inter', sans-serif" }}
-                >
-                  Sign up
-                </button>
-              </p>
+            <div className="flex items-center justify-center gap-1 mt-6 pt-4 border-t border-gray-100">
+              <p className="text-[12px] text-[#55657b]">Don't have an account?</p>
+              <button
+                type="button"
+                onClick={handleNavigateToSignUp}
+                disabled={isSubmitting}
+                className="text-[12px] font-bold text-[#ff6a00] hover:underline focus:outline-none disabled:opacity-60"
+              >
+                Sign up
+              </button>
             </div>
           </form>
         </div>

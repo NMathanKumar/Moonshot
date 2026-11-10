@@ -1,0 +1,177 @@
+﻿
+> iet-ui-testtaker@0.1.0 test:integration
+> vitest run --config vitest.config.integration.ts
+
+[vitest.config.integration] Loaded VITE_ vars from .env.development
+node.exe : [vitest.config.integration] Warning: 
+.env.test-integration not found at C:\Users\mathankumar.n\D
+ownloads\HST_IDP\iet-ui-testtaker-1\.env.test-integration
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([vitest.confi 
+   g....est-integration:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[vitest.config.integration] Integration tests will skip 
+credential-based tests
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90mC:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1[39m
+
+[90mstdout[2m | loadEnvForIntegration (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\tests\integration\setup.ts:36:11)[22m[39m
+[Integration Tests] Loaded environment variables: {
+  VITE_COGNITO_REGION: [32m'ap-southeast-1'[39m,
+  VITE_COGNITO_USER_POOL_ID: [32m'ap-southeast-1_OyLXCWR59'[39m,
+  VITE_COGNITO_USER_POOL_CLIENT_ID: [32m'5vb0inbm5cson031am1buja73i'[39m,
+  VITE_API_BASE_URL: [32m'https://hih3u10m2i.execute-api.ap-southeast-1.amazonaws.com/dev'[39m
+}
+
+[90mstdout[2m | tests\integration\setup.ts:55:9[22m[39m
+[Integration Tests] Amplify initialized with DEV Cognito pool
+
+[90mstdout[2m | loadEnvForIntegration (C:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\tests\integration\setup.ts:36:11)[22m[39m
+[Integration Tests] Loaded environment variables: {
+  VITE_COGNITO_REGION: [32m'ap-southeast-1'[39m,
+  VITE_COGNITO_USER_POOL_ID: [32m'ap-southeast-1_OyLXCWR59'[39m,
+  VITE_COGNITO_USER_POOL_CLIENT_ID: [32m'5vb0inbm5cson031am1buja73i'[39m,
+  VITE_API_BASE_URL: [32m'https://hih3u10m2i.execute-api.ap-southeast-1.amazonaws.com/dev'[39m
+}
+
+[90mstdout[2m | tests\integration\setup.ts:55:9[22m[39m
+[Integration Tests] Amplify initialized with DEV Cognito pool
+
+ [33mΓ¥»[39m tests/integration/auth.integration.test.ts [2m ([22m[2m2 tests[22m [2m|[22m [31m1 failed[39m[2m)[22m[90m 4[2mms[22m[39m
+[31m   [33mΓ¥»[31m tests/integration/auth.integration.test.ts[2m > [22mCognito Auth Integration[2m > [22mSign In Flow[2m > [22mSigns in with valid credentials and obtains access token[39m
+[31m     ΓåÆ Test credentials not configured. Set environment variables:
+  COGNITO_TEST_EMAIL=<valid-test-email>
+  COGNITO_TEST_PASSWORD=<valid-test-password>[39m
+ [33mΓ¥»[39m tests/integration/api.integration.test.ts [2m ([22m[2m3 tests[22m [2m|[22m [31m1 failed[39m [2m|[22m [33m1 skipped[39m[2m)[22m[90m 4[2mms[22m[39m
+[31m   [33mΓ¥»[31m tests/integration/api.integration.test.ts[2m > [22mEnrolment Service Integration Tests[2m > [22mPublic Endpoints[2m > [22mGET /public/v1/health returns 200[39m
+[31m     ΓåÆ Cannot read properties of undefined (reading 'replace')[39m
+
+[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[1m[7m Failed Suites 2 
+[27m[22mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+tests/integration/api.integration.test.ts[2m > 
+[22mEnrolment Service Integration Tests[2m > 
+[22mAuthenticated Endpoints (read-only)
+[31m[1mError[22m: Test credentials not configured. Set 
+environment variables:
+  COGNITO_TEST_EMAIL=<valid-test-email>
+  COGNITO_TEST_PASSWORD=<valid-test-password>[39m
+[36m [2mΓ¥»[22m Module.getTestCredentials 
+tests/integration/setup.ts:[2m95:11[22m[39m
+    [90m 93| [39m  
+    [90m 94| [39m  [35mif[39m ([33m![39memail 
+[33m||[39m [33m![39mpassword) {
+    [90m 95| [39m    [35mthrow[39m [35mnew[39m 
+[33mError[39m(
+    [90m   | [39m          [31m^[39m
+    [90m 96| [39m      [32m'Test credentials not 
+configured. Set environment variables:\n'[39m [33m+[39m
+    [90m 97| [39m      [32m'  
+COGNITO_TEST_EMAIL=<valid-test-email>\n'[39m [33m+[39m
+[90m [2mΓ¥»[22m tests/integration/api.integration.test.t
+s:[2m60:27[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ
+»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[1/4]ΓÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+tests/integration/auth.integration.test.ts[2m > 
+[22mCognito Auth Integration[2m > [22mSession 
+Persistence
+[31m[1mError[22m: Test credentials not configured. Set 
+environment variables:
+  COGNITO_TEST_EMAIL=<valid-test-email>
+  COGNITO_TEST_PASSWORD=<valid-test-password>[39m
+[36m [2mΓ¥»[22m Module.getTestCredentials 
+tests/integration/setup.ts:[2m95:11[22m[39m
+    [90m 93| [39m  
+    [90m 94| [39m  [35mif[39m ([33m![39memail 
+[33m||[39m [33m![39mpassword) {
+    [90m 95| [39m    [35mthrow[39m [35mnew[39m 
+[33mError[39m(
+    [90m   | [39m          [31m^[39m
+    [90m 96| [39m      [32m'Test credentials not 
+configured. Set environment variables:\n'[39m [33m+[39m
+    [90m 97| [39m      [32m'  
+COGNITO_TEST_EMAIL=<valid-test-email>\n'[39m [33m+[39m
+[90m [2mΓ¥»[22m tests/integration/auth.integration.test.
+ts:[2m68:27[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ
+»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[2/4]ΓÄ»[22m[39m
+
+[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[1m[7m Failed Tests 2 
+[27m[22mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+tests/integration/api.integration.test.ts[2m > 
+[22mEnrolment Service Integration Tests[2m > [22mPublic 
+Endpoints[2m > [22mGET /public/v1/health returns 200
+[31m[1mTypeError[22m: Cannot read properties of 
+undefined (reading 'replace')[39m
+[36m [2mΓ¥»[22m buildUrl 
+src/services/apiClient.ts:[2m81:44[22m[39m
+[2m Test Files [22m [1m[31m2 failed[39m[22m[90m (2)[39m
+[2m      Tests [22m [1m[31m2 failed[39m[22m[2m | [22m[33m1 skipped[39m[90m (5)[39m
+[2m   Start at [22m 18:19:22
+[2m   Duration [22m 2.48s[2m (transform 111ms, setup 2.59s, collect 191ms, tests 8ms, environment 0ms, prepare 1.47s)[22m
+
+    [90m 79| [39m[35mfunction[39m 
+[34mbuildUrl[39m(path[33m:[39m string)[33m:[39m 
+string {
+    [90m 80| [39m  [35mconst[39m { 
+[33mVITE_API_BASE_URL[39m } [33m=[39m 
+[34mgetEnv[39m()[33m;[39m
+    [90m 81| [39m  [35mconst[39m normalizedBase 
+[33m=[39m [33mVITE_API_BASE_URL[39m[33m.[39m[34mrepl
+ace[39m([36m/\/+$/[39m[33m,[39m 
+[32m''[39m)[33m;[39m
+    [90m   | [39m                                        
+   [31m^[39m
+    [90m 82| [39m  [35mconst[39m normalizedPath 
+[33m=[39m path[33m.[39m[34mreplace[39m([36m/^\/+/[3
+9m[33m,[39m [32m''[39m)[33m;[39m
+    [90m 83| [39m  [35mreturn[39m [32m`[39m[36m${[3
+9mnormalizedBase[36m}[39m[32m/[39m[36m${[39mnormalize
+dPath[36m}[39m[32m`[39m[33m;[39m
+[90m [2mΓ¥»[22m Module.apiRequest 
+src/services/apiClient.ts:[2m125:15[22m[39m
+[90m [2mΓ¥»[22m tests/integration/api.integration.test.t
+s:[2m40:30[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ
+»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[3/4]ΓÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+tests/integration/auth.integration.test.ts[2m > 
+[22mCognito Auth Integration[2m > [22mSign In Flow[2m 
+> [22mSigns in with valid credentials and obtains access 
+token
+[31m[1mError[22m: Test credentials not configured. Set 
+environment variables:
+  COGNITO_TEST_EMAIL=<valid-test-email>
+  COGNITO_TEST_PASSWORD=<valid-test-password>[39m
+[36m [2mΓ¥»[22m Module.getTestCredentials 
+tests/integration/setup.ts:[2m95:11[22m[39m
+    [90m 93| [39m  
+    [90m 94| [39m  [35mif[39m ([33m![39memail 
+[33m||[39m [33m![39mpassword) {
+    [90m 95| [39m    [35mthrow[39m [35mnew[39m 
+[33mError[39m(
+    [90m   | [39m          [31m^[39m
+    [90m 96| [39m      [32m'Test credentials not 
+configured. Set environment variables:\n'[39m [33m+[39m
+    [90m 97| [39m      [32m'  
+COGNITO_TEST_EMAIL=<valid-test-email>\n'[39m [33m+[39m
+[90m [2mΓ¥»[22m tests/integration/auth.integration.test.
+ts:[2m29:27[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ
+»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[4/4]ΓÄ»[22m[39m
+

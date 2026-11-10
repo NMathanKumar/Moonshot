@@ -262,3 +262,17 @@ export async function getCurrentUser() {
     return null;
   }
 }
+
+/**
+ * Fetch the current auth session
+ * Returns session object with access token if authenticated
+ * Used to verify that user has a valid access token for API calls
+ */
+export async function getAuthSession() {
+  try {
+    return await fetchAuthSession();
+  } catch (error) {
+    console.error('getAuthSession error:', error);
+    return null;
+  }
+}

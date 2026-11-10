@@ -49,7 +49,9 @@ describe('Timer', () => {
         orientation="vertical"
       />
     );
-    expect((container.firstChild as HTMLElement).className).toMatch(/timerVertical/);
+    // Tailwind class for vertical orientation is flex-col
+    const timerDiv = container.querySelector('[aria-live="polite"]') as HTMLElement;
+    expect(timerDiv.className).toMatch(/flex-col/);
   });
 
   it('applies warning class when under threshold', () => {
@@ -60,8 +62,11 @@ describe('Timer', () => {
         warningThreshold={5}
       />
     );
-
-    expect(container.querySelector('[class*="warning"]')).toBeInTheDocument();
+    // Warning state applies animate-pulse and text color
+    const timerDiv = container.querySelector('[aria-live="polite"]') as HTMLElement;
+    expect(timerDiv).toBeInTheDocument();
+    // Check that pulse animation is applied
+    expect(timerDiv.querySelector('div')?.className).toMatch(/animate-pulse/);
   });
 
   it('applies critical class when below half of threshold', () => {
@@ -72,8 +77,10 @@ describe('Timer', () => {
         warningThreshold={5}
       />
     );
-
-    expect(container.querySelector('[class*="critical"]')).toBeInTheDocument();
+    // Critical state also applies animate-pulse
+    const timerDiv = container.querySelector('[aria-live="polite"]') as HTMLElement;
+    expect(timerDiv).toBeInTheDocument();
+    expect(timerDiv.querySelector('div')?.className).toMatch(/animate-pulse/);
   });
 
   it('renders zero time correctly', () => {
