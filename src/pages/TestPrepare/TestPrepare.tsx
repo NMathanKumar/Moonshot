@@ -156,7 +156,7 @@ export default function TestPrepare() {
           </div>
           <div className="rounded-lg border border-yellow-400 bg-yellow-50 px-4 py-3.5 text-xs leading-relaxed text-yellow-900">
             <strong>You can only take this test once.</strong> Once submitted, you cannot return to
-            your answers. Make sure you're fully prepared before starting.
+            your answers. Make sure you&apos;re fully prepared before starting.
           </div>
         </div>
 

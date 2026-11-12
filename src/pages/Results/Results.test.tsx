@@ -53,19 +53,10 @@ describe('Results', () => {
     });
     
     // Click on the second report button to make it active
-    // There are multiple buttons on the page, so we need to find the one for the second report
     const reportButtons = screen.getAllByRole('button');
-    // The second report's button should have "IDP-ENG-3PQ2-5R8W" in its key
-    // Since the certId is not visible in the report card, we need to find it another way
-    // Let's click on the button that has "View report →" text and is not the first one
-    
-    // Actually, the certId is only visible in the report header when the report is active
-    // So we need to find the second report card and click on it
-    const reportCards = screen.getAllByRole('button');
-    
     // Find the second report card by its position
-    if (reportCards.length > 1) {
-      fireEvent.click(reportCards[1]);
+    if (reportButtons.length > 1) {
+      fireEvent.click(reportButtons[1]);
     }
     
     // Now check second certId (active report)
@@ -78,8 +69,9 @@ describe('Results', () => {
   it('shows completed and cancelled status badges', async () => {
     renderPage();
     await waitFor(() => {
-      expect(screen.getByText(/completed/i)).toBeInTheDocument();
-      expect(screen.getByText(/cancelled/i)).toBeInTheDocument();
+      // Multiple "completed" and "cancelled" badges exist - use getAllByText
+      expect(screen.getAllByText(/completed/i).length).toBeGreaterThan(0);
+      expect(screen.getAllByText(/cancelled/i).length).toBeGreaterThan(0);
     });
   });
 
@@ -88,8 +80,9 @@ describe('Results', () => {
     await waitFor(() => {
       expect(screen.getByText(/overall score/i)).toBeInTheDocument();
       expect(screen.getByText(/78/i)).toBeInTheDocument();
-      expect(screen.getByText(/\/120/i)).toBeInTheDocument();
-      expect(screen.getByText(/B2/i)).toBeInTheDocument();
+      // "/120" may appear multiple times, use getAllByText
+      expect(screen.getAllByText(/\/120/i).length).toBeGreaterThan(0);
+      expect(screen.getAllByText(/B2/i).length).toBeGreaterThan(0);
     });
   });
 
@@ -103,18 +96,18 @@ describe('Results', () => {
   it('shows skill cards for all four skills', async () => {
     renderPage();
     await waitFor(() => {
-      expect(screen.getByText(/reading/i)).toBeInTheDocument();
-      expect(screen.getByText(/listening/i)).toBeInTheDocument();
-      expect(screen.getByText(/writing/i)).toBeInTheDocument();
-      expect(screen.getByText(/speaking/i)).toBeInTheDocument();
+      expect(screen.getAllByText(/reading/i).length).toBeGreaterThan(0);
+      expect(screen.getAllByText(/listening/i).length).toBeGreaterThan(0);
+      expect(screen.getAllByText(/writing/i).length).toBeGreaterThan(0);
+      expect(screen.getAllByText(/speaking/i).length).toBeGreaterThan(0);
     });
   });
 
   it('shows CEFR level for each skill', async () => {
     renderPage();
     await waitFor(() => {
-      expect(screen.getByText(/C1/i)).toBeInTheDocument();
-      expect(screen.getByText(/B2/i)).toBeInTheDocument();
+      expect(screen.getAllByText(/C1/i).length).toBeGreaterThan(0);
+      expect(screen.getAllByText(/B2/i).length).toBeGreaterThan(0);
     });
   });
 

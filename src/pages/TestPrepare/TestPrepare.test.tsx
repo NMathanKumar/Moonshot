@@ -42,7 +42,8 @@ describe('TestPrepare', () => {
     // There are multiple elements with "microphone" text, use getAllByText
     const microphoneEls = screen.getAllByText(/microphone/i);
     expect(microphoneEls.length).toBeGreaterThan(0);
-    expect(screen.getByText(/stable internet connection/i)).toBeInTheDocument();
+    // "stable internet connection" appears multiple times in the page
+    expect(screen.getAllByText(/stable internet connection/i).length).toBeGreaterThan(0);
     expect(screen.getByText(/camera \(proctoring\)/i)).toBeInTheDocument();
     expect(screen.getByText(/quiet environment/i)).toBeInTheDocument();
   });
@@ -75,9 +76,10 @@ describe('TestPrepare', () => {
     expect(screen.getByRole('heading', { name: /environment reminders/i })).toBeInTheDocument();
     expect(screen.getByText(/identity document on your desk/i)).toBeInTheDocument();
     expect(screen.getByText(/quiet.*private room/i)).toBeInTheDocument();
-    // "desk clear" appears in multiple places, use getAllByText
-    expect(screen.getAllByText(/desk clear/i).length).toBeGreaterThan(0);
-    expect(screen.getByText(/stable internet connection/i)).toBeInTheDocument();
+    // Check for the full text about clear desk
+    expect(screen.getByText(/your desk is clear/i)).toBeInTheDocument();
+    // "stable internet connection" appears multiple times
+    expect(screen.getAllByText(/stable internet connection/i).length).toBeGreaterThan(0);
   });
 
   it('renders environment confirmation checkboxes', () => {

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@hooks/useAuth';
-import AppShell from '../layouts/AppShell';
+import AppShell from '../../layouts/AppShell';
 import { Button } from '@components/common/Button';
 import { Input } from '@components/common/Input';
 import { Card } from '@components/common/Card';

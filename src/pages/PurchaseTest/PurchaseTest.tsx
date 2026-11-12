@@ -24,7 +24,6 @@ const faqs = [
   { q: 'Where is the test accepted?', a: 'Over 2,000 institutions and organisations worldwide. Use the search above to find yours.' },
 ];
 
-const CHECKOUT_FEATURES = ['Four skills, one sitting', 'Results in 48 hours', 'Certified in days', 'Recognised worldwide'];
 const TEST_FEATURES = ['Four skills, one sitting', 'Results in 48 hours', 'Certified in days', 'Recognised worldwide'];
 const PRACTICE_FEATURES = [
   'Practise all four skills',
@@ -117,7 +116,7 @@ export default function PurchaseTest() {
               estimated score, and go at your own pace.
             </p>
             <p className="text-[11px] font-bold text-[#232d3f] uppercase tracking-[0.08em] mb-2.5">
-              What's included
+              What&apos;s included
             </p>
             <div className="flex flex-col gap-2 mb-6 flex-1">
               {PRACTICE_FEATURES.map((f) => (
@@ -228,7 +227,7 @@ export default function PurchaseTest() {
           {/* Nomination Footer */}
           <div className="mt-4 text-center">
             <p className="text-[12px] text-[#55657b] mb-2">
-              Don't see your institution?
+              Don&apos;t see your institution?
             </p>
             <button
               type="button"

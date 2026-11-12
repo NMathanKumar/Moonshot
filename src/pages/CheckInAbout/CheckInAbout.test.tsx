@@ -42,8 +42,9 @@ describe('CheckInAbout', () => {
     // Check that progress indicator elements exist
     expect(screen.getByText('1')).toBeInTheDocument();
     expect(screen.getByText('2')).toBeInTheDocument();
-    expect(screen.getByText(/about you/i)).toBeInTheDocument();
-    expect(screen.getByText(/identity check/i)).toBeInTheDocument();
+    // "about you" and "identity check" may appear multiple times in progress indicator and button
+    expect(screen.getAllByText(/about you/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/identity check/i).length).toBeGreaterThan(0);
   });
 
   it('renders all form fields', () => {

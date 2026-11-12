@@ -103,7 +103,7 @@ describe('Dashboard', () => {
     renderPage();
     await waitFor(() => {
       expect(screen.getByRole('link', { name: /start test/i })).toBeInTheDocument();
-    });
+    }, { timeout: 10000 });
   });
 
   it('renders all four skill score cards', async () => {

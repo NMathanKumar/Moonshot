@@ -6,15 +6,15 @@ import { useNavigate, Routes, Route, Navigate } from 'react-router-dom';
 import { SignIn } from '@components/auth/SignIn';
 import { SignUp } from '@components/auth/SignUp';
 import { ConfirmSignUp } from '@components/auth/ConfirmSignUp';
-import Dashboard from '../pages/Dashboard';
-import Results from '../pages/Results';
-import PurchaseTest from '../pages/PurchaseTest';
-import Checkout from '../pages/Checkout';
-import Settings from '../pages/Settings';
-import Practice from '../pages/Practice';
-import TestPrepare from '../pages/TestPrepare';
-import CheckInAbout from '../pages/CheckInAbout';
-import CheckInIdentity from '../pages/CheckInIdentity';
+import Dashboard from '../pages/Dashboard/Dashboard';
+import Results from '../pages/Results/Results';
+import PurchaseTest from '../pages/PurchaseTest/PurchaseTest';
+import Checkout from '../pages/Checkout/Checkout';
+import Settings from '../pages/Settings/Settings';
+import Practice from '../pages/Practice/Practice';
+import TestPrepare from '../pages/TestPrepare/TestPrepare';
+import CheckInAbout from '../pages/CheckInAbout/CheckInAbout';
+import CheckInIdentity from '../pages/CheckInIdentity/CheckInIdentity';
 import {
   signIn as authSignIn,
   getCurrentUser,

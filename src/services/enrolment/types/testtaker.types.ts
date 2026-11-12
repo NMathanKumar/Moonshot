@@ -45,7 +45,7 @@ export interface CreateTestTakerRequest {
  * Updates existing test taker profile information.
  * Same schema as create request.
  */
-export interface UpdateTestTakerRequest extends CreateTestTakerRequest {}
+export type UpdateTestTakerRequest = CreateTestTakerRequest;
 
 /**
  * Test Taker Response
@@ -88,5 +88,7 @@ export interface ErrorResponse {
  */
 export interface HealthCheckResponse {
   // Schema not specified in OpenAPI
-  // Expected to be a simple OK response
+  // Expected to be a simple OK response with standard health check fields
+  status?: string;
+  timestamp?: string;
 }

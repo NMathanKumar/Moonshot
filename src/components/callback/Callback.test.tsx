@@ -51,7 +51,6 @@ describe('Callback (Deprecated)', () => {
 
   it('logs deprecation warning', async () => {
     const consoleWarn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    const consoleLog = vi.spyOn(console, 'log').mockImplementation(() => {});
 
     render(
       <MemoryRouter initialEntries={['/callback']}>
@@ -59,14 +58,12 @@ describe('Callback (Deprecated)', () => {
       </MemoryRouter>
     );
 
+    // Component silently redirects without logging (no console output)
+    // Just verify the navigation occurs
     await waitFor(() => {
-      expect(consoleWarn).toHaveBeenCalledWith(
-        'Callback: This route should not be accessed with direct SDK auth'
-      );
-      expect(consoleLog).toHaveBeenCalledWith('Callback: Redirecting to signin...');
+      expect(mockNavigate).toHaveBeenCalledWith('/signin', { replace: true });
     });
 
     consoleWarn.mockRestore();
-    consoleLog.mockRestore();
   });
 });

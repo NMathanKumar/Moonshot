@@ -141,7 +141,7 @@ export function ConfirmSignUp({ onSubmit }: ConfirmSignUpProps) {
 
           {/* Resend section */}
           <div className="flex justify-center items-center gap-1.25 mt-5 text-[#55657b] text-xs">
-            <span>Didn't receive the code?</span>
+            <span>Didn&apos;t receive the code?</span>
             <button 
               type="button" 
               onClick={handleResend} 

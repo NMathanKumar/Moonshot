@@ -175,7 +175,7 @@ export function SignIn({ onSubmit }: SignInProps) {
 
           {/* Sign Up Link */}
           <div className="text-center">
-            <span className="text-[10px] sm:text-[11px] md:text-[12px] text-[#55657b]">Don't have an account? </span>
+            <span className="text-[10px] sm:text-[11px] md:text-[12px] text-[#55657b]">Don&apos;t have an account? </span>
             <button
               type="button"
               onClick={handleNavigateToSignUp}

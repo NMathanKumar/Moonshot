@@ -99,7 +99,7 @@ export default function Dashboard() {
             Welcome back, {firstName}
           </h1>
           <p className="text-[14px] text-[#55657b] m-0">
-            Here's an overview of your IDP English Test journey.
+            Here&apos;s an overview of your IDP English Test journey.
           </p>
         </div>
 
@@ -271,7 +271,7 @@ export default function Dashboard() {
         {/* What's Next Section */}
         <div className="bg-white rounded-2xl px-7 py-6 border border-[#dde2e7]">
           <h2 className="text-[16px] font-black text-[#232d3f] mb-4 leading-tight">
-            What's next?
+            What&apos;s next?
           </h2>
           <div className="flex flex-col gap-3">
             {NEXT_STEPS.map((item) => (
