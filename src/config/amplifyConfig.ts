@@ -11,11 +11,6 @@ import { getEnv } from './env';
 const { VITE_COGNITO_USER_POOL_ID, VITE_COGNITO_USER_POOL_CLIENT_ID, VITE_COGNITO_REGION } =
   getEnv();
 
-console.log('amplifyConfig: Loading configuration...');
-console.log('amplifyConfig: Region:', VITE_COGNITO_REGION);
-console.log('amplifyConfig: User Pool ID:', VITE_COGNITO_USER_POOL_ID);
-console.log('amplifyConfig: Client ID:', VITE_COGNITO_USER_POOL_CLIENT_ID);
-
 /**
  * Amplify v6 configuration for direct SDK authentication
  *
@@ -45,9 +40,7 @@ const amplifyConfig = {
  * Call this once at app entry point before using any Amplify services
  */
 export function initializeAmplify(): void {
-  console.log('amplifyConfig: Initializing Amplify with config:', amplifyConfig);
   Amplify.configure(amplifyConfig);
-  console.log('amplifyConfig: Amplify initialized successfully');
 }
 
 export { amplifyConfig };

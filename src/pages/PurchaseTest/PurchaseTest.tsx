@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AppIcon from '@components/AppIcon';
 import { useAuth } from '@hooks/useAuth';
 import AppShell from '../../layouts/AppShell';
@@ -24,6 +24,7 @@ const faqs = [
   { q: 'Where is the test accepted?', a: 'Over 2,000 institutions and organisations worldwide. Use the search above to find yours.' },
 ];
 
+const CHECKOUT_FEATURES = ['Four skills, one sitting', 'Results in 48 hours', 'Certified in days', 'Recognised worldwide'];
 const TEST_FEATURES = ['Four skills, one sitting', 'Results in 48 hours', 'Certified in days', 'Recognised worldwide'];
 const PRACTICE_FEATURES = [
   'Practise all four skills',
@@ -31,199 +32,12 @@ const PRACTICE_FEATURES = [
   'Complete the test in your own time',
   'Feel more confident on test day',
 ];
-const CHECKOUT_FEATURES = [
-  'A clear score, mapped to CEFR',
-  'Reviewed by certified assessors',
-  'Accepted by institutions around the globe',
-  'Certified in days',
-];
-
-const inputStyle: React.CSSProperties = {
-  padding: '10px 14px',
-  borderRadius: 8,
-  border: '1.5px solid var(--border)',
-  background: 'white',
-  fontSize: 13,
-  color: 'var(--color-ink)',
-  outline: 'none',
-  fontFamily: 'Inter, sans-serif',
-  width: '100%',
-};
-
-const labelStyle: React.CSSProperties = {
-  fontSize: 11,
-  fontWeight: 700,
-  color: 'var(--color-slate)',
-  textTransform: 'uppercase',
-  letterSpacing: '0.06em',
-  display: 'block',
-  marginBottom: 6,
-};
-
-function Checkout({ onBack }: { onBack: () => void }) {
-  return (
-    <div style={{ maxWidth: '100%', width: '100%', padding: '0 16px', margin: '0 auto', paddingBottom: 48 }}>
-      <div style={{ maxWidth: 520, margin: '0 auto' }}>
-      <button
-        type="button"
-        onClick={onBack}
-        style={{
-          background: 'none',
-          border: 'none',
-          fontSize: 13,
-          fontWeight: 600,
-          color: 'var(--color-slate)',
-          cursor: 'pointer',
-          marginBottom: 24,
-          padding: 0,
-        }}
-      >
-        ← Back
-      </button>
-      <h1 style={{ fontSize: 22, fontWeight: 900, color: 'var(--color-ink)', marginBottom: 4 }}>
-        Checkout
-      </h1>
-      <p style={{ fontSize: 13, color: 'var(--color-slate)', marginBottom: 28 }}>
-        IDP English Test · One-time access
-      </p>
-
-      <div
-        style={{
-          background: 'var(--color-cream)',
-          borderRadius: 14,
-          padding: '20px 22px',
-          border: '1.5px solid #FF6A0025',
-          marginBottom: 24,
-        }}
-      >
-        <div className="flex items-center justify-between mb-2">
-          <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--color-ink)' }}>
-            IDP English Test
-          </span>
-          <span style={{ fontSize: 16, fontWeight: 900, color: 'var(--color-ink)' }}>$89 AUD</span>
-        </div>
-        <div style={{ fontSize: 12, color: 'var(--color-slate)' }}>
-          ONE TIME TEST · UP TO 80 MINS · Results in 48 hours
-        </div>
-        <div style={{ marginTop: 12, paddingTop: 12, borderTop: '1px solid #FF6A0020' }}>
-          <div
-            style={{
-              fontSize: 11,
-              color: 'var(--color-slate)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 4,
-            }}
-          >
-            {CHECKOUT_FEATURES.map((f) => (
-              <div key={f} className="flex items-center gap-2">
-                <span style={{ color: '#FF6A00' }}>✓</span> {f}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginBottom: 24 }}>
-        <div style={{ borderTop: '1.5px solid var(--border)', paddingTop: 20, marginTop: 6 }}>
-          <h2 style={{ fontSize: 15, fontWeight: 800, color: 'var(--color-ink)' }}>
-            Payment information
-          </h2>
-        </div>
-        <div>
-          <label htmlFor="card-number" style={labelStyle}>
-            Card Number
-          </label>
-          <input
-            id="card-number"
-            inputMode="numeric"
-            autoComplete="cc-number"
-            placeholder="1234 5678 9012 3456"
-            style={inputStyle}
-          />
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 12 }}>
-          <div>
-            <label htmlFor="card-expiry" style={labelStyle}>
-              Expiry
-            </label>
-            <input
-              id="card-expiry"
-              autoComplete="cc-exp"
-              placeholder="MM / YY"
-              style={inputStyle}
-            />
-          </div>
-          <div>
-            <label htmlFor="card-cvv" style={labelStyle}>
-              CVV
-            </label>
-            <input
-              id="card-cvv"
-              type="password"
-              inputMode="numeric"
-              autoComplete="cc-csc"
-              placeholder="•••"
-              style={inputStyle}
-            />
-          </div>
-        </div>
-        <div>
-          <label htmlFor="card-name" style={labelStyle}>
-            Name on card
-          </label>
-          <input
-            id="card-name"
-            autoComplete="cc-name"
-            placeholder="Agnes Lee"
-            style={inputStyle}
-          />
-        </div>
-      </div>
-
-      <div className="flex items-center gap-2" style={{ marginBottom: 20 }}>
-        <input
-          type="checkbox"
-          id="terms"
-          style={{ width: 16, height: 16 }}
-        />
-        <label htmlFor="terms" style={{ fontSize: 12, color: 'var(--color-slate)' }}>
-          I agree to the{' '}
-          <span style={{ color: '#FF6A00', fontWeight: 700 }}>
-            Terms of Service and Privacy Policy
-          </span>
-        </label>
-      </div>
-
-      <button
-        type="button"
-        style={{
-          width: '100%',
-          padding: '14px',
-          borderRadius: 10,
-          border: 'none',
-          background: 'var(--color-action-primary)',
-          color: 'white',
-          fontSize: 15,
-          fontWeight: 800,
-          cursor: 'pointer',
-        }}
-      >
-        Pay $89 AUD
-      </button>
-      <p style={{ fontSize: 11, color: 'var(--color-slate)', textAlign: 'center', marginTop: 12 }}>
-        CONDITIONS APPLY · Secure payment
-      </p>
-      </div>
-    </div>
-  );
-}
 
 export default function PurchaseTest() {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [step, setStep] = useState<'info' | 'checkout'>('info');
 
   const displayName = (user as any)?.given_name || 'Agnes Lee';
   const email = (user as any)?.signInDetails?.loginId || 'a.lee@email.com';
@@ -233,258 +47,140 @@ export default function PurchaseTest() {
     (i) => i.name.toLowerCase().includes(term) || i.country.toLowerCase().includes(term)
   );
 
-  if (step === 'checkout') {
-    return (
-      <AppShell displayName={displayName} email={email}>
-        <Checkout onBack={() => setStep('info')} />
-      </AppShell>
-    );
-  }
+  const handleCheckout = () => {
+    navigate('/checkout', { replace: false });
+  };
 
   return (
     <AppShell displayName={displayName} email={email}>
-      <div style={{ maxWidth: 900, margin: '0 auto', paddingBottom: 48 }}>
-        <div className="flex items-center justify-between mb-8">
+      <div className="max-w-[900px] mx-auto pb-12 px-4 sm:px-6 md:px-4">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-8">
           <div>
             <Link
               to="/dashboard"
-              style={{
-                fontSize: 13,
-                color: 'var(--color-slate)',
-                textDecoration: 'none',
-                fontWeight: 600,
-              }}
+              className="text-[13px] text-[#55657b] no-underline font-semibold"
             >
               ← Dashboard
             </Link>
-            <h1 style={{ fontSize: 24, fontWeight: 900, color: 'var(--color-ink)', marginTop: 8 }}>
+            <h1 className="text-[24px] font-black text-[#232d3f] mt-2">
               Purchase Test
             </h1>
-            <p style={{ fontSize: 14, color: 'var(--color-slate)', marginTop: 4 }}>
+            <p className="text-[14px] text-[#55657b] mt-1">
               Prove your English. Open your future.
             </p>
           </div>
         </div>
 
-        {/* Hero pricing */}
-        <div
-          className="ds-grid-2"
-          style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 28 }}
-        >
-          <div
-            style={{
-              background: 'var(--color-cream)',
-              borderRadius: 16,
-              padding: '28px 32px',
-              color: 'var(--color-ink)',
-              border: '1.5px solid #FFC89F',
-              boxShadow: 'var(--shadow-card)',
-              display: 'flex',
-              flexDirection: 'column',
-            }}
-          >
-            <p
-              style={{
-                fontSize: 11,
-                fontWeight: 700,
-                color: 'var(--color-ink)',
-                textTransform: 'uppercase',
-                letterSpacing: '0.1em',
-                marginBottom: 12,
-              }}
-            >
+        {/* Hero Pricing Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-7">
+          {/* Test Card */}
+          <div className="bg-[#fff3ea] rounded-[16px] px-8 py-7 text-[#232d3f] border border-[#FFC89F] shadow-[0_4px_16px_rgba(0,0,0,0.08)] flex flex-col">
+            <p className="text-[11px] font-bold text-[#232d3f] uppercase tracking-[0.1em] mb-3">
               IDP English Test
             </p>
-            <div className="flex items-end gap-2 mb-4">
-              <span
-                style={{
-                  fontSize: 48,
-                  fontWeight: 900,
-                  lineHeight: 1,
-                  color: 'var(--color-action-primary)',
-                }}
-              >
+            <div className="flex items-end gap-2 mb-1">
+              <span className="text-[48px] font-black leading-[1] text-[#FF6A00]">
                 $89
               </span>
-              <span style={{ fontSize: 16, color: 'var(--color-slate)', paddingBottom: 6 }}>
+              <span className="text-[16px] text-[#55657b] pb-1.5">
                 AUD
               </span>
             </div>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 8,
-                marginBottom: 24,
-                flex: 1,
-              }}
-            >
+            <div className="flex flex-col gap-2 mb-6 flex-1">
               {TEST_FEATURES.map((f) => (
                 <div
                   key={f}
-                  className="flex items-center gap-2"
-                  style={{ fontSize: 13, color: 'var(--color-slate)' }}
+                  className="flex items-center gap-2 text-[13px] text-[#55657b]"
                 >
-                  <span style={{ color: 'var(--color-action-primary)', fontWeight: 800 }}>✓</span>{' '}
+                  <span className="text-[#FF6A00] font-black">✓</span>
                   {f}
                 </div>
               ))}
             </div>
             <button
               type="button"
-              onClick={() => setStep('checkout')}
-              style={{
-                width: '100%',
-                padding: '12px',
-                borderRadius: 10,
-                border: 'none',
-                background: 'var(--color-action-primary)',
-                color: 'white',
-                fontSize: 14,
-                fontWeight: 800,
-                cursor: 'pointer',
-              }}
+              onClick={handleCheckout}
+              className="w-full py-3 rounded-[10px] border-none bg-[#FF6A00] text-white text-[14px] font-black cursor-pointer hover:opacity-90 transition-opacity"
             >
               Purchase Test →
             </button>
           </div>
 
-          <div
-            style={{
-              background: 'var(--muted)',
-              borderRadius: 16,
-              padding: '28px 32px',
-              border: '1.5px solid var(--border)',
-              display: 'flex',
-              flexDirection: 'column',
-            }}
-          >
-            <p
-              style={{
-                fontSize: 22,
-                fontWeight: 900,
-                color: 'var(--color-ink)',
-                marginBottom: 4,
-              }}
-            >
+          {/* Practice Card */}
+          <div className="bg-[#f5f5f5] rounded-[16px] px-8 py-7 border border-[#e0e0e0] flex flex-col">
+            <p className="text-[22px] font-black text-[#232d3f] mb-1">
               Practice for free
             </p>
-            <p
-              style={{
-                fontSize: 13,
-                color: 'var(--color-slate)',
-                marginBottom: 20,
-                lineHeight: 1.6,
-              }}
-            >
+            <p className="text-[13px] text-[#55657b] mb-5 leading-[1.6]">
               See what the test is like before test day. Take a full practice test, receive an
               estimated score, and go at your own pace.
             </p>
-            <p
-              style={{
-                fontSize: 11,
-                fontWeight: 700,
-                color: 'var(--color-ink)',
-                textTransform: 'uppercase',
-                letterSpacing: '0.08em',
-                marginBottom: 10,
-              }}
-            >
+            <p className="text-[11px] font-bold text-[#232d3f] uppercase tracking-[0.08em] mb-2.5">
               What's included
             </p>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 8,
-                marginBottom: 24,
-                flex: 1,
-              }}
-            >
+            <div className="flex flex-col gap-2 mb-6 flex-1">
               {PRACTICE_FEATURES.map((f) => (
                 <div
                   key={f}
-                  className="flex items-center gap-2"
-                  style={{ fontSize: 12, color: 'var(--color-slate)' }}
+                  className="flex items-center gap-2 text-[12px] text-[#55657b]"
                 >
-                  <span style={{ color: '#FF6A00' }}>→</span> {f}
+                  <span className="text-[#FF6A00]">→</span>
+                  {f}
                 </div>
               ))}
             </div>
             <Link
               to="/practice"
-              style={{
-                display: 'block',
-                textAlign: 'center',
-                padding: '12px',
-                borderRadius: 10,
-                border: '1.5px solid var(--border)',
-                background: 'white',
-                color: 'var(--color-ink)',
-                fontSize: 14,
-                fontWeight: 700,
-                textDecoration: 'none',
-              }}
+              className="block text-center py-3 rounded-[10px] border-[1.5px] border-[#e0e0e0] bg-white text-[#232d3f] text-[14px] font-bold no-underline hover:bg-[#f9f9f9] transition-colors"
             >
               Start free practice →
             </Link>
           </div>
         </div>
 
-        {/* Institutions */}
-        <div
-          style={{
-            background: 'white',
-            borderRadius: 16,
-            border: '1.5px solid var(--border)',
-            padding: '24px 28px',
-            marginBottom: 24,
-          }}
-        >
-          <div className="flex items-center justify-between mb-4">
+        {/* Institutions Section */}
+        <div className="bg-white rounded-[16px] border border-[#e0e0e0] px-7 py-6 mb-6">
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-1">
             <div>
-              <h2 style={{ fontSize: 16, fontWeight: 800, color: 'var(--color-ink)' }}>
+              <h2 className="text-[16px] font-black text-[#232d3f]">
                 WHERE IDP ENGLISH TEST IS ACCEPTED
               </h2>
-              <p style={{ fontSize: 13, color: 'var(--color-slate)', marginTop: 2 }}>
+              <p className="text-[13px] text-[#55657b] mt-0.5">
                 2,000+ institutions and organizations worldwide
               </p>
             </div>
           </div>
-          <div className="ds-search-row flex gap-3 mb-4">
+
+          {/* Search Row */}
+          <div className="flex flex-col md:flex-row gap-3 mb-1 md:gap-2">
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search institutions…"
               aria-label="Search institutions"
-              style={{ ...inputStyle, flex: 1 }}
+              className="px-3.5 py-2.5 rounded-lg border-[1.5px] border-[#e0e0e0] bg-white text-[13px] text-[#232d3f] outline-none font-sans flex-1 min-w-0"
             />
-            <select aria-label="Institution type" style={{ ...inputStyle, width: 'auto' }}>
+            <select aria-label="Institution type" className="px-3.5 py-2.5 rounded-lg border-[1.5px] border-[#e0e0e0] bg-white text-[13px] text-[#232d3f] outline-none font-sans w-full md:w-[150px] flex-shrink-0">
               <option>All types</option>
               <option>University</option>
               <option>College</option>
               <option>Government</option>
             </select>
-            <select aria-label="Region" style={{ ...inputStyle, width: 'auto' }}>
+            <select aria-label="Region" className="px-3.5 py-2.5 rounded-lg border-[1.5px] border-[#e0e0e0] bg-white text-[13px] text-[#232d3f] outline-none font-sans w-full md:w-[150px] flex-shrink-0">
               <option>All regions</option>
               <option>Asia Pacific</option>
               <option>North America</option>
               <option>Europe</option>
             </select>
           </div>
-          <div
-            className="ds-grid-3"
-            style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10 }}
-          >
+
+          {/* Institutions Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2.5">
             {filtered.map((inst) => (
               <div
                 key={inst.code}
-                style={{
-                  padding: '14px 16px',
-                  borderRadius: 10,
-                  border: '1.5px solid var(--border)',
-                  background: 'var(--muted)',
-                }}
+                className="px-4 py-3.5 rounded-[10px] border border-[#e0e0e0] bg-[#f5f5f5]"
               >
                 <div className="flex items-center gap-3">
                   <img
@@ -492,31 +188,16 @@ export default function PurchaseTest() {
                     alt={`${inst.country} flag`}
                     width={22}
                     height={15}
-                    style={{ width: 22, height: 'auto', flexShrink: 0, borderRadius: 2 }}
+                    className="w-[22px] h-auto flex-shrink-0 rounded-sm"
                   />
                   <div>
-                    <div
-                      style={{
-                        fontSize: 13,
-                        fontWeight: 700,
-                        color: 'var(--color-ink)',
-                        lineHeight: 1.3,
-                      }}
-                    >
+                    <div className="text-[13px] font-bold text-[#232d3f] leading-[1.3]">
                       {inst.name}
                     </div>
-                    <div style={{ fontSize: 11, color: 'var(--color-slate)', marginTop: 2 }}>
+                    <div className="text-[11px] text-[#55657b] mt-0.5">
                       {inst.country} · {inst.type}
                     </div>
-                    <div
-                      style={{
-                        fontSize: 10,
-                        fontWeight: 700,
-                        color: 'var(--color-slate)',
-                        marginTop: 4,
-                        letterSpacing: '0.04em',
-                      }}
-                    >
+                    <div className="text-[10px] font-bold text-[#55657b] mt-1 tracking-[0.04em]">
                       Code: {inst.code}
                     </div>
                   </div>
@@ -524,114 +205,69 @@ export default function PurchaseTest() {
               </div>
             ))}
           </div>
+
+          {/* Empty State */}
           {filtered.length === 0 && (
-            <div style={{ textAlign: 'center', padding: '32px', color: 'var(--color-slate)' }}>
-              <div className="ds-empty-icon">
+            <div className="text-center py-8 text-[#55657b]">
+              <div className="flex justify-center mb-1">
                 <AppIcon name="search" size={24} />
               </div>
-              <p style={{ fontSize: 13, fontWeight: 600, marginBottom: 4 }}>
+              <p className="text-[13px] font-semibold mb-1">
                 Try a different institution name, country, or clear your filters.
               </p>
               <button
                 type="button"
                 onClick={() => setSearch('')}
-                style={{
-                  fontSize: 12,
-                  color: '#FF6A00',
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer',
-                  fontWeight: 700,
-                }}
+                className="text-[12px] text-[#FF6A00] bg-none border-none cursor-pointer font-bold"
               >
                 Clear filters
               </button>
             </div>
           )}
-          <div style={{ marginTop: 16, textAlign: 'center' }}>
-            <p style={{ fontSize: 12, color: 'var(--color-slate)', marginBottom: 8 }}>
+
+          {/* Nomination Footer */}
+          <div className="mt-4 text-center">
+            <p className="text-[12px] text-[#55657b] mb-2">
               Don't see your institution?
             </p>
             <button
               type="button"
-              style={{
-                fontSize: 13,
-                fontWeight: 700,
-                color: '#FF6A00',
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-              }}
+              className="text-[13px] font-bold text-[#FF6A00] bg-none border-none cursor-pointer"
             >
               Submit a nomination →
             </button>
           </div>
         </div>
 
-        {/* FAQ */}
-        <div
-          style={{
-            background: 'white',
-            borderRadius: 16,
-            border: '1.5px solid var(--border)',
-            padding: '24px 28px',
-          }}
-        >
-          <h2
-            style={{
-              fontSize: 16,
-              fontWeight: 800,
-              color: 'var(--color-ink)',
-              marginBottom: 16,
-            }}
-          >
+        {/* FAQ Section */}
+        <div className="bg-white rounded-[16px] border border-[#e0e0e0] px-7 py-6">
+          <h2 className="text-[16px] font-black text-[#232d3f] mb-4">
             Frequently asked questions
           </h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+          <div className="flex flex-col gap-0">
             {faqs.map((faq, i) => {
               const isOpen = openFaq === i;
               return (
                 <div
                   key={faq.q}
-                  style={{
-                    borderBottom: i < faqs.length - 1 ? '1px solid var(--border)' : 'none',
-                  }}
+                  className={i < faqs.length - 1 ? 'border-b border-[#e0e0e0]' : ''}
                 >
                   <button
                     type="button"
                     aria-expanded={isOpen}
                     aria-controls={`faq-answer-${i}`}
                     onClick={() => setOpenFaq(isOpen ? null : i)}
-                    style={{
-                      width: '100%',
-                      textAlign: 'left',
-                      padding: '16px 0',
-                      background: 'none',
-                      border: 'none',
-                      fontSize: 14,
-                      fontWeight: 700,
-                      color: 'var(--color-ink)',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      outline: 'none',
-                    }}
+                    className="w-full text-left py-4 bg-none border-none text-[14px] font-bold text-[#232d3f] cursor-pointer flex items-center justify-between outline-none hover:text-[#FF6A00] transition-colors"
                   >
                     {faq.q}
-                    <span aria-hidden="true" style={{ color: 'var(--color-slate)', fontSize: 16 }}>
+                    <span aria-hidden="true" className="text-[#55657b] text-[16px]">
                       {isOpen ? '−' : '+'}
                     </span>
                   </button>
                   {isOpen && (
                     <p
                       id={`faq-answer-${i}`}
-                      style={{
-                        fontSize: 13,
-                        color: 'var(--color-slate)',
-                        lineHeight: 1.7,
-                        paddingBottom: 16,
-                      }}
+                      className="text-[13px] text-[#55657b] leading-[1.7] pb-4"
                     >
                       {faq.a}
                     </p>

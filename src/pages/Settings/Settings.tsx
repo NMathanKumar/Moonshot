@@ -41,12 +41,6 @@ function formatGender(value?: string): string | undefined {
   return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
-const supportLinkStyle: React.CSSProperties = {
-  color: '#FF6A00',
-  fontWeight: 700,
-  textDecoration: 'none',
-};
-
 function Field({
   id,
   label,
@@ -65,25 +59,16 @@ function Field({
   autoComplete?: string;
 }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <div className="flex flex-col">
       <label
         htmlFor={id}
-        style={{
-          display: 'block',
-          fontSize: 11,
-          fontWeight: 700,
-          color: 'var(--color-slate)',
-          textTransform: 'uppercase',
-          letterSpacing: '0.06em',
-          marginBottom: 6,
-        }}
+        className="block text-[11px] font-bold text-[#55657b] uppercase tracking-[0.06em] mb-1.5"
       >
         {label}
         {required && <span aria-hidden="true"> *</span>}
       </label>
       <input
         id={id}
-        // Re-mount when the value changes so async profile data is shown
         key={value}
         defaultValue={value}
         type={type}
@@ -91,18 +76,11 @@ function Field({
         required={required}
         aria-required={required}
         autoComplete={autoComplete}
-        style={{
-          width: '100%',
-          padding: '10px 14px',
-          borderRadius: 8,
-          border: '1.5px solid var(--border)',
-          background: disabled ? 'var(--muted)' : 'white',
-          fontSize: 13,
-          color: disabled ? 'var(--color-muted-foreground)' : 'var(--color-ink)',
-          outline: 'none',
-          fontFamily: 'Inter, sans-serif',
-          cursor: disabled ? 'not-allowed' : 'text',
-        }}
+        className={`w-full px-3.5 py-2.5 rounded-lg border-[1.5px] font-sans text-[13px] outline-none ${
+          disabled
+            ? 'border-[#e0e0e0] bg-[#f5f5f5] text-[#8899aa] cursor-not-allowed'
+            : 'border-[#e0e0e0] bg-white text-[#232d3f]'
+        }`}
       />
     </div>
   );
@@ -124,31 +102,14 @@ function Toggle({
       aria-checked={on}
       aria-label={label}
       onClick={() => onChange(!on)}
-      style={{
-        width: 40,
-        height: 22,
-        borderRadius: 11,
-        background: on ? 'var(--color-action-primary)' : '#e0e0e0',
-        border: 'none',
-        cursor: 'pointer',
-        position: 'relative',
-        padding: 0,
-        flexShrink: 0,
-        transition: 'background 0.2s',
-      }}
+      className={`w-10 h-[22px] rounded-[11px] border-none cursor-pointer relative p-0 flex-shrink-0 transition-colors duration-200 ${
+        on ? 'bg-[#FF6A00]' : 'bg-[#e0e0e0]'
+      }`}
     >
       <span
-        style={{
-          position: 'absolute',
-          top: 3,
-          left: on ? 21 : 3,
-          width: 16,
-          height: 16,
-          borderRadius: '50%',
-          background: 'white',
-          transition: 'left 0.2s',
-          boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
-        }}
+        className={`absolute top-0.75 w-4 h-4 rounded-full bg-white shadow-[0_1px_3px_rgba(0,0,0,0.2)] transition-all duration-200 ${
+          on ? 'left-5.25' : 'left-0.75'
+        }`}
       />
     </button>
   );
@@ -156,19 +117,11 @@ function Toggle({
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div
-      style={{
-        background: 'white',
-        borderRadius: 16,
-        border: '1.5px solid var(--border)',
-        overflow: 'hidden',
-        marginBottom: 16,
-      }}
-    >
-      <div style={{ padding: '16px 24px', borderBottom: '1.5px solid var(--border)' }}>
-        <h2 style={{ fontSize: 15, fontWeight: 800, color: 'var(--color-ink)' }}>{title}</h2>
+    <div className="bg-white rounded-[16px] border-[1.5px] border-[#e0e0e0] overflow-hidden mb-4">
+      <div className="px-6 py-4 border-b-[1.5px] border-[#e0e0e0]">
+        <h2 className="text-[15px] font-black text-[#232d3f]">{title}</h2>
       </div>
-      <div style={{ padding: '24px' }}>{children}</div>
+      <div className="px-6 py-6">{children}</div>
     </div>
   );
 }
@@ -216,31 +169,25 @@ export default function Settings() {
 
   return (
     <AppShell displayName={displayName} email={email}>
-      <div style={{ maxWidth: 760, margin: '0 auto', paddingBottom: 48 }}>
-        <div style={{ marginBottom: 28 }}>
+      <div className="max-w-[760px] mx-auto pb-12 px-4 sm:px-6 md:px-4">
+        <div className="mb-7">
           <Link
             to="/dashboard"
-            style={{
-              fontSize: 13,
-              color: 'var(--color-slate)',
-              textDecoration: 'none',
-              fontWeight: 600,
-            }}
+            className="text-[13px] text-[#55657b] no-underline font-semibold"
           >
             ← Dashboard
           </Link>
-          <h1 style={{ fontSize: 24, fontWeight: 900, color: 'var(--color-ink)', marginTop: 8 }}>
+          <h1 className="text-[24px] font-black text-[#232d3f] mt-2">
             Settings
           </h1>
         </div>
 
-        <div className="settings-layout" style={{ display: 'flex', gap: 24 }}>
+        <div className="flex gap-6 lg:flex-row flex-col">
           {/* Tab sidebar */}
           <div
-            className="settings-tabs"
+            className="lg:w-40 flex-shrink-0 flex lg:flex-col gap-0 overflow-x-auto lg:overflow-x-visible w-full"
             role="tablist"
             aria-label="Settings sections"
-            style={{ width: 160, flexShrink: 0 }}
           >
             {tabs.map((t) => {
               const isActive = tab === t;
@@ -253,23 +200,11 @@ export default function Settings() {
                   aria-selected={isActive}
                   aria-controls="settings-panel"
                   onClick={() => setTab(t)}
-                  style={{
-                    display: 'block',
-                    width: '100%',
-                    textAlign: 'left',
-                    padding: '10px 14px',
-                    borderRadius: 8,
-                    border: 'none',
-                    cursor: 'pointer',
-                    fontSize: 13,
-                    fontWeight: 700,
-                    fontFamily: 'Inter, sans-serif',
-                    background: isActive ? 'var(--color-cream)' : 'transparent',
-                    color: isActive ? '#FF6A00' : 'var(--color-slate)',
-                    borderLeft: isActive ? '3px solid #FF6A00' : '3px solid transparent',
-                    transition: 'all 0.15s',
-                    marginBottom: 2,
-                  }}
+                  className={`block min-w-max lg:w-full text-left px-3.5 py-2.5 rounded-lg border-none cursor-pointer text-[13px] font-bold font-sans transition-all duration-150 mb-0.5 ${
+                    isActive
+                      ? 'bg-[#fff8f1] text-[#FF6A00] border-l-4 border-[#FF6A00]'
+                      : 'bg-transparent text-[#55657b] border-l-4 border-transparent'
+                  }`}
                 >
                   {t}
                 </button>
@@ -282,32 +217,30 @@ export default function Settings() {
             id="settings-panel"
             role="tabpanel"
             aria-labelledby={`settings-tab-${tab}`}
-            style={{ flex: 1, minWidth: 0 }}
+            className="flex-1 min-w-0"
           >
             {tab === 'Profile' && (
               <>
                 <Section title="Personal Information">
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                  <div className="flex flex-col gap-4">
                     <div
-                      className="ds-grid-2"
-                      style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}
+                      className="grid grid-cols-1 lg:grid-cols-2 gap-3.5"
                     >
                       <Field id="first-name" label="First Name" value={details.firstName} disabled required />
                       <Field id="last-name" label="Last Name" value={details.lastName} disabled required />
                     </div>
                     <Field id="email" label="Email" value={details.email} type="email" disabled required />
                     <div
-                      className="ds-grid-2"
-                      style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}
+                      className="grid grid-cols-1 lg:grid-cols-2 gap-3.5"
                     >
                       <Field id="date-of-birth" label="Date of Birth" value={details.dateOfBirth} disabled required />
                       <Field id="gender" label="Gender" value={details.gender} disabled required />
                     </div>
                   </div>
                 </Section>
-                <p style={{ margin: '-4px 0 20px', fontSize: 12, color: 'var(--color-slate)' }}>
+                <p className="mx-0 my-0 mb-5 text-[12px] text-[#55657b]">
                   To make changes, please contact{' '}
-                  <a href={`mailto:${SUPPORT_EMAIL}`} style={supportLinkStyle}>
+                  <a href={`mailto:${SUPPORT_EMAIL}`} className="text-[#FF6A00] font-bold no-underline">
                     {SUPPORT_EMAIL}
                   </a>
                 </p>
@@ -317,7 +250,7 @@ export default function Settings() {
             {tab === 'Password' && (
               <>
                 <Section title="Change Password">
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                  <div className="flex flex-col gap-3.5">
                     <Field id="current-password" label="Current Password" value="" type="password" autoComplete="current-password" />
                     <Field id="new-password" label="New Password" value="" type="password" autoComplete="new-password" />
                     <Field id="confirm-password" label="Confirm New Password" value="" type="password" autoComplete="new-password" />
@@ -326,17 +259,7 @@ export default function Settings() {
                 <div className="flex justify-end">
                   <button
                     type="button"
-                    style={{
-                      padding: '10px 20px',
-                      borderRadius: 8,
-                      border: 'none',
-                      background: 'var(--color-action-primary)',
-                      color: 'white',
-                      fontSize: 13,
-                      fontWeight: 700,
-                      cursor: 'pointer',
-                      fontFamily: 'Inter, sans-serif',
-                    }}
+                    className="px-5 py-2.5 rounded-lg border-none bg-[#FF6A00] text-white text-[13px] font-bold cursor-pointer font-sans hover:opacity-90 transition-opacity"
                   >
                     Change password
                   </button>
@@ -346,18 +269,17 @@ export default function Settings() {
 
             {tab === 'Notifications' && (
               <Section title="Notification Preferences">
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+                <div className="flex flex-col gap-0">
                   {NOTIFICATION_OPTIONS.map(({ key, label, desc }) => (
                     <div
                       key={key}
-                      className="flex items-center justify-between"
-                      style={{ padding: '16px 0', borderBottom: '1.5px solid var(--border)' }}
+                      className="flex items-center justify-between py-4 border-b-[1.5px] border-[#e0e0e0]"
                     >
                       <div>
-                        <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--color-ink)' }}>
+                        <div className="text-[13px] font-bold text-[#232d3f]">
                           {label}
                         </div>
-                        <div style={{ fontSize: 12, color: 'var(--color-slate)', marginTop: 2 }}>
+                        <div className="text-[12px] text-[#55657b] mt-0.5">
                           {desc}
                         </div>
                       </div>
@@ -375,52 +297,27 @@ export default function Settings() {
             {tab === 'Account' && (
               <>
                 <Section title="Test Access">
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                  <div className="flex flex-col gap-3">
                     <div
-                      style={{
-                        padding: '14px 16px',
-                        borderRadius: 10,
-                        background: 'var(--color-cream)',
-                        border: '1.5px solid #FF6A0025',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                      }}
+                      className="px-4 py-3.5 rounded-[10px] bg-[#fff8f1] border-[1.5px] border-[#FF6A0025] flex items-center justify-between"
                     >
                       <div>
-                        <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--color-ink)' }}>
+                        <div className="text-[13px] font-bold text-[#232d3f]">
                           Envoy High-Stakes Test
                         </div>
-                        <div style={{ fontSize: 11, color: 'var(--color-slate)', marginTop: 2 }}>
+                        <div className="text-[11px] text-[#55657b] mt-0.5">
                           Taken 2 Jul 2026 · Access until 2 Jul 2027
                         </div>
                       </div>
                       <span
-                        style={{
-                          fontSize: 11,
-                          fontWeight: 700,
-                          color: '#2e7d32',
-                          background: '#e8f5e9',
-                          padding: '4px 10px',
-                          borderRadius: 20,
-                        }}
+                        className="text-[11px] font-bold text-[#2e7d32] bg-[#e8f5e9] px-2.5 py-1 rounded-full whitespace-nowrap"
                       >
                         ✓ Completed
                       </span>
                     </div>
                     <Link
                       to="/book"
-                      style={{
-                        display: 'block',
-                        padding: '12px 16px',
-                        borderRadius: 10,
-                        border: '1.5px dashed var(--border)',
-                        textAlign: 'center',
-                        fontSize: 13,
-                        fontWeight: 700,
-                        color: '#FF6A00',
-                        textDecoration: 'none',
-                      }}
+                      className="block px-4 py-3 rounded-[10px] border-[1.5px] border-dashed border-[#e0e0e0] text-center text-[13px] font-bold text-[#FF6A00] no-underline hover:bg-[#fff8f1] transition-colors"
                     >
                       + Purchase another test
                     </Link>
@@ -428,29 +325,15 @@ export default function Settings() {
                 </Section>
                 <Section title="Danger Zone">
                   <div
-                    style={{
-                      padding: '14px 16px',
-                      borderRadius: 10,
-                      background: 'var(--muted)',
-                      border: '1.5px solid var(--border)',
-                    }}
+                    className="px-4 py-3.5 rounded-[10px] bg-[#f5f5f5] border-[1.5px] border-[#e0e0e0]"
                   >
                     <div
-                      style={{
-                        fontSize: 13,
-                        fontWeight: 700,
-                        color: 'var(--color-muted-foreground)',
-                        marginBottom: 4,
-                      }}
+                      className="text-[13px] font-bold text-[#8899aa] mb-1"
                     >
                       Delete account
                     </div>
                     <div
-                      style={{
-                        fontSize: 12,
-                        color: 'var(--color-muted-foreground)',
-                        marginBottom: 12,
-                      }}
+                      className="text-[12px] text-[#8899aa] mb-3"
                     >
                       This will permanently delete your account and all associated results and
                       certificates.
@@ -459,26 +342,15 @@ export default function Settings() {
                       type="button"
                       disabled
                       aria-disabled="true"
-                      style={{
-                        padding: '8px 16px',
-                        borderRadius: 8,
-                        border: '1.5px solid var(--border)',
-                        background: 'var(--muted)',
-                        color: 'var(--color-muted-foreground)',
-                        fontSize: 12,
-                        fontWeight: 700,
-                        cursor: 'not-allowed',
-                        fontFamily: 'Inter, sans-serif',
-                        opacity: 0.7,
-                      }}
+                      className="px-4 py-2 rounded-lg border-[1.5px] border-[#e0e0e0] bg-[#f5f5f5] text-[#8899aa] text-[12px] font-bold cursor-not-allowed font-sans opacity-70"
                     >
                       Delete my account
                     </button>
                   </div>
                 </Section>
-                <p style={{ marginTop: 20, fontSize: 12, color: 'var(--color-slate)' }}>
+                <p className="mt-5 text-[12px] text-[#55657b]">
                   To delete your account, please contact{' '}
-                  <a href={`mailto:${SUPPORT_EMAIL}`} style={supportLinkStyle}>
+                  <a href={`mailto:${SUPPORT_EMAIL}`} className="text-[#FF6A00] font-bold no-underline">
                     {SUPPORT_EMAIL}
                   </a>
                 </p>

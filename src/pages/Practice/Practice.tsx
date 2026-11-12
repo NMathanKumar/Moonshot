@@ -59,85 +59,55 @@ export default function Practice() {
 
   return (
     <AppShell displayName={displayName} email={email}>
-      <div style={{ maxWidth: 900, margin: '0 auto', paddingBottom: 48 }}>
-        <div style={{ marginBottom: 32 }}>
+      <div className="max-w-[900px] mx-auto pb-12">
+        {/* Header Section */}
+        <div className="mb-8">
           <Link
             to="/dashboard"
-            style={{
-              fontSize: 13,
-              color: 'var(--color-slate)',
-              textDecoration: 'none',
-              fontWeight: 600,
-            }}
+            className="text-[13px] text-[#55657b] no-underline font-semibold"
           >
             ← Dashboard
           </Link>
-          <h1 style={{ fontSize: 24, fontWeight: 900, color: 'var(--color-ink)', marginTop: 8 }}>
+          <h1 className="text-[24px] font-black text-[#232d3f] mt-2">
             Practice
           </h1>
-          <p style={{ fontSize: 14, color: 'var(--color-slate)', marginTop: 4 }}>
+          <p className="text-[14px] text-[#55657b] mt-1">
             Build confidence and get test-ready with free practice activities.
           </p>
         </div>
 
-        {/* Full-length practice */}
+        {/* Full-length practice card */}
         <div
-          className="ds-feature-row"
-          style={{
-            background: 'var(--color-cream)',
-            borderRadius: 16,
-            padding: '20px 28px',
-            border: '1.5px solid #FF6A0030',
-            marginBottom: 24,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}
+          className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-6 bg-[#fff3ea] border border-[#FF6A0030] rounded-[16px] px-7 py-5 mb-6"
         >
           <div>
             <p
-              style={{
-                fontSize: 12,
-                fontWeight: 700,
-                color: '#FF6A00',
-                textTransform: 'uppercase',
-                letterSpacing: '0.08em',
-                marginBottom: 6,
-              }}
+              className="text-[12px] font-bold text-[#FF6A00] uppercase tracking-[0.08em] mb-1.5"
             >
               Four Skills Practice Test
             </p>
-            <h3 style={{ fontSize: 16, fontWeight: 800, color: 'var(--color-ink)', marginBottom: 4 }}>
+            <h3 className="text-[16px] font-black text-[#232d3f] mb-1">
               Try a short test
             </h3>
-            <p style={{ fontSize: 13, color: 'var(--color-slate)' }}>
+            <p className="text-[13px] text-[#55657b]">
               ~45 minutes · Reading · Listening · Writing · Speaking · An indicative score, for
               practice only
             </p>
           </div>
           <Link
             to="/test-prepare"
-            style={{
-              padding: '11px 22px',
-              borderRadius: 10,
-              background: 'var(--color-action-primary)',
-              color: 'white',
-              fontSize: 13,
-              fontWeight: 700,
-              textDecoration: 'none',
-              whiteSpace: 'nowrap',
-            }}
+            className="px-5.5 py-2.75 rounded-[10px] bg-[#FF6A00] text-white text-[13px] font-bold no-underline whitespace-nowrap text-center md:w-auto w-full"
           >
             Coming soon
           </Link>
         </div>
 
-        {/* Filter */}
-        <div className="ds-filter-row flex items-center justify-between mb-4">
-          <h2 style={{ fontSize: 16, fontWeight: 800, color: 'var(--color-ink)' }}>
+        {/* Filter Section */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-4 mb-4">
+          <h2 className="text-[16px] font-black text-[#232d3f]">
             Skills Practice
           </h2>
-          <div className="ds-filter-tabs flex gap-2" role="group" aria-label="Filter by skill">
+          <div className="flex flex-wrap gap-2 justify-start md:justify-end" role="group" aria-label="Filter by skill">
             {skills.map((s) => {
               const isActive = activeSkill === s;
               return (
@@ -146,18 +116,11 @@ export default function Practice() {
                   type="button"
                   aria-pressed={isActive}
                   onClick={() => setActiveSkill(s)}
-                  style={{
-                    padding: '6px 14px',
-                    borderRadius: 20,
-                    border: '1.5px solid',
-                    borderColor: isActive ? '#FF6A00' : 'var(--border)',
-                    background: isActive ? 'var(--color-cream)' : 'white',
-                    color: isActive ? '#FF6A00' : 'var(--color-slate)',
-                    fontSize: 12,
-                    fontWeight: 700,
-                    cursor: 'pointer',
-                    transition: 'all 0.15s',
-                  }}
+                  className={`px-3.5 py-1.5 rounded-full border-[1.5px] text-[12px] font-bold cursor-pointer transition-all ${
+                    isActive
+                      ? 'border-[#FF6A00] bg-[#fff3ea] text-[#FF6A00]'
+                      : 'border-[#e0e0e0] bg-white text-[#55657b] hover:border-[#FF6A0050]'
+                  }`}
                 >
                   {s}
                 </button>
@@ -166,41 +129,19 @@ export default function Practice() {
           </div>
         </div>
 
-        <div
-          className="ds-grid-2"
-          style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}
-        >
+        {/* Practice Sessions Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
           {filtered.map((s) => (
             <Link
               key={s.id}
               to="/test-prepare"
-              style={{
-                display: 'block',
-                background: 'white',
-                borderRadius: 14,
-                padding: '18px 20px',
-                border: '1.5px solid var(--border)',
-                textDecoration: 'none',
-                transition: 'all 0.15s',
-                cursor: 'pointer',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = '#FF6A0050';
-                e.currentTarget.style.boxShadow = '0 4px 16px rgba(255,106,0,0.08)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = 'var(--border)';
-                e.currentTarget.style.boxShadow = 'none';
-              }}
+              className="block bg-white border-[1.5px] border-[#e0e0e0] rounded-[14px] px-5 py-[18px] no-underline cursor-pointer transition-all hover:border-[#FF6A0050] hover:shadow-[0_4px_16px_rgba(255,106,0,0.08)]"
             >
               <div className="flex items-start justify-between mb-3">
                 <span
+                  className="text-[11px] font-bold px-2.5 py-0.75 rounded-full"
                   style={{
-                    fontSize: 11,
-                    fontWeight: 700,
-                    padding: '3px 10px',
-                    borderRadius: 20,
-                    background: typeBg[s.type],
+                    backgroundColor: typeBg[s.type],
                     color: typeColors[s.type],
                   }}
                 >
@@ -208,45 +149,29 @@ export default function Practice() {
                 </span>
                 {s.done && s.score !== null && (
                   <span
-                    style={{
-                      fontSize: 12,
-                      fontWeight: 800,
-                      color: '#FF6A00',
-                      background: 'var(--color-cream)',
-                      padding: '3px 10px',
-                      borderRadius: 20,
-                    }}
+                    className="text-[12px] font-black px-2.5 py-0.75 rounded-full bg-[#fff3ea] text-[#FF6A00]"
                   >
                     {Math.round(s.score / 12)}/10
                   </span>
                 )}
               </div>
               <h3
-                style={{
-                  fontSize: 14,
-                  fontWeight: 700,
-                  color: 'var(--color-ink)',
-                  marginBottom: 8,
-                  lineHeight: 1.4,
-                }}
+                className="text-[14px] font-bold text-[#232d3f] mb-2 leading-[1.4]"
               >
                 {s.title}
               </h3>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <span
-                    className="ds-meta-icon"
-                    style={{ fontSize: 11, color: 'var(--color-slate)' }}
+                    className="text-[11px] text-[#55657b] inline-flex items-center gap-1.5"
                   >
                     <AppIcon name="clock" size={14} /> {s.duration}
                   </span>
                 </div>
                 <span
-                  style={{
-                    fontSize: 13,
-                    color: s.done ? '#2e7d32' : '#FF6A00',
-                    fontWeight: 700,
-                  }}
+                  className={`text-[13px] font-bold ${
+                    s.done ? 'text-[#2e7d32]' : 'text-[#FF6A00]'
+                  }`}
                 >
                   {s.done ? '✓ Done' : 'Start →'}
                 </span>
