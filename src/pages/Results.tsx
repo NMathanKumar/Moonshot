@@ -90,24 +90,14 @@ const CEFR_DESC: Record<string, string> = {
   C2: 'Mastery',
 };
 
-const changeChipStyle: React.CSSProperties = {
-  display: 'flex',
-  alignItems: 'center',
-  gap: 7,
-  padding: '6px 11px',
-  borderRadius: 8,
-  background: '#eef8ef',
-  border: '1px solid #a9d5ad',
-};
-
 function ScoreChangeChip({ label, from, to }: { label: string; from: number; to: number }) {
   return (
-    <div style={changeChipStyle}>
-      <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--color-ink)' }}>{label}</span>
-      <span style={{ fontSize: 13, color: 'var(--color-slate)', fontWeight: 700 }}>{from}</span>
-      <span style={{ fontSize: 12, color: 'var(--color-slate)' }}>→</span>
-      <span style={{ fontSize: 13, fontWeight: 800, color: '#216B27' }}>{to}</span>
-      <span style={{ fontSize: 12, fontWeight: 800, color: '#216B27' }}>+{to - from}</span>
+    <div className="flex items-center gap-1.75 px-[11px] py-1.5 rounded-lg bg-[#eef8ef] border border-[#a9d5ad]">
+      <span className="text-[12px] font-black text-[#232d3f]">{label}</span>
+      <span className="text-[13px] font-black text-[#55657b]">{from}</span>
+      <span className="text-[12px] text-[#55657b]">→</span>
+      <span className="text-[13px] font-black text-[#216B27]">{to}</span>
+      <span className="text-[12px] font-black text-[#216B27]">+{to - from}</span>
     </div>
   );
 }
@@ -129,69 +119,50 @@ function SkillCard({
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      style={{
-        textAlign: 'left',
-        padding: '16px 18px',
-        borderRadius: 12,
-        border: active ? '2px solid var(--color-action-primary)' : '2px solid var(--border)',
-        background: active ? 'var(--color-cream)' : 'white',
-        cursor: 'pointer',
-        transition: 'all 0.2s',
-        width: '100%',
-      }}
+      className={`w-full text-left px-[18px] py-4 rounded-[12px] border-2 transition-all cursor-pointer ${
+        active
+          ? 'border-[#FF6A00] bg-[#fff3ea]'
+          : 'border-[#dde2e7] bg-white hover:border-[#FF6A0050]'
+      }`}
     >
       <div className="flex items-center justify-between mb-3">
-        <span style={{ fontSize: 14, fontWeight: 800, color: 'var(--color-ink)' }}>
+        <span className="text-[14px] font-black text-[#232d3f]">
           {skill.skill}
         </span>
         <span
-          style={{
-            fontSize: 12,
-            fontWeight: 800,
-            padding: '4px 10px',
-            borderRadius: 20,
-            background: active ? 'var(--color-action-primary)' : 'var(--muted)',
-            color: active ? 'white' : 'var(--color-ink)',
-          }}
+          className={`text-[12px] font-black px-[10px] py-1 rounded-full ${
+            active
+              ? 'bg-[#FF6A00] text-white'
+              : 'bg-[#f5f5f5] text-[#232d3f]'
+          }`}
         >
           {skill.cefr}
         </span>
       </div>
       <div className="flex items-end gap-2 mb-3">
-        <span style={{ fontSize: 28, fontWeight: 900, color: 'var(--color-ink)', lineHeight: 1 }}>
+        <span className="text-[28px] font-black text-[#232d3f] leading-[1]">
           {skill.score}
         </span>
-        <span style={{ fontSize: 13, color: 'var(--color-slate)', paddingBottom: 3 }}>
+        <span className="text-[13px] text-[#55657b] pb-0.75">
           /{skill.max}
         </span>
       </div>
       {delta !== null && delta > 0 && prevScore !== undefined ? (
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 7,
-            marginBottom: 10,
-            padding: '7px 9px',
-            borderRadius: 8,
-            background: '#eef8ef',
-            border: '1px solid #a9d5ad',
-          }}
-        >
-          <span style={{ fontSize: 12, color: 'var(--color-ink)', fontWeight: 700 }}>
+        <div className="flex items-center gap-1.75 mb-2.5 px-[9px] py-1.75 rounded-lg bg-[#eef8ef] border border-[#a9d5ad]">
+          <span className="text-[12px] text-[#232d3f] font-black">
             Score updated
           </span>
-          <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--color-slate)' }}>
+          <span className="text-[13px] font-black text-[#55657b]">
             {prevScore}
           </span>
-          <span style={{ fontSize: 12, color: 'var(--color-slate)' }}>→</span>
-          <span style={{ fontSize: 13, fontWeight: 800, color: '#216B27' }}>{skill.score}</span>
-          <span style={{ marginLeft: 'auto', fontSize: 12, fontWeight: 800, color: '#216B27' }}>
+          <span className="text-[12px] text-[#55657b]">→</span>
+          <span className="text-[13px] font-black text-[#216B27]">{skill.score}</span>
+          <span className="ml-auto text-[12px] font-black text-[#216B27]">
             +{delta}
           </span>
         </div>
       ) : (
-        <div style={{ marginBottom: 8 }} />
+        <div className="mb-2" />
       )}
     </button>
   );
@@ -224,35 +195,22 @@ export default function Results() {
 
   return (
     <AppShell displayName={displayName} email={email}>
-      <div style={{ maxWidth: 920, margin: '0 auto', paddingBottom: 48 }}>
+      <div className="max-w-[920px] mx-auto pb-12">
         {/* My Results list */}
-        <div style={{ marginBottom: 28 }}>
+        <div className="mb-7">
           <Link
             to="/dashboard"
-            style={{
-              fontSize: 13,
-              color: 'var(--color-slate)',
-              textDecoration: 'none',
-              fontWeight: 600,
-            }}
+            className="text-[13px] text-[#55657b] no-underline font-semibold"
           >
             ← Back to Dashboard
           </Link>
-          <h1
-            style={{
-              fontSize: 22,
-              fontWeight: 900,
-              color: 'var(--color-ink)',
-              marginTop: 12,
-              marginBottom: 4,
-            }}
-          >
+          <h1 className="text-[22px] font-black text-[#232d3f] mt-3 mb-1">
             My Results
           </h1>
-          <p style={{ fontSize: 13, color: 'var(--color-slate)', marginBottom: 16 }}>
+          <p className="text-[13px] text-[#55657b] mb-4">
             Your completed tests and their results.
           </p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <div className="flex flex-col gap-2.5">
             {reports.map((r, i) => {
               const isActive = i === activeReport;
               return (
@@ -268,105 +226,54 @@ export default function Results() {
                       selectReport(i);
                     }
                   }}
-                  style={{
-                    background: isActive ? 'var(--color-cream)' : 'white',
-                    borderRadius: 14,
-                    border: isActive ? '2px solid #FF6A00' : '1.5px solid var(--border)',
-                    padding: '16px 20px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    cursor: isActive ? 'default' : 'pointer',
-                    transition: 'all 0.15s',
-                  }}
+                  className={`rounded-[14px] border-2 px-5 py-4 flex items-center justify-between cursor-pointer transition-all ${
+                    isActive
+                      ? 'bg-[#fff3ea] border-[#FF6A00]'
+                      : 'bg-white border-[#dde2e7] hover:border-[#FF6A0050]'
+                  }`}
                   onMouseEnter={(e) => {
                     if (!isActive) e.currentTarget.style.borderColor = '#FF6A0050';
                   }}
                   onMouseLeave={(e) => {
-                    if (!isActive) e.currentTarget.style.borderColor = 'var(--border)';
+                    if (!isActive) e.currentTarget.style.borderColor = '#dde2e7';
                   }}
                 >
                   <div className="flex items-center gap-3">
                     <div
-                      style={{
-                        width: 36,
-                        height: 36,
-                        borderRadius: 8,
-                        background: isActive ? 'white' : 'var(--muted)',
-                        border: `1.5px solid ${isActive ? '#FF6A0030' : 'var(--border)'}`,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        flexShrink: 0,
-                        color: 'var(--color-brand-orange)',
-                      }}
+                      className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 border-[1.5px] ${
+                        isActive
+                          ? 'bg-white border-[#FF6A0030]'
+                          : 'bg-[#f5f5f5] border-[#dde2e7]'
+                      } text-[#FF6A00]`}
                     >
                       <AppIcon name="document" size={18} />
                     </div>
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <span style={{ fontSize: 15, fontWeight: 800, color: 'var(--color-ink)' }}>
+                        <span className="text-[15px] font-black text-[#232d3f]">
                           IDP English Test
                         </span>
                         {r.cancelled ? (
-                          <span
-                            style={{
-                              fontSize: 11,
-                              fontWeight: 800,
-                              padding: '3px 9px',
-                              borderRadius: 20,
-                              background: '#fce4ec',
-                              color: '#a61f1f',
-                              border: '1px solid #e58d8d',
-                            }}
-                          >
+                          <span className="text-[11px] font-black px-2.25 py-0.75 rounded-full bg-[#fce4ec] text-[#a61f1f] border border-[#e58d8d]">
                             CANCELLED
                           </span>
                         ) : (
-                          <span
-                            style={{
-                              fontSize: 11,
-                              fontWeight: 800,
-                              padding: '3px 9px',
-                              borderRadius: 20,
-                              background: '#e8f5e9',
-                              color: '#216B27',
-                              border: '1px solid #8fc795',
-                            }}
-                          >
+                          <span className="text-[11px] font-black px-2.25 py-0.75 rounded-full bg-[#e8f5e9] text-[#216B27] border border-[#8fc795]">
                             COMPLETED
                           </span>
                         )}
                       </div>
-                      <p style={{ fontSize: 13, color: '#44546A', fontWeight: 500 }}>
+                      <p className="text-[13px] text-[#44546A] font-medium">
                         {r.name} · {r.date}
                       </p>
                       {r.cancelReason && (
-                        <p style={{ fontSize: 12, color: '#c62828', fontWeight: 600, marginTop: 3 }}>
+                        <p className="text-[12px] text-[#c62828] font-semibold mt-0.75">
                           Reason(s): {r.cancelReason}
                         </p>
                       )}
                       {r.scoreChanges && (
-                        <div
-                          style={{
-                            marginTop: 6,
-                            display: 'flex',
-                            gap: 8,
-                            flexWrap: 'wrap',
-                            alignItems: 'center',
-                          }}
-                        >
-                          <span
-                            style={{
-                              fontSize: 12,
-                              fontWeight: 800,
-                              padding: '6px 12px',
-                              borderRadius: 20,
-                              background: '#216B27',
-                              color: 'white',
-                              letterSpacing: '0.01em',
-                            }}
-                          >
+                        <div className="mt-1.5 flex gap-2 flex-wrap items-center">
+                          <span className="text-[12px] font-black px-3 py-1.5 rounded-full bg-[#216B27] text-white tracking-wider">
                             ✓ Score updated {r.scoreChanges.updatedOn}
                           </span>
                           {r.scoreChanges.overall && (
@@ -389,12 +296,9 @@ export default function Results() {
                     </div>
                   </div>
                   <span
-                    style={{
-                      fontSize: 14,
-                      fontWeight: 800,
-                      color: isActive ? '#216B27' : 'var(--color-action-primary)',
-                      whiteSpace: 'nowrap',
-                    }}
+                    className={`text-[14px] font-black whitespace-nowrap ${
+                      isActive ? 'text-[#216B27]' : 'text-[#FF6A00]'
+                    }`}
                   >
                     {isActive ? '✓ Current report' : 'View report →'}
                   </span>
@@ -405,188 +309,98 @@ export default function Results() {
         </div>
 
         {/* Report header */}
-        <div className="ds-page-header flex items-center justify-between mb-8">
-          <div>
-            <div className="flex items-center gap-3" style={{ marginTop: 8 }}>
-              <h1 style={{ fontSize: 24, fontWeight: 900, color: 'var(--color-ink)' }}>
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between md:gap-6 mb-8">
+          <div className="flex-1">
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-3 mt-2">
+              <h1 className="text-[24px] font-black text-[#232d3f]">
                 English Proficiency Report
               </h1>
               {report.scoreChanges && (
-                <span
-                  style={{
-                    fontSize: 12,
-                    fontWeight: 800,
-                    padding: '5px 11px',
-                    borderRadius: 20,
-                    background: '#e8f5e9',
-                    color: '#216B27',
-                    border: '1px solid #8fc795',
-                    whiteSpace: 'nowrap',
-                  }}
-                >
+                <span className="text-[12px] font-black px-2.75 py-1.25 rounded-full bg-[#e8f5e9] text-[#216B27] border border-[#8fc795] whitespace-nowrap">
                   Score updated {report.scoreChanges.updatedOn}
                 </span>
               )}
             </div>
-            <p style={{ fontSize: 14, color: '#44546A', fontWeight: 500, marginTop: 4 }}>
+            <p className="text-[14px] text-[#44546A] font-medium mt-1">
               {report.name} · Test Date: {report.date} · Assessment ID: {report.certId}
             </p>
           </div>
           <button
             type="button"
             disabled={!!report.cancelled}
-            style={{
-              padding: '10px 20px',
-              borderRadius: 8,
-              background: report.cancelled ? '#e0e0e0' : 'var(--color-action-primary)',
-              border: 'none',
-              color: report.cancelled ? '#bdbdbd' : 'white',
-              fontSize: 13,
-              fontWeight: 700,
-              cursor: report.cancelled ? 'not-allowed' : 'pointer',
-            }}
+            className="px-5 py-2.5 rounded-lg text-[13px] font-bold text-white whitespace-nowrap disabled:bg-[#e0e0e0] disabled:text-[#bdbdbd] disabled:cursor-not-allowed bg-[#EB7900]"
           >
             Download official certificate
           </button>
         </div>
 
         {/* Overall + Radar */}
-        <div
-          className="ds-grid-results"
-          style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: 20, marginBottom: 20 }}
-        >
+        <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-5 mb-5">
           <div
-            className="results-overall-card"
-            style={{
-              background: report.cancelled ? '#f5f5f5' : 'var(--color-action-primary)',
-              borderRadius: 20,
-              padding: '30px 26px',
-              color: report.cancelled ? '#bdbdbd' : 'white',
-              textAlign: 'center',
-              width: 240,
-              border: report.cancelled ? '1.5px solid #e0e0e0' : 'none',
-              boxShadow: report.cancelled ? 'none' : '0 14px 30px rgba(35,45,63,0.14)',
-            }}
+            className={`rounded-[20px] px-[26px] py-[30px] text-center ${
+              report.cancelled
+                ? 'bg-[#f5f5f5] border-[1.5px] border-[#e0e0e0] text-[#bdbdbd]'
+                : 'bg-[#EB7900] text-white shadow-[0_14px_30px_rgba(35,45,63,0.14)]'
+            }`}
           >
-            <p
-              style={{
-                fontSize: 13,
-                fontWeight: 800,
-                opacity: 0.98,
-                textTransform: 'uppercase',
-                letterSpacing: '0.13em',
-                marginBottom: 14,
-              }}
-            >
+            <p className="text-[13px] font-black opacity-98 uppercase tracking-[0.13em] mb-3.5">
               Overall Score
             </p>
             {report.cancelled ? (
-              <div style={{ fontSize: 28, fontWeight: 800, color: '#bdbdbd', marginBottom: 12 }}>
+              <div className="text-[28px] font-black text-[#bdbdbd] mb-3">
                 —
               </div>
             ) : (
               <>
                 {report.scoreChanges?.overall && (
-                  <div
-                    style={{
-                      fontSize: 12,
-                      fontWeight: 800,
-                      padding: '6px 12px',
-                      borderRadius: 20,
-                      background: 'rgba(99,48,0,0.24)',
-                      border: '1px solid rgba(255,255,255,0.6)',
-                      display: 'inline-block',
-                      marginBottom: 18,
-                      letterSpacing: '0.02em',
-                      whiteSpace: 'nowrap',
-                    }}
-                  >
+                  <div className="text-[12px] font-black px-3 py-1.5 rounded-full bg-[rgba(99,48,0,0.24)] border border-[rgba(255,255,255,0.6)] inline-block mb-4.5 tracking-[0.02em] whitespace-nowrap">
                     Score updated {report.scoreChanges.updatedOn}
                   </div>
                 )}
-                <div style={{ fontSize: 76, fontWeight: 900, lineHeight: 0.95 }}>
+                <div className="text-[76px] font-black leading-[0.95]">
                   {report.overall}
                 </div>
-                <div style={{ fontSize: 16, opacity: 0.96, marginTop: 8, marginBottom: 20 }}>/120</div>
+                <div className="text-base opacity-96 mt-2 mb-5">/120</div>
                 {report.scoreChanges?.overall && (
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: 7,
-                      marginBottom: 20,
-                      padding: '9px 12px',
-                      borderRadius: 12,
-                      background: 'rgba(99,48,0,0.28)',
-                      border: '1px solid rgba(255,255,255,0.55)',
-                      whiteSpace: 'nowrap',
-                    }}
-                  >
-                    <span style={{ fontSize: 12, opacity: 0.9 }}>Before</span>
-                    <span style={{ fontSize: 15, fontWeight: 800 }}>
+                  <div className="flex items-center justify-center gap-1.75 mb-5 px-3 py-2.25 rounded-lg bg-[rgba(99,48,0,0.28)] border border-[rgba(255,255,255,0.55)] whitespace-nowrap">
+                    <span className="text-[12px] opacity-90">Before</span>
+                    <span className="text-[15px] font-black">
                       {report.scoreChanges.overall.from}
                     </span>
-                    <span style={{ fontSize: 12, opacity: 0.8 }}>→</span>
-                    <span style={{ fontSize: 12, opacity: 0.9 }}>After</span>
-                    <span style={{ fontSize: 15, fontWeight: 800 }}>
+                    <span className="text-[12px] opacity-80">→</span>
+                    <span className="text-[12px] opacity-90">After</span>
+                    <span className="text-[15px] font-black">
                       {report.scoreChanges.overall.to}
                     </span>
-                    <span style={{ fontSize: 12, fontWeight: 800 }}>
+                    <span className="text-[12px] font-black">
                       +{report.scoreChanges.overall.to - report.scoreChanges.overall.from}
                     </span>
                   </div>
                 )}
-                <div
-                  style={{
-                    fontSize: 25,
-                    fontWeight: 800,
-                    background: 'rgba(99,48,0,0.3)',
-                    borderRadius: 30,
-                    padding: '7px 22px',
-                    display: 'inline-block',
-                  }}
-                >
+                <div className="text-[25px] font-black bg-[rgba(99,48,0,0.3)] rounded-full px-5.5 py-1.75 inline-block">
                   {report.cefr}
                 </div>
-                <div style={{ fontSize: 14, opacity: 0.98, marginTop: 10 }}>
+                <div className="text-sm opacity-98 mt-2.5">
                   {CEFR_DESC[report.cefr]}
                 </div>
               </>
             )}
             {report.cancelled && (
-              <div style={{ marginTop: 10 }}>
-                <div style={{ fontSize: 12, color: '#c62828', fontWeight: 700 }}>Test cancelled</div>
+              <div className="mt-2.5">
+                <div className="text-[12px] text-[#c62828] font-bold">Test cancelled</div>
                 {report.cancelReason && (
-                  <div style={{ fontSize: 12, color: '#a61f1f', marginTop: 4 }}>
+                  <div className="text-[12px] text-[#a61f1f] mt-1">
                     Reason(s): {report.cancelReason}
                   </div>
                 )}
               </div>
             )}
           </div>
-          <div
-            className="results-skill-profile-card"
-            style={{
-              background: 'white',
-              borderRadius: 16,
-              border: '1.5px solid var(--border)',
-              padding: '20px 24px',
-            }}
-          >
-            <p
-              style={{
-                fontSize: 12,
-                fontWeight: 700,
-                color: 'var(--color-slate)',
-                textTransform: 'uppercase',
-                letterSpacing: '0.08em',
-                marginBottom: 4,
-              }}
-            >
+          <div className="bg-white rounded-[16px] border-[1.5px] border-[#dde2e7] px-6 py-5 flex flex-col min-h-[410px] md:min-h-[330px]">
+            <p className="text-[12px] font-bold text-[#55657b] uppercase tracking-[0.08em] mb-1">
               Skill Profile
             </p>
-            <div className="results-radar-wrap">
+            <div className="flex-1 flex items-center justify-center min-h-[330px] md:min-h-[290px]">
               <ResponsiveContainer width="100%" height="100%">
                 <RadarChart
                   data={radarData}
@@ -612,15 +426,7 @@ export default function Results() {
         </div>
 
         {/* Skill selector */}
-        <div
-          className="ds-grid-4"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: 12,
-            marginBottom: 20,
-          }}
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
           {sortedSkills.map(({ entry: s, index: i }) => {
             const change = report.scoreChanges?.skills?.find((sc) => sc.skill === s.skill);
             return (
@@ -636,83 +442,33 @@ export default function Results() {
         </div>
 
         {/* Detail panel */}
-        <div
-          style={{
-            background: 'white',
-            borderRadius: 16,
-            border: '1.5px solid var(--border)',
-            padding: '28px 32px',
-          }}
-        >
-          <div className="flex items-center gap-3 mb-6">
-            <h2 style={{ fontSize: 18, fontWeight: 900, color: 'var(--color-ink)' }}>
+        <div className="bg-white rounded-[16px] border-[1.5px] border-[#dde2e7] px-8 py-7 mb-5">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-6">
+            <h2 className="text-[18px] font-black text-[#232d3f]">
               {skill.skill}
             </h2>
-            <span
-              style={{
-                fontSize: 13,
-                fontWeight: 700,
-                padding: '4px 12px',
-                borderRadius: 20,
-                background: 'var(--color-cream)',
-                color: '#FF6A00',
-                border: '1.5px solid #FF6A0040',
-              }}
-            >
+            <span className="text-[13px] font-bold px-3 py-1 rounded-full bg-[#fff3ea] text-[#FF6A00] border-[1.5px] border-[#FF6A0040]">
               {skill.cefr} — {CEFR_DESC[skill.cefr] ?? 'Not available'}
             </span>
           </div>
           <div>
-            <p
-              style={{
-                fontSize: 13,
-                fontWeight: 700,
-                color: 'var(--color-slate)',
-                textTransform: 'uppercase',
-                letterSpacing: '0.06em',
-                marginBottom: 12,
-              }}
-            >
+            <p className="text-[13px] font-bold text-[#55657b] uppercase tracking-[0.06em] mb-3">
               Feedback
             </p>
-            <p style={{ fontSize: 14, color: 'var(--color-slate)', lineHeight: 1.7 }}>
+            <p className="text-[14px] text-[#55657b] leading-relaxed">
               {skill.feedback}
             </p>
           </div>
         </div>
 
         {/* Additional Results Service */}
-        <div
-          className="ds-service-row"
-          style={{
-            marginTop: 20,
-            padding: '20px 24px',
-            borderRadius: 16,
-            background: 'var(--color-ink)',
-            color: 'white',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}
-        >
-          <p style={{ fontSize: 14, fontWeight: 700 }}>Additional Results Service</p>
-          <div className="flex items-center gap-3">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-6 px-6 py-5 rounded-[16px] bg-[#232d3f] text-white">
+          <p className="text-[14px] font-bold">Additional Results Service</p>
+          <div className="flex items-center gap-3 w-full sm:w-auto">
             <button
               type="button"
               disabled={!!report.cancelled}
-              style={{
-                padding: '10px 20px',
-                borderRadius: 8,
-                border: 'none',
-                whiteSpace: 'nowrap',
-                fontSize: 13,
-                fontWeight: 700,
-                background: report.cancelled
-                  ? 'rgba(255,255,255,0.1)'
-                  : 'var(--color-action-primary)',
-                color: report.cancelled ? 'rgba(255,255,255,0.3)' : 'white',
-                cursor: report.cancelled ? 'not-allowed' : 'pointer',
-              }}
+              className="px-5 py-2.5 rounded-lg border-none whitespace-nowrap text-[13px] font-bold text-white disabled:bg-[rgba(255,255,255,0.1)] disabled:text-[rgba(255,255,255,0.3)] disabled:cursor-not-allowed bg-[#EB7900] w-full sm:w-auto"
             >
               Request Score Review
             </button>

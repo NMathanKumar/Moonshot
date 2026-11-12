@@ -22,26 +22,11 @@ const ENVIRONMENT_REMINDERS = [
   'You have a stable internet connection for the full ~80 minutes',
 ];
 
-const statusColor: Record<CheckStatus, string> = { ok: '#2e7d32', warn: '#f9a825', pending: '#bdbdbd' };
-const statusBg: Record<CheckStatus, string> = { ok: '#e8f5e9', warn: '#fff8e1', pending: '#f5f5f5' };
-const statusLabel: Record<CheckStatus, string> = { ok: 'Ready', warn: 'Warning', pending: 'Not checked' };
-const statusSymbol: Record<CheckStatus, string> = { ok: '✓', warn: '!', pending: '·' };
-
-const checkboxStyle: React.CSSProperties = {
-  accentColor: '#FF6A00',
-  width: 16,
-  height: 16,
-  marginTop: 1,
-  flexShrink: 0,
-  padding: 0,
-};
-
-const cardStyle: React.CSSProperties = {
-  background: 'white',
-  borderRadius: 16,
-  border: '1.5px solid var(--border)',
-  padding: '24px 28px',
-  marginBottom: 20,
+// Status color and styling maps (using CSS variables)
+const statusConfig = {
+  ok: { color: 'var(--color-success)', bg: 'bg-green-100', border: 'border-green-300', borderLight: '#2e7d3230', label: 'Ready', symbol: '✓' },
+  warn: { color: 'var(--color-warning)', bg: 'bg-yellow-50', border: 'border-yellow-300', borderLight: '#f9a82530', label: 'Warning', symbol: '!' },
+  pending: { color: '#bdbdbd', bg: 'bg-gray-100', border: 'border-gray-300', borderLight: '#bdbdbd30', label: 'Not checked', symbol: '·' },
 };
 
 export default function TestPrepare() {
@@ -57,148 +42,89 @@ export default function TestPrepare() {
 
   return (
     <AppShell displayName={displayName} email={email}>
-      <div style={{ maxWidth: 760, margin: '0 auto', paddingBottom: 48 }}>
+      <div className="mx-auto w-full max-w-[760px] pb-12 md:pb-12">
+        {/* Back link */}
         <Link
           to="/practice"
-          style={{
-            fontSize: 13,
-            color: 'var(--color-slate)',
-            textDecoration: 'none',
-            fontWeight: 600,
-            display: 'block',
-            marginBottom: 24,
-          }}
+          className="mb-6 block text-xs font-semibold no-underline text-[var(--color-slate)] md:mb-6"
         >
           ← Back to practice
         </Link>
 
-        <div style={{ textAlign: 'center', marginBottom: 36 }}>
-          <div
-            style={{
-              width: 56,
-              height: 56,
-              borderRadius: '50%',
-              background: 'var(--color-action-primary)',
-              margin: '0 auto 16px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: 'var(--color-ink)',
-            }}
-          >
+        {/* Hero section */}
+        <div className="mb-9 text-center md:mb-9">
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--color-brand-orange)]">
             <AppIcon name="sparkle" size={25} />
           </div>
-          <h1 style={{ fontSize: 26, fontWeight: 900, color: 'var(--color-ink)', marginBottom: 8 }}>
+          <h1 className="mb-2 text-2xl font-black text-[var(--color-ink)] md:text-2xl">
             Before you start
           </h1>
-          <p style={{ fontSize: 14, color: 'var(--color-slate)', maxWidth: 480, margin: '0 auto' }}>
+          <p className="mx-auto max-w-[480px] text-sm text-[var(--color-slate)] md:text-sm">
             Review requirements, policies, and tips before your test. Make sure your device and
             connection are ready.
           </p>
         </div>
 
-        {/* System check */}
-        <div style={cardStyle}>
-          <div className="flex items-center justify-between mb-5">
-            <h2 style={{ fontSize: 16, fontWeight: 800, color: 'var(--color-ink)' }}>
+        {/* System check card */}
+        <div className="mb-5 rounded-2xl border border-[color:var(--color-border)] bg-white p-7 md:p-7">
+          <div className="mb-5 flex items-center justify-between">
+            <h2 className="text-base font-black text-[var(--color-ink)] md:text-base">
               System &amp; equipment check
             </h2>
             <button
               type="button"
-              style={{
-                fontSize: 12,
-                fontWeight: 700,
-                color: '#FF6A00',
-                background: 'var(--color-cream)',
-                border: '1.5px solid #FF6A0030',
-                borderRadius: 8,
-                padding: '6px 14px',
-                cursor: 'pointer',
-              }}
+              className="rounded-lg border border-opacity-20 border-[color:var(--color-brand-orange)] bg-[var(--color-cream)] px-3.5 py-1.5 text-xs font-bold text-[var(--color-brand-orange)] hover:opacity-80"
             >
               Re-run all checks
             </button>
           </div>
-          <ul style={{ display: 'flex', flexDirection: 'column', gap: 10, listStyle: 'none' }}>
-            {checklist.map((item) => (
-              <li
-                key={item.id}
-                style={{
-                  display: 'flex',
-                  alignItems: 'flex-start',
-                  gap: 14,
-                  padding: '14px 16px',
-                  borderRadius: 10,
-                  margin: 0,
-                  background: statusBg[item.status],
-                  border: `1.5px solid ${statusColor[item.status]}30`,
-                }}
-              >
-                <div
-                  aria-hidden="true"
-                  style={{
-                    width: 20,
-                    height: 20,
-                    borderRadius: '50%',
-                    flexShrink: 0,
-                    marginTop: 1,
-                    background: statusColor[item.status],
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: 10,
-                    color: 'white',
-                    fontWeight: 900,
-                  }}
+          <ul className="flex flex-col gap-2.5">
+            {checklist.map((item) => {
+              const config = statusConfig[item.status];
+              return (
+                <li
+                  key={item.id}
+                  className={`flex flex-start gap-3.5 rounded-lg border border-opacity-20 p-4 ${config.bg}`}
+                  style={{ borderColor: config.color }}
                 >
-                  {statusSymbol[item.status]}
-                </div>
-                <div style={{ flex: 1 }}>
-                  <div className="flex items-center justify-between">
-                    <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--color-ink)' }}>
-                      {item.label}
-                    </span>
-                    <span
-                      style={{ fontSize: 11, fontWeight: 700, color: statusColor[item.status] }}
-                    >
-                      {statusLabel[item.status]}
-                    </span>
-                  </div>
-                  <p
-                    style={{
-                      fontSize: 12,
-                      color: 'var(--color-slate)',
-                      marginTop: 3,
-                      lineHeight: 1.5,
-                    }}
+                  <div
+                    aria-hidden="true"
+                    className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full text-xs font-black text-white"
+                    style={{ backgroundColor: config.color }}
                   >
-                    {item.detail}
-                  </p>
-                </div>
-              </li>
-            ))}
+                    {config.symbol}
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-bold text-[#232d3f]">
+                        {item.label}
+                      </span>
+                      <span className="text-xs font-bold" style={{ color: config.color }}>
+                        {config.label}
+                      </span>
+                    </div>
+                    <p className="mt-0.75 text-xs leading-relaxed text-[var(--color-slate)]">
+                      {item.detail}
+                    </p>
+                  </div>
+                </li>
+              );
+            })}
           </ul>
 
           <button
             type="button"
             onClick={() => setPlayedAudio(true)}
-            style={{
-              marginTop: 14,
-              width: '100%',
-              padding: '11px',
-              borderRadius: 10,
-              border: `1.5px solid ${playedAudio ? '#d1d5db' : 'var(--border)'}`,
-              background: playedAudio ? '#e8f5e9' : 'var(--muted)',
-              color: playedAudio ? '#2e7d32' : 'var(--color-slate)',
-              fontSize: 13,
-              fontWeight: 700,
-              cursor: 'pointer',
-            }}
+            className={`mt-3.5 w-full rounded-lg border border-[1.5px] px-3 py-2.75 text-sm font-bold transition-colors ${
+              playedAudio
+                ? 'border-gray-300 bg-green-100 text-green-700'
+                : 'border-[color:var(--color-border)] bg-[var(--color-muted)] text-[var(--color-slate)] font-bold'
+            }`}
           >
             {playedAudio ? (
               '✓ Audio confirmed'
             ) : (
-              <span className="ds-button-content">
+              <span className="flex items-center justify-center gap-2">
                 <AppIcon name="headphones" size={16} />
                 Play test sound — Click to play listening passage
               </span>
@@ -206,71 +132,56 @@ export default function TestPrepare() {
           </button>
         </div>
 
-        {/* Environment reminders */}
-        <div style={cardStyle}>
-          <h2 style={{ fontSize: 16, fontWeight: 800, color: 'var(--color-ink)', marginBottom: 4 }}>
+        {/* Environment reminders card */}
+        <div className="mb-5 rounded-2xl border border-[color:var(--color-border)] bg-white p-7 md:p-7">
+          <h2 className="mb-1 text-base font-black text-[var(--color-ink)] md:text-base">
             Environment reminders
           </h2>
-          <p style={{ fontSize: 13, color: 'var(--color-slate)', marginBottom: 16 }}>
+          <p className="mb-4 text-xs font-normal text-[var(--color-slate)] md:text-xs">
             Confirm these conditions before your test:
           </p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 20 }}>
+          <div className="mb-5 flex flex-col gap-2">
             {ENVIRONMENT_REMINDERS.map((r) => (
               <label
                 key={r}
-                className="flex items-start gap-3"
-                style={{
-                  padding: '10px 14px',
-                  borderRadius: 8,
-                  background: 'var(--muted)',
-                  fontSize: 13,
-                  color: 'var(--color-slate)',
-                  cursor: 'pointer',
-                }}
+                className="flex cursor-pointer items-start gap-3 rounded-lg bg-[var(--color-muted)] px-3.5 py-2.5 text-xs text-[var(--color-slate)]"
               >
-                <input type="checkbox" style={checkboxStyle} />
+                <input
+                  type="checkbox"
+                  className="mt-0.5 h-4 w-4 flex-shrink-0 cursor-pointer accent-[var(--color-brand-orange)]"
+                />
                 {r}
               </label>
             ))}
           </div>
-          <div
-            style={{
-              padding: '14px 16px',
-              borderRadius: 10,
-              background: '#fff8e1',
-              border: '1.5px solid #ffd54f',
-              fontSize: 12,
-              color: '#5d4037',
-              lineHeight: 1.6,
-            }}
-          >
+          <div className="rounded-lg border border-yellow-400 bg-yellow-50 px-4 py-3.5 text-xs leading-relaxed text-yellow-900">
             <strong>You can only take this test once.</strong> Once submitted, you cannot return to
             your answers. Make sure you're fully prepared before starting.
           </div>
         </div>
 
-        {/* Consent */}
-        <div style={{ ...cardStyle, padding: '20px 28px', marginBottom: 24 }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <label className="flex items-start gap-3" style={{ cursor: 'pointer' }}>
+        {/* Consent card */}
+        <div className="mb-6 rounded-2xl border border-[color:var(--color-border)] bg-white p-7 md:p-7">
+          <div className="flex flex-col gap-3">
+            <label className="flex cursor-pointer items-start gap-3">
               <input
                 type="checkbox"
                 checked={agreedEnv}
                 onChange={(e) => setAgreedEnv(e.target.checked)}
-                style={checkboxStyle}
+                className="mt-0.5 h-4 w-4 flex-shrink-0 cursor-pointer accent-[var(--color-brand-orange)]"
               />
-              <span style={{ fontSize: 13, color: 'var(--color-slate)', lineHeight: 1.5 }}>
+              <span className="text-xs leading-relaxed text-[var(--color-slate)]">
                 I confirm my environment is ready and I meet the conditions above
               </span>
             </label>
-            <label className="flex items-start gap-3" style={{ cursor: 'pointer' }}>
+            <label className="flex cursor-pointer items-start gap-3">
               <input
                 type="checkbox"
                 checked={agreedOnce}
                 onChange={(e) => setAgreedOnce(e.target.checked)}
-                style={checkboxStyle}
+                className="mt-0.5 h-4 w-4 flex-shrink-0 cursor-pointer accent-[var(--color-brand-orange)]"
               />
-              <span style={{ fontSize: 13, color: 'var(--color-slate)', lineHeight: 1.5 }}>
+              <span className="text-xs leading-relaxed text-[var(--color-slate)]">
                 I understand this is a <strong>one-time test</strong> and I cannot retake it after
                 submission
               </span>
@@ -278,41 +189,22 @@ export default function TestPrepare() {
           </div>
         </div>
 
-        <div
-          className="ds-grid-2"
-          style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}
-        >
+        {/* Action buttons */}
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-2">
           <Link
             to="/practice"
-            style={{
-              display: 'block',
-              textAlign: 'center',
-              padding: '14px',
-              borderRadius: 10,
-              border: '1.5px solid var(--border)',
-              background: 'white',
-              color: 'var(--color-ink)',
-              fontSize: 14,
-              fontWeight: 700,
-              textDecoration: 'none',
-            }}
+            className="flex items-center justify-center rounded-lg border border-[color:var(--color-border)] bg-white px-3.5 py-3.5 text-center text-sm font-bold no-underline text-[var(--color-ink)] transition-colors hover:bg-gray-50"
           >
             Back to practice
           </Link>
           <button
             type="button"
             disabled={!allReady}
-            style={{
-              padding: '14px',
-              borderRadius: 10,
-              border: 'none',
-              background: allReady ? 'var(--color-action-primary)' : '#e0e0e0',
-              color: allReady ? 'white' : '#bdbdbd',
-              fontSize: 14,
-              fontWeight: 800,
-              cursor: allReady ? 'pointer' : 'not-allowed',
-              transition: 'all 0.2s',
-            }}
+            className={`rounded-lg border-0 px-3.5 py-3.5 text-sm font-black transition-all ${
+              allReady
+                ? 'cursor-pointer bg-[var(--color-brand-orange)] text-white hover:shadow-lg'
+                : 'cursor-not-allowed bg-[#d1d5db] text-gray-500'
+            }`}
           >
             {allReady ? 'Start test →' : 'Complete checklist to start'}
           </button>

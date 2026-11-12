@@ -36,46 +36,29 @@ export function AuthProvider({ children }: { children: React.ReactNode }): React
    * Checks if there is an existing valid Amplify session
    */
   const initializeAuth = useCallback(async () => {
-    const timestamp = new Date().toISOString();
-    console.log(`[${timestamp}] AuthProvider: Initializing authentication state...`);
-
     try {
       // Attempt to restore session from Amplify token storage
       const session = await fetchAuthSession();
-      console.log(`[${timestamp}] AuthProvider: fetchAuthSession returned:`, {
-        hasAccessToken: !!session.tokens?.accessToken,
-      });
 
       if (session.tokens?.accessToken) {
-        console.log(`[${timestamp}] AuthProvider: Valid session found. Fetching current user...`);
-
         // Session exists, get current user details
         const currentUser = await getCurrentUser();
         if (currentUser) {
-          console.log(
-            `[${timestamp}] ✅ AuthProvider: User session restored: ${currentUser.username}`
-          );
           setUser(currentUser);
           setIsAuthenticated(true);
           setIsLoading(false);
         } else {
-          console.warn(`[${timestamp}] AuthProvider: Session found but user details unavailable`);
           setUser(null);
           setIsAuthenticated(false);
           setIsLoading(false);
         }
       } else {
-        console.log(`[${timestamp}] AuthProvider: No valid session found (no access token)`);
         setUser(null);
         setIsAuthenticated(false);
         setIsLoading(false);
       }
     } catch (error) {
       // No session or session retrieval failed — treat as unauthenticated
-      console.log(
-        `[${timestamp}] AuthProvider: No existing session (expected on first load):`,
-        error
-      );
       setUser(null);
       setIsAuthenticated(false);
       setIsLoading(false);
@@ -89,38 +72,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }): React
 
   // Listen for Amplify authentication Hub events
   useEffect(() => {
-    const timestamp = new Date().toISOString();
-    console.log(`[${timestamp}] AuthProvider: Setting up auth Hub listener`);
-
     const handleAuthEvent = async (capsule: unknown): Promise<void> => {
       const payload = capsule as { data?: { event?: string } };
       const { event } = payload?.data || {};
-      const eventTimestamp = new Date().toISOString();
-      console.log(`[${eventTimestamp}] AuthProvider: Auth Hub event received: ${event}`);
 
       switch (event) {
         case 'signedIn':
           // User successfully signed in via signIn()
-          console.log(`[${eventTimestamp}] ✅ AuthProvider: signedIn event detected`);
-          // Fetch current user immediately when signed in
           try {
             const currentUser = await getCurrentUser();
             if (currentUser) {
-              console.log(
-                `[${eventTimestamp}] ✅ AuthProvider: User authenticated: ${currentUser.username}`
-              );
               setUser(currentUser);
               setIsAuthenticated(true);
               setIsLoading(false);
             } else {
-              console.warn(`[${eventTimestamp}] AuthProvider: signedIn event but user unavailable`);
               setUser(null);
               setIsAuthenticated(false);
               setIsLoading(false);
             }
           } catch (error) {
             console.error(
-              `[${eventTimestamp}] AuthProvider: Error fetching user after signedIn:`,
+              'AuthProvider: Error fetching user after signedIn:',
               error
             );
             setUser(null);
@@ -130,7 +102,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }): React
           break;
 
         case 'signedOut':
-          console.log(`[${eventTimestamp}] AuthProvider: signedOut event detected`);
           setUser(null);
           setIsAuthenticated(false);
           setIsLoading(false);
@@ -145,7 +116,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }): React
     const removeListener = Hub.listen('auth', handleAuthEvent);
 
     return () => {
-      console.log(`[${timestamp}] AuthProvider: Removing auth Hub listener`);
       removeListener();
     };
   }, []);
@@ -155,15 +125,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }): React
    * Force re-fetch of current user and auth status
    */
   const refreshAuth = useCallback(async () => {
-    const timestamp = new Date().toISOString();
-    console.log(`[${timestamp}] AuthProvider: Refreshing auth state...`);
     const currentUser = await getCurrentUser();
 
     if (currentUser) {
       setUser(currentUser);
       setIsAuthenticated(true);
       setIsLoading(false);
-      console.log(`[${timestamp}] ✅ AuthProvider: Auth state refreshed: ${currentUser.username}`);
     } else {
       setUser(null);
       setIsAuthenticated(false);
@@ -176,16 +143,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }): React
    * This bypasses Hub events and sets state directly
    */
   const setAuthenticatedUser = useCallback((currentUser: AuthUser | null) => {
-    const timestamp = new Date().toISOString();
     if (currentUser) {
-      console.log(
-        `[${timestamp}] AuthProvider: setAuthenticatedUser called for: ${currentUser.username}`
-      );
       setUser(currentUser);
       setIsAuthenticated(true);
       setIsLoading(false);
     } else {
-      console.log(`[${timestamp}] AuthProvider: setAuthenticatedUser called with null`);
       setUser(null);
       setIsAuthenticated(false);
       setIsLoading(false);
@@ -197,7 +159,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }): React
    */
   const signOut = useCallback(async () => {
     try {
-      console.log('AuthProvider: Signing out...');
       await authSignOut();
       // signOut() above will trigger 'signedOut' Hub event
       // which will update state via the Hub listener

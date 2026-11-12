@@ -9,6 +9,7 @@ import { ConfirmSignUp } from '@components/auth/ConfirmSignUp';
 import Dashboard from '../pages/Dashboard';
 import Results from '../pages/Results';
 import PurchaseTest from '../pages/PurchaseTest';
+import Checkout from '../pages/Checkout';
 import Settings from '../pages/Settings';
 import Practice from '../pages/Practice';
 import TestPrepare from '../pages/TestPrepare';
@@ -236,6 +237,9 @@ export function AppRoutes(): React.JSX.Element {
 
       {/* Purchase test page route */}
       <Route path="/book" element={<PurchaseTest />} />
+
+      {/* Checkout page route */}
+      <Route path="/checkout" element={<Checkout />} />
 
       {/* Practice page route */}
       <Route path="/practice" element={<Practice />} />

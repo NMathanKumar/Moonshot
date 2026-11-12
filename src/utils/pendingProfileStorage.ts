@@ -29,7 +29,6 @@ export function setPendingProfile(data: PendingProfileData): void {
       // Explicitly exclude password if accidentally passed
     };
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(sanitized));
-    console.log('pendingProfileStorage: Profile data stored');
   } catch (error) {
     console.error('pendingProfileStorage: Failed to store profile:', error);
   }
@@ -46,7 +45,6 @@ export function getPendingProfile(): PendingProfileData | null {
       return null;
     }
     const parsed = JSON.parse(stored);
-    console.log('pendingProfileStorage: Profile data retrieved');
     return parsed as PendingProfileData;
   } catch (error) {
     console.error('pendingProfileStorage: Failed to retrieve profile:', error);
@@ -61,7 +59,6 @@ export function getPendingProfile(): PendingProfileData | null {
 export function clearPendingProfile(): void {
   try {
     sessionStorage.removeItem(STORAGE_KEY);
-    console.log('pendingProfileStorage: Profile data cleared');
   } catch (error) {
     console.error('pendingProfileStorage: Failed to clear profile:', error);
   }

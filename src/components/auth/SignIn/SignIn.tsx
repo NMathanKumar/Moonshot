@@ -27,11 +27,10 @@ export function SignIn({ onSubmit }: SignInProps) {
       try {
         const session = await fetchAuthSession();
         if (session.tokens?.accessToken) {
-          console.log('[SignIn] User already authenticated, redirecting to dashboard');
           navigate('/dashboard', { replace: true });
         }
       } catch (err) {
-        console.log('[SignIn] No existing session');
+        // No existing session
       } finally {
         setIsCheckingSession(false);
       }
@@ -54,19 +53,15 @@ export function SignIn({ onSubmit }: SignInProps) {
     setIsSubmitting(true);
 
     try {
-      console.log('[SignIn] Form submitted with:', { email });
       if (onSubmit) {
         await onSubmit({ email, password });
-        console.log('[SignIn] Auth handler completed successfully');
         // Handler will navigate to dashboard via AppRoutes
       } else {
-        console.warn('[SignIn] No onSubmit handler provided');
         setError('Sign in handler not configured');
         setIsSubmitting(false);
       }
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred';
-      console.error('[SignIn] Submission error:', errorMessage);
       setError(errorMessage);
       setIsSubmitting(false);
     }
@@ -82,41 +77,43 @@ export function SignIn({ onSubmit }: SignInProps) {
   }
 
   return (
-    <div className="login-grid">
-      {/* Left brand panel */}
-      <div className="login-brand-panel" style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: 60, position: 'relative', overflow: 'hidden' }}>
+    <div className="min-h-screen w-screen flex flex-col md:flex-row bg-[#f7f7f5] overflow-x-hidden">
+      {/* Left Illustration Panel: Hidden on mobile, 45% on desktop */}
+      <div className="hidden md:flex md:w-[45%] flex-col justify-center items-center p-6 md:p-10 relative overflow-hidden bg-[#f7f7f5]">
+        <div className="absolute top-[-60px] left-[-60px] w-[280px] h-[280px] rounded-full bg-white/10" />
+        <div className="absolute bottom-[-40px] right-[-40px] w-[200px] h-[200px] rounded-full bg-white/[0.08]" />
         <img
           src={signinStudent}
           alt="Student holding a tablet"
-          className="signin-illustration"
+          className="max-w-[496px] w-full h-auto object-contain relative z-10"
         />
       </div>
 
-      {/* Right form panel */}
-      <div className="login-form-panel">
-        <form className="login-form-card" style={{ maxWidth: 480, padding: '40px 42px', borderRadius: 20, background: 'white', border: '1px solid #e5e7eb', boxShadow: '0 10px 40px rgba(0, 0, 0, 0.08)' }} onSubmit={handleSubmit}>
+      {/* Right Form Panel: Full width on mobile, 55% on desktop */}
+      <div className="w-full md:w-[55%] flex flex-col justify-center items-center p-3 sm:p-4 md:p-9 bg-[#f7f7f5] min-h-screen md:min-h-auto">
+        <form className="w-full max-w-[590px] px-4 sm:px-5 md:px-[44px] py-6 sm:py-7 md:py-[40px] rounded-lg md:rounded-[20px] bg-white border border-[#e0e0e0] shadow-[0_16px_45px_rgba(35,45,63,0.12)]" onSubmit={handleSubmit}>
           {/* Header */}
-          <div style={{ marginBottom: 36, textAlign: 'center' }}>
-            <h1 style={{ fontSize: 28, fontWeight: 900, color: '#1f2937', marginBottom: 12, textAlign: 'center', margin: 0 }}>
+          <div className="mb-5 sm:mb-6 md:mb-[28px] text-center">
+            <h1 className="text-xl sm:text-2xl md:text-[24px] font-black text-[#232d3f] mb-1 md:mb-2 m-0 leading-tight">
               Sign in
             </h1>
-            <p style={{ fontSize: 14, color: '#6b7280', textAlign: 'center', margin: 0 }}>
+            <p className="text-xs sm:text-sm md:text-[13px] text-[#55657b] m-0 leading-relaxed">
               Welcome back! Please enter your details.
             </p>
           </div>
 
           {/* Error Alert */}
           {error && (
-            <div style={{ marginBottom: 16, padding: '10px 14px', borderRadius: 8, background: '#fef2f2', border: '1px solid #fecaca', color: '#dc2626', fontSize: 13 }}>
+            <div className="mb-3 sm:mb-4 md:mb-4 p-2.5 sm:p-3 md:p-3.5 rounded-lg bg-[#fef2f2] border border-[#fecaca] text-[#dc2626] text-xs sm:text-xs md:text-[13px] leading-relaxed">
               {error}
             </div>
           )}
 
           {/* Form Fields */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginBottom: 20 }}>
+          <div className="flex flex-col gap-3 sm:gap-3.5 md:gap-[16px] mb-4 sm:mb-5 md:mb-[20px]">
             {/* Email Field */}
             <div>
-              <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: 'var(--color-slate)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>
+              <label className="block text-[10px] sm:text-[11px] font-bold text-[#55657b] uppercase tracking-[0.06em] mb-1.5 md:mb-[6px]">
                 Email
               </label>
               <input
@@ -126,26 +123,26 @@ export function SignIn({ onSubmit }: SignInProps) {
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={isSubmitting}
                 required
-                style={{ width: '100%', padding: '11px 14px', borderRadius: 8, border: '1.5px solid var(--border)', background: 'white', fontSize: 13, color: 'var(--color-ink)', outline: 'none', fontFamily: 'Inter, sans-serif' }}
+                className="w-full px-3 sm:px-3.5 md:px-[14px] py-2.5 sm:py-2.5 md:py-[11px] rounded-lg md:rounded-[8px] border border-[#dde2e7] bg-white text-xs sm:text-xs md:text-[13px] text-[#232d3f] outline-none font-sans disabled:bg-gray-100 disabled:cursor-not-allowed disabled:text-gray-600"
               />
             </div>
 
             {/* Password Field */}
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, marginBottom: 6 }}>
-                <label style={{ fontSize: 11, fontWeight: 700, color: 'var(--color-slate)', textTransform: 'uppercase', letterSpacing: '0.06em', margin: 0 }}>
+              <div className="flex items-center justify-between gap-1.5 sm:gap-2 md:gap-[12px] mb-1.5 md:mb-[6px]">
+                <label className="text-[10px] sm:text-[11px] font-bold text-[#55657b] uppercase tracking-[0.06em] m-0">
                   Password
                 </label>
                 <button
                   type="button"
                   onClick={handleForgotPassword}
                   disabled={isSubmitting}
-                  style={{ fontSize: 12, color: '#FF6A00', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700, padding: 0 }}
+                  className="text-[9px] sm:text-[10px] md:text-[12px] text-[#FF6A00] bg-none border-none cursor-pointer font-bold p-0 disabled:cursor-not-allowed whitespace-nowrap"
                 >
                   Forgot password?
                 </button>
               </div>
-              <div style={{ position: 'relative' }}>
+              <div className="relative">
                 <input
                   type={show ? 'text' : 'password'}
                   placeholder="••••••••"
@@ -153,15 +150,15 @@ export function SignIn({ onSubmit }: SignInProps) {
                   onChange={(e) => setPassword(e.target.value)}
                   disabled={isSubmitting}
                   required
-                  style={{ width: '100%', padding: '11px 14px', paddingRight: 44, borderRadius: 8, border: '1.5px solid var(--border)', background: 'white', fontSize: 13, color: 'var(--color-ink)', outline: 'none', fontFamily: 'Inter, sans-serif' }}
+                  className="w-full px-3 sm:px-3.5 md:px-[14px] py-2.5 sm:py-2.5 md:py-[11px] rounded-lg md:rounded-[8px] border border-[#dde2e7] bg-white text-xs sm:text-xs md:text-[13px] text-[#232d3f] outline-none font-sans pr-10 sm:pr-11 md:pr-[44px] disabled:bg-gray-100 disabled:cursor-not-allowed disabled:text-gray-600"
                 />
                 <button
                   type="button"
                   onClick={() => setShow(!show)}
                   disabled={isSubmitting}
-                  style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', fontSize: 11, color: 'var(--color-slate)', fontWeight: 700, fontFamily: 'Inter, sans-serif', padding: 0 }}
+                  className="absolute right-2 sm:right-2.5 md:right-[12px] top-1/2 -translate-y-1/2 bg-none border-none cursor-pointer text-[8px] sm:text-[9px] md:text-[11px] text-[#55657b] font-bold font-sans p-0 disabled:cursor-not-allowed whitespace-nowrap px-1"
                 >
-                  {show ? 'Hide password' : 'Show password'}
+                  {show ? 'Hide' : 'Show'}
                 </button>
               </div>
             </div>
@@ -171,19 +168,19 @@ export function SignIn({ onSubmit }: SignInProps) {
           <button
             type="submit"
             disabled={isSubmitting}
-            style={{ width: '100%', display: 'block', textAlign: 'center', padding: '13px', borderRadius: 10, border: 'none', background: 'var(--color-action-primary)', color: 'white', fontSize: 14, fontWeight: 800, textDecoration: 'none', marginBottom: 16, cursor: 'pointer', fontFamily: 'Inter, sans-serif' }}
+            className="w-full block text-center py-2.5 sm:py-2.75 md:py-[13px] rounded-lg md:rounded-[10px] border-none bg-[#FF6A00] text-white text-xs sm:text-xs md:text-[14px] font-black mb-3 sm:mb-4 md:mb-[16px] cursor-pointer disabled:cursor-not-allowed disabled:opacity-60 font-sans leading-tight"
           >
             {isSubmitting ? 'Signing in...' : 'Sign in'}
           </button>
 
           {/* Sign Up Link */}
-          <div style={{ textAlign: 'center', marginBottom: 18 }}>
-            <span style={{ fontSize: 12, color: 'var(--color-slate)' }}>Don't have an account? </span>
+          <div className="text-center">
+            <span className="text-[10px] sm:text-[11px] md:text-[12px] text-[#55657b]">Don't have an account? </span>
             <button
               type="button"
               onClick={handleNavigateToSignUp}
               disabled={isSubmitting}
-              style={{ fontSize: 12, color: 'var(--color-action-primary)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 700 }}
+              className="text-[10px] sm:text-[11px] md:text-[12px] text-[#FF6A00] bg-none border-none cursor-pointer font-bold p-0 disabled:cursor-not-allowed"
             >
               Sign up
             </button>

@@ -21,8 +21,6 @@ export function Callback(): React.JSX.Element {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.warn('Callback: This route should not be accessed with direct SDK auth');
-    console.log('Callback: Redirecting to signin...');
     navigate('/signin', { replace: true });
   }, [navigate]);
 
