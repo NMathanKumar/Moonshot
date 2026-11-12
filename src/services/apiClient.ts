@@ -76,11 +76,12 @@ export async function getCurrentAmplifyAccessToken(): Promise<string | null> {
  * Build the full URL for an API endpoint
  */
 function buildUrl(path: string): string {
-  // Try process.env first (for Node test environment)
-  // Then fall back to import.meta.env (for Vite browser build)
+  // Prefer import.meta.env (Vite browser build and jsdom tests).
+  // Fall back to process.env for plain Node environments, guarding the
+  // reference with typeof because `process` is undefined in the browser.
   const baseUrl =
-    process.env.VITE_API_BASE_URL ||
-    (typeof import.meta !== 'undefined' ? import.meta.env?.VITE_API_BASE_URL : undefined);
+    (typeof import.meta !== 'undefined' ? import.meta.env?.VITE_API_BASE_URL : undefined) ||
+    (typeof process !== 'undefined' ? process.env?.VITE_API_BASE_URL : undefined);
 
   if (!baseUrl) {
     throw new Error(
