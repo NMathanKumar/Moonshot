@@ -37,7 +37,9 @@
       "@routes": ["./src/routes"],
       "@routes/*": ["./src/routes/*"],
       "@utils": ["./src/utils"],
-      "@utils/*": ["./src/utils/*"]
+      "@utils/*": ["./src/utils/*"],
+      "@layouts": ["./src/layouts"],
+      "@layouts/*": ["./src/layouts/*"]
     }
   },
   "include": ["src", "tests"],

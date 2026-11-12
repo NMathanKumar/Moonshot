@@ -14,7 +14,7 @@ export interface SignInProps {
 
 export function SignIn({ onSubmit }: SignInProps) {
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
+  const [show, setShow] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -27,11 +27,10 @@ export function SignIn({ onSubmit }: SignInProps) {
       try {
         const session = await fetchAuthSession();
         if (session.tokens?.accessToken) {
-          console.log('[SignIn] User already authenticated, redirecting to dashboard');
           navigate('/dashboard', { replace: true });
         }
       } catch (err) {
-        console.log('[SignIn] No existing session');
+        // No existing session
       } finally {
         setIsCheckingSession(false);
       }
@@ -45,8 +44,7 @@ export function SignIn({ onSubmit }: SignInProps) {
   };
 
   const handleForgotPassword = () => {
-    // TODO: Implement forgot password flow
-    console.log('[SignIn] Forgot password clicked');
+    navigate('/forgot-password');
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -55,19 +53,15 @@ export function SignIn({ onSubmit }: SignInProps) {
     setIsSubmitting(true);
 
     try {
-      console.log('[SignIn] Form submitted with:', { email });
       if (onSubmit) {
         await onSubmit({ email, password });
-        console.log('[SignIn] Auth handler completed successfully');
         // Handler will navigate to dashboard via AppRoutes
       } else {
-        console.warn('[SignIn] No onSubmit handler provided');
         setError('Sign in handler not configured');
         setIsSubmitting(false);
       }
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred';
-      console.error('[SignIn] Submission error:', errorMessage);
       setError(errorMessage);
       setIsSubmitting(false);
     }
@@ -76,53 +70,50 @@ export function SignIn({ onSubmit }: SignInProps) {
   // Show loading while checking session
   if (isCheckingSession) {
     return (
-      <div className="min-h-screen bg-[#f7f7f5] flex items-center justify-center">
-        <p className="text-center text-[#232d3f] text-base">Loading...</p>
+      <div className="flex min-h-screen items-center justify-center bg-white">
+        <p className="text-center text-base text-[#232d3f]">Loading...</p>
       </div>
     );
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen bg-[#f7f7f5]">
-      {/* LEFT PANEL - Student image with decorative circles */}
-      <div className="hidden md:flex flex-col items-end justify-center p-10 relative overflow-hidden">
-        <div className="absolute w-[280px] h-[280px] bg-white/6 rounded-full -top-16 -left-16 z-0" />
-        <div className="absolute w-[200px] h-[200px] bg-white/8 rounded-full -bottom-8 left-96 z-0" />
-
-        <div className="relative z-10 w-full max-w-[520px]">
-          <img
-            src={signinStudent}
-            alt="Student holding a tablet"
-            className="w-full h-auto object-cover"
-          />
-        </div>
+    <div className="min-h-screen w-screen flex flex-col md:flex-row bg-[#f7f7f5] overflow-x-hidden">
+      {/* Left Illustration Panel: Hidden on mobile, 45% on desktop */}
+      <div className="hidden md:flex md:w-[45%] flex-col justify-center items-center p-6 md:p-10 relative overflow-hidden bg-[#f7f7f5]">
+        <div className="absolute top-[-60px] left-[-60px] w-[280px] h-[280px] rounded-full bg-white/10" />
+        <div className="absolute bottom-[-40px] right-[-40px] w-[200px] h-[200px] rounded-full bg-white/[0.08]" />
+        <img
+          src={signinStudent}
+          alt="Student holding a tablet"
+          className="max-w-[496px] w-full h-auto object-contain relative z-10"
+        />
       </div>
 
-      {/* RIGHT PANEL - Sign In Form */}
-      <div className="flex items-center justify-center p-6 md:p-9 bg-[#f7f7f5]">
-        <div className="w-full max-w-[590px] bg-white rounded-[20px] border border-[#e0e0e0] shadow-[0px_16px_22.5px_rgba(35,45,63,0.12)] px-11 py-10">
-          {/* HEADER */}
-          <div className="flex flex-col items-center mb-7">
-            <h1 className="text-[26px] font-bold text-[#232d3f] leading-[39px] tracking-[-0.39px] text-center">
+      {/* Right Form Panel: Full width on mobile, 55% on desktop */}
+      <div className="w-full md:w-[55%] flex flex-col justify-center items-center p-3 sm:p-4 md:p-9 bg-[#f7f7f5] min-h-screen md:min-h-auto">
+        <form className="w-full max-w-[590px] px-4 sm:px-5 md:px-[44px] py-6 sm:py-7 md:py-[40px] rounded-lg md:rounded-[20px] bg-white border border-[#e0e0e0] shadow-[0_16px_45px_rgba(35,45,63,0.12)]" onSubmit={handleSubmit}>
+          {/* Header */}
+          <div className="mb-5 sm:mb-6 md:mb-[28px] text-center">
+            <h1 className="text-xl sm:text-2xl md:text-[24px] font-black text-[#232d3f] mb-1 md:mb-2 m-0 leading-tight">
               Sign in
             </h1>
-            <p className="text-[14px] font-normal text-[#55657b] leading-[21px] text-center mt-2">
+            <p className="text-xs sm:text-sm md:text-[13px] text-[#55657b] m-0 leading-relaxed">
               Welcome back! Please enter your details.
             </p>
           </div>
 
-          {/* ERROR ALERT */}
+          {/* Error Alert */}
           {error && (
-            <div className="w-full mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
+            <div className="mb-3 sm:mb-4 md:mb-4 p-2.5 sm:p-3 md:p-3.5 rounded-lg bg-[#fef2f2] border border-[#fecaca] text-[#dc2626] text-xs sm:text-xs md:text-[13px] leading-relaxed">
               {error}
             </div>
           )}
 
-          {/* FORM */}
-          <form onSubmit={handleSubmit} className="w-full">
-            {/* EMAIL FIELD */}
-            <div className="mb-4">
-              <label className="block text-[11px] font-bold text-[#55657b] uppercase tracking-[0.66px] pb-1.5">
+          {/* Form Fields */}
+          <div className="flex flex-col gap-3 sm:gap-3.5 md:gap-[16px] mb-4 sm:mb-5 md:mb-[20px]">
+            {/* Email Field */}
+            <div>
+              <label className="block text-[10px] sm:text-[11px] font-bold text-[#55657b] uppercase tracking-[0.06em] mb-1.5 md:mb-[6px]">
                 Email
               </label>
               <input
@@ -132,75 +123,69 @@ export function SignIn({ onSubmit }: SignInProps) {
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={isSubmitting}
                 required
-                className="w-full h-11 px-3.5 py-2.75 bg-white border border-[#e0e0e0] rounded-lg text-[13px] text-[#111827] font-medium placeholder-[#9CA3AF] focus:outline-none focus:border-[#FF6A00] focus:ring-1 focus:ring-[rgba(255,106,0,0.1)] disabled:opacity-60 autofill:text-[#111827] autofill:font-medium"
-                style={{
-                  WebkitTextFillColor: email ? '#111827' : undefined,
-                }}
+                className="w-full px-3 sm:px-3.5 md:px-[14px] py-2.5 sm:py-2.5 md:py-[11px] rounded-lg md:rounded-[8px] border border-[#dde2e7] bg-white text-xs sm:text-xs md:text-[13px] text-[#232d3f] outline-none font-sans disabled:bg-gray-100 disabled:cursor-not-allowed disabled:text-gray-600"
               />
             </div>
 
-            {/* PASSWORD FIELD */}
-            <div className="mb-6">
-              <div className="flex items-center justify-between pb-1.5">
-                <label className="text-[11px] font-bold text-[#55657b] uppercase tracking-[0.66px]">
+            {/* Password Field */}
+            <div>
+              <div className="flex items-center justify-between gap-1.5 sm:gap-2 md:gap-[12px] mb-1.5 md:mb-[6px]">
+                <label className="text-[10px] sm:text-[11px] font-bold text-[#55657b] uppercase tracking-[0.06em] m-0">
                   Password
                 </label>
                 <button
                   type="button"
                   onClick={handleForgotPassword}
                   disabled={isSubmitting}
-                  className="text-[12px] font-bold text-[#ff6a00] hover:underline focus:outline-none disabled:opacity-60"
+                  className="text-[9px] sm:text-[10px] md:text-[12px] text-[#FF6A00] bg-none border-none cursor-pointer font-bold p-0 disabled:cursor-not-allowed whitespace-nowrap"
                 >
                   Forgot password?
                 </button>
               </div>
               <div className="relative">
                 <input
-                  type={showPassword ? 'text' : 'password'}
+                  type={show ? 'text' : 'password'}
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   disabled={isSubmitting}
                   required
-                  className="w-full h-11 px-3.5 py-2.75 bg-white border border-[#e0e0e0] rounded-lg text-[13px] text-[#111827] font-medium placeholder-[#9CA3AF] focus:outline-none focus:border-[#FF6A00] focus:ring-1 focus:ring-[rgba(255,106,0,0.1)] disabled:opacity-60 autofill:text-[#111827] autofill:font-medium"
-                  style={{
-                    WebkitTextFillColor: password ? '#111827' : undefined,
-                  }}
+                  className="w-full px-3 sm:px-3.5 md:px-[14px] py-2.5 sm:py-2.5 md:py-[11px] rounded-lg md:rounded-[8px] border border-[#dde2e7] bg-white text-xs sm:text-xs md:text-[13px] text-[#232d3f] outline-none font-sans pr-10 sm:pr-11 md:pr-[44px] disabled:bg-gray-100 disabled:cursor-not-allowed disabled:text-gray-600"
                 />
                 <button
                   type="button"
-                  onClick={() => setShowPassword(!showPassword)}
+                  onClick={() => setShow(!show)}
                   disabled={isSubmitting}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[11px] font-bold text-[#55657b] hover:text-[#232d3f] focus:outline-none disabled:opacity-60"
+                  className="absolute right-2 sm:right-2.5 md:right-[12px] top-1/2 -translate-y-1/2 bg-none border-none cursor-pointer text-[8px] sm:text-[9px] md:text-[11px] text-[#55657b] font-bold font-sans p-0 disabled:cursor-not-allowed whitespace-nowrap px-1"
                 >
-                  {showPassword ? 'Hide' : 'Show'}
+                  {show ? 'Hide' : 'Show'}
                 </button>
               </div>
             </div>
+          </div>
 
-            {/* SUBMIT BUTTON */}
+          {/* Submit Button */}
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full block text-center py-2.5 sm:py-2.75 md:py-[13px] rounded-lg md:rounded-[10px] border-none bg-[#FF6A00] text-white text-xs sm:text-xs md:text-[14px] font-black mb-3 sm:mb-4 md:mb-[16px] cursor-pointer disabled:cursor-not-allowed disabled:opacity-60 font-sans leading-tight"
+          >
+            {isSubmitting ? 'Signing in...' : 'Sign in'}
+          </button>
+
+          {/* Sign Up Link */}
+          <div className="text-center">
+            <span className="text-[10px] sm:text-[11px] md:text-[12px] text-[#55657b]">Don&apos;t have an account? </span>
             <button
-              type="submit"
-              disabled={isSubmitting || !email || !password}
-              className="w-full py-3 px-4 bg-gradient-to-r from-[#FFC01E] via-[#FF6A00] to-[#E01F26] rounded-[10px] text-white font-extrabold text-[14px] leading-[21px] hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:shadow-md transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+              type="button"
+              onClick={handleNavigateToSignUp}
+              disabled={isSubmitting}
+              className="text-[10px] sm:text-[11px] md:text-[12px] text-[#FF6A00] bg-none border-none cursor-pointer font-bold p-0 disabled:cursor-not-allowed"
             >
-              {isSubmitting ? 'Signing in...' : 'Sign in'}
+              Sign up
             </button>
-
-            {/* SIGN UP LINK */}
-            <div className="flex items-baseline justify-center gap-1.5 mt-6 pt-4 border-t border-gray-100">
-              <span className="text-sm text-gray-500 font-normal">Don't have an account?</span>
-              <button
-                type="button"
-                onClick={handleNavigateToSignUp}
-                disabled={isSubmitting}
-                className="text-sm font-semibold text-[#f97316] hover:text-[#ea580c] hover:underline focus:outline-none disabled:opacity-60 transition-colors"
-              >
-                Sign up
-              </button>
-            </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </div>
   );

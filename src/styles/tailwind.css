@@ -1,1 +1,30 @@
 @import 'tailwindcss';
+
+/* Custom Figma design system colors */
+@theme {
+  --color-ink: #232D3F;
+  --color-slate: #55657B;
+  --color-cream: #FFF3EA;
+  --color-action-primary: #EB7900;
+  --color-score-highlight: #FF8300;
+  --color-brand-orange: #FF6A00;
+  --color-brand-yellow: #FFC01E;
+  --color-brand-red: #E01F26;
+  --color-surface-subtle: #F7F9FA;
+  --color-border-default: #DDE2E7;
+  --color-border-subtle: #E9EDF0;
+  --color-muted: #f5f5f5;
+  --color-muted-foreground: #8d8f91;
+
+  --shadow-card: 0 1px 2px rgba(35, 45, 63, 0.04), 0 8px 24px rgba(35, 45, 63, 0.06);
+  --shadow-card-hover: 0 2px 4px rgba(35, 45, 63, 0.05), 0 12px 28px rgba(35, 45, 63, 0.09);
+  --shadow-sm: 0 1px 2px rgba(35, 45, 63, 0.04);
+  --shadow-md: 0 4px 16px rgba(35, 45, 63, 0.08);
+  --shadow-lg: 0 8px 24px rgba(35, 45, 63, 0.12);
+  --shadow-xl: 0 12px 32px rgba(35, 45, 63, 0.16);
+  --shadow-2xl: 0 18px 50px rgba(35, 45, 63, 0.13);
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+}

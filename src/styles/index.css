@@ -3,6 +3,16 @@
 @import './variables.css';
 @import './tailwind.css';
 
+/* Import fonts from Figma design system */
+@import url('https://fonts.googleapis.com/css2?family=Farro:wght@300;400;500;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+@font-face {
+  font-family: "Farro";
+  src: url("https://static.figma.com/font/Farro-Regular_1") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+}
+
 /* Base element resets and styles (moved from reset.css) */
 @layer base {
   * {
@@ -52,7 +62,7 @@
   }
 
   a {
-    @apply text-[#FF6A00] no-underline bg-transparent cursor-pointer;
+    @apply text-[var(--color-brand-orange)] no-underline bg-transparent cursor-pointer;
 
     &:hover {
       @apply underline;
@@ -73,7 +83,7 @@
   input,
   textarea,
   select {
-    @apply border border-[#ccc] p-2 rounded;
+    @apply border border-[var(--color-border)] p-2 rounded;
   }
 
   textarea {
@@ -99,16 +109,16 @@
 
   th,
   td {
-    @apply text-left p-2 border-b border-[#ddd];
+    @apply text-left p-2 border-b border-[var(--color-border-subtle)];
   }
 
   th {
-    @apply font-bold bg-[#f5f5f5];
+    @apply font-bold bg-[var(--color-muted)];
   }
 
   /* Accessibility */
   :focus {
-    @apply outline-2 outline-[#FF6A00] outline-offset-2;
+    outline: none !important;
   }
 
   ::placeholder {
@@ -121,6 +131,54 @@ body {
   background-color: var(--color-white);
   font-family: var(--font-family-base);
 }
+
+html, body, #root {
+  height: 100%;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Inter", sans-serif;
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Farro", "Farro:Regular", sans-serif;
+  font-weight: 700 !important;
+  letter-spacing: -0.015em;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: "Inter", sans-serif;
+}
+
+button,
+a {
+  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease,
+    box-shadow 160ms ease, transform 160ms ease;
+}
+
+button:not(:disabled):active,
+a:active {
+  transform: translateY(1px);
+}
+
+:where(a, button, input, select, textarea):focus-visible {
+  outline: 3px solid rgba(var(--brand-primary-rgb), 0.22);
+  outline-offset: 2px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--color-brand-orange) !important;
+  box-shadow: 0 0 0 3px rgba(var(--brand-primary-rgb), 0.1);
+}
+
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 2px; }
 
 #root {
   width: 100%;
@@ -154,7 +212,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:focus-visible {
-  -webkit-text-fill-color: #111827 !important;
+  -webkit-text-fill-color: var(--color-ink) !important;
   font-weight: 500;
 }
 
@@ -165,6 +223,210 @@ input:-webkit-autofill {
 
 /* Firefox autofill (if supported) */
 input:-moz-autofill {
-  color: #111827 !important;
+  color: var(--color-ink) !important;
   font-weight: 500;
+}
+
+:root {
+  --border: var(--color-border);
+  --muted: var(--color-muted);
+}
+
+/* Removed: Legacy CSS class definitions for pages migrated to Tailwind CSS v4:
+ * - .login-grid namespace (was for SignIn/SignUp, now pure Tailwind)
+ * - .verify-* namespace (was for ConfirmSignUp, now pure Tailwind)
+ * - .checkin-* namespace (was for CheckInAbout/CheckInIdentity, now pure Tailwind)
+ * - .ds-* namespace (was for Dashboard/Results grids, now pure Tailwind)
+ * - .settings-* namespace (was for Settings page, now pure Tailwind)
+ * - .app-shell input/select/focus overrides (now covered by global base styles)
+ * - Related @media queries (no longer needed for moved selectors)
+ */
+
+
+/* FAQ Section - Remove orange focus highlights */
+.app-shell button[aria-expanded]:focus-visible {
+  outline: none !important;
+}
+
+button[aria-expanded] {
+  outline: none !important;
+}
+
+button[aria-expanded]:focus,
+button[aria-expanded]:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove orange highlight from checkboxes - keep tick color, remove outer border */
+input[type='checkbox'] {
+  accent-color: var(--color-brand-orange) !important;
+}
+
+input[type='checkbox']:focus,
+input[type='checkbox']:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Tablet responsive (768px to 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .app-main {
+    padding: 32px clamp(20px, 4vw, 40px);
+  }
+
+  .ds-grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .dashboard-skill-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .signup-layout {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .signup-layout .login-form-card {
+    max-width: 590px;
+    padding: 40px 44px;
+  }
+
+  .signin-illustration {
+    max-width: 450px;
+  }
+
+  .verify-layout {
+    grid-template-columns: minmax(340px, 0.85fr) minmax(420px, 1.15fr);
+    gap: clamp(32px, 6vw, 80px);
+  }
+}
+
+/* Large devices responsive (1440px+) */
+@media (min-width: 1441px) {
+  .app-main {
+    padding: 36px clamp(40px, 8vw, 80px);
+  }
+
+  .ds-grid-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+
+  .dashboard-skill-cards {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Extra small devices (under 480px) */
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 20px !important;
+  }
+
+  h2 {
+    font-size: 18px !important;
+  }
+
+  .app-main {
+    padding: 16px 12px;
+  }
+
+  .login-form-card,
+  .verify-card {
+    padding: 20px 16px;
+    border-radius: 12px;
+  }
+
+  .login-form-panel {
+    padding: 16px 12px;
+  }
+
+  .verify-layout {
+    grid-template-columns: 1fr;
+    width: 100%;
+    padding: 24px 0;
+  }
+
+  .verify-card {
+    box-shadow: none;
+  }
+
+  button {
+    padding: 11px 12px;
+    font-size: 13px;
+  }
+
+  .ds-feature-row,
+  .ds-filter-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+
+  .dashboard-skill-cards {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .checkin-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .checkin-card {
+    padding: 16px 14px;
+  }
+
+  .signup-intro h2 {
+    white-space: normal;
+    font-size: clamp(12px, 2vw, 18px);
+  }
+}
+
+/* Small devices (480px to 768px) */
+@media (max-width: 768px) and (min-width: 481px) {
+  body {
+    font-size: 15px;
+  }
+
+  h1 {
+    font-size: 24px !important;
+  }
+
+  h2 {
+    font-size: 20px !important;
+  }
+
+  .app-main {
+    padding: 20px 16px 88px;
+  }
+
+  .dashboard-skill-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .login-form-panel {
+    padding: 24px 16px;
+  }
+
+  .verify-card {
+    padding: 28px 20px;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
 }

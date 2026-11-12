@@ -18,52 +18,38 @@ import {
 } from './apiClient';
 import { fetchAuthSession, type AuthSession, type JWT } from 'aws-amplify/auth';
 
-// Mock environment variables
-vi.mock('../config/env', () => ({
-  getEnv: () => ({
-    VITE_API_BASE_URL: 'http://localhost:8080',
-    VITE_APP_NAME: 'Test App',
-    VITE_APP_VERSION: '1.0.0',
-    VITE_ENABLE_MOCK_SERVER: 'false',
-    VITE_ENABLE_ANALYTICS: 'false',
-    VITE_COGNITO_REGION: 'us-east-1',
-    VITE_COGNITO_USER_POOL_ID: 'test-pool-id',
-    VITE_COGNITO_USER_POOL_CLIENT_ID: 'test-client-id',
-  }),
-}));
-
-// Mock aws-amplify/auth fetchAuthSession
-vi.mock('aws-amplify/auth', () => ({
-  fetchAuthSession: vi.fn(),
-}));
-
-// Mock fetch globally
-const mockFetch = vi.fn();
-
 // Helper to create a mock JWT token
+// AWS Amplify's JWT.toString() returns the full JWT string (header.payload.signature)
 function createMockJWT(): JWT {
+  const mockJwtString =
+    'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0LXVzZXIifQ.test-signature';
   return {
-    payload: { sub: 'test-user' },
-    header: { alg: 'RS256' },
-    signature: 'test-signature',
-    toString: () =>
-      'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0LXVzZXIifQ.test-signature',
+    toString: () => mockJwtString,
   } as JWT;
 }
 
-beforeEach(() => {
-  global.fetch = mockFetch;
-  clearAuthToken();
-  vi.clearAllMocks();
-  // Default mock - no auth session (tokens is omitted)
-  vi.mocked(fetchAuthSession).mockResolvedValue({} as AuthSession);
-});
+// Mock environment variables
+vi.stubEnv('VITE_API_BASE_URL', 'http://localhost:8080');
 
-afterEach(() => {
-  vi.restoreAllMocks();
-});
+// NOTE: aws-amplify/auth is already mocked in tests/setup.ts
+// We just use vi.mocked(fetchAuthSession) to control it per-test
+
+// Mock fetch globally by replacing the global fetch
+const mockFetch = vi.fn();
 
 describe('apiClient', () => {
+  beforeEach(() => {
+    vi.stubGlobal('fetch', mockFetch);
+    mockFetch.mockReset();
+    // Default: fetchAuthSession returns no tokens (unauthenticated)
+    vi.mocked(fetchAuthSession).mockResolvedValue({} as AuthSession);
+    clearAuthToken();
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
   describe('setAuthToken / getAuthToken / clearAuthToken', () => {
     it('sets auth token', () => {
       setAuthToken('test-token-123');
@@ -98,7 +84,7 @@ describe('apiClient', () => {
 
       expect(result.data).toEqual(mockData);
       expect(result.status).toBe(200);
-      expect(fetch).toHaveBeenCalledWith(
+      expect(mockFetch).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({ method: 'GET' })
       );
@@ -115,7 +101,7 @@ describe('apiClient', () => {
       const result = await apiRequest('/products', 'POST', { name: 'New Product' });
 
       expect(result.data).toEqual({ success: true });
-      expect(fetch).toHaveBeenCalledWith(
+      expect(mockFetch).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({
           method: 'POST',
@@ -135,7 +121,7 @@ describe('apiClient', () => {
       const result = await apiPut('/products/1', { name: 'Updated Product' });
 
       expect(result.data).toEqual({ updated: true });
-      expect(fetch).toHaveBeenCalledWith(
+      expect(mockFetch).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({
           method: 'PUT',
@@ -155,7 +141,7 @@ describe('apiClient', () => {
       const result = await apiPatch('/products/1', { price: 29.99 });
 
       expect(result.data).toEqual({ patched: true });
-      expect(fetch).toHaveBeenCalledWith(
+      expect(mockFetch).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({
           method: 'PATCH',
@@ -176,7 +162,7 @@ describe('apiClient', () => {
 
       expect(result.data).toBeUndefined();
       expect(result.status).toBe(204);
-      expect(fetch).toHaveBeenCalledWith(
+      expect(mockFetch).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({ method: 'DELETE' })
       );
@@ -195,7 +181,7 @@ describe('apiClient', () => {
 
       await apiGet('/products');
 
-      expect(fetch).toHaveBeenCalledWith(
+      expect(mockFetch).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({
           headers: expect.objectContaining({
@@ -217,7 +203,7 @@ describe('apiClient', () => {
 
       await apiGet('/products');
 
-      expect(fetch).toHaveBeenCalledWith(
+      expect(mockFetch).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({
           headers: expect.objectContaining({
@@ -242,7 +228,7 @@ describe('apiClient', () => {
 
       await apiGet('/products');
 
-      expect(fetch).toHaveBeenCalledWith(
+      expect(mockFetch).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({
           headers: expect.objectContaining({
@@ -269,6 +255,26 @@ describe('apiClient', () => {
       expect(headers).not.toHaveProperty('Authorization');
     });
 
+    it('sets Content-Type header (no token)', async () => {
+      mockFetch.mockResolvedValueOnce(
+        new Response(JSON.stringify(mockData), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        })
+      );
+
+      await apiGet('/products');
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.anything(),
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            'Content-Type': 'application/json',
+          }),
+        })
+      );
+    });
+
     it('sets Content-Type header', async () => {
       mockFetch.mockResolvedValueOnce(
         new Response(JSON.stringify(mockData), {
@@ -279,7 +285,7 @@ describe('apiClient', () => {
 
       await apiGet('/products');
 
-      expect(fetch).toHaveBeenCalledWith(
+      expect(mockFetch).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({
           headers: expect.objectContaining({
@@ -342,7 +348,7 @@ describe('apiClient', () => {
 
       await apiGet('/products');
 
-      expect(fetch).toHaveBeenCalledWith(
+      expect(mockFetch).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({ method: 'GET' })
       );
@@ -360,7 +366,7 @@ describe('apiClient', () => {
 
       await apiPost('/products', { name: 'Test' });
 
-      expect(fetch).toHaveBeenCalledWith(
+      expect(mockFetch).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({
           method: 'POST',
@@ -381,7 +387,7 @@ describe('apiClient', () => {
 
       await apiPut('/products/1', { name: 'Updated' });
 
-      expect(fetch).toHaveBeenCalledWith(
+      expect(mockFetch).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({
           method: 'PUT',
@@ -402,7 +408,7 @@ describe('apiClient', () => {
 
       await apiPatch('/products/1', { price: 19.99 });
 
-      expect(fetch).toHaveBeenCalledWith(
+      expect(mockFetch).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({
           method: 'PATCH',
@@ -422,7 +428,7 @@ describe('apiClient', () => {
 
       await apiDelete('/products/1');
 
-      expect(fetch).toHaveBeenCalledWith(
+      expect(mockFetch).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({ method: 'DELETE' })
       );

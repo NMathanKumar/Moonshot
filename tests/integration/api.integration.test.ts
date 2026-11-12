@@ -30,7 +30,6 @@ import {
   canRunIntegrationTests,
   shouldRunDataModifyingTests,
   assertCanModifyData,
-  generateTestEmail,
 } from './setup';
 import { Gender } from '@services/enrolment/types';
 
@@ -61,7 +60,7 @@ describe('Enrolment Service Integration Tests', () => {
       });
 
       const session = await fetchAuthSession();
-      accessToken = session.tokens?.accessToken?.toString();
+      accessToken = session.tokens?.accessToken?.toString() ?? null;
 
       if (!accessToken) {
         throw new Error(
@@ -130,7 +129,7 @@ describe('Enrolment Service Integration Tests', () => {
       });
 
       const session = await fetchAuthSession();
-      accessToken = session.tokens?.accessToken?.toString();
+      accessToken = session.tokens?.accessToken?.toString() ?? null;
 
       if (!accessToken) {
         throw new Error('Failed to obtain access token for data-modifying tests');

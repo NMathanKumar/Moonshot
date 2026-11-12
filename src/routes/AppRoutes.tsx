@@ -6,7 +6,15 @@ import { useNavigate, Routes, Route, Navigate } from 'react-router-dom';
 import { SignIn } from '@components/auth/SignIn';
 import { SignUp } from '@components/auth/SignUp';
 import { ConfirmSignUp } from '@components/auth/ConfirmSignUp';
-import Dashboard from '../pages/Dashboard';
+import Dashboard from '../pages/Dashboard/Dashboard';
+import Results from '../pages/Results/Results';
+import PurchaseTest from '../pages/PurchaseTest/PurchaseTest';
+import Checkout from '../pages/Checkout/Checkout';
+import Settings from '../pages/Settings/Settings';
+import Practice from '../pages/Practice/Practice';
+import TestPrepare from '../pages/TestPrepare/TestPrepare';
+import CheckInAbout from '../pages/CheckInAbout/CheckInAbout';
+import CheckInIdentity from '../pages/CheckInIdentity/CheckInIdentity';
 import {
   signIn as authSignIn,
   getCurrentUser,
@@ -223,6 +231,29 @@ export function AppRoutes(): React.JSX.Element {
 
       {/* Protected dashboard route */}
       <Route path="/dashboard" element={<Dashboard />} />
+
+      {/* Results page route */}
+      <Route path="/results" element={<Results />} />
+
+      {/* Purchase test page route */}
+      <Route path="/book" element={<PurchaseTest />} />
+
+      {/* Checkout page route */}
+      <Route path="/checkout" element={<Checkout />} />
+
+      {/* Practice page route */}
+      <Route path="/practice" element={<Practice />} />
+
+      {/* Before-you-start page (opened from each practice test) */}
+      <Route path="/test-prepare" element={<TestPrepare />} />
+
+      {/* Test check-in (opened from the dashboard "Check-in" button) */}
+      <Route path="/check-in" element={<Navigate to="/check-in/about" replace />} />
+      <Route path="/check-in/about" element={<CheckInAbout />} />
+      <Route path="/check-in/identity" element={<CheckInIdentity />} />
+
+      {/* Settings page route */}
+      <Route path="/settings" element={<Settings />} />
 
       {/* Default redirect to signin */}
       <Route path="/" element={<Navigate to="/signin" replace />} />

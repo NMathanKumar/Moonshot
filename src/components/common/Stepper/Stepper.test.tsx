@@ -17,7 +17,7 @@ describe('Stepper', () => {
   });
 
   it('marks the active step', () => {
-    const { container } = render(<Stepper steps={steps} activeStep={1} />);
+    const { container: _ } = render(<Stepper steps={steps} activeStep={1} />);
     // The step indicator is a div with flex layout, not queryable by className
     // Instead, verify that we have 3 steps displayed and text is visible
     const stepLabels = screen.getAllByText(/Step [123]/);

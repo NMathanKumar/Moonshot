@@ -7,6 +7,7 @@ import {
   signIn as amplifySignIn,
   signUp as amplifySignUp,
   confirmSignUp as amplifyConfirmSignUp,
+  resendSignUpCode as amplifyResendSignUpCode,
   signOut as amplifySignOut,
   getCurrentUser as amplifyGetCurrentUser,
   fetchAuthSession,
@@ -229,6 +230,34 @@ export async function confirmSignUp(email: string, confirmationCode: string): Pr
     }
 
     throw new Error('Email confirmation failed. Please check the code and try again.');
+  }
+}
+
+/**
+ * Resend the sign-up confirmation code to the user's email
+ *
+ * @param email - User's email address (Cognito username)
+ * @throws Error if the code could not be resent
+ */
+export async function resendSignUpCode(email: string): Promise<void> {
+  try {
+    console.log('resendSignUpCode: Requesting a new confirmation code...');
+    await amplifyResendSignUpCode({ username: email });
+    console.log('✅ resendSignUpCode: New confirmation code sent.');
+  } catch (error) {
+    console.error('❌ resendSignUpCode: Failed to resend code:', error);
+
+    if (error instanceof Error) {
+      const message = error.message;
+      if (message.includes('LimitExceededException') || message.includes('Attempt limit')) {
+        throw new Error('Too many requests. Please wait a few minutes and try again.');
+      }
+      if (message.includes('UserNotFoundException')) {
+        throw new Error('We could not find an account for this email. Please sign up again.');
+      }
+    }
+
+    throw new Error('Could not resend the code. Please try again.');
   }
 }
 
