@@ -1,0 +1,5 @@
+﻿src/pages/Settings.tsx(370,11): error TS1128: Declaration or statement expected.
+src/pages/Settings.tsx(371,9): error TS1109: Expression expected.
+src/pages/Settings.tsx(372,7): error TS1109: Expression expected.
+src/pages/Settings.tsx(373,5): error TS1109: Expression expected.
+src/pages/Settings.tsx(374,3): error TS1109: Expression expected.
