@@ -1,0 +1,169 @@
+/* CSS Custom Properties (Variables) */
+
+:root {
+  /*
+   * ----------------------------------------------------------------
+   * LAYER 1 � Raw brand palette (BRAND-SWAPPABLE, per MSP-2011 AC2 / F118)
+   * Moonshot/IDP English Test brand colors
+   * To re-brand, override ONLY these --brand-* values (e.g. in a theme
+   * block or a brand stylesheet). Components must NOT reference these
+   * directly; they reference the semantic tokens in Layer 2.
+   * ----------------------------------------------------------------
+   */
+  --brand-primary: #ff6a00;
+  --brand-primary-hover: #e85a00;
+  --brand-primary-active: #d14900;
+  --brand-secondary: #ffc01e;
+  --brand-accent: #e01f26;
+  --brand-accent-hover: #c01520;
+  --brand-success: #2e7d32;
+  --brand-warning: #f9a825;
+  --brand-info: #17a2b8;
+  --brand-surface: #ffffff;
+  --brand-on-primary: #ffffff;
+  --brand-focus-ring: #ff6a00;
+  /* RGB channels of the brand colors, so faint/alpha tokens below can be
+     derived from the swappable layer (override these when re-branding). */
+  --brand-primary-rgb: 255, 106, 0;
+  --brand-secondary-rgb: 255, 192, 30;
+  --brand-accent-rgb: 224, 31, 38;
+
+  /*
+   * ----------------------------------------------------------------
+   * LAYER 2 � Semantic tokens (components reference ONLY these)
+   * These map intent -> brand palette. Stable names so a brand swap
+   * never requires component changes.
+   * ----------------------------------------------------------------
+   */
+  --color-action: var(--brand-primary);
+  --color-action-hover: var(--brand-primary-hover);
+  --color-action-active: var(--brand-primary-active);
+  --color-on-action: var(--brand-on-primary);
+  --color-danger-action: var(--brand-accent);
+  --color-danger-action-hover: var(--brand-accent-hover);
+  --color-surface: var(--brand-surface);
+  --color-focus-ring: var(--brand-focus-ring);
+  /* Faint focus/validation rings � derived from brand RGB so a rebrand flows through */
+  --color-focus-ring-faint: rgba(var(--brand-primary-rgb), 0.1);
+  --color-danger-ring-faint: rgba(var(--brand-accent-rgb), 0.1);
+  --color-text: #232d3f;
+  --color-text-muted: #55657b;
+  --color-text-secondary: #55657b;
+  --color-border: #dde2e7;
+  --color-border-default: #dde2e7;
+  --color-border-strong: #999999;
+  --color-overlay: rgba(0, 0, 0, 0.5);
+  --color-ink: #232d3f;
+  --color-slate: #55657b;
+  --color-cream: #fff3ea;
+  --color-success: #2e7d32;
+  --color-warning: #f9a825;
+  /* Legacy color aliases (kept for compatibility; prefer semantic tokens above) */
+  --color-primary: var(--brand-primary);
+  --color-primary-dark: var(--brand-primary-hover);
+  --color-secondary: var(--brand-secondary);
+  --color-danger: var(--brand-accent);
+  /* Grays */
+  --color-dark: #333;
+  --color-gray-900: #1a1a1a;
+  --color-gray-800: #333;
+  --color-gray-700: #555;
+  --color-gray-600: #666;
+  --color-gray-500: #999;
+  --color-gray-400: #ccc;
+  --color-gray-300: #ddd;
+  --color-gray-200: #efefef;
+  --color-gray-100: #f5f5f5;
+  --color-gray-50: #fafafa;
+  --color-light: #f0f0f0;
+  --color-white: #ffffff;
+  --color-muted: #f5f5f5;
+  --color-muted-foreground: #8d8f91;
+  --color-surface-subtle: #f7f9fa;
+  --color-surface-brand: #fff3ea;
+  --color-action-primary: #ff6a00;
+  --color-action-primary-text: #ffffff;
+  --color-border-subtle: #e9edf0;
+
+  /* Typography */
+  --font-family-base:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --font-family-mono: 'Courier New', monospace;
+
+  /* Font Sizes */
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 28px;
+  --font-size-4xl: 32px;
+
+  /* Font Weights */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Line Heights */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+
+  /* Border Radius */
+  --border-radius-sm: 2px;
+  --border-radius-base: 4px;
+  --border-radius-md: 6px;
+  --border-radius-lg: 8px;
+  --border-radius-xl: 12px;
+  --border-radius-full: 9999px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-base: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.2);
+  --shadow-card: 0 1px 2px rgba(35, 45, 63, 0.04), 0 8px 24px rgba(35, 45, 63, 0.06);
+  --shadow-card-hover: 0 2px 4px rgba(35, 45, 63, 0.05), 0 12px 28px rgba(35, 45, 63, 0.09);
+
+  /* Z-index */
+  --z-index-dropdown: 1000;
+  --z-index-sticky: 1020;
+  --z-index-fixed: 1030;
+  --z-index-modal-backdrop: 1040;
+  --z-index-modal: 1050;
+  --z-index-popover: 1060;
+  --z-index-tooltip: 1070;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease-in-out;
+  --transition-base: 0.3s ease-in-out;
+  --transition-slow: 0.5s ease-in-out;
+  --transition-default: 160ms ease;
+
+  /* Gradient */
+  --gradient-brand: linear-gradient(135deg, #ffc01e 0%, #ff6a00 50%, #e01f26 100%);
+
+  /* Breakpoints */
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-2xl: 1400px;
+}
