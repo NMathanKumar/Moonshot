@@ -33,6 +33,8 @@ export default defineConfig({
       '@routes/*': path.resolve(__dirname, './src/routes/*'),
       '@utils': path.resolve(__dirname, './src/utils'),
       '@utils/*': path.resolve(__dirname, './src/utils/*'),
+      '@layouts': path.resolve(__dirname, './src/layouts'),
+      '@layouts/*': path.resolve(__dirname, './src/layouts/*'),
     },
   },
 });

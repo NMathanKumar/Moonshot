@@ -16,7 +16,7 @@
  */
 
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
-import { signIn, signOut } from '@services/auth';
+import { signIn } from '@services/auth';
 import { fetchAuthSession, getCurrentUser, signOut as amplifySignOut } from 'aws-amplify/auth';
 import { getTestCredentials, canRunIntegrationTests } from './setup';
 
@@ -99,7 +99,7 @@ describe('Cognito Auth Integration', () => {
       });
 
       const session = await fetchAuthSession();
-      firstSessionToken = session.tokens?.accessToken?.toString();
+      firstSessionToken = session.tokens?.accessToken?.toString() ?? null;
       console.log('[Integration] Session Persistence setup: Fresh sign-in completed');
     }, 20000);
 

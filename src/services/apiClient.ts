@@ -76,15 +76,13 @@ export async function getCurrentAmplifyAccessToken(): Promise<string | null> {
  * Build the full URL for an API endpoint
  */
 function buildUrl(path: string): string {
-  // Try process.env first (for Node test environment)
-  // Then fall back to import.meta.env (for Vite browser build)
-  const baseUrl =
-    process.env.VITE_API_BASE_URL ||
-    (typeof import.meta !== 'undefined' ? import.meta.env?.VITE_API_BASE_URL : undefined);
+  // Get VITE_API_BASE_URL from import.meta.env (Vite) or process.env (Node test)
+  // For test environments, we allow missing config to throw a clear error
+  const baseUrl = import.meta.env?.VITE_API_BASE_URL;
 
   if (!baseUrl) {
     throw new Error(
-      'VITE_API_BASE_URL is not configured. ' + 'Check .env.development or environment variables.'
+      'VITE_API_BASE_URL is not configured. ' + 'Set it in environment or mock it in tests.'
     );
   }
 

@@ -93,8 +93,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }): React
     console.log(`[${timestamp}] AuthProvider: Setting up auth Hub listener`);
 
     const handleAuthEvent = async (capsule: unknown): Promise<void> => {
-      const payload = capsule as { data?: { event?: string } };
-      const { event } = payload?.data || {};
+      // HubCapsule from aws-amplify has the structure:
+      // { channel: string; payload: { event: string; data?: unknown }; source?: string; crossTab?: boolean }
+      const hubCapsule = capsule as { channel: string; payload: { event: string; data?: unknown }; source?: string; crossTab?: boolean };
+      const { event } = hubCapsule.payload;
       const eventTimestamp = new Date().toISOString();
       console.log(`[${eventTimestamp}] AuthProvider: Auth Hub event received: ${event}`);
 
