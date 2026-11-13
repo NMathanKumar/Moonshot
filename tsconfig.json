@@ -36,6 +36,8 @@
       "@services/*": ["./src/services/*"],
       "@routes": ["./src/routes"],
       "@routes/*": ["./src/routes/*"],
+      "@pages": ["./src/pages"],
+      "@pages/*": ["./src/pages/*"],
       "@utils": ["./src/utils"],
       "@utils/*": ["./src/utils/*"],
       "@layouts": ["./src/layouts"],

@@ -30,6 +30,7 @@ import {
   getPendingProfile,
   clearPendingProfile,
 } from '@utils/pendingProfileStorage';
+import ForgetPassword from '@pages/ForgetPassword/ForgetPassword';
 
 /**
  * Component that handles sign-in and uses auth context
@@ -228,6 +229,9 @@ export function AppRoutes(): React.JSX.Element {
         path="/confirm-signup"
         element={<ConfirmSignUp onSubmit={handleConfirmSignUpSubmit} />}
       />
+
+      {/* Forgot password page */}
+      <Route path="/forgot-password" element={<ForgetPassword />} />
 
       {/* Protected dashboard route */}
       <Route path="/dashboard" element={<Dashboard />} />

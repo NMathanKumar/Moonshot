@@ -18,6 +18,8 @@ export default defineConfig({
       '@services/*': path.resolve(__dirname, './src/services/*'),
       '@routes': path.resolve(__dirname, './src/routes'),
       '@routes/*': path.resolve(__dirname, './src/routes/*'),
+      '@pages': path.resolve(__dirname, './src/pages'),
+      '@pages/*': path.resolve(__dirname, './src/pages/*'),
       '@utils': path.resolve(__dirname, './src/utils'),
       '@utils/*': path.resolve(__dirname, './src/utils/*'),
     },

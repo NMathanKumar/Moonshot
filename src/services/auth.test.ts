@@ -5,8 +5,10 @@ import {
   confirmSignUp as amplifyConfirmSignUp,
   signOut as amplifySignOut,
   getCurrentUser as amplifyGetCurrentUser,
+  resetPassword as amplifyResetPassword,
+  confirmResetPassword as amplifyConfirmResetPassword,
 } from 'aws-amplify/auth';
-import { signIn, signUp, confirmSignUp, signOut, isAuthenticated, getCurrentUser } from './auth';
+import { signIn, signUp, confirmSignUp, signOut, isAuthenticated, getCurrentUser, resetPassword, confirmResetPassword } from './auth';
 
 // Mock Amplify auth functions
 vi.mock('aws-amplify/auth', () => ({
@@ -16,6 +18,8 @@ vi.mock('aws-amplify/auth', () => ({
   resendSignUpCode: vi.fn(),
   signOut: vi.fn(),
   getCurrentUser: vi.fn(),
+  resetPassword: vi.fn(),
+  confirmResetPassword: vi.fn(),
 }));
 
 const mockedSignIn = vi.mocked(amplifySignIn);
@@ -23,6 +27,8 @@ const mockedSignUp = vi.mocked(amplifySignUp);
 const mockedConfirmSignUp = vi.mocked(amplifyConfirmSignUp);
 const mockedAmplifySignOut = vi.mocked(amplifySignOut);
 const mockedAmplifyGetCurrentUser = vi.mocked(amplifyGetCurrentUser);
+const mockedAmplifyResetPassword = vi.mocked(amplifyResetPassword);
+const mockedAmplifyConfirmResetPassword = vi.mocked(amplifyConfirmResetPassword);
 
 // Mock console to prevent test output pollution
 vi.spyOn(console, 'error').mockImplementation(() => {});
@@ -61,7 +67,7 @@ describe('auth service', () => {
 
       const credentials = { email: 'test@example.com', password: 'wrong' };
 
-      await expect(signIn(credentials)).rejects.toThrow('Email or password is incorrect.');
+      await expect(signIn(credentials)).rejects.toThrow('Authentication failed. Please check your email and password and try again.');
     });
 
     it('throws user-friendly error for unconfirmed email', async () => {
@@ -228,6 +234,120 @@ describe('auth service', () => {
       const user = await getCurrentUser();
 
       expect(user).toBeNull();
+    });
+  });
+
+  describe('resetPassword', () => {
+    it('calls Amplify resetPassword with email', async () => {
+      mockedAmplifyResetPassword.mockResolvedValue({ nextStep: { resetPasswordStep: 'CONFIRM_RESET_PASSWORD_WITH_CODE' } } as any);
+
+      await resetPassword('test@example.com');
+
+      expect(mockedAmplifyResetPassword).toHaveBeenCalledTimes(1);
+      expect(mockedAmplifyResetPassword).toHaveBeenCalledWith({ username: 'test@example.com' });
+    });
+
+    it('translates UserNotFoundException to generic message (email enumeration protection)', async () => {
+      mockedAmplifyResetPassword.mockRejectedValue(new Error('UserNotFoundException: User not found'));
+
+      await expect(resetPassword('nonexistent@example.com')).rejects.toThrow(
+        'We sent a 6-digit code to your email address.'
+      );
+    });
+
+    it('translates NetworkError to user-friendly message', async () => {
+      mockedAmplifyResetPassword.mockRejectedValue(new Error('NetworkError: Connection refused'));
+
+      await expect(resetPassword('test@example.com')).rejects.toThrow(
+        'Network error. Please check your connection and try again.'
+      );
+    });
+
+    it('translates LimitExceededException to rate limit message', async () => {
+      mockedAmplifyResetPassword.mockRejectedValue(new Error('LimitExceededException: Too many attempts'));
+
+      await expect(resetPassword('test@example.com')).rejects.toThrow(
+        'Too many requests. Please wait a few minutes and try again.'
+      );
+    });
+
+    it('translates InvalidParameterException to invalid email message', async () => {
+      mockedAmplifyResetPassword.mockRejectedValue(new Error('InvalidParameterException: Invalid email'));
+
+      await expect(resetPassword('invalid-email')).rejects.toThrow(
+        'Invalid email address. Please check and try again.'
+      );
+    });
+
+    it('throws default fallback message for unknown errors', async () => {
+      mockedAmplifyResetPassword.mockRejectedValue(new Error('UnknownError: Something went wrong'));
+
+      await expect(resetPassword('test@example.com')).rejects.toThrow(
+        'Unable to send code. Please check your email and try again.'
+      );
+    });
+  });
+
+  describe('confirmResetPassword', () => {
+    it('calls Amplify confirmResetPassword with correct parameters', async () => {
+      mockedAmplifyConfirmResetPassword.mockResolvedValue(undefined);
+
+      await confirmResetPassword('test@example.com', '123456', 'NewPassword123!');
+
+      expect(mockedAmplifyConfirmResetPassword).toHaveBeenCalledTimes(1);
+      expect(mockedAmplifyConfirmResetPassword).toHaveBeenCalledWith({
+        username: 'test@example.com',
+        confirmationCode: '123456',
+        newPassword: 'NewPassword123!',
+      });
+    });
+
+    it('translates CodeMismatchException to invalid code message', async () => {
+      mockedAmplifyConfirmResetPassword.mockRejectedValue(new Error('CodeMismatchException: Code does not match'));
+
+      await expect(confirmResetPassword('test@example.com', 'wrong', 'Password123!')).rejects.toThrow(
+        'Invalid code. Please check and try again.'
+      );
+    });
+
+    it('translates ExpiredCodeException to expired message', async () => {
+      mockedAmplifyConfirmResetPassword.mockRejectedValue(new Error('ExpiredCodeException: Code has expired'));
+
+      await expect(confirmResetPassword('test@example.com', 'expired', 'Password123!')).rejects.toThrow(
+        'Reset code has expired. Please request a new one.'
+      );
+    });
+
+    it('translates InvalidPasswordException to password policy message', async () => {
+      mockedAmplifyConfirmResetPassword.mockRejectedValue(new Error('InvalidPasswordException: Password does not meet requirements'));
+
+      await expect(confirmResetPassword('test@example.com', '123456', 'weak')).rejects.toThrow(
+        'Password must be at least 12 characters with 1 uppercase, 1 lowercase, and 1 number.'
+      );
+    });
+
+    it('translates LimitExceededException to rate limit message', async () => {
+      mockedAmplifyConfirmResetPassword.mockRejectedValue(new Error('LimitExceededException: Too many attempts'));
+
+      await expect(confirmResetPassword('test@example.com', '123456', 'Password123!')).rejects.toThrow(
+        'Too many failed attempts. Please wait a few minutes and try again.'
+      );
+    });
+
+    it('translates NetworkError to user-friendly message', async () => {
+      mockedAmplifyConfirmResetPassword.mockRejectedValue(new Error('Network error: Connection timeout'));
+
+      await expect(confirmResetPassword('test@example.com', '123456', 'Password123!')).rejects.toThrow(
+        'Network error. Please check your connection and try again.'
+      );
+    });
+
+    it('throws default fallback message for unknown errors', async () => {
+      mockedAmplifyConfirmResetPassword.mockRejectedValue(new Error('UnknownError: Something went wrong'));
+
+      await expect(confirmResetPassword('test@example.com', '123456', 'Password123!')).rejects.toThrow(
+        'Invalid code or password reset failed. Please try again.'
+      );
     });
   });
 });

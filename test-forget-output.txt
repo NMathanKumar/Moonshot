@@ -1,0 +1,1355 @@
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90mC:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1[39m
+
+ [32m✓[39m src/services/auth.test.ts [2m ([22m[2m29 tests[22m[2m)[22m[90m 21[2mms[22m[39m
+[90mstderr[2m | src/pages/ForgetPassword/ForgetPassword.test.tsx[2m > [22m[2mForgetPassword[2m > [22m[2mrenders the page heading[22m[39m
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+[90mstderr[2m | src/pages/ForgetPassword/ForgetPassword.test.tsx[2m > [22m[2mForgetPassword[2m > [22m[2mshows error for failed code request[22m[39m
+Forgot password error: Error: Network error. Please check your connection and try again.
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39msrc\pages\ForgetPassword\ForgetPassword.test.tsx:157:26
+    at [90mfile:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:135:14
+    at [90mfile:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:60:26
+    at runTest [90m(file:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:781:17[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:909:15[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:909:15[90m)[39m
+    at runFiles [90m(file:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:958:5[90m)[39m
+    at startTests [90m(file:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:967:3[90m)[39m
+    at [90mfile:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4mvitest[24m/dist/chunks/runtime-runBaseTests.oAvMKtQC.js:116:7
+    at withEnv [90m(file:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4mvitest[24m/dist/chunks/runtime-runBaseTests.oAvMKtQC.js:83:5[90m)[39m
+
+[90mstderr[2m | src/pages/ForgetPassword/ForgetPassword.test.tsx[2m > [22m[2mForgetPassword[2m > [22m[2mshows error for invalid confirmation code[22m[39m
+Confirm forgot password error: Error: Invalid code. Please check and try again.
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39msrc\pages\ForgetPassword\ForgetPassword.test.tsx:208:7
+    at [90mfile:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:135:14
+    at [90mfile:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:60:26
+    at runTest [90m(file:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:781:17[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:909:15[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:909:15[90m)[39m
+    at runFiles [90m(file:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:958:5[90m)[39m
+    at startTests [90m(file:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:967:3[90m)[39m
+    at [90mfile:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4mvitest[24m/dist/chunks/runtime-runBaseTests.oAvMKtQC.js:116:7
+    at withEnv [90m(file:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4mvitest[24m/dist/chunks/runtime-runBaseTests.oAvMKtQC.js:83:5[90m)[39m
+
+[90mstderr[2m | src/pages/ForgetPassword/ForgetPassword.test.tsx[2m > [22m[2mForgetPassword[2m > [22m[2mshows generic message for non-existent email[22m[39m
+Forgot password error: Error: We sent a 6-digit code to your email address.
+    at [90mC:\Users\mathankumar.n\Downloads\HST_IDP\iet-ui-testtaker-1\[39msrc\pages\ForgetPassword\ForgetPassword.test.tsx:363:7
+    at [90mfile:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:135:14
+    at [90mfile:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:60:26
+    at runTest [90m(file:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:781:17[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:909:15[90m)[39m
+    at runSuite [90m(file:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:909:15[90m)[39m
+    at runFiles [90m(file:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:958:5[90m)[39m
+    at startTests [90m(file:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:967:3[90m)[39m
+    at [90mfile:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4mvitest[24m/dist/chunks/runtime-runBaseTests.oAvMKtQC.js:116:7
+    at withEnv [90m(file:///C:/Users/mathankumar.n/Downloads/HST_IDP/iet-ui-testtaker-1/[39mnode_modules/[4mvitest[24m/dist/chunks/runtime-runBaseTests.oAvMKtQC.js:83:5[90m)[39m
+
+ [33m❯[39m src/pages/ForgetPassword/ForgetPassword.test.tsx [2m ([22m[2m18 tests[22m [2m|[22m [31m3 failed[39m[2m)[22m[33m 5919[2mms[22m[39m
+[31m   [33m❯[31m src/pages/ForgetPassword/ForgetPassword.test.tsx[2m > [22mForgetPassword[2m > [22mshows error for invalid email[39m
+[31m     → Unable to find an element with the text: /Please enter a valid email address/i. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<div[31m
+      [33mclass[31m=[32m"min-h-screen w-full flex flex-col bg-[#f7f7f5]"[31m
+    [36m>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"absolute top-0 left-0 w-full h-[7px] bg-gradient-to-r from-[#FF6A00] to-[#FFC01E]"[31m
+      [36m/>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"flex-1 flex items-center justify-center px-4 sm:px-6 py-8"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"w-full max-w-[620px] bg-white rounded-[22px] border border-[#dde2e7] shadow-[0_20px_26px_rgba(35,45,63,0.12)] px-[48px] py-[44px]"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"mb-[49px]"[31m
+          [36m>[31m
+            [36m<a[31m
+              [33mclass[31m=[32m"inline-flex items-center gap-[7px] text-[#9b4d16] font-extrabold text-[14px] no-underline hover:opacity-80 transition-opacity"[31m
+              [33mhref[31m=[32m"/signin"[31m
+            [36m>[31m
+              [36m<span>[31m
+                [0m‹[0m
+              [36m</span>[31m
+              [36m<span>[31m
+                [0mBack to sign in[0m
+              [36m</span>[31m
+            [36m</a>[31m
+          [36m</div>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"mb-5"[31m
+          [36m>[31m
+            [36m<p[31m
+              [33mclass[31m=[32m"text-[#eb7900] font-extrabold text-[11px] uppercase tracking-[0.09em] mb-1"[31m
+            [36m>[31m
+              [0mAccount recovery[0m
+            [36m</p>[31m
+            [36m<h1[31m
+              [33mclass[31m=[32m"text-[35px] font-bold text-[#232d3f] leading-[42px] tracking-[-0.525px] mb-0"[31m
+            [36m>[31m
+              [0mReset your password[0m
+            [36m</h1>[31m
+          [36m</div>[31m
+          [36m<p[31m
+            [33mclass[31m=[32m"text-[15px] text-[#55657b] mb-6 leading-[24px]"[31m
+          [36m>[31m
+            [0mEnter the email you used to create your account. We will send you a 6-digit code.[0m
+          [36m</p>[31m
+          [36m<div[31m
+            [33maria-atomic[31m=[32m"true"[31m
+            [33maria-live[31m=[32m"polite"[31m
+          [36m/>[31m
+          [36m<form[31m
+            [33mclass[31m=[32m"flex flex-col gap-5"[31m
+          [36m>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"flex flex-col"[31m
+            [36m>[31m
+              [36m<label[31m
+                [33mclass[31m=[32m"text-[11px] font-extrabold text-[#55657b] uppercase tracking-[0.07em] mb-1.5"[31m
+                [33mfor[31m=[32m"email"[31m
+              [36m>[31m
+                [0mEmail[0m
+              [36m</label>[31m
+              [36m<input[31m
+                [33maria-invalid[31m=[32m"false"[31m
+                [33mclass[31m=[32m"w-full px-[15px] py-[12px] rounded-[10px] border border-[#dde2e7] bg-white text-[14px] text-[#232d3f] outline-none placeholder:text-[rgba(35,45,63,0.5)] disabled:bg-gray-100 disabled:text-gray-600 disabled:cursor-not-allowed transition-colors"[31m
+                [33mid[31m=[32m"email"[31m
+                [33mplaceholder[31m=[32m"you@example.com"[31m
+                [33mtype[31m=[32m"email"[31m
+                [33mvalue[31m=[32m"invalid-email"[31m
+              [36m/>[31m
+            [36m</div>[31m
+            [36m<button[31m
+              [33maria-busy[31m=[32m"false"[31m
+              [33mclass[31m=[32m"w-full min-h-[52px] px-[18px] py-[12px] rounded-[10px] bg-[#eb7900] text-white text-[14px] font-extrabold cursor-pointer disabled:bg-gray-300 disabled:cursor-not-allowed transition-all"[31m
+              [33mtype[31m=[32m"submit"[31m
+            [36m>[31m
+              [0mSend code[0m
+            [36m</button>[31m
+          [36m</form>[31m
+        [36m</div>[31m
+      [36m</div>[31m
+    [36m</div>[31m
+  [36m</div>[31m
+[36m</body>[31m
+
+Ignored nodes: comments, script, style
+[36m<html>[31m
+  [36m<head />[31m
+  [36m<body>[31m
+    [36m<div>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"min-h-screen w-full flex flex-col bg-[#f7f7f5]"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"absolute top-0 left-0 w-full h-[7px] bg-gradient-to-r from-[#FF6A00] to-[#FFC01E]"[31m
+        [36m/>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"flex-1 flex items-center justify-center px-4 sm:px-6 py-8"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"w-full max-w-[620px] bg-white rounded-[22px] border border-[#dde2e7] shadow-[0_20px_26px_rgba(35,45,63,0.12)] px-[48px] py-[44px]"[31m
+          [36m>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"mb-[49px]"[31m
+            [36m>[31m
+              [36m<a[31m
+                [33mclass[31m=[32m"inline-flex items-center gap-[7px] text-[#9b4d16] font-extrabold text-[14px] no-underline hover:opacity-80 transition-opacity"[31m
+                [33mhref[31m=[32m"/signin"[31m
+              [36m>[31m
+                [36m<span>[31m
+                  [0m‹[0m
+                [36m</span>[31m
+                [36m<span>[31m
+                  [0mBack to sign in[0m
+                [36m</span>[31m
+              [36m</a>[31m
+            [36m</div>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"mb-5"[31m
+            [36m>[31m
+              [36m<p[31m
+                [33mclass[31m=[32m"text-[#eb7900] font-extrabold text-[11px] uppercase tracking-[0.09em] mb-1"[31m
+              [36m>[31m
+                [0mAccount recovery[0m
+              [36m</p>[31m
+              [36m<h1[31m
+                [33mclass[31m=[32m"text-[35px] font-bold text-[#232d3f] leading-[42px] tracking-[-0.525px] mb-0"[31m
+              [36m>[31m
+                [0mReset your password[0m
+              [36m</h1>[31m
+            [36m</div>[31m
+            [36m<p[31m
+              [33mclass[31m=[32m"text-[15px] text-[#55657b] mb-6 leading-[24px]"[31m
+            [36m>[31m
+              [0mEnter the email you used to create your account. We will send you a 6-digit code.[0m
+            [36m</p>[31m
+            [36m<div[31m
+              [33maria-atomic[31m=[32m"true"[31m
+              [33maria-live[31m=[32m"polite"[31m
+            [36m/>[31m
+            [36m<form[31m
+              [33mclass[31m=[32m"flex flex-col gap-5"[31m
+            [36m>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"flex flex-col"[31m
+              [36m>[31m
+                [36m<label[31m
+                  [33mclass[31m=[32m"text-[11px] font-extrabold text-[#55657b] uppercase tracking-[0.07em] mb-1.5"[31m
+                  [33mfor[31m=[32m"email"[31m
+                [36m>[31m
+                  [0mEmail[0m
+                [36m</label>[31m
+                [36m<input[31m
+                  [33maria-invalid[31m=[32m"false"[31m
+                  [33mclass[31m=[32m"w-full px-[15px] py-[12px] rounded-[10px] border border-[#dde2e7] bg-white text-[14px] text-[#232d3f] outline-none placeholder:text-[rgba(35,45,63,0.5)] disabled:bg-gray-100 disabled:text-gray-600 disabled:cursor-not-allowed transition-colors"[31m
+                  [33mid[31m=[32m"email"[31m
+                  [33mplaceholder[31m=[32m"you@example.com"[31m
+                  [33mtype[31m=[32m"email"[31m
+                  [33mvalue[31m=[32m"invalid-email"[31m
+                [36m/>[31m
+              [36m</div>[31m
+              [36m<button[31m
+                [33maria-busy[31m=[32m"false"[31m
+                [33mclass[31m=[32m"w-full min-h-[52px] px-[18px] py-[12px] rounded-[10px] bg-[#eb7900] text-white text-[14px] font-extrabold cursor-pointer disabled:bg-gray-300 disabled:cursor-not-allowed transition-all"[31m
+                [33mtype[31m=[32m"submit"[31m
+              [36m>[31m
+                [0mSend code[0m
+              [36m</button>[31m
+            [36m</form>[31m
+          [36m</div>[31m
+        [36m</div>[31m
+      [36m</div>[31m
+    [36m</div>[31m
+  [36m</body>[31m
+[36m</html>[31m[39m
+[31m   [33m❯[31m src/pages/ForgetPassword/ForgetPassword.test.tsx[2m > [22mForgetPassword[2m > [22mshows error for empty email[39m
+[31m     → Unable to find an element with the text: /Please enter your email address/i. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<div[31m
+      [33mclass[31m=[32m"min-h-screen w-full flex flex-col bg-[#f7f7f5]"[31m
+    [36m>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"absolute top-0 left-0 w-full h-[7px] bg-gradient-to-r from-[#FF6A00] to-[#FFC01E]"[31m
+      [36m/>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"flex-1 flex items-center justify-center px-4 sm:px-6 py-8"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"w-full max-w-[620px] bg-white rounded-[22px] border border-[#dde2e7] shadow-[0_20px_26px_rgba(35,45,63,0.12)] px-[48px] py-[44px]"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"mb-[49px]"[31m
+          [36m>[31m
+            [36m<a[31m
+              [33mclass[31m=[32m"inline-flex items-center gap-[7px] text-[#9b4d16] font-extrabold text-[14px] no-underline hover:opacity-80 transition-opacity"[31m
+              [33mhref[31m=[32m"/signin"[31m
+            [36m>[31m
+              [36m<span>[31m
+                [0m‹[0m
+              [36m</span>[31m
+              [36m<span>[31m
+                [0mBack to sign in[0m
+              [36m</span>[31m
+            [36m</a>[31m
+          [36m</div>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"mb-5"[31m
+          [36m>[31m
+            [36m<p[31m
+              [33mclass[31m=[32m"text-[#eb7900] font-extrabold text-[11px] uppercase tracking-[0.09em] mb-1"[31m
+            [36m>[31m
+              [0mAccount recovery[0m
+            [36m</p>[31m
+            [36m<h1[31m
+              [33mclass[31m=[32m"text-[35px] font-bold text-[#232d3f] leading-[42px] tracking-[-0.525px] mb-0"[31m
+            [36m>[31m
+              [0mReset your password[0m
+            [36m</h1>[31m
+          [36m</div>[31m
+          [36m<p[31m
+            [33mclass[31m=[32m"text-[15px] text-[#55657b] mb-6 leading-[24px]"[31m
+          [36m>[31m
+            [0mEnter the email you used to create your account. We will send you a 6-digit code.[0m
+          [36m</p>[31m
+          [36m<div[31m
+            [33maria-atomic[31m=[32m"true"[31m
+            [33maria-live[31m=[32m"polite"[31m
+          [36m/>[31m
+          [36m<form[31m
+            [33mclass[31m=[32m"flex flex-col gap-5"[31m
+          [36m>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"flex flex-col"[31m
+            [36m>[31m
+              [36m<label[31m
+                [33mclass[31m=[32m"text-[11px] font-extrabold text-[#55657b] uppercase tracking-[0.07em] mb-1.5"[31m
+                [33mfor[31m=[32m"email"[31m
+              [36m>[31m
+                [0mEmail[0m
+              [36m</label>[31m
+              [36m<input[31m
+                [33maria-invalid[31m=[32m"false"[31m
+                [33mclass[31m=[32m"w-full px-[15px] py-[12px] rounded-[10px] border border-[#dde2e7] bg-white text-[14px] text-[#232d3f] outline-none placeholder:text-[rgba(35,45,63,0.5)] disabled:bg-gray-100 disabled:text-gray-600 disabled:cursor-not-allowed transition-colors"[31m
+                [33mid[31m=[32m"email"[31m
+                [33mplaceholder[31m=[32m"you@example.com"[31m
+                [33mtype[31m=[32m"email"[31m
+                [33mvalue[31m=[32m""[31m
+              [36m/>[31m
+            [36m</div>[31m
+            [36m<button[31m
+              [33maria-busy[31m=[32m"false"[31m
+              [33mclass[31m=[32m"w-full min-h-[52px] px-[18px] py-[12px] rounded-[10px] bg-[#eb7900] text-white text-[14px] font-extrabold cursor-pointer disabled:bg-gray-300 disabled:cursor-not-allowed transition-all"[31m
+              [33mdisabled[31m=[32m""[31m
+              [33mtype[31m=[32m"submit"[31m
+            [36m>[31m
+              [0mSend code[0m
+            [36m</button>[31m
+          [36m</form>[31m
+        [36m</div>[31m
+      [36m</div>[31m
+    [36m</div>[31m
+  [36m</div>[31m
+[36m</body>[31m
+
+Ignored nodes: comments, script, style
+[36m<html>[31m
+  [36m<head />[31m
+  [36m<body>[31m
+    [36m<div>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"min-h-screen w-full flex flex-col bg-[#f7f7f5]"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"absolute top-0 left-0 w-full h-[7px] bg-gradient-to-r from-[#FF6A00] to-[#FFC01E]"[31m
+        [36m/>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"flex-1 flex items-center justify-center px-4 sm:px-6 py-8"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"w-full max-w-[620px] bg-white rounded-[22px] border border-[#dde2e7] shadow-[0_20px_26px_rgba(35,45,63,0.12)] px-[48px] py-[44px]"[31m
+          [36m>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"mb-[49px]"[31m
+            [36m>[31m
+              [36m<a[31m
+                [33mclass[31m=[32m"inline-flex items-center gap-[7px] text-[#9b4d16] font-extrabold text-[14px] no-underline hover:opacity-80 transition-opacity"[31m
+                [33mhref[31m=[32m"/signin"[31m
+              [36m>[31m
+                [36m<span>[31m
+                  [0m‹[0m
+                [36m</span>[31m
+                [36m<span>[31m
+                  [0mBack to sign in[0m
+                [36m</span>[31m
+              [36m</a>[31m
+            [36m</div>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"mb-5"[31m
+            [36m>[31m
+              [36m<p[31m
+                [33mclass[31m=[32m"text-[#eb7900] font-extrabold text-[11px] uppercase tracking-[0.09em] mb-1"[31m
+              [36m>[31m
+                [0mAccount recovery[0m
+              [36m</p>[31m
+              [36m<h1[31m
+                [33mclass[31m=[32m"text-[35px] font-bold text-[#232d3f] leading-[42px] tracking-[-0.525px] mb-0"[31m
+              [36m>[31m
+                [0mReset your password[0m
+              [36m</h1>[31m
+            [36m</div>[31m
+            [36m<p[31m
+              [33mclass[31m=[32m"text-[15px] text-[#55657b] mb-6 leading-[24px]"[31m
+            [36m>[31m
+              [0mEnter the email you used to create your account. We will send you a 6-digit code.[0m
+            [36m</p>[31m
+            [36m<div[31m
+              [33maria-atomic[31m=[32m"true"[31m
+              [33maria-live[31m=[32m"polite"[31m
+            [36m/>[31m
+            [36m<form[31m
+              [33mclass[31m=[32m"flex flex-col gap-5"[31m
+            [36m>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"flex flex-col"[31m
+              [36m>[31m
+                [36m<label[31m
+                  [33mclass[31m=[32m"text-[11px] font-extrabold text-[#55657b] uppercase tracking-[0.07em] mb-1.5"[31m
+                  [33mfor[31m=[32m"email"[31m
+                [36m>[31m
+                  [0mEmail[0m
+                [36m</label>[31m
+                [36m<input[31m
+                  [33maria-invalid[31m=[32m"false"[31m
+                  [33mclass[31m=[32m"w-full px-[15px] py-[12px] rounded-[10px] border border-[#dde2e7] bg-white text-[14px] text-[#232d3f] outline-none placeholder:text-[rgba(35,45,63,0.5)] disabled:bg-gray-100 disabled:text-gray-600 disabled:cursor-not-allowed transition-colors"[31m
+                  [33mid[31m=[32m"email"[31m
+                  [33mplaceholder[31m=[32m"you@example.com"[31m
+                  [33mtype[31m=[32m"email"[31m
+                  [33mvalue[31m=[32m""[31m
+                [36m/>[31m
+              [36m</div>[31m
+              [36m<button[31m
+                [33maria-busy[31m=[32m"false"[31m
+                [33mclass[31m=[32m"w-full min-h-[52px] px-[18px] py-[12px] rounded-[10px] bg-[#eb7900] text-white text-[14px] font-extrabold cursor-pointer disabled:bg-gray-300 disabled:cursor-not-allowed transition-all"[31m
+                [33mdisabled[31m=[32m""[31m
+                [33mtype[31m=[32m"submit"[31m
+              [36m>[31m
+                [0mSend code[0m
+              [36m</button>[31m
+            [36m</form>[31m
+          [36m</div>[31m
+        [36m</div>[31m
+      [36m</div>[31m
+    [36m</div>[31m
+  [36m</body>[31m
+[36m</html>[31m[39m
+[31m   [33m❯[31m src/pages/ForgetPassword/ForgetPassword.test.tsx[2m > [22mForgetPassword[2m > [22mshows error when code field is empty[39m
+[31m     → Unable to find an element with the text: /Please enter the verification code/i. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[31m
+  [36m<div>[31m
+    [36m<div[31m
+      [33mclass[31m=[32m"min-h-screen w-full flex flex-col bg-[#f7f7f5]"[31m
+    [36m>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"absolute top-0 left-0 w-full h-[7px] bg-gradient-to-r from-[#FF6A00] to-[#FFC01E]"[31m
+      [36m/>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"flex-1 flex items-center justify-center px-4 sm:px-6 py-8"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"w-full max-w-[620px] bg-white rounded-[22px] border border-[#dde2e7] shadow-[0_20px_26px_rgba(35,45,63,0.12)] px-[48px] py-[44px]"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"mb-[49px]"[31m
+          [36m>[31m
+            [36m<a[31m
+              [33mclass[31m=[32m"inline-flex items-center gap-[7px] text-[#9b4d16] font-extrabold text-[14px] no-underline hover:opacity-80 transition-opacity"[31m
+              [33mhref[31m=[32m"/signin"[31m
+            [36m>[31m
+              [36m<span>[31m
+                [0m‹[0m
+              [36m</span>[31m
+              [36m<span>[31m
+                [0mBack to sign in[0m
+              [36m</span>[31m
+            [36m</a>[31m
+          [36m</div>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"mb-5"[31m
+          [36m>[31m
+            [36m<p[31m
+              [33mclass[31m=[32m"text-[#eb7900] font-extrabold text-[11px] uppercase tracking-[0.09em] mb-1"[31m
+            [36m>[31m
+              [0mAccount recovery[0m
+            [36m</p>[31m
+            [36m<h1[31m
+              [33mclass[31m=[32m"text-[35px] font-bold text-[#232d3f] leading-[42px] tracking-[-0.525px] mb-0"[31m
+            [36m>[31m
+              [0mReset your password[0m
+            [36m</h1>[31m
+          [36m</div>[31m
+          [36m<p[31m
+            [33mclass[31m=[32m"text-[15px] text-[#55657b] mb-6 leading-[24px]"[31m
+          [36m>[31m
+            [0mEnter the email you used to create your account. We will send you a 6-digit code.[0m
+          [36m</p>[31m
+          [36m<div[31m
+            [33maria-atomic[31m=[32m"true"[31m
+            [33maria-live[31m=[32m"polite"[31m
+          [36m>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"mb-4 p-3 rounded-lg bg-[#e8f5e9] border border-[#c8e6c9] text-[#2e7d32] text-[13px] leading-relaxed"[31m
+              [33mrole[31m=[32m"status"[31m
+            [36m>[31m
+              [0mWe sent a 6-digit code to your email address.[0m
+            [36m</div>[31m
+          [36m</div>[31m
+          [36m<form[31m
+            [33mclass[31m=[32m"flex flex-col gap-5"[31m
+          [36m>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"flex flex-col"[31m
+            [36m>[31m
+              [36m<label[31m
+                [33mclass[31m=[32m"text-[11px] font-extrabold text-[#55657b] uppercase tracking-[0.07em] mb-1.5"[31m
+                [33mfor[31m=[32m"code"[31m
+              [36m>[31m
+                [0mVerification Code[0m
+              [36m</label>[31m
+              [36m<input[31m
+                [33maria-invalid[31m=[32m"false"[31m
+                [33mclass[31m=[32m"w-full px-[15px] py-[12px] rounded-[10px] border border-[#dde2e7] bg-white text-[14px] text-[#232d3f] outline-none placeholder:text-[rgba(35,45,63,0.5)] disabled:bg-gray-100 disabled:text-gray-600 disabled:cursor-not-allowed transition-colors"[31m
+                [33mid[31m=[32m"code"[31m
+                [33mmaxlength[31m=[32m"6"[31m
+                [33mplaceholder[31m=[32m"Enter 6-digit code"[31m
+                [33mtype[31m=[32m"text"[31m
+                [33mvalue[31m=[32m""[31m
+              [36m/>[31m
+            [36m</div>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"flex flex-col"[31m
+            [36m>[31m
+              [36m<label[31m
+                [33mclass[31m=[32m"text-[11px] font-extrabold text-[#55657b] uppercase tracking-[0.07em] mb-1.5"[31m
+                [33mfor[31m=[32m"newPassword"[31m
+              [36m>[31m
+                [0mNew Password[0m
+              [36m</label>[31m
+              [36m<input[31m
+                [33maria-describedby[31m=[32m"password-hint"[31m
+                [33mclass[31m=[32m"w-full px-[15px] py-[12px] rounded-[10px] border border-[#dde2e7] bg-white text-[14px] text-[#232d3f] outline-none placeholder:text-[rgba(35,45,63,0.5)] disabled:bg-gray-100 disabled:text-gray-600 disabled:cursor-not-allowed transition-colors"[31m
+                [33mid[31m=[32m"newPassword"[31m
+                [33mplaceholder[31m=[32m"Enter new password"[31m
+                [33mtype[31m=[32m"password"[31m
+                [33mvalue[31m=[32m""[31m
+              [36m/>[31m
+              [36m<p[31m
+                [33mclass[31m=[32m"mt-1.5 text-[11px] text-[#55657b] leading-[16px]"[31m
+                [33mid[31m=[32m"password-hint"[31m
+              [36m>[31m
+                [0mPassword must be at least 12 characters with 1 uppercase, 1 lowercase, and 1 number[0m
+              [36m</p>[31m
+            [36m</div>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"flex flex-col gap-3"[31m
+            [36m>[31m
+              [36m<button[31m
+                [33maria-busy[31m=[32m"false"[31m
+                [33mclass[31m=[32m"w-full min-h-[52px] px-[18px] py-[12px] rounded-[10px] bg-[#eb7900] text-white text-[14px] font-extrabold cursor-pointer disabled:bg-gray-300 disabled:cursor-not-allowed transition-all"[31m
+                [33mdisabled[31m=[32m""[31m
+                [33mtype[31m=[32m"submit"[31m
+              [36m>[31m
+                [0mReset password[0m
+              [36m</button>[31m
+              [36m<button[31m
+                [33maria-disabled[31m=[32m"false"[31m
+                [33mclass[31m=[32m"w-full text-[14px] text-[#eb7900] bg-transparent border-none cursor-pointer font-semibold py-2 disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-80 transition-opacity"[31m
+                [33mtype[31m=[32m"button"[31m
+              [36m>[31m
+                [0mRequest a new code[0m
+              [36m</button>[31m
+            [36m</div>[31m
+          [36m</form>[31m
+        [36m</div>[31m
+      [36m</div>[31m
+    [36m</div>[31m
+  [36m</div>[31m
+[36m</body>[31m
+
+Ignored nodes: comments, script, style
+[36m<html>[31m
+  [36m<head />[31m
+  [36m<body>[31m
+    [36m<div>[31m
+      [36m<div[31m
+        [33mclass[31m=[32m"min-h-screen w-full flex flex-col bg-[#f7f7f5]"[31m
+      [36m>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"absolute top-0 left-0 w-full h-[7px] bg-gradient-to-r from-[#FF6A00] to-[#FFC01E]"[31m
+        [36m/>[31m
+        [36m<div[31m
+          [33mclass[31m=[32m"flex-1 flex items-center justify-center px-4 sm:px-6 py-8"[31m
+        [36m>[31m
+          [36m<div[31m
+            [33mclass[31m=[32m"w-full max-w-[620px] bg-white rounded-[22px] border border-[#dde2e7] shadow-[0_20px_26px_rgba(35,45,63,0.12)] px-[48px] py-[44px]"[31m
+          [36m>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"mb-[49px]"[31m
+            [36m>[31m
+              [36m<a[31m
+                [33mclass[31m=[32m"inline-flex items-center gap-[7px] text-[#9b4d16] font-extrabold text-[14px] no-underline hover:opacity-80 transition-opacity"[31m
+                [33mhref[31m=[32m"/signin"[31m
+              [36m>[31m
+                [36m<span>[31m
+                  [0m‹[0m
+                [36m</span>[31m
+                [36m<span>[31m
+                  [0mBack to sign in[0m
+                [36m</span>[31m
+              [36m</a>[31m
+            [36m</div>[31m
+            [36m<div[31m
+              [33mclass[31m=[32m"mb-5"[31m
+            [36m>[31m
+              [36m<p[31m
+                [33mclass[31m=[32m"text-[#eb7900] font-extrabold text-[11px] uppercase tracking-[0.09em] mb-1"[31m
+              [36m>[31m
+                [0mAccount recovery[0m
+              [36m</p>[31m
+              [36m<h1[31m
+                [33mclass[31m=[32m"text-[35px] font-bold text-[#232d3f] leading-[42px] tracking-[-0.525px] mb-0"[31m
+              [36m>[31m
+                [0mReset your password[0m
+              [36m</h1>[31m
+            [36m</div>[31m
+            [36m<p[31m
+              [33mclass[31m=[32m"text-[15px] text-[#55657b] mb-6 leading-[24px]"[31m
+            [36m>[31m
+              [0mEnter the email you used to create your account. We will send you a 6-digit code.[0m
+            [36m</p>[31m
+            [36m<div[31m
+              [33maria-atomic[31m=[32m"true"[31m
+              [33maria-live[31m=[32m"polite"[31m
+            [36m>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"mb-4 p-3 rounded-lg bg-[#e8f5e9] border border-[#c8e6c9] text-[#2e7d32] text-[13px] leading-relaxed"[31m
+                [33mrole[31m=[32m"status"[31m
+              [36m>[31m
+                [0mWe sent a 6-digit code to your email address.[0m
+              [36m</div>[31m
+            [36m</div>[31m
+            [36m<form[31m
+              [33mclass[31m=[32m"flex flex-col gap-5"[31m
+            [36m>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"flex flex-col"[31m
+              [36m>[31m
+                [36m<label[31m
+                  [33mclass[31m=[32m"text-[11px] font-extrabold text-[#55657b] uppercase tracking-[0.07em] mb-1.5"[31m
+                  [33mfor[31m=[32m"code"[31m
+                [36m>[31m
+                  [0mVerification Code[0m
+                [36m</label>[31m
+                [36m<input[31m
+                  [33maria-invalid[31m=[32m"false"[31m
+                  [33mclass[31m=[32m"w-full px-[15px] py-[12px] rounded-[10px] border border-[#dde2e7] bg-white text-[14px] text-[#232d3f] outline-none placeholder:text-[rgba(35,45,63,0.5)] disabled:bg-gray-100 disabled:text-gray-600 disabled:cursor-not-allowed transition-colors"[31m
+                  [33mid[31m=[32m"code"[31m
+                  [33mmaxlength[31m=[32m"6"[31m
+                  [33mplaceholder[31m=[32m"Enter 6-digit code"[31m
+                  [33mtype[31m=[32m"text"[31m
+                  [33mvalue[31m=[32m""[31m
+                [36m/>[31m
+              [36m</div>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"flex flex-col"[31m
+              [36m>[31m
+                [36m<label[31m
+                  [33mclass[31m=[32m"text-[11px] font-extrabold text-[#55657b] uppercase tracking-[0.07em] mb-1.5"[31m
+                  [33mfor[31m=[32m"newPassword"[31m
+                [36m>[31m
+                  [0mNew Password[0m
+                [36m</label>[31m
+                [36m<input[31m
+                  [33maria-describedby[31m=[32m"password-hint"[31m
+                  [33mclass[31m=[32m"w-full px-[15px] py-[12px] rounded-[10px] border border-[#dde2e7] bg-white text-[14px] text-[#232d3f] outline-none placeholder:text-[rgba(35,45,63,0.5)] disabled:bg-gray-100 disabled:text-gray-600 disabled:cursor-not-allowed transition-colors"[31m
+                  [33mid[31m=[32m"newPassword"[31m
+                  [33mplaceholder[31m=[32m"Enter new password"[31m
+                  [33mtype[31m=[32m"password"[31m
+                  [33mvalue[31m=[32m""[31m
+                [36m/>[31m
+                [36m<p[31m
+                  [33mclass[31m=[32m"mt-1.5 text-[11px] text-[#55657b] leading-[16px]"[31m
+                  [33mid[31m=[32m"password-hint"[31m
+                [36m>[31m
+                  [0mPassword must be at least 12 characters with 1 uppercase, 1 lowercase, and 1 number[0m
+                [36m</p>[31m
+              [36m</div>[31m
+              [36m<div[31m
+                [33mclass[31m=[32m"flex flex-col gap-3"[31m
+              [36m>[31m
+                [36m<button[31m
+                  [33maria-busy[31m=[32m"false"[31m
+                  [33mclass[31m=[32m"w-full min-h-[52px] px-[18px] py-[12px] rounded-[10px] bg-[#eb7900] text-white text-[14px] font-extrabold cursor-pointer disabled:bg-gray-300 disabled:cursor-not-allowed transition-all"[31m
+                  [33mdisabled[31m=[32m""[31m
+                  [33mtype[31m=[32m"submit"[31m
+                [36m>[31m
+                  [0mReset password[0m
+                [36m</button>[31m
+                [36m<button[31m
+                  [33maria-disabled[31m=[32m"false"[31m
+                  [33mclass[31m=[32m"w-full text-[14px] text-[#eb7900] bg-transparent border-none cursor-pointer font-semibold py-2 disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-80 transition-opacity"[31m
+                  [33mtype[31m=[32m"button"[31m
+                [36m>[31m
+                  [0mRequest a new code[0m
+                [36m</button>[31m
+              [36m</div>[31m
+            [36m</form>[31m
+          [36m</div>[31m
+        [36m</div>[31m
+      [36m</div>[31m
+    [36m</div>[31m
+  [36m</body>[31m
+[36m</html>[31m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[1m[7m Failed Tests 3 [27m[22m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[31m[1m[7m FAIL [27m[22m[39m src/pages/ForgetPassword/ForgetPassword.test.tsx[2m > [22mForgetPassword[2m > [22mshows error for invalid email
+[31m[1mTestingLibraryElementError[22m[39m: Unable to find an element with the text: /Please enter a valid email address/i. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"min-h-screen w-full flex flex-col bg-[#f7f7f5]"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"absolute top-0 left-0 w-full h-[7px] bg-gradient-to-r from-[#FF6A00] to-[#FFC01E]"[39m
+      [36m/>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"flex-1 flex items-center justify-center px-4 sm:px-6 py-8"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"w-full max-w-[620px] bg-white rounded-[22px] border border-[#dde2e7] shadow-[0_20px_26px_rgba(35,45,63,0.12)] px-[48px] py-[44px]"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-[49px]"[39m
+          [36m>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"inline-flex items-center gap-[7px] text-[#9b4d16] font-extrabold text-[14px] no-underline hover:opacity-80 transition-opacity"[39m
+              [33mhref[39m=[32m"/signin"[39m
+            [36m>[39m
+              [36m<span>[39m
+                [0m‹[0m
+              [36m</span>[39m
+              [36m<span>[39m
+                [0mBack to sign in[0m
+              [36m</span>[39m
+            [36m</a>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-5"[39m
+          [36m>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-[#eb7900] font-extrabold text-[11px] uppercase tracking-[0.09em] mb-1"[39m
+            [36m>[39m
+              [0mAccount recovery[0m
+            [36m</p>[39m
+            [36m<h1[39m
+              [33mclass[39m=[32m"text-[35px] font-bold text-[#232d3f] leading-[42px] tracking-[-0.525px] mb-0"[39m
+            [36m>[39m
+              [0mReset your password[0m
+            [36m</h1>[39m
+          [36m</div>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"text-[15px] text-[#55657b] mb-6 leading-[24px]"[39m
+          [36m>[39m
+            [0mEnter the email you used to create your account. We will send you a 6-digit code.[0m
+          [36m</p>[39m
+          [36m<div[39m
+            [33maria-atomic[39m=[32m"true"[39m
+            [33maria-live[39m=[32m"polite"[39m
+          [36m/>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"flex flex-col gap-5"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"flex flex-col"[39m
+            [36m>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"text-[11px] font-extrabold text-[#55657b] uppercase tracking-[0.07em] mb-1.5"[39m
+                [33mfor[39m=[32m"email"[39m
+              [36m>[39m
+                [0mEmail[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33maria-invalid[39m=[32m"false"[39m
+                [33mclass[39m=[32m"w-full px-[15px] py-[12px] rounded-[10px] border border-[#dde2e7] bg-white text-[14px] text-[#232d3f] outline-none placeholder:text-[rgba(35,45,63,0.5)] disabled:bg-gray-100 disabled:text-gray-600 disabled:cursor-not-allowed transition-colors"[39m
+                [33mid[39m=[32m"email"[39m
+                [33mplaceholder[39m=[32m"you@example.com"[39m
+                [33mtype[39m=[32m"email"[39m
+                [33mvalue[39m=[32m"invalid-email"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33maria-busy[39m=[32m"false"[39m
+              [33mclass[39m=[32m"w-full min-h-[52px] px-[18px] py-[12px] rounded-[10px] bg-[#eb7900] text-white text-[14px] font-extrabold cursor-pointer disabled:bg-gray-300 disabled:cursor-not-allowed transition-all"[39m
+              [33mtype[39m=[32m"submit"[39m
+            [36m>[39m
+              [0mSend code[0m
+            [36m</button>[39m
+          [36m</form>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<html>[39m
+  [36m<head />[39m
+  [36m<body>[39m
+    [36m<div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"min-h-screen w-full flex flex-col bg-[#f7f7f5]"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"absolute top-0 left-0 w-full h-[7px] bg-gradient-to-r from-[#FF6A00] to-[#FFC01E]"[39m
+        [36m/>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex-1 flex items-center justify-center px-4 sm:px-6 py-8"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"w-full max-w-[620px] bg-white rounded-[22px] border border-[#dde2e7] shadow-[0_20px_26px_rgba(35,45,63,0.12)] px-[48px] py-[44px]"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"mb-[49px]"[39m
+            [36m>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"inline-flex items-center gap-[7px] text-[#9b4d16] font-extrabold text-[14px] no-underline hover:opacity-80 transition-opacity"[39m
+                [33mhref[39m=[32m"/signin"[39m
+              [36m>[39m
+                [36m<span>[39m
+                  [0m‹[0m
+                [36m</span>[39m
+                [36m<span>[39m
+                  [0mBack to sign in[0m
+                [36m</span>[39m
+              [36m</a>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"mb-5"[39m
+            [36m>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"text-[#eb7900] font-extrabold text-[11px] uppercase tracking-[0.09em] mb-1"[39m
+              [36m>[39m
+                [0mAccount recovery[0m
+              [36m</p>[39m
+              [36m<h1[39m
+                [33mclass[39m=[32m"text-[35px] font-bold text-[#232d3f] leading-[42px] tracking-[-0.525px] mb-0"[39m
+              [36m>[39m
+                [0mReset your password[0m
+              [36m</h1>[39m
+            [36m</div>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-[15px] text-[#55657b] mb-6 leading-[24px]"[39m
+            [36m>[39m
+              [0mEnter the email you used to create your account. We will send you a 6-digit code.[0m
+            [36m</p>[39m
+            [36m<div[39m
+              [33maria-atomic[39m=[32m"true"[39m
+              [33maria-live[39m=[32m"polite"[39m
+            [36m/>[39m
+            [36m<form[39m
+              [33mclass[39m=[32m"flex flex-col gap-5"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex flex-col"[39m
+              [36m>[39m
+                [36m<label[39m
+                  [33mclass[39m=[32m"text-[11px] font-extrabold text-[#55657b] uppercase tracking-[0.07em] mb-1.5"[39m
+                  [33mfor[39m=[32m"email"[39m
+                [36m>[39m
+                  [0mEmail[0m
+                [36m</label>[39m
+                [36m<input[39m
+                  [33maria-invalid[39m=[32m"false"[39m
+                  [33mclass[39m=[32m"w-full px-[15px] py-[12px] rounded-[10px] border border-[#dde2e7] bg-white text-[14px] text-[#232d3f] outline-none placeholder:text-[rgba(35,45,63,0.5)] disabled:bg-gray-100 disabled:text-gray-600 disabled:cursor-not-allowed transition-colors"[39m
+                  [33mid[39m=[32m"email"[39m
+                  [33mplaceholder[39m=[32m"you@example.com"[39m
+                  [33mtype[39m=[32m"email"[39m
+                  [33mvalue[39m=[32m"invalid-email"[39m
+                [36m/>[39m
+              [36m</div>[39m
+              [36m<button[39m
+                [33maria-busy[39m=[32m"false"[39m
+                [33mclass[39m=[32m"w-full min-h-[52px] px-[18px] py-[12px] rounded-[10px] bg-[#eb7900] text-white text-[14px] font-extrabold cursor-pointer disabled:bg-gray-300 disabled:cursor-not-allowed transition-all"[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mSend code[0m
+              [36m</button>[39m
+            [36m</form>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+  [36m</body>[39m
+[36m</html>[39m
+[90m [2m❯[22m Proxy.waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:[2m163:27[22m[39m
+[36m [2m❯[22m src/pages/ForgetPassword/ForgetPassword.test.tsx:[2m68:11[22m[39m
+    [90m 66| [39m    [35mawait[39m fireEvent[33m.[39m[34mclick[39m(sendCodeBtn)[33m;[39m
+    [90m 67| [39m
+    [90m 68| [39m    [35mawait[39m [34mwaitFor[39m(() [33m=>[39m {
+    [90m   | [39m          [31m^[39m
+    [90m 69| [39m      [35mconst[39m errorSpan [33m=[39m screen[33m.[39m[34mgetByText[39m([36m/Please enter a valid email a[39m…
+    [90m 70| [39m      [34mexpect[39m(errorSpan)[33m.[39m[34mtoBeInTheDocument[39m()[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m src/pages/ForgetPassword/ForgetPassword.test.tsx[2m > [22mForgetPassword[2m > [22mshows error for empty email
+[31m[1mTestingLibraryElementError[22m[39m: Unable to find an element with the text: /Please enter your email address/i. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"min-h-screen w-full flex flex-col bg-[#f7f7f5]"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"absolute top-0 left-0 w-full h-[7px] bg-gradient-to-r from-[#FF6A00] to-[#FFC01E]"[39m
+      [36m/>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"flex-1 flex items-center justify-center px-4 sm:px-6 py-8"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"w-full max-w-[620px] bg-white rounded-[22px] border border-[#dde2e7] shadow-[0_20px_26px_rgba(35,45,63,0.12)] px-[48px] py-[44px]"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-[49px]"[39m
+          [36m>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"inline-flex items-center gap-[7px] text-[#9b4d16] font-extrabold text-[14px] no-underline hover:opacity-80 transition-opacity"[39m
+              [33mhref[39m=[32m"/signin"[39m
+            [36m>[39m
+              [36m<span>[39m
+                [0m‹[0m
+              [36m</span>[39m
+              [36m<span>[39m
+                [0mBack to sign in[0m
+              [36m</span>[39m
+            [36m</a>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-5"[39m
+          [36m>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-[#eb7900] font-extrabold text-[11px] uppercase tracking-[0.09em] mb-1"[39m
+            [36m>[39m
+              [0mAccount recovery[0m
+            [36m</p>[39m
+            [36m<h1[39m
+              [33mclass[39m=[32m"text-[35px] font-bold text-[#232d3f] leading-[42px] tracking-[-0.525px] mb-0"[39m
+            [36m>[39m
+              [0mReset your password[0m
+            [36m</h1>[39m
+          [36m</div>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"text-[15px] text-[#55657b] mb-6 leading-[24px]"[39m
+          [36m>[39m
+            [0mEnter the email you used to create your account. We will send you a 6-digit code.[0m
+          [36m</p>[39m
+          [36m<div[39m
+            [33maria-atomic[39m=[32m"true"[39m
+            [33maria-live[39m=[32m"polite"[39m
+          [36m/>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"flex flex-col gap-5"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"flex flex-col"[39m
+            [36m>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"text-[11px] font-extrabold text-[#55657b] uppercase tracking-[0.07em] mb-1.5"[39m
+                [33mfor[39m=[32m"email"[39m
+              [36m>[39m
+                [0mEmail[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33maria-invalid[39m=[32m"false"[39m
+                [33mclass[39m=[32m"w-full px-[15px] py-[12px] rounded-[10px] border border-[#dde2e7] bg-white text-[14px] text-[#232d3f] outline-none placeholder:text-[rgba(35,45,63,0.5)] disabled:bg-gray-100 disabled:text-gray-600 disabled:cursor-not-allowed transition-colors"[39m
+                [33mid[39m=[32m"email"[39m
+                [33mplaceholder[39m=[32m"you@example.com"[39m
+                [33mtype[39m=[32m"email"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<button[39m
+              [33maria-busy[39m=[32m"false"[39m
+              [33mclass[39m=[32m"w-full min-h-[52px] px-[18px] py-[12px] rounded-[10px] bg-[#eb7900] text-white text-[14px] font-extrabold cursor-pointer disabled:bg-gray-300 disabled:cursor-not-allowed transition-all"[39m
+              [33mdisabled[39m=[32m""[39m
+              [33mtype[39m=[32m"submit"[39m
+            [36m>[39m
+              [0mSend code[0m
+            [36m</button>[39m
+          [36m</form>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<html>[39m
+  [36m<head />[39m
+  [36m<body>[39m
+    [36m<div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"min-h-screen w-full flex flex-col bg-[#f7f7f5]"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"absolute top-0 left-0 w-full h-[7px] bg-gradient-to-r from-[#FF6A00] to-[#FFC01E]"[39m
+        [36m/>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex-1 flex items-center justify-center px-4 sm:px-6 py-8"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"w-full max-w-[620px] bg-white rounded-[22px] border border-[#dde2e7] shadow-[0_20px_26px_rgba(35,45,63,0.12)] px-[48px] py-[44px]"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"mb-[49px]"[39m
+            [36m>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"inline-flex items-center gap-[7px] text-[#9b4d16] font-extrabold text-[14px] no-underline hover:opacity-80 transition-opacity"[39m
+                [33mhref[39m=[32m"/signin"[39m
+              [36m>[39m
+                [36m<span>[39m
+                  [0m‹[0m
+                [36m</span>[39m
+                [36m<span>[39m
+                  [0mBack to sign in[0m
+                [36m</span>[39m
+              [36m</a>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"mb-5"[39m
+            [36m>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"text-[#eb7900] font-extrabold text-[11px] uppercase tracking-[0.09em] mb-1"[39m
+              [36m>[39m
+                [0mAccount recovery[0m
+              [36m</p>[39m
+              [36m<h1[39m
+                [33mclass[39m=[32m"text-[35px] font-bold text-[#232d3f] leading-[42px] tracking-[-0.525px] mb-0"[39m
+              [36m>[39m
+                [0mReset your password[0m
+              [36m</h1>[39m
+            [36m</div>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-[15px] text-[#55657b] mb-6 leading-[24px]"[39m
+            [36m>[39m
+              [0mEnter the email you used to create your account. We will send you a 6-digit code.[0m
+            [36m</p>[39m
+            [36m<div[39m
+              [33maria-atomic[39m=[32m"true"[39m
+              [33maria-live[39m=[32m"polite"[39m
+            [36m/>[39m
+            [36m<form[39m
+              [33mclass[39m=[32m"flex flex-col gap-5"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex flex-col"[39m
+              [36m>[39m
+                [36m<label[39m
+                  [33mclass[39m=[32m"text-[11px] font-extrabold text-[#55657b] uppercase tracking-[0.07em] mb-1.5"[39m
+                  [33mfor[39m=[32m"email"[39m
+                [36m>[39m
+                  [0mEmail[0m
+                [36m</label>[39m
+                [36m<input[39m
+                  [33maria-invalid[39m=[32m"false"[39m
+                  [33mclass[39m=[32m"w-full px-[15px] py-[12px] rounded-[10px] border border-[#dde2e7] bg-white text-[14px] text-[#232d3f] outline-none placeholder:text-[rgba(35,45,63,0.5)] disabled:bg-gray-100 disabled:text-gray-600 disabled:cursor-not-allowed transition-colors"[39m
+                  [33mid[39m=[32m"email"[39m
+                  [33mplaceholder[39m=[32m"you@example.com"[39m
+                  [33mtype[39m=[32m"email"[39m
+                  [33mvalue[39m=[32m""[39m
+                [36m/>[39m
+              [36m</div>[39m
+              [36m<button[39m
+                [33maria-busy[39m=[32m"false"[39m
+                [33mclass[39m=[32m"w-full min-h-[52px] px-[18px] py-[12px] rounded-[10px] bg-[#eb7900] text-white text-[14px] font-extrabold cursor-pointer disabled:bg-gray-300 disabled:cursor-not-allowed transition-all"[39m
+                [33mdisabled[39m=[32m""[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mSend code[0m
+              [36m</button>[39m
+            [36m</form>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+  [36m</body>[39m
+[36m</html>[39m
+[90m [2m❯[22m Proxy.waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:[2m163:27[22m[39m
+[36m [2m❯[22m src/pages/ForgetPassword/ForgetPassword.test.tsx:[2m85:11[22m[39m
+    [90m 83| [39m    [35mawait[39m fireEvent[33m.[39m[34mclick[39m(sendCodeBtn)[33m;[39m
+    [90m 84| [39m
+    [90m 85| [39m    [35mawait[39m [34mwaitFor[39m(() [33m=>[39m {
+    [90m   | [39m          [31m^[39m
+    [90m 86| [39m      [35mconst[39m errorSpan [33m=[39m screen[33m.[39m[34mgetByText[39m([36m/Please enter your email addr[39m…
+    [90m 87| [39m      [34mexpect[39m(errorSpan)[33m.[39m[34mtoBeInTheDocument[39m()[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m src/pages/ForgetPassword/ForgetPassword.test.tsx[2m > [22mForgetPassword[2m > [22mshows error when code field is empty
+[31m[1mTestingLibraryElementError[22m[39m: Unable to find an element with the text: /Please enter the verification code/i. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"min-h-screen w-full flex flex-col bg-[#f7f7f5]"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"absolute top-0 left-0 w-full h-[7px] bg-gradient-to-r from-[#FF6A00] to-[#FFC01E]"[39m
+      [36m/>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"flex-1 flex items-center justify-center px-4 sm:px-6 py-8"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"w-full max-w-[620px] bg-white rounded-[22px] border border-[#dde2e7] shadow-[0_20px_26px_rgba(35,45,63,0.12)] px-[48px] py-[44px]"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-[49px]"[39m
+          [36m>[39m
+            [36m<a[39m
+              [33mclass[39m=[32m"inline-flex items-center gap-[7px] text-[#9b4d16] font-extrabold text-[14px] no-underline hover:opacity-80 transition-opacity"[39m
+              [33mhref[39m=[32m"/signin"[39m
+            [36m>[39m
+              [36m<span>[39m
+                [0m‹[0m
+              [36m</span>[39m
+              [36m<span>[39m
+                [0mBack to sign in[0m
+              [36m</span>[39m
+            [36m</a>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"mb-5"[39m
+          [36m>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-[#eb7900] font-extrabold text-[11px] uppercase tracking-[0.09em] mb-1"[39m
+            [36m>[39m
+              [0mAccount recovery[0m
+            [36m</p>[39m
+            [36m<h1[39m
+              [33mclass[39m=[32m"text-[35px] font-bold text-[#232d3f] leading-[42px] tracking-[-0.525px] mb-0"[39m
+            [36m>[39m
+              [0mReset your password[0m
+            [36m</h1>[39m
+          [36m</div>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"text-[15px] text-[#55657b] mb-6 leading-[24px]"[39m
+          [36m>[39m
+            [0mEnter the email you used to create your account. We will send you a 6-digit code.[0m
+          [36m</p>[39m
+          [36m<div[39m
+            [33maria-atomic[39m=[32m"true"[39m
+            [33maria-live[39m=[32m"polite"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"mb-4 p-3 rounded-lg bg-[#e8f5e9] border border-[#c8e6c9] text-[#2e7d32] text-[13px] leading-relaxed"[39m
+              [33mrole[39m=[32m"status"[39m
+            [36m>[39m
+              [0mWe sent a 6-digit code to your email address.[0m
+            [36m</div>[39m
+          [36m</div>[39m
+          [36m<form[39m
+            [33mclass[39m=[32m"flex flex-col gap-5"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"flex flex-col"[39m
+            [36m>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"text-[11px] font-extrabold text-[#55657b] uppercase tracking-[0.07em] mb-1.5"[39m
+                [33mfor[39m=[32m"code"[39m
+              [36m>[39m
+                [0mVerification Code[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33maria-invalid[39m=[32m"false"[39m
+                [33mclass[39m=[32m"w-full px-[15px] py-[12px] rounded-[10px] border border-[#dde2e7] bg-white text-[14px] text-[#232d3f] outline-none placeholder:text-[rgba(35,45,63,0.5)] disabled:bg-gray-100 disabled:text-gray-600 disabled:cursor-not-allowed transition-colors"[39m
+                [33mid[39m=[32m"code"[39m
+                [33mmaxlength[39m=[32m"6"[39m
+                [33mplaceholder[39m=[32m"Enter 6-digit code"[39m
+                [33mtype[39m=[32m"text"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"flex flex-col"[39m
+            [36m>[39m
+              [36m<label[39m
+                [33mclass[39m=[32m"text-[11px] font-extrabold text-[#55657b] uppercase tracking-[0.07em] mb-1.5"[39m
+                [33mfor[39m=[32m"newPassword"[39m
+              [36m>[39m
+                [0mNew Password[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33maria-describedby[39m=[32m"password-hint"[39m
+                [33mclass[39m=[32m"w-full px-[15px] py-[12px] rounded-[10px] border border-[#dde2e7] bg-white text-[14px] text-[#232d3f] outline-none placeholder:text-[rgba(35,45,63,0.5)] disabled:bg-gray-100 disabled:text-gray-600 disabled:cursor-not-allowed transition-colors"[39m
+                [33mid[39m=[32m"newPassword"[39m
+                [33mplaceholder[39m=[32m"Enter new password"[39m
+                [33mtype[39m=[32m"password"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"mt-1.5 text-[11px] text-[#55657b] leading-[16px]"[39m
+                [33mid[39m=[32m"password-hint"[39m
+              [36m>[39m
+                [0mPassword must be at least 12 characters with 1 uppercase, 1 lowercase, and 1 number[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"flex flex-col gap-3"[39m
+            [36m>[39m
+              [36m<button[39m
+                [33maria-busy[39m=[32m"false"[39m
+                [33mclass[39m=[32m"w-full min-h-[52px] px-[18px] py-[12px] rounded-[10px] bg-[#eb7900] text-white text-[14px] font-extrabold cursor-pointer disabled:bg-gray-300 disabled:cursor-not-allowed transition-all"[39m
+                [33mdisabled[39m=[32m""[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mReset password[0m
+              [36m</button>[39m
+              [36m<button[39m
+                [33maria-disabled[39m=[32m"false"[39m
+                [33mclass[39m=[32m"w-full text-[14px] text-[#eb7900] bg-transparent border-none cursor-pointer font-semibold py-2 disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-80 transition-opacity"[39m
+                [33mtype[39m=[32m"button"[39m
+              [36m>[39m
+                [0mRequest a new code[0m
+              [36m</button>[39m
+            [36m</div>[39m
+          [36m</form>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+Ignored nodes: comments, script, style
+[36m<html>[39m
+  [36m<head />[39m
+  [36m<body>[39m
+    [36m<div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"min-h-screen w-full flex flex-col bg-[#f7f7f5]"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"absolute top-0 left-0 w-full h-[7px] bg-gradient-to-r from-[#FF6A00] to-[#FFC01E]"[39m
+        [36m/>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex-1 flex items-center justify-center px-4 sm:px-6 py-8"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"w-full max-w-[620px] bg-white rounded-[22px] border border-[#dde2e7] shadow-[0_20px_26px_rgba(35,45,63,0.12)] px-[48px] py-[44px]"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"mb-[49px]"[39m
+            [36m>[39m
+              [36m<a[39m
+                [33mclass[39m=[32m"inline-flex items-center gap-[7px] text-[#9b4d16] font-extrabold text-[14px] no-underline hover:opacity-80 transition-opacity"[39m
+                [33mhref[39m=[32m"/signin"[39m
+              [36m>[39m
+                [36m<span>[39m
+                  [0m‹[0m
+                [36m</span>[39m
+                [36m<span>[39m
+                  [0mBack to sign in[0m
+                [36m</span>[39m
+              [36m</a>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"mb-5"[39m
+            [36m>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"text-[#eb7900] font-extrabold text-[11px] uppercase tracking-[0.09em] mb-1"[39m
+              [36m>[39m
+                [0mAccount recovery[0m
+              [36m</p>[39m
+              [36m<h1[39m
+                [33mclass[39m=[32m"text-[35px] font-bold text-[#232d3f] leading-[42px] tracking-[-0.525px] mb-0"[39m
+              [36m>[39m
+                [0mReset your password[0m
+              [36m</h1>[39m
+            [36m</div>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"text-[15px] text-[#55657b] mb-6 leading-[24px]"[39m
+            [36m>[39m
+              [0mEnter the email you used to create your account. We will send you a 6-digit code.[0m
+            [36m</p>[39m
+            [36m<div[39m
+              [33maria-atomic[39m=[32m"true"[39m
+              [33maria-live[39m=[32m"polite"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"mb-4 p-3 rounded-lg bg-[#e8f5e9] border border-[#c8e6c9] text-[#2e7d32] text-[13px] leading-relaxed"[39m
+                [33mrole[39m=[32m"status"[39m
+              [36m>[39m
+                [0mWe sent a 6-digit code to your email address.[0m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<form[39m
+              [33mclass[39m=[32m"flex flex-col gap-5"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex flex-col"[39m
+              [36m>[39m
+                [36m<label[39m
+                  [33mclass[39m=[32m"text-[11px] font-extrabold text-[#55657b] uppercase tracking-[0.07em] mb-1.5"[39m
+                  [33mfor[39m=[32m"code"[39m
+                [36m>[39m
+                  [0mVerification Code[0m
+                [36m</label>[39m
+                [36m<input[39m
+                  [33maria-invalid[39m=[32m"false"[39m
+                  [33mclass[39m=[32m"w-full px-[15px] py-[12px] rounded-[10px] border border-[#dde2e7] bg-white text-[14px] text-[#232d3f] outline-none placeholder:text-[rgba(35,45,63,0.5)] disabled:bg-gray-100 disabled:text-gray-600 disabled:cursor-not-allowed transition-colors"[39m
+                  [33mid[39m=[32m"code"[39m
+                  [33mmaxlength[39m=[32m"6"[39m
+                  [33mplaceholder[39m=[32m"Enter 6-digit code"[39m
+                  [33mtype[39m=[32m"text"[39m
+                  [33mvalue[39m=[32m""[39m
+                [36m/>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex flex-col"[39m
+              [36m>[39m
+                [36m<label[39m
+                  [33mclass[39m=[32m"text-[11px] font-extrabold text-[#55657b] uppercase tracking-[0.07em] mb-1.5"[39m
+                  [33mfor[39m=[32m"newPassword"[39m
+                [36m>[39m
+                  [0mNew Password[0m
+                [36m</label>[39m
+                [36m<input[39m
+                  [33maria-describedby[39m=[32m"password-hint"[39m
+                  [33mclass[39m=[32m"w-full px-[15px] py-[12px] rounded-[10px] border border-[#dde2e7] bg-white text-[14px] text-[#232d3f] outline-none placeholder:text-[rgba(35,45,63,0.5)] disabled:bg-gray-100 disabled:text-gray-600 disabled:cursor-not-allowed transition-colors"[39m
+                  [33mid[39m=[32m"newPassword"[39m
+                  [33mplaceholder[39m=[32m"Enter new password"[39m
+                  [33mtype[39m=[32m"password"[39m
+                  [33mvalue[39m=[32m""[39m
+                [36m/>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"mt-1.5 text-[11px] text-[#55657b] leading-[16px]"[39m
+                  [33mid[39m=[32m"password-hint"[39m
+                [36m>[39m
+                  [0mPassword must be at least 12 characters with 1 uppercase, 1 lowercase, and 1 number[0m
+                [36m</p>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex flex-col gap-3"[39m
+              [36m>[39m
+                [36m<button[39m
+                  [33maria-busy[39m=[32m"false"[39m
+                  [33mclass[39m=[32m"w-full min-h-[52px] px-[18px] py-[12px] rounded-[10px] bg-[#eb7900] text-white text-[14px] font-extrabold cursor-pointer disabled:bg-gray-300 disabled:cursor-not-allowed transition-all"[39m
+                  [33mdisabled[39m=[32m""[39m
+                  [33mtype[39m=[32m"submit"[39m
+                [36m>[39m
+                  [0mReset password[0m
+                [36m</button>[39m
+                [36m<button[39m
+                  [33maria-disabled[39m=[32m"false"[39m
+                  [33mclass[39m=[32m"w-full text-[14px] text-[#eb7900] bg-transparent border-none cursor-pointer font-semibold py-2 disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-80 transition-opacity"[39m
+                  [33mtype[39m=[32m"button"[39m
+                [36m>[39m
+                  [0mRequest a new code[0m
+                [36m</button>[39m
+              [36m</div>[39m
+            [36m</form>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</div>[39m
+  [36m</body>[39m
+[36m</html>[39m
+[90m [2m❯[22m Proxy.waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:[2m163:27[22m[39m
+[36m [2m❯[22m src/pages/ForgetPassword/ForgetPassword.test.tsx:[2m194:11[22m[39m
+    [90m192| [39m    [35mawait[39m fireEvent[33m.[39m[34mclick[39m(resetBtn)[33m;[39m
+    [90m193| [39m
+    [90m194| [39m    [35mawait[39m [34mwaitFor[39m(() [33m=>[39m {
+    [90m   | [39m          [31m^[39m
+    [90m195| [39m      [35mconst[39m errorSpan [33m=[39m screen[33m.[39m[34mgetByText[39m([36m/Please enter the verificatio[39m…
+    [90m196| [39m      [34mexpect[39m(errorSpan)[33m.[39m[34mtoBeInTheDocument[39m()[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯[22m[39m
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m1 passed[39m[22m[90m (2)[39m
+[2m      Tests [22m [1m[31m3 failed[39m[22m[2m | [22m[1m[32m44 passed[39m[22m[90m (47)[39m
+[2m   Start at [22m 21:02:44
+[2m   Duration [22m 9.83s[2m (transform 150ms, setup 598ms, collect 715ms, tests 5.94s, environment 3.24s, prepare 494ms)[22m
+

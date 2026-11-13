@@ -8,6 +8,8 @@ import {
   signUp as amplifySignUp,
   confirmSignUp as amplifyConfirmSignUp,
   resendSignUpCode as amplifyResendSignUpCode,
+  resetPassword as amplifyResetPassword,
+  confirmResetPassword as amplifyConfirmResetPassword,
   signOut as amplifySignOut,
   getCurrentUser as amplifyGetCurrentUser,
   fetchAuthSession,
@@ -118,11 +120,7 @@ export async function signIn(credentials: SignInCredentials): Promise<void> {
       if (message.includes('UserNotConfirmedException')) {
         throw new Error('Please confirm your email address before signing in.');
       }
-      if (
-        message.includes('NotAuthorizedException') ||
-        message.includes('Invalid') ||
-        message.includes('invalid')
-      ) {
+      if (message.includes('NotAuthorizedException')) {
         throw new Error('Email or password is incorrect.');
       }
       if (message.includes('UserNotFoundException')) {
@@ -313,5 +311,93 @@ export async function getAuthSession() {
   } catch (error) {
     console.error('getAuthSession error:', error);
     return null;
+  }
+}
+
+/**
+ * Request a password reset code for a user
+ * Sends a reset code to the user's registered email
+ *
+ * @param email - User's email address (Cognito username)
+ * @throws Error if the reset request fails
+ */
+export async function resetPassword(email: string): Promise<void> {
+  try {
+    console.log('resetPassword: Requesting password reset code...');
+    await amplifyResetPassword({ username: email });
+    console.log('✅ resetPassword: Reset code sent to email.');
+  } catch (error) {
+    console.error('❌ resetPassword: Reset request failed:', error);
+
+    if (error instanceof Error) {
+      const message = error.message;
+
+      // Security: Do not expose whether email exists (prevent enumeration)
+      if (message.includes('UserNotFoundException')) {
+        throw new Error('We sent a 6-digit code to your email address.');
+      }
+      if (message.includes('LimitExceededException') || message.includes('Attempt limit')) {
+        throw new Error('Too many requests. Please wait a few minutes and try again.');
+      }
+      if (message.includes('InvalidParameterException')) {
+        throw new Error('Invalid email address. Please check and try again.');
+      }
+      if (message.includes('NetworkError') || message.includes('Network')) {
+        throw new Error('Network error. Please check your connection and try again.');
+      }
+    }
+
+    throw new Error('Unable to send code. Please check your email and try again.');
+  }
+}
+
+/**
+ * Confirm password reset with verification code
+ * Completes the password reset process with the code received via email
+ *
+ * @param email - User's email address (Cognito username)
+ * @param confirmationCode - Verification code from email
+ * @param newPassword - New password for the account
+ * @throws Error if confirmation fails
+ */
+export async function confirmResetPassword(
+  email: string,
+  confirmationCode: string,
+  newPassword: string
+): Promise<void> {
+  try {
+    console.log('confirmResetPassword: Confirming password reset...');
+    await amplifyConfirmResetPassword({
+      username: email,
+      confirmationCode,
+      newPassword,
+    });
+    console.log('✅ confirmResetPassword: Password reset successfully.');
+  } catch (error) {
+    console.error('❌ confirmResetPassword: Password reset confirmation failed:', error);
+
+    if (error instanceof Error) {
+      const message = error.message;
+
+      if (message.includes('ExpiredCodeException') || message.includes('expired')) {
+        throw new Error('Reset code has expired. Please request a new one.');
+      }
+      if (message.includes('CodeMismatchException') || message.includes('Mismatch')) {
+        throw new Error('Invalid code. Please check and try again.');
+      }
+      if (message.includes('LimitExceededException') || message.includes('Attempt limit')) {
+        throw new Error('Too many failed attempts. Please wait a few minutes and try again.');
+      }
+      if (message.includes('InvalidPasswordException')) {
+        throw new Error(
+          'Password must be at least 12 characters with 1 uppercase, 1 lowercase, and 1 number.'
+        );
+      }
+      if (message.includes('NetworkError') || message.includes('Network')) {
+        throw new Error('Network error. Please check your connection and try again.');
+      }
+    }
+
+    throw new Error('Invalid code or password reset failed. Please try again.');
   }
 }
