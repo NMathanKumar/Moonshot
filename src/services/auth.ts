@@ -10,6 +10,7 @@ import {
   resendSignUpCode as amplifyResendSignUpCode,
   resetPassword as amplifyResetPassword,
   confirmResetPassword as amplifyConfirmResetPassword,
+  updatePassword as amplifyUpdatePassword,
   signOut as amplifySignOut,
   getCurrentUser as amplifyGetCurrentUser,
   fetchAuthSession,
@@ -399,5 +400,38 @@ export async function confirmResetPassword(
     }
 
     throw new Error('Invalid code or password reset failed. Please try again.');
+  }
+}
+
+/**
+ * Change the authenticated user's password via Cognito
+ *
+ * @param oldPassword - The user's current password
+ * @param newPassword - The desired new password
+ * @throws Error with a user-friendly message on failure
+ */
+export async function changePassword(oldPassword: string, newPassword: string): Promise<void> {
+  try {
+    await amplifyUpdatePassword({ oldPassword, newPassword });
+  } catch (error) {
+    if (error instanceof Error) {
+      const message = error.message;
+
+      if (message.includes('NotAuthorizedException') || message.includes('Incorrect username or password')) {
+        throw new Error('Current password is incorrect.');
+      }
+      if (message.includes('InvalidPasswordException') || message.includes('Password does not conform')) {
+        throw new Error(
+          'Password must be at least 12 characters with 1 uppercase, 1 lowercase, and 1 number.'
+        );
+      }
+      if (message.includes('LimitExceededException') || message.includes('Attempt limit')) {
+        throw new Error('Too many attempts. Please wait a few minutes and try again.');
+      }
+      if (message.includes('NetworkError') || message.includes('Network')) {
+        throw new Error('Network error. Please check your connection and try again.');
+      }
+    }
+    throw new Error('Password change failed. Please try again.');
   }
 }

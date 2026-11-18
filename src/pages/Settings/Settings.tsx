@@ -1,7 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useAuth } from '@hooks/useAuth';
 import { EnrolmentService } from '@services';
+import { changePassword } from '@services/auth';
+import { useUserProfileContext } from '@context/UserProfileContext';
 import type { TestTakerResponse } from '@services/enrolment';
 import AppShell from '../../layouts/AppShell';
 
@@ -10,14 +13,19 @@ type Tab = (typeof tabs)[number];
 
 const SUPPORT_EMAIL = 'support@idpenglishtest.com';
 
-/** Design fallback values, used until (or if) the real profile is unavailable */
 const FALLBACK_PROFILE = {
-  firstName: 'Agnes',
-  lastName: 'Chen',
-  email: 'a.lee@email.com',
-  dateOfBirth: '12 May 1992',
-  gender: 'Female',
+  firstName: '',
+  lastName: '',
+  email: '',
+  dateOfBirth: '',
 };
+
+/** Password policy: at least 12 chars, 1 uppercase, 1 lowercase, 1 number */
+const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{12,}$/;
+
+function isPasswordValid(password: string): boolean {
+  return PASSWORD_REGEX.test(password);
+}
 
 /** "1992-05-12" -> "12 May 1992" */
 function formatDateOfBirth(value?: string): string | undefined {
@@ -34,30 +42,7 @@ function formatDateOfBirth(value?: string): string | undefined {
   });
 }
 
-/** "PREFER_NOT_TO_SAY" -> "Prefer not to say" */
-function formatGender(value?: string): string | undefined {
-  if (!value) return undefined;
-  const text = value.replace(/_/g, ' ').toLowerCase();
-  return text.charAt(0).toUpperCase() + text.slice(1);
-}
-
-function Field({
-  id,
-  label,
-  value,
-  type = 'text',
-  disabled = false,
-  required = false,
-  autoComplete,
-}: {
-  id: string;
-  label: string;
-  value: string;
-  type?: string;
-  disabled?: boolean;
-  required?: boolean;
-  autoComplete?: string;
-}) {
+function ReadOnlyField({ id, label, value }: { id: string; label: string; value: string }) {
   return (
     <div className="flex flex-col">
       <label
@@ -65,53 +50,84 @@ function Field({
         className="block text-[11px] font-bold text-[#55657b] uppercase tracking-[0.06em] mb-1.5"
       >
         {label}
-        {required && <span aria-hidden="true"> *</span>}
       </label>
       <input
         id={id}
-        key={value}
-        defaultValue={value}
-        type={type}
-        disabled={disabled}
-        required={required}
-        aria-required={required}
-        autoComplete={autoComplete}
-        className={`w-full px-3.5 py-2.5 rounded-lg border-[1.5px] font-sans text-[13px] outline-none ${
-          disabled
-            ? 'border-[#e0e0e0] bg-[#f5f5f5] text-[#8899aa] cursor-not-allowed'
-            : 'border-[#e0e0e0] bg-white text-[#232d3f]'
-        }`}
+        value={value ?? ''}
+        type="text"
+        readOnly
+        disabled
+        aria-readonly="true"
+        className="w-full px-3.5 py-2.5 rounded-lg border-[1.5px] font-sans text-[13px] outline-none border-[#e0e0e0] bg-[#f5f5f5] text-[#8899aa] cursor-not-allowed"
       />
     </div>
   );
 }
 
-function Toggle({
-  on,
-  onChange,
+function PasswordField({
+  id,
   label,
+  value,
+  onChange,
+  autoComplete,
+  error,
+  helperText,
+  onFocus,
 }: {
-  on: boolean;
-  onChange: (v: boolean) => void;
+  id: string;
   label: string;
+  value: string;
+  onChange: (v: string) => void;
+  autoComplete: string;
+  error?: string;
+  helperText?: string;
+  onFocus?: () => void;
 }) {
+  const [show, setShow] = useState(false);
   return (
-    <button
-      type="button"
-      role="switch"
-      aria-checked={on}
-      aria-label={label}
-      onClick={() => onChange(!on)}
-      className={`w-10 h-[22px] rounded-[11px] border-none cursor-pointer relative p-0 flex-shrink-0 transition-colors duration-200 ${
-        on ? 'bg-[#EB7900]' : 'bg-[#e0e0e0]'
-      }`}
-    >
-      <span
-        className={`absolute top-0.75 w-4 h-4 rounded-full bg-white shadow-[0_1px_3px_rgba(0,0,0,0.2)] transition-all duration-200 ${
-          on ? 'left-5.25' : 'left-0.75'
-        }`}
-      />
-    </button>
+    <div className="flex flex-col gap-1">
+      <label
+        htmlFor={id}
+        className="block text-[11px] font-bold text-[#55657b] uppercase tracking-[0.06em]"
+      >
+        {label} <span aria-hidden="true">*</span>
+      </label>
+      <div className="relative">
+        <input
+          id={id}
+          type={show ? 'text' : 'password'}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          onFocus={onFocus}
+          autoComplete={autoComplete}
+          required
+          aria-required="true"
+          aria-invalid={error ? 'true' : undefined}
+          aria-describedby={error ? `${id}-error` : helperText ? `${id}-hint` : undefined}
+          className={`w-full px-3.5 py-2.5 pr-10 rounded-lg border-[1.5px] font-sans text-[13px] outline-none bg-white text-[#232d3f] transition-colors ${
+            error ? 'border-red-500 focus:border-red-500' : 'border-[#e0e0e0] focus:border-[#EB7900]'
+          }`}
+        />
+        <button
+          type="button"
+          onClick={() => setShow((s) => !s)}
+          aria-label={show ? 'Hide password' : 'Show password'}
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-[#55657b] bg-transparent border-none cursor-pointer p-0 text-[11px] font-bold focus:outline-none focus:outline-offset-2 focus:outline-[#EB7900] rounded"
+        >
+          {show ? 'Hide' : 'Show'}
+        </button>
+      </div>
+      {error && (
+        <span id={`${id}-error`} role="alert" className="text-[11px] text-red-600">
+          {error}
+        </span>
+      )}
+      {helperText && !error && (
+        <p id={`${id}-hint`} className="text-[11px] text-[#55657b]">
+          {helperText}
+        </p>
+      )}
+    </div>
   );
 }
 
@@ -126,20 +142,97 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
-const NOTIFICATION_OPTIONS = [
-  { key: 'results' as const, label: 'Results ready', desc: 'When your test results are available' },
-  { key: 'practice' as const, label: 'Practice reminders', desc: 'Weekly nudges to keep you on track' },
-  { key: 'tips' as const, label: 'Study tips', desc: 'Personalised guidance from Copilot' },
-  { key: 'news' as const, label: 'Platform updates', desc: 'News about new features and institutions' },
-];
+type PasswordFormStatus = { type: 'error' | 'success'; message: string } | null;
 
 export default function Settings() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const { user, isLoading: authLoading } = useAuth();
-  const [tab, setTab] = useState<Tab>('Profile');
-  const [notifs, setNotifs] = useState({ results: true, practice: true, news: false, tips: true });
+  const { profile: userProfile } = useUserProfileContext();
   const [profile, setProfile] = useState<TestTakerResponse | null>(null);
 
-  // Load the real profile; fall back to design values if unavailable
+  // Get tab from URL query parameter or default to 'Profile'
+  const getTabFromUrl = (): Tab => {
+    const params = new URLSearchParams(location.search);
+    const tabParam = params.get('tab') as Tab;
+    if (tabs.includes(tabParam)) {
+      return tabParam;
+    }
+    return 'Profile';
+  };
+
+  // Initialize tab from URL on first render only
+  const [tab, setTab] = useState<Tab>(getTabFromUrl);
+
+  // Password form state
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordStatus, setPasswordStatus] = useState<PasswordFormStatus>(null);
+  const [passwordSubmitting, setPasswordSubmitting] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const submittingRef = useRef(false);
+
+  // Clear field errors when user starts typing
+  const handleCurrentPasswordChange = (value: string) => {
+    setCurrentPassword(value);
+    if (fieldErrors['current-password']) {
+      setFieldErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors['current-password'];
+        return newErrors;
+      });
+    }
+    if (passwordStatus) {
+      setPasswordStatus(null);
+    }
+  };
+
+  const handleNewPasswordChange = (value: string) => {
+    setNewPassword(value);
+    if (fieldErrors['new-password']) {
+      setFieldErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors['new-password'];
+        return newErrors;
+      });
+    }
+    if (passwordStatus) {
+      setPasswordStatus(null);
+    }
+  };
+
+  const handleConfirmPasswordChange = (value: string) => {
+    setConfirmPassword(value);
+    if (fieldErrors['confirm-password']) {
+      setFieldErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors['confirm-password'];
+        return newErrors;
+      });
+    }
+    if (passwordStatus) {
+      setPasswordStatus(null);
+    }
+  };
+
+  // Clear password status messages when user starts typing
+  const handlePasswordInputFocus = () => {
+    if (passwordStatus) {
+      setPasswordStatus(null);
+    }
+  };
+
+  // Sync tab with URL when tab changes
+  useEffect(() => {
+    // Update URL to match current tab
+    const params = new URLSearchParams(location.search);
+    if (params.get('tab') !== tab) {
+      params.set('tab', tab);
+      navigate({ search: params.toString() }, { replace: true });
+    }
+  }, [tab, location.search, navigate]);
+
   useEffect(() => {
     if (!user || authLoading) return;
     let cancelled = false;
@@ -147,7 +240,7 @@ export default function Settings() {
       .then((result) => {
         if (!cancelled && result) setProfile(result);
       })
-      .catch((error) => {
+      .catch((error: unknown) => {
         console.error('Settings: Failed to load test taker profile:', error);
       });
     return () => {
@@ -156,26 +249,78 @@ export default function Settings() {
   }, [user, authLoading]);
 
   const details = {
-    firstName: profile?.givenName || FALLBACK_PROFILE.firstName,
-    lastName: profile?.familyName || FALLBACK_PROFILE.lastName,
-    email: (profile?.contactEmail || FALLBACK_PROFILE.email) as string,
+    firstName: profile?.givenName || userProfile.firstName,
+    lastName: profile?.familyName || userProfile.lastName,
+    email: (profile?.contactEmail || userProfile.email) as string,
     dateOfBirth: formatDateOfBirth(profile?.dateOfBirth) || FALLBACK_PROFILE.dateOfBirth,
-    gender: formatGender(profile?.gender) || FALLBACK_PROFILE.gender,
   };
+
+  function validatePasswordForm(): boolean {
+    const errors: Record<string, string> = {};
+
+    // Required field validation
+    if (!currentPassword) {
+      errors['current-password'] = 'Current password is required.';
+    }
+    if (!newPassword) {
+      errors['new-password'] = 'New password is required.';
+    }
+    if (!confirmPassword) {
+      errors['confirm-password'] = 'Please confirm your new password.';
+    }
+
+    // Password policy validation (client-side)
+    if (newPassword && !isPasswordValid(newPassword)) {
+      errors['new-password'] = 'Password must be at least 12 characters with 1 uppercase, 1 lowercase, and 1 number.';
+    }
+
+    // Password match validation
+    if (newPassword && confirmPassword && newPassword !== confirmPassword) {
+      errors['confirm-password'] = 'Passwords do not match.';
+    }
+
+    // Current and new password must be different
+    if (currentPassword && newPassword && currentPassword === newPassword) {
+      errors['new-password'] = 'New password must be different from your current password.';
+    }
+
+    setFieldErrors(errors);
+    return Object.keys(errors).length === 0;
+  }
+
+  async function handlePasswordSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (submittingRef.current) return;
+
+    // Validate form before submitting
+    if (!validatePasswordForm()) return;
+
+    submittingRef.current = true;
+    setPasswordSubmitting(true);
+    try {
+      await changePassword(currentPassword, newPassword);
+      setPasswordStatus({ type: 'success', message: 'Password updated successfully.' });
+      setCurrentPassword('');
+      setNewPassword('');
+      setConfirmPassword('');
+      setFieldErrors({});
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Password change failed. Please try again.';
+      setPasswordStatus({ type: 'error', message });
+    } finally {
+      setPasswordSubmitting(false);
+      submittingRef.current = false;
+    }
+  }
 
   return (
     <AppShell>
       <div className="max-w-[760px] mx-auto pb-12 px-4 sm:px-6 md:px-4">
         <div className="mb-7">
-          <Link
-            to="/dashboard"
-            className="text-[13px] text-[#55657b] no-underline font-semibold"
-          >
+          <Link to="/dashboard" className="text-[13px] text-[#55657b] no-underline font-semibold">
             ← Dashboard
           </Link>
-          <h1 className="text-[24px] font-black text-[#232d3f] mt-2">
-            Settings
-          </h1>
+          <h1 className="text-[24px] font-black text-[#232d3f] mt-2">Settings</h1>
         </div>
 
         <div className="flex gap-6 lg:flex-row flex-col">
@@ -215,23 +360,17 @@ export default function Settings() {
             aria-labelledby={`settings-tab-${tab}`}
             className="flex-1 min-w-0"
           >
+            {/* ── Profile ── */}
             {tab === 'Profile' && (
               <>
                 <Section title="Personal Information">
                   <div className="flex flex-col gap-4">
-                    <div
-                      className="grid grid-cols-1 lg:grid-cols-2 gap-3.5"
-                    >
-                      <Field id="first-name" label="First Name" value={details.firstName} disabled required />
-                      <Field id="last-name" label="Last Name" value={details.lastName} disabled required />
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-3.5">
+                      <ReadOnlyField id="first-name" label="First Name" value={details.firstName} />
+                      <ReadOnlyField id="last-name" label="Last Name" value={details.lastName} />
                     </div>
-                    <Field id="email" label="Email" value={details.email} type="email" disabled required />
-                    <div
-                      className="grid grid-cols-1 lg:grid-cols-2 gap-3.5"
-                    >
-                      <Field id="date-of-birth" label="Date of Birth" value={details.dateOfBirth} disabled required />
-                      <Field id="gender" label="Gender" value={details.gender} disabled required />
-                    </div>
+                    <ReadOnlyField id="email" label="Email" value={details.email} />
+                    <ReadOnlyField id="date-of-birth" label="Date of Birth" value={details.dateOfBirth} />
                   </div>
                 </Section>
                 <p className="mx-0 my-0 mb-5 text-[12px] text-[#55657b]">
@@ -243,60 +382,184 @@ export default function Settings() {
               </>
             )}
 
+            {/* ── Password ── */}
             {tab === 'Password' && (
               <>
                 <Section title="Change Password">
-                  <div className="flex flex-col gap-3.5">
-                    <Field id="current-password" label="Current Password" value="" type="password" autoComplete="current-password" />
-                    <Field id="new-password" label="New Password" value="" type="password" autoComplete="new-password" />
-                    <Field id="confirm-password" label="Confirm New Password" value="" type="password" autoComplete="new-password" />
-                  </div>
+                  <form
+                    id="change-password-form"
+                    onSubmit={handlePasswordSubmit}
+                    noValidate
+                    className="flex flex-col gap-3.5"
+                  >
+                    {passwordStatus && (
+                      <div
+                        role={passwordStatus.type === 'success' ? 'status' : 'alert'}
+                        aria-live="polite"
+                        className="p-3 rounded-lg border-l-4 bg-white"
+                        style={{
+                          backgroundColor: passwordStatus.type === 'success' ? '#e8f5e9' : '#fef2f2',
+                          borderColor: passwordStatus.type === 'success' ? '#c8e6c9' : '#fecaca',
+                          color: passwordStatus.type === 'success' ? '#2e7d32' : '#dc2626',
+                        }}
+                      >
+                        <p className="text-[13px] leading-relaxed">{passwordStatus.message}</p>
+                      </div>
+                    )}
+                    <PasswordField
+                      id="current-password"
+                      label="Current Password"
+                      value={currentPassword}
+                      onChange={handleCurrentPasswordChange}
+                      autoComplete="current-password"
+                      error={fieldErrors['current-password']}
+                      onFocus={handlePasswordInputFocus}
+                    />
+                    <PasswordField
+                      id="new-password"
+                      label="New Password"
+                      value={newPassword}
+                      onChange={handleNewPasswordChange}
+                      autoComplete="new-password"
+                      error={fieldErrors['new-password']}
+                      helperText="Password must be at least 12 characters with 1 uppercase, 1 lowercase, and 1 number"
+                      onFocus={handlePasswordInputFocus}
+                    />
+                    <PasswordField
+                      id="confirm-password"
+                      label="Confirm New Password"
+                      value={confirmPassword}
+                      onChange={handleConfirmPasswordChange}
+                      autoComplete="new-password"
+                      error={fieldErrors['confirm-password']}
+                      onFocus={handlePasswordInputFocus}
+                    />
+                  </form>
                 </Section>
                 <div className="flex justify-end">
                   <button
-                    type="button"
-                    className="px-5 py-2.5 rounded-lg border-none bg-[#EB7900] text-white text-[13px] font-bold cursor-pointer font-sans hover:opacity-90 transition-opacity"
+                    type="submit"
+                    form="change-password-form"
+                    disabled={passwordSubmitting}
+                    aria-disabled={passwordSubmitting}
+                    className="px-5 py-2.5 rounded-lg border-none bg-[#EB7900] text-white text-[13px] font-bold cursor-pointer font-sans hover:opacity-90 transition-opacity disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    Change password
+                    {passwordSubmitting ? 'Updating…' : 'Change password'}
                   </button>
                 </div>
               </>
             )}
 
+            {/* ── Notifications ── MSP-2713: MVP display-only state */}
             {tab === 'Notifications' && (
-              <Section title="Notification Preferences">
+              <Section title="Notification preferences">
+                {details.email && (
+                  <p className="text-[13px] text-[#55657b] mb-4 -mt-2">
+                    Emails go to{' '}
+                    <span className="font-bold text-[#232d3f]">{details.email}</span>
+                  </p>
+                )}
                 <div className="flex flex-col gap-0">
-                  {NOTIFICATION_OPTIONS.map(({ key, label, desc }) => (
-                    <div
-                      key={key}
-                      className="flex items-center justify-between py-4 border-b-[1.5px] border-[#e0e0e0]"
-                    >
-                      <div>
-                        <div className="text-[13px] font-bold text-[#232d3f]">
-                          {label}
-                        </div>
-                        <div className="text-[12px] text-[#55657b] mt-0.5">
-                          {desc}
-                        </div>
+                  {/* Account and results emails toggle */}
+                  <div className="flex items-center justify-between py-4 border-b-[1.5px] border-[#e0e0e0]">
+                    <div>
+                      <div className="text-[13px] font-bold text-[#232d3f]">Account and results emails</div>
+                      <div className="text-[12px] text-[#55657b] mt-0.5">
+                        Verification codes, receipts, test reminders, results ready.
                       </div>
-                      <Toggle
-                        label={label}
-                        on={notifs[key]}
-                        onChange={(v) => setNotifs((p) => ({ ...p, [key]: v }))}
-                      />
                     </div>
-                  ))}
+                    <button
+                      type="button"
+                      role="switch"
+                      aria-checked={true}
+                      aria-label="Account and results emails"
+                      className="w-10 h-[22px] rounded-[11px] border-none relative p-0 flex-shrink-0 bg-[#EB7900] transition-colors duration-200 focus:outline-none focus:outline-offset-2 focus:outline-[#EB7900]"
+                    >
+                      <span className="absolute top-[3px] right-[3px] w-4 h-4 rounded-full bg-white shadow-[0_1px_3px_rgba(0,0,0,0.2)] transition-transform duration-200" />
+                    </button>
+                  </div>
+                  {/* Practice reminders toggle */}
+                  <div className="flex items-center justify-between py-4 border-b-[1.5px] border-[#e0e0e0]">
+                    <div>
+                     <div className="flex items-center gap-2">
+  <span className="text-[13px] font-bold text-[#232d3f]">Practice reminders</span>
+  <ComingSoonBadge />
+</div>
+                      <div className="text-[12px] text-[#55657b] mt-0.5">
+                        Scheduled practice session reminders.
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      role="switch"
+                      aria-checked={false}
+                      aria-label="Practice reminders"
+                      tabIndex={-1}
+                      disabled
+                      className="w-10 h-[22px] rounded-[11px] border-none relative p-0 flex-shrink-0 bg-[#e0e0e0] opacity-40 cursor-not-allowed pointer-events-none"
+                    >
+                      <span className="absolute top-[3px] left-[3px] w-4 h-4 rounded-full bg-white shadow-[0_1px_3px_rgba(0,0,0,0.2)]" />
+                    </button>
+                  </div>
+                  {/* Study tips toggle */}
+                  <div className="flex items-center justify-between py-4 border-b-[1.5px] border-[#e0e0e0]">
+                    <div>
+                      <div className="flex items-center gap-2">
+  <span className="text-[13px] font-bold text-[#232d3f]">Study tips</span>
+  <ComingSoonBadge />
+</div>
+                      <div className="text-[12px] text-[#55657b] mt-0.5">
+                        Tips to help you prepare for the test.
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      role="switch"
+                      aria-checked={false}
+                      aria-label="Study tips"
+                      tabIndex={-1}
+                      disabled
+                      className="w-10 h-[22px] rounded-[11px] border-none relative p-0 flex-shrink-0 bg-[#e0e0e0] opacity-40 cursor-not-allowed pointer-events-none"
+                    >
+                      <span className="absolute top-[3px] left-[3px] w-4 h-4 rounded-full bg-white shadow-[0_1px_3px_rgba(0,0,0,0.2)]" />
+                    </button>
+                  </div>
+                  {/* Platform updates toggle */}
+                  <div className="flex items-center justify-between py-4">
+                    <div>
+                     <div className="flex items-center gap-2">
+  <span className="text-[13px] font-bold text-[#232d3f]">Platform updates</span>
+  <ComingSoonBadge />
+</div>
+                      <div className="text-[12px] text-[#55657b] mt-0.5">
+                        Important platform news and feature announcements.
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      role="switch"
+                      aria-checked={false}
+                      aria-label="Platform updates"
+                      tabIndex={-1}
+                      disabled
+                      className="w-10 h-[22px] rounded-[11px] border-none relative p-0 flex-shrink-0 bg-[#e0e0e0] opacity-40 cursor-not-allowed pointer-events-none"
+                    >
+                      <span className="absolute top-[3px] left-[3px] w-4 h-4 rounded-full bg-white shadow-[0_1px_3px_rgba(0,0,0,0.2)]" />
+                    </button>
+                  </div>
                 </div>
               </Section>
             )}
 
+            {/* ── Account ──
+                NOTE: Account deletion UI is present but the button is intentionally
+                disabled. No backend deletion endpoint exists yet (MSP-323 pending).
+                Deletion must be requested via IDP Admin support. */}
             {tab === 'Account' && (
               <>
                 <Section title="Test Access">
                   <div className="flex flex-col gap-3">
-                    <div
-                      className="px-4 py-3.5 rounded-[10px] bg-[#fff8f1] border-[1.5px] border-[#EB79000025] flex items-center justify-between"
-                    >
+                    <div className="px-4 py-3.5 rounded-[10px] bg-[#fff8f1] border-[1.5px] border-[#EB79000025] flex items-center justify-between">
                       <div>
                         <div className="text-[13px] font-bold text-[#232d3f]">
                           Envoy High-Stakes Test
@@ -305,9 +568,7 @@ export default function Settings() {
                           Taken 2 Jul 2026 · Access until 2 Jul 2027
                         </div>
                       </div>
-                      <span
-                        className="text-[11px] font-bold text-[#2e7d32] bg-[#e8f5e9] px-2.5 py-1 rounded-full whitespace-nowrap"
-                      >
+                      <span className="text-[11px] font-bold text-[#2e7d32] bg-[#e8f5e9] px-2.5 py-1 rounded-full whitespace-nowrap">
                         ✓ Completed
                       </span>
                     </div>
@@ -320,19 +581,11 @@ export default function Settings() {
                   </div>
                 </Section>
                 <Section title="Danger Zone">
-                  <div
-                    className="px-4 py-3.5 rounded-[10px] bg-[#f5f5f5] border-[1.5px] border-[#e0e0e0]"
-                  >
-                    <div
-                      className="text-[13px] font-bold text-[#8899aa] mb-1"
-                    >
-                      Delete account
-                    </div>
-                    <div
-                      className="text-[12px] text-[#8899aa] mb-3"
-                    >
+                  <div className="px-4 py-3.5 rounded-[10px] bg-[#f5f5f5] border-[1.5px] border-[#e0e0e0]">
+                    <div className="text-[13px] font-bold text-[#8899aa] mb-1">Delete account</div>
+                    <div className="text-[12px] text-[#8899aa] mb-3">
                       This will permanently delete your account and all associated results and
-                      certificates.
+                      certificates. To delete your account, contact IDP Admin support.
                     </div>
                     <button
                       type="button"
@@ -356,5 +609,12 @@ export default function Settings() {
         </div>
       </div>
     </AppShell>
+  );
+}
+function ComingSoonBadge() {
+  return (
+    <span className="text-[10px] font-bold text-[#55657b] bg-[#ebe9e4] px-2 py-0.5 rounded-full whitespace-nowrap">
+      Coming soon
+    </span>
   );
 }
