@@ -195,7 +195,7 @@ export default function Results() {
   if (isLoading) {
     return (
       <AppShell>
-        <div className="max-w-[920px] mx-auto pb-12">
+        <div className="max-w-[900px] mx-auto pb-12">
           <p className="text-center text-[14px] text-[#55657b]">Loading your results...</p>
         </div>
       </AppShell>
@@ -223,7 +223,7 @@ export default function Results() {
 
   return (
     <AppShell>
-      <div className="max-w-[920px] mx-auto pb-12">
+      <div className="max-w-[900px] mx-auto pb-12">
         {!hasResults ? (
           // EMPTY STATE
           <>

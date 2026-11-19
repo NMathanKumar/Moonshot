@@ -68,7 +68,7 @@ export default function CheckInIdentity() {
 
   return (
     <AppShell>
-      <div className="max-w-[860px] mx-auto pb-12 px-4 sm:px-6 md:px-4">
+      <div className="max-w-[900px] mx-auto pb-12">
         <Link className="inline-flex mb-6 text-[#55657b] text-[12px] font-bold no-underline" to="/check-in/about">
           ← Back to your details
         </Link>

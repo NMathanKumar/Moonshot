@@ -37,7 +37,7 @@ export default function TestPrepare() {
 
   return (
     <AppShell>
-      <div className="mx-auto w-full max-w-[760px] pb-12 md:pb-12">
+      <div className="w-full max-w-[900px] mx-auto pb-12 md:pb-12">
         {/* Back link */}
         <Link
           to="/practice"

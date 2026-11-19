@@ -47,7 +47,7 @@ export default function PurchaseTest() {
 
   return (
     <AppShell>
-      <div className="max-w-[900px] mx-auto pb-12 px-4 sm:px-6 md:px-4">
+      <div className="max-w-[900px] mx-auto pb-12">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-8">
           <div>

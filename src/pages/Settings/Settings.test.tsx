@@ -43,8 +43,8 @@ vi.mock('@services/auth', () => ({
   changePassword: vi.fn(),
 }));
 
-vi.mock('@layouts/AppShell', () => ({
-  default: ({ children }: { children: unknown }) => <div>{children as never}</div>,
+vi.mock('@components/Sidebar', () => ({
+  Sidebar: () => <aside data-testid="sidebar" />,
 }));
 
 vi.mock('@services', () => ({
@@ -72,6 +72,14 @@ describe('Settings', () => {
   it('renders the page heading', () => {
     renderPage();
     expect(screen.getByRole('heading', { name: /settings/i })).toBeInTheDocument();
+  });
+
+  it('displays exactly one page-level H1 and no duplicate top-bar title (MSP-2715)', () => {
+    renderPage();
+    const h1Headings = screen.getAllByRole('heading', { level: 1 });
+    expect(h1Headings).toHaveLength(1);
+    expect(h1Headings[0]).toHaveTextContent(/^settings$/i);
+    expect(screen.queryByRole('heading', { name: 'IDP' })).not.toBeInTheDocument();
   });
 
   it('renders tab sidebar with Profile, Password, Notifications, Account', () => {
@@ -600,16 +608,15 @@ describe('Settings', () => {
       });
     });
 
-    it('shows On toggle for account and results emails', () => {
+    it('shows Always on badge for account and results emails', () => {
       expect(screen.getByText(/account and results emails/i)).toBeInTheDocument();
-      const accountResultsToggle = screen.getByRole('switch', { name: /account and results emails/i });
-      expect(accountResultsToggle).toBeInTheDocument();
-      expect(accountResultsToggle).toHaveAttribute('aria-checked', 'true');
+      expect(screen.getByText('Always on')).toBeInTheDocument();
     });
 
-    it('renders toggle for account and results emails', () => {
-      const accountResultsToggle = screen.getByRole('switch', { name: /account and results emails/i });
-      expect(accountResultsToggle).toBeInTheDocument();
+    it('does not render an interactive switch or toggle for account and results emails', () => {
+      expect(
+        screen.queryByRole('switch', { name: /account and results emails/i })
+      ).not.toBeInTheDocument();
     });
 
     it('Practice reminders toggle is OFF (disabled)', () => {
@@ -642,10 +649,12 @@ describe('Settings', () => {
       });
     });
 
-    it('Account and results toggle is enabled', () => {
-      const accountResultsToggle = screen.getByRole('switch', { name: /account and results emails/i });
-      expect(accountResultsToggle).toBeInTheDocument();
-      expect(accountResultsToggle).not.toBeDisabled();
+    it('preserves notification toggles for practice reminders, study tips, and platform updates', () => {
+      const switches = screen.getAllByRole('switch');
+      expect(switches).toHaveLength(3);
+      expect(screen.getByRole('switch', { name: /practice reminders/i })).toBeInTheDocument();
+      expect(screen.getByRole('switch', { name: /study tips/i })).toBeInTheDocument();
+      expect(screen.getByRole('switch', { name: /platform updates/i })).toBeInTheDocument();
     });
 
     it('no notification preference update API is called', () => {
@@ -667,26 +676,51 @@ describe('Settings', () => {
     });
   });
 
-  describe('Account section', () => {
+  describe('Account section (MSP-2714)', () => {
     beforeEach(() => {
       renderPage();
       fireEvent.click(screen.getByRole('tab', { name: 'Account' }));
     });
 
-    it('renders test access section', () => {
-      expect(screen.getByText(/envoy high-stakes test/i)).toBeInTheDocument();
-      expect(screen.getByText(/completed/i)).toBeInTheDocument();
-      expect(screen.getByRole('link', { name: /\+ purchase another test/i })).toBeInTheDocument();
+    it('renders exactly one Delete your account card with required copy', () => {
+      expect(screen.getByRole('heading', { level: 2, name: /delete your account/i })).toBeInTheDocument();
+      expect(
+        screen.getByText(/deleting your account permanently removes your profile, test results and certificates\./i)
+      ).toBeInTheDocument();
+      expect(screen.getByText(/this can't be undone\./i)).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          /because it's permanent, our support team handles deletion requests\. we'll confirm it's you before anything is deleted\./i
+        )
+      ).toBeInTheDocument();
     });
 
-    it('renders danger zone with disabled delete button', () => {
-      expect(screen.getByRole('button', { name: /delete my account/i })).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /delete my account/i })).toBeDisabled();
+    it('renders certificate information strip with link to My Results route', () => {
+      expect(screen.getByText(/need your certificate for an application\?/i)).toBeInTheDocument();
+      const resultsLink = screen.getByRole('link', { name: /download it from my results/i });
+      expect(resultsLink).toBeInTheDocument();
+      expect(resultsLink).toHaveAttribute('href', '/results');
     });
 
-    it('shows account deletion notice with support contact', () => {
-      expect(screen.getByText(/to delete your account, please contact/i)).toBeInTheDocument();
-      expect(screen.getByRole('link', { name: /support@idpenglishtest\.com/i })).toBeInTheDocument();
+    it('renders support action row with Contact support button and visible email', () => {
+      const supportBtn = screen.getByRole('link', { name: /contact support to delete/i });
+      expect(supportBtn).toBeInTheDocument();
+      expect(supportBtn).toHaveAttribute(
+        'href',
+        'mailto:support@idpenglishtest.com?subject=Account%20deletion%20request'
+      );
+
+      expect(screen.getByText('or email')).toBeInTheDocument();
+
+      const emailLink = screen.getByRole('link', { name: 'support@idpenglishtest.com' });
+      expect(emailLink).toBeInTheDocument();
+      expect(emailLink).toHaveAttribute('href', 'mailto:support@idpenglishtest.com');
+    });
+
+    it('does not render Test Access, Danger Zone, or disabled delete controls', () => {
+      expect(screen.queryByText(/test access/i)).not.toBeInTheDocument();
+      expect(screen.queryByText(/danger zone/i)).not.toBeInTheDocument();
+      expect(screen.queryByRole('button', { name: /delete my account/i })).not.toBeInTheDocument();
     });
   });
 

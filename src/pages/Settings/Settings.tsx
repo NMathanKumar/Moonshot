@@ -6,6 +6,7 @@ import { EnrolmentService } from '@services';
 import { changePassword } from '@services/auth';
 import { useUserProfileContext } from '@context/UserProfileContext';
 import type { TestTakerResponse } from '@services/enrolment';
+import AppIcon from '@components/AppIcon';
 import AppShell from '../../layouts/AppShell';
 
 const tabs = ['Profile', 'Password', 'Notifications', 'Account'] as const;
@@ -315,7 +316,7 @@ export default function Settings() {
 
   return (
     <AppShell>
-      <div className="max-w-[760px] mx-auto pb-12 px-4 sm:px-6 md:px-4">
+      <div className="max-w-[900px] mx-auto pb-12">
         <div className="mb-7">
           <Link to="/dashboard" className="text-[13px] text-[#55657b] no-underline font-semibold">
             ← Dashboard
@@ -460,7 +461,7 @@ export default function Settings() {
                   </p>
                 )}
                 <div className="flex flex-col gap-0">
-                  {/* Account and results emails toggle */}
+                  {/* Account and results emails */}
                   <div className="flex items-center justify-between py-4 border-b-[1.5px] border-[#e0e0e0]">
                     <div>
                       <div className="text-[13px] font-bold text-[#232d3f]">Account and results emails</div>
@@ -468,15 +469,7 @@ export default function Settings() {
                         Verification codes, receipts, test reminders, results ready.
                       </div>
                     </div>
-                    <button
-                      type="button"
-                      role="switch"
-                      aria-checked={true}
-                      aria-label="Account and results emails"
-                      className="w-10 h-[22px] rounded-[11px] border-none relative p-0 flex-shrink-0 bg-[#EB7900] transition-colors duration-200 focus:outline-none focus:outline-offset-2 focus:outline-[#EB7900]"
-                    >
-                      <span className="absolute top-[3px] right-[3px] w-4 h-4 rounded-full bg-white shadow-[0_1px_3px_rgba(0,0,0,0.2)] transition-transform duration-200" />
-                    </button>
+                    <AlwaysOnBadge />
                   </div>
                   {/* Practice reminders toggle */}
                   <div className="flex items-center justify-between py-4 border-b-[1.5px] border-[#e0e0e0]">
@@ -551,59 +544,67 @@ export default function Settings() {
               </Section>
             )}
 
-            {/* ── Account ──
-                NOTE: Account deletion UI is present but the button is intentionally
-                disabled. No backend deletion endpoint exists yet (MSP-323 pending).
-                Deletion must be requested via IDP Admin support. */}
+            {/* ── Account ── MSP-2714: Delete your account */}
             {tab === 'Account' && (
-              <>
-                <Section title="Test Access">
-                  <div className="flex flex-col gap-3">
-                    <div className="px-4 py-3.5 rounded-[10px] bg-[#fff8f1] border-[1.5px] border-[#EB79000025] flex items-center justify-between">
-                      <div>
-                        <div className="text-[13px] font-bold text-[#232d3f]">
-                          Envoy High-Stakes Test
-                        </div>
-                        <div className="text-[11px] text-[#55657b] mt-0.5">
-                          Taken 2 Jul 2026 · Access until 2 Jul 2027
-                        </div>
-                      </div>
-                      <span className="text-[11px] font-bold text-[#2e7d32] bg-[#e8f5e9] px-2.5 py-1 rounded-full whitespace-nowrap">
-                        ✓ Completed
-                      </span>
-                    </div>
+              <div className="bg-white rounded-[16px] border-[1.5px] border-[#e0e0e0] p-6 sm:p-7 md:p-8">
+                <h2 className="text-[18px] md:text-[20px] font-black text-[#232d3f] mb-3">
+                  Delete your account
+                </h2>
+                <p className="text-[13px] text-[#55657b] leading-relaxed mb-3">
+                  Deleting your account permanently removes your profile, test results and certificates.{' '}
+                  <strong className="font-bold text-[#232d3f]">This can&apos;t be undone.</strong>
+                </p>
+                <p className="text-[13px] text-[#55657b] leading-relaxed mb-5">
+                  Because it&apos;s permanent, our support team handles deletion requests. We&apos;ll confirm it&apos;s you before anything is deleted.
+                </p>
+
+                {/* Certificate information strip */}
+                <div className="rounded-[10px] bg-[#edf5fd] p-3.5 px-4 flex items-start gap-2.5 mb-6 text-[12px] md:text-[13px] text-[#232d3f] leading-relaxed">
+                  <span className="text-[#0066cc] mt-0.5 flex-shrink-0 inline-flex">
+                    <AppIcon name="download" size={16} />
+                  </span>
+                  <div>
+                    Need your certificate for an application?{' '}
                     <Link
-                      to="/book"
-                      className="block px-4 py-3 rounded-[10px] border-[1.5px] border-dashed border-[#e0e0e0] text-center text-[13px] font-bold text-[#EB7900] no-underline hover:bg-[#fff8f1] transition-colors"
+                      to="/results"
+                      className="text-[#0066cc] font-bold underline hover:text-[#004c99] transition-colors"
                     >
-                      + Purchase another test
-                    </Link>
+                      Download it from My Results
+                    </Link>{' '}
+                    before you ask us to delete your account.
                   </div>
-                </Section>
-                <Section title="Danger Zone">
-                  <div className="px-4 py-3.5 rounded-[10px] bg-[#f5f5f5] border-[1.5px] border-[#e0e0e0]">
-                    <div className="text-[13px] font-bold text-[#8899aa] mb-1">Delete account</div>
-                    <div className="text-[12px] text-[#8899aa] mb-3">
-                      This will permanently delete your account and all associated results and
-                      certificates. To delete your account, contact IDP Admin support.
-                    </div>
-                    <button
-                      type="button"
-                      disabled
-                      aria-disabled="true"
-                      className="px-4 py-2 rounded-lg border-[1.5px] border-[#e0e0e0] bg-[#f5f5f5] text-[#8899aa] text-[12px] font-bold cursor-not-allowed font-sans opacity-70"
+                </div>
+
+                {/* Support action row */}
+                <div className="flex items-center gap-3 flex-wrap">
+                  <a
+                    href={`mailto:${SUPPORT_EMAIL}?subject=Account%20deletion%20request`}
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[#232d3f] bg-white text-[#232d3f] text-[13px] font-bold hover:bg-[#f5f5f5] transition-colors no-underline"
+                  >
+                    <svg
+                      className="w-4 h-4 flex-shrink-0"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
                     >
-                      Delete my account
-                    </button>
-                  </div>
-                </Section>
-                <p className="mt-5 text-[12px] text-[#55657b]">
-                  To delete your account, please contact{' '}
-                  <a href={`mailto:${SUPPORT_EMAIL}`} className="text-[#EB7900] font-bold no-underline">
+                      <rect x="3" y="5" width="18" height="14" rx="2" />
+                      <path d="m3 7 9 6 9-6" />
+                    </svg>
+                    <span>Contact support to delete</span>
+                  </a>
+                  <span className="text-[13px] text-[#55657b]">or email</span>
+                  <a
+                    href={`mailto:${SUPPORT_EMAIL}`}
+                    className="text-[#EB7900] font-bold text-[13px] no-underline hover:underline"
+                  >
                     {SUPPORT_EMAIL}
                   </a>
-                </p>
-              </>
+                </div>
+              </div>
             )}
           </div>
         </div>
@@ -615,6 +616,14 @@ function ComingSoonBadge() {
   return (
     <span className="text-[10px] font-bold text-[#55657b] bg-[#ebe9e4] px-2 py-0.5 rounded-full whitespace-nowrap">
       Coming soon
+    </span>
+  );
+}
+
+function AlwaysOnBadge() {
+  return (
+    <span className="text-[11px] font-bold text-[#2e7d32] bg-[#e8f5e9] px-2.5 py-1 rounded-full whitespace-nowrap flex-shrink-0">
+      Always on
     </span>
   );
 }
